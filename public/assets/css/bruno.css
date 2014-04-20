@@ -1,0 +1,406 @@
+@charset "utf-8";
+body {
+    padding-top: 20px;
+    min-height: 2000px;
+    color: #252;
+}
+body, .hero-unit, .navbar-inner {
+    background: -moz-radial-gradient(top left, rgba(180,140,0,.5), rgba(180,80,0,0));
+    background: -webkit-radial-gradient(top left, rgba(0,0,255,.5), rgba(0,240,0,0));
+    background: -ms-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
+    background: -o-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
+    background: radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));   
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8383FF', endColorstr='#D8D8FF', GradientType=0);
+}
+
+#bas {
+    text-align: center;
+}
+
+.navbar {
+    box-shadow: 3px 3px 3px #D8B979;
+}
+
+.well {
+    box-shadow: 3px 3px 3px #559;
+}
+.navbar .nav > li > a {
+    color: #CC0000;
+    font-size: 16px;
+    text-shadow:none;
+}
+
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus,
+.navbar .nav > .active.dropdown > a, .navbar .nav > .active.dropdown > a:hover, .navbar .nav > .active.dropdown > a:focus {
+    background-color: #C33;
+    box-shadow: 1px 1px 1px 1px #059;
+    color: #FFEEEE;
+}
+
+/* —————————————————————————————  SURCHARGE Bootstrap ————————————————————————*/
+
+.alert {
+  position: fixed;
+  z-index: 100;
+}
+
+.label-locale,
+.badge-locale {
+  background-color: #C9A945;
+}
+
+.label-locale a,
+.badge-locale a{
+  color: #EEE;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dropdown > .dropdown-menu{
+    background-color: #DDBF8B;
+    box-shadow: 1px 1px 1px 1px #059;
+    color: #FFF;
+    display:none;
+}
+
+.dropdown:hover > .dropdown-menu{
+    display:block;
+}
+
+.navbar .nav > li > .dropdown-menu:after {
+    border-bottom: 6px solid #DDBF8B;
+}
+
+/* —————————————————————————————  PERSOS ————————————————————————*/
+
+/* - - - - - - - - - - - -  Titres  - - - - - - - - - - - -*/
+
+/*Nom des items dans les présentations en listes*/
+
+p.logo {
+    display: block;
+    position: relative;
+    top: 8px;
+    float: left;
+    margin-right: 10px;
+    font-size: 36px;
+    line-height: 32px;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+}
+
+
+h1.titrepage {
+    margin: 0;
+    font-size:26px;
+}
+
+.badge_haut_page {
+    font-size: 18px;
+    margin-top: 3px;
+    padding: 6px;
+}
+
+h2.item {
+    font-size:26px;
+}
+
+p.note {
+    line-height : 0.2em;
+
+}
+
+tr.racinemenu {
+    font-size : 1.4em;
+
+}
+/* - - - - - - - - - - - -  TABLEAUX  - - - - - - - - - - - -*/
+
+table {
+    width: 100%;
+    border-color: #8CB08C;
+    border-style: solid;
+    border-width: 1px;
+}
+
+thead,
+tbody{
+    border-color: #5F835F;
+    border-style: solid;
+    border-width: 1px;
+}
+
+thead{
+    background-color: #5F835F;
+    color: #F5E1B3;
+}
+
+td, th {
+    border-color: #5F835F;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0px 5px;
+}
+
+th {
+    font-weight: bold;
+}
+
+/*tr.surlignage{
+}
+*/
+tr.surlignage:hover{
+    border-width: 3px;
+    border-color: #777722;
+    box-shadow: 0px 0px 16px #aaa;
+}
+
+tr.ligne_mois{
+    background-color: rgba(255, 255, 255, 0.1);
+    color:#5F835F;
+    text-align: center;
+    border: medium none;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+/*tr.etat_point_releve{
+    background-color:#F0F0E9;
+}
+*/
+/*tr.etat_point_releve{
+}
+*/
+.st_www{
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.st_emise{
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.st_prev{
+    background-color: rgba(200, 50, 50, 0.35);
+}
+
+td.niv2, td.before_niv2{
+    border-style:none;
+}
+
+td input[type="text"] {
+  width: 30px;
+  height: 11px;
+  margin: 6px 8px;
+  opacity: 0.7;
+}
+
+/*div .menu_admin {
+}
+*/
+.nota{
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+span.atraduire, label.atraduire, a.atraduire{
+    background-color: #EBF8A4;
+    color:#F00;
+}
+
+h4.nonpublie{
+    color:#999999;
+}
+
+div.contenu h5{
+    margin-top:-9px;
+}
+
+td.gras{
+    font-weight: bold;
+    font-size: 1.12em;
+}
+
+fieldset{
+    border-style:none;
+    border-bottom-style:dashed;
+    border-width:1px;
+    margin: 10px;
+    padding: 5px;
+}
+
+legend{
+    margin-bottom:1px;
+}
+
+label{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+input.nobr, label.nobr{
+   display:inline;
+   margin-right:10px;
+}
+
+div.input{
+   float:left;
+   margin-right:10px;
+}
+
+input{
+    width:150px
+}
+
+div#banque2_id.input.invisible{
+    display:none
+}
+
+input.court{
+    width:50px
+}
+
+input.margright, label.margright, button.margright{
+   display:inline;
+   margin-right:45px;
+}
+
+input[type="checkbox"]{
+    vertical-align: top;
+    margin-bottom: 20px;
+}
+
+input[title~=Supprimer]{
+    background-color: #00FFFF;
+}
+
+div.success{
+    color: #5A5;
+    background-color: #EFE;
+    border: 1px solid #88EE88;
+}
+
+textarea{
+    width: 700px;
+}
+
+select#compte_id{
+    width: 500px;
+}
+
+div.compte.actif{
+    background-color: #CECA90;
+}
+
+section.login{
+    width:300px;
+    height:200px;
+    margin:auto;
+    background-color: #CECA90;
+}
+
+/*  Section coulissante ----------------------------------- */
+section.coulisse{
+    position:fixed;
+    top:22px;
+    left:-67%;
+    width:50%;
+    max-height:100%;
+    padding-left:10px;
+    font-size: 12px;
+    line-height: 14px;
+    background-color: #B7DBB7;
+    color: #000;
+    z-index:10;
+    transition-property: left;
+    transition-duration: 0.5s;
+}
+
+section.coulisse p{
+    font-size:1.2em;
+    line-height:1.2em;
+    margin-top:5px;
+}
+
+section.coulisse:hover {
+    left:0%;
+    transition-property:left;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+}
+
+div.onglet {
+    position:fixed;
+    top:0;
+    left:0%;
+    width: 30px;
+    height: 18px;
+    background-color: #225522;
+    padding: 2px 5px;
+    color:#FFF;
+    line-height: 16px;
+}
+
+section.coulisse:hover div.onglet {
+    background-color: #B7DBB7;
+    color: #000;
+}
+
+div#coulisse_form_creer,
+div#coulisse_form_editer{
+    display:none;
+}
+
+div#coulisse_form_creer.visible,
+div#coulisse_form_editer.visible{
+    display:block;
+}
+
+
+/*  Section coulissante "dev"  ----------------------------------- */
+section.dev{
+    background-color: #EAA4A4;
+}
+
+section.dev:hover{
+    padding-right: 40px;
+}
+
+section.dev div.onglet{
+    background-color: #CC3333;
+    left:40px;
+    padding: 2px 5px;
+    width: 90px;
+}
+
+section.dev:hover div.onglet {
+    background-color: #EAA4A4;
+}
+
+/*  Page recettes dépenses  ----------------------------------- */
+span.depense,
+td.depense{
+    text-align: right;
+    color:#CC3333;
+}
+
+span.recette,
+td.recette{
+    text-align: right;
+    color:#0088CC;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 7px;
+    vertical-align: top;
+}
+
+form.pointage {
+    margin: 0;
+}
+
+/*  Navigation  ----------------------------------- */
+ul.nav li:hover{
+    color:#0088CC;
+}
+
