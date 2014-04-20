@@ -41,6 +41,11 @@ class Ecriture extends Eloquent {
 		return $this->belongsTo('Statut');
 	}
 
+	public function banqueliee()
+	{
+		return $this->belongsTo('DoubleEcriture', 'double_ecriture_id');
+	}
+
 
 
 	/* —————————  DATES  —————————————————*/
