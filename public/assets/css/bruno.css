@@ -248,16 +248,21 @@ div.input{
    margin-right:10px;
 }
 
+fieldset#banque2.invisible{
+    display:none;
+    height:0px;
+}
+
 input{
     width:150px
 }
 
-div#banque2_id.input.invisible{
-    display:none
-}
-
 input.court{
     width:50px
+}
+
+input.long{
+    width:400px
 }
 
 input.margright, label.margright, button.margright{

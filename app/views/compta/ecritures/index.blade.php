@@ -46,7 +46,7 @@
 			<td>{{ F::dateCourteNb($ecriture->date_emission) }}</td>
 			<td>{{ F::dateCourteNb($ecriture->date_valeur) }}</td>
 			<td>{{ $ecriture->type->nom}}
-				@if($ecriture->type_justif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->type_justif}}@endif
+				@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 			</td>
 			<td><b>{{ $ecriture->banque->nom }}</b>
 				@if($ecriture->type->req_banque2)

@@ -93,10 +93,10 @@
 			</td>
 			<td>
 				{{ $ecriture->type->nom }}
-				@if($ecriture->type_justif)
+				@if($ecriture->justificatif)
 				{{ $ecriture->type->sep_justif }}
 				@endif
-				{{ $ecriture->type_justif }}
+				{{ $ecriture->justificatif }}
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
@@ -118,13 +118,13 @@
 					{{ number_format($solde, 2, ',', '&nbsp') }}
 				</td>
 			<td>{{ $ecriture->banque->nom }}
-				@if($ecriture->type->req_banque2)
+				@if($ecriture->double_flag)
 					@if($ecriture->signe->signe == -1)
 					<br />&rarr; 
 					@else
 					<br />&larr; 
 					@endif
-					<small>{{ $ecriture->banque2->nom }}</small>
+					<small>{{ $ecriture->banque2->banque->nom }}</small>
 				@endif
 			</td>
 				<td>

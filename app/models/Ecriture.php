@@ -28,7 +28,7 @@ class Ecriture extends Eloquent {
 
 	public function banque2()
 	{
-		return $this->belongsTo('Banque', 'banque2_id');
+		return $this->belongsTo('Ecriture', 'double_id');
 	}
 
 	public function signe()
@@ -40,12 +40,6 @@ class Ecriture extends Eloquent {
 	{
 		return $this->belongsTo('Statut');
 	}
-
-	public function banqueliee()
-	{
-		return $this->belongsTo('DoubleEcriture', 'double_ecriture_id');
-	}
-
 
 
 	/* —————————  DATES  —————————————————*/
@@ -79,15 +73,16 @@ class Ecriture extends Eloquent {
 	public static function fillFormForCreate()
 	{
 		$ecriture = new Ecriture();
+		$ecriture->banque_id = 0;
 		$ecriture->attributes['date_valeur'] = '0000';
 		$ecriture->attributes['date_emission'] = '0000';
 		$ecriture->montant = 00;
+		$ecriture->type_id = 0;
 		$ecriture->libelle = 'Saisir un libellé';
 		$ecriture->libelle_detail = 'Éventuellement le compléter';
-		$ecriture->type_id = 0;
-		$ecriture->banque_id = 1;
-		$ecriture->banque2_id = 0;
+		$ecriture->justificatif = 'Éventuellement préciser un justificatif';
 		$ecriture->compte_id = 0;
+		$ecriture->double_flag = false;
 		return $ecriture;
 	}
 

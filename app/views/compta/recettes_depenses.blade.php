@@ -87,10 +87,10 @@
 			</td>
 			<td>
 				{{ $ecriture->type->nom }}
-				@if($ecriture->type_justif)
+				@if($ecriture->justificatif)
 				{{ $ecriture->type->sep_justif }}
 				@endif
-				{{ $ecriture->type_justif }}
+				{{ $ecriture->justificatif }}
 			</td>
 			<td>
 				{{ $ecriture->banque->nom }}

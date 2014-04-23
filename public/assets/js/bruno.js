@@ -10,12 +10,12 @@ function bascule_signe() {
 	if (document.form.signe_1.checked == 1)
 	{
 		document.getElementById("montant").style.color="red"; /* aFA passer par les classe de span */
-		label.innerHTML="Mouvement vers";
+		label.innerHTML="Vers";
 	}
 	else
 	{
 		document.getElementById("montant").style.color="blue";
-		label.innerHTML="Mouvement depuis";
+		label.innerHTML="Depuis";
 	}
 }
 
@@ -23,14 +23,15 @@ function bascule_signe() {
 
 /*----------   Affichage de la banque de destination (pages Écritures)-----------*/
 function banque() {
-	var div = document.getElementById("div_banque2");
+	var div = document.getElementById("banque2");
 	var form = document.form;
+	var select = document.getElementById("double");
 
 	// alert(label.innerHTML);
 
 	/* Si le "type_id" sélectionné via le formulaire est dans la liste des types qui requièrent une banque liée
 	(c'est le tableau $type_dble_ecriture passé en json depuis ecriture_form.blade.php */
-		if (type_dble_ecriture.indexOf(form.type_id.value) != -1)
+		if (select.checked === true)
 		{
 			div.className="input"; /* Si oui on affiche la div banque liée */
 		}
