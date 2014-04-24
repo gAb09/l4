@@ -127,7 +127,7 @@ class EcritureController extends BaseController {
 
 		 	    	/* Le message sera composé différemment selon qu'il s'agit d'un passage d'une écriture double à une écriture simple  ou du passage inverse */
 		 	    	if ($doubleBefore){
-		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture double à une écriture simple.<br />Si vous êtes sûr de votre choix vous pouvez enregistrer. L’écriture liée va être automatiquement supprimée.  Sinon vous pouvez ";
+		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture double à une écriture simple.<br />Notez bien que c’est l’écriture actuellement ouverte qui sera conservée, l’écriture liée va être automatiquement supprimée. <br />Si vous êtes sûr de votre choix vous pouvez enregistrer. Sinon vous pouvez ";
 		 	    	}else{
 		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Si vous êtes sûr de vos modifications vous pouvez enregistrer. Sinon vous pouvez ";
 
