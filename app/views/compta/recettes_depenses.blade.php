@@ -94,9 +94,13 @@
 			</td>
 			<td>
 				{{ $ecriture->banque->nom }}
-				@if($ecriture->type->req_banque2)
-				&rarr; 
-				{{ $ecriture->banque2->nom }}
+				@if($ecriture->double_flag)
+					@if($ecriture->signe->signe == -1)
+					<br />&rarr; 
+					@else
+					<br />&larr; 
+					@endif
+					<small>{{ $ecriture->banque2->banque->nom }}</small>
 				@endif
 			</td>
 			<td>

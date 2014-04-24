@@ -37,7 +37,6 @@
 		<th>Modifié le</th>
 	</thead>
 
-
 	<tbody>
 		@foreach($ecritures as $ecriture)
 		<tr class="surlignage"
@@ -49,13 +48,13 @@
 				@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 			</td>
 			<td><b>{{ $ecriture->banque->nom }}</b>
-				@if($ecriture->type->req_banque2)
+				@if($ecriture->double_flag)
 					@if($ecriture->signe->signe == -1)
-					&rarr; 
+					<br />&rarr; 
 					@else
-					&larr; 
+					<br />&larr; 
 					@endif
-				<small>{{ $ecriture->banque2->nom }}</small>
+					<small>{{ $ecriture->banque2->banque->nom }}</small>
 				@endif
 			</td>
 			<td>{{ $ecriture->libelle }} —
