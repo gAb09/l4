@@ -4,16 +4,17 @@ class Ecriture extends Eloquent {
 	protected static $unguarded = true; // AFA
 
 
+	public static function mutator() // aFa remove ?
+	{
+		return static::$mutatorCache;
+	}
+
+
 	/* —————————  RELATIONS  —————————————————*/
 
 	public function type()
 	{
 		return $this->belongsTo('Type');
-	}
-
-	public static function mutator() // aFa remove ?
-	{
-		return static::$mutatorCache;
 	}
 
 	public function compte()
@@ -26,7 +27,7 @@ class Ecriture extends Eloquent {
 		return $this->belongsTo('Banque');
 	}
 
-	public function banque2()
+	public function ecriture2()
 	{
 		return $this->belongsTo('Ecriture', 'double_id');
 	}

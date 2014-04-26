@@ -4,14 +4,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EcritureController extends BaseController {
 
-	public function index()
+	public function index($banque = null)
 	{
 		Session::put('page_depart', Request::path());
 
-		$ecritures = Ecriture::all();
+		if ($banque === null) {
+			$ecritures = Ecriture::all();
+		}else{
+			$ecritures = Ecriture::whereBanqueId($banque)->get();
 		// return var_dump($ecritures);  // CTRL
-		
-		return View::Make('compta/ecritures/index')->with(compact('ecritures'))->with(compact('mutatorCache'));
+		}
+		return View::Make('compta/ecritures/index')->with(compact('ecritures'));
 	}
 
 
@@ -30,58 +33,116 @@ class EcritureController extends BaseController {
 	public function store()
 	{
 		// return 'Enregistrement d\'une nouvelle ecriture“';  // CTRL
-		// return var_dump(Input::all()); // CTRL
+		 // dd(Input::all()); 
 
-		/* Créer la liste des types qui impliquent une double écriture */ // aFa Factoriser pour toutes les actions
-		$type_dble_ecriture = Type::type_dble_ecriture();
+		/* Instancier écriture 1 */
+		$ec1 = new Ecriture;
 
-		$ecriture = Ecriture::create(array(
-			'date_emission' => F::dateSaisieSauv(Input::get('date_emission')),
-			'date_valeur' => F::dateSaisieSauv(Input::get('date_valeur')),
-			'montant' => Input::get('montant'),
-			'signe_id' => Input::get('signe_id'),
-			'libelle' => Input::get('libelle'),
-			'libelle_detail' => Input::get('libelle_detail'),
-			'banque_id' => Input::get('banque_id'),
-			'banque2_id' => Input::get('banque2_id'),
-			'type_id' => Input::get('type_id'),
-			'justificatif' => Input::get('justificatif'),
-			'compte_id' => Input::get('compte_id'),
-			));
+		/* Si écriture simple */
+		if (!Input::get('double_flag')) {
 
-		/* Le cas échéant traiter l'écriture liée */
-		if (Input::get('double_flag')) {
+			$ec1 = static::hydrateSimple($ec1);
 
-			/* Renseigner le champs "double_id" de la première écriture */
+			$ec1->save();
 
-			$ecriture->double_id = $ecriture->id;
-			$ecriture->save();
-			$signe2 = (Input::get('signe_id') == 1)? 2 : 1;
+		}else{
+			/* Si écriture double */
 
-			Ecriture::create(array(
-				'date_emission' => F::dateSaisieSauv(Input::get('date_emission')),
-				'date_valeur' => F::dateSaisieSauv(Input::get('date_valeur')),
-				'montant' => Input::get('montant'),
-				'signe_id' => $signe2,
-				'libelle' => Input::get('libelle'),
-				'libelle_detail' => Input::get('libelle_detail'),
-				'banque_id' => Input::get('banque2_id'),
-				'type_id' => Input::get('type2_id'),
-				'justificatif' => Input::get('justificatif'),
-				'compte_id' => Input::get('compte_id'),
-				'double_id' => $ecriture->id,
-				));
+			$couple = static::hydrateDouble($ec1, $ec2 = null);
+			$ec1 = $couple[0];
+			$ec2 = $couple[1];
+
+			$ec1->save();
+
+		// /* double_id */
+			$ec2->double_id = $ec1->id;
+			$ec2->save();
+
+			$ec1->double_id = $ec2->id;
+			$ec1->save();
 
 		}
 
 		return Redirect::to(Session::get('page_depart'));
+
 	}
+
+
+	private static function hydrateSimple(Ecriture $ec1)
+	{		
+		$ec1->banque_id = Input::get('banque_id');
+		$ec1->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
+		$ec1->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
+		$ec1->montant = Input::get('montant');
+		$ec1->signe_id = Input::get('signe_id');
+		$ec1->libelle = Input::get('libelle');
+		$ec1->libelle_detail = Input::get('libelle_detail');
+		$ec1->type_id = Input::get('type_id');
+		$ec1->justificatif = Input::get('justificatif');
+		$ec1->compte_id = Input::get('compte_id');
+		$ec1->double_flag = Input::get('double_flag');
+
+		return $ec1;
+	}
+
+
+
+	private static function hydrateDouble(Ecriture $ec1, Ecriture $ec2 = null)
+	{
+		/* Instancier écriture 2 */
+		if ($ec2 === null) {
+			$ec2 = new Ecriture;
+		}
+
+		/* banque */
+		$ec1->banque_id = Input::get('banque_id');
+		$ec2->banque_id = Input::get('banque2_id');
+
+		/* date émission */
+		$ec1->date_emission = $ec2->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
+
+		/* date valeur */
+		$ec1->date_valeur = $ec2->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
+
+		/* montant */
+		$ec1->montant = $ec2->montant = Input::get('montant');
+
+		/* signe */
+		$ec1->signe_id = Input::get('signe_id');
+		$ec2->signe_id = ($ec1->signe_id == 1)? 2 : 1;
+
+		/* libellé */
+		$ec1->libelle = $ec2->libelle = Input::get('libelle');
+
+		/* libellé détail */
+		$ec1->libelle_detail = $ec2->libelle_detail = Input::get('libelle_detail');
+
+		/* type */
+		$ec1->type_id = Input::get('type_id');
+		$ec2->type_id = Input::get('type2_id');
+
+		/* justificatif */
+		$ec1->justificatif = Input::get('justificatif');
+		$ec2->justificatif = Input::get('justif2');
+
+		/* compte */
+		$ec1->compte_id = $ec2->compte_id = Input::get('compte_id');
+
+		/* double flag */
+		$ec1->double_flag = $ec2->double_flag = Input::get('double_flag');
+
+		return array($ec1, $ec2);
+
+	}
+
+
+
 
 	public function edit($id)
 	{
 		// return 'edition de l\écriture n° '.$id;  // CTRL
 		try{
-			$ec1 = Ecriture::where('id', '=', $id)->with('banque2')->get();
+			$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->get();
 		}
 		catch (ModelNotFoundException $e)
 		{
@@ -96,8 +157,10 @@ class EcritureController extends BaseController {
 	public function update($id)
 	{
 		/* Instancier ecriture 1 */
-		$ec1 = Ecriture::where('id', '=', $id)->with('banque2')->get();
-		$ec1 = $ec1[0];
+		$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->first();
+
+		/* Nommage de l'écriture n°1 compréhensible par l’utilisateur */
+		$nommage = ($ec1->double_flag == 1) ? 'principale ' : '' ;
 
 		/* Initialiser la variable destinée à contenir le message de succès */
 		$success = '';
@@ -127,12 +190,12 @@ class EcritureController extends BaseController {
 
 		 	    	/* Le message sera composé différemment selon qu'il s'agit d'un passage d'une écriture double à une écriture simple  ou du passage inverse */
 		 	    	if ($doubleBefore){
-		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture double à une écriture simple.<br />Notez bien que c’est l’écriture actuellement ouverte qui sera conservée, l’écriture liée va être automatiquement supprimée. <br />Si vous êtes sûr de votre choix vous pouvez enregistrer. Sinon vous pouvez ";
+		 	    		$message = "• Attention ! Vous cherchez à passer d’une écriture double à une écriture simple.<br />• IMPORTANT : Notez bien que c’est l’écriture actuellement ouverte qui sera conservée et l’écriture liée va être automatiquement supprimée.<br />Vous pouvez :<br /> – Faire vos modifications éventuelles et cliquer sur le bouton “Enregistrer”,<br /> – Revenir à la  ";
 		 	    	}else{
-		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Si vous êtes sûr de vos modifications vous pouvez enregistrer. Sinon vous pouvez ";
+		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Si vous êtes sûr de vos modifications vous pouvez cliquer sur le bouton “Enregistrer”.<br />Sinon vous pouvez revenir à la ";
 
 		 	    	}
-		 	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'Annuler'));
+		 	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'page précédente'));
 
 		 	    	/* Redirection */
 		 	    	return View::make('compta/ecritures/confirmedit')
@@ -148,57 +211,58 @@ class EcritureController extends BaseController {
 		   	// dd('Traitement de l’update'); // CTRL
 
 
-			/* Hydrater ecriture 1 avec les nouvelles entrées*/
-			$ec1->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
-			$ec1->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
-			$ec1->libelle = Input::get('libelle');
-			$ec1->libelle_detail = Input::get('libelle_detail');
-			$ec1->banque_id = Input::get('banque_id');
-			$ec1->signe_id = Input::get('signe_id');
-			$ec1->montant = Input::get('montant');
-			$ec1->type_id = Input::get('type_id');
-			$ec1->justificatif = Input::get('justificatif');
-			$ec1->compte_id = Input::get('compte_id');
-			$ec1->double_flag = Input::get('double_flag');
-			$ec1->double_id = Input::get('ecriture2_id');
+			/* - - - - - - - - - - - - - - - - - - - - - -
+			Si l'écriture est de type simple
+			- - - - - - - - - - - - - - - - - - - - - - - - */
+			if (!$doubleNow == 1)
+			{
+				/* Hydrater ecriture 1 avec les nouvelles entrées*/
+				$ec1 = static::hydrateSimple($ec1);
 
-			/* - - - - - - - Si passage d'écriture double à simple - - - - - - - - - - - */
-			if ($changement and $doubleBefore == 1) {
+				/* - - - - - - - Si passage d'écriture double à simple - - - - - - - - - - - */
+				if ($changement and $doubleBefore == 1) {
 		 		// dd('2 en 1'); // CTRL
 
-				/* Supprimer E2 */
-				$ec2 = Ecriture::whereDoubleId($ec1->id)->where('id', '!=', $ec1->id)->get();
-				$ec2[0]->delete();
+					/* Supprimer E2 */
+					$ec2 = Ecriture::whereDoubleId($ec1->id)->where('id', '!=', $ec1->id)->get();
+					$ec2[0]->delete();
 
-				/* Désynchroniser E1 */
-				$ec1->double_id = null;
+					/* Désynchroniser E1 */
+					$ec1->double_id = null;
 
-				/* Composer messages */
-				$success .= 'L’écriture liée a été supprimée<br />L’écriture initiale désynchronisée…';
-			}
-
+					/* Composer messages */
+					$success = "• L’écriture $nommage désynchronisée…<br />• L’écriture liée a été supprimée<br />".$success;
+				}
 
 
 			/* - - - - - - - - - - - - - - - - - - - - - -
-			Si l'écriture est de type double…
+			Si l'écriture est de type double…	
 			- - - - - - - - - - - - - - - - - - - - - - - - */
-			if ($doubleNow == 1) {
-		 		var_dump('type double'); // CTRL
+		}else{
+		 		// var_dump('type double'); // CTRL
 
 				/* - - - - - - - - - - - - - - - - - - - - - -
-				… mais était simple avant…
+				… et était simple avant…
 				- - - - - - - - - - - - - - - - - - - - - - - - */
 				if ($changement) {
 			 		// dd('1 en 2');  // CTRL
 
 					/* Instancier E2 */
 					$ec2 = new Ecriture();
-					$success .= 'L’écriture liée a été créée.';
-				}else{
+					$success .= '• L’écriture liée a été créée.<br />';
+
+					/* Synchroniser E2 */
+					$ec2->double_id = $id;
+					$success .= '• L’écriture liée a été synchronisée.<br />';
+
+
 				/* - - - - - - - - - - - - - - - - - - - - - -
-				… ou était déjà double.
+				… et était déjà double.
 				- - - - - - - - - - - - - - - - - - - - - - - - */
+			}else{
+
 			 	// dd('2 en 2');  // CTRL
+
 				/* Instancier E2 */
 				$ec2 = Ecriture::whereDoubleId($ec1->id)->get();
 
@@ -213,25 +277,20 @@ class EcritureController extends BaseController {
 				$ec2 = $ec2[0];
 			}
 
-			/* Hydrater E2 */
-			$ec2->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
-			$ec2->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
-			$ec2->libelle = Input::get('libelle');
-			$ec2->libelle_detail = Input::get('libelle_detail');
-			$ec2->banque_id = Input::get('banque2_id');
-			$ec2->montant = Input::get('montant');
-			$ec2->signe_id = (Input::get('signe_id') == 1)? 2 : 1;
-			$ec2->type_id = Input::get('type2_id');
-			$ec2->justificatif = Input::get('justif2');
-			$ec2->compte_id = Input::get('compte_id');
-			$ec2->double_flag = Input::get('double_flag');
-			$ec2->double_id = $id;
+			/* Hydrater les 2 écritures */
+			$couple = static::hydrateDouble($ec1, $ec2);
 
 			/* Save E2 */
 			$ec2->save();
-			$success .= '<br />L’écriture liée a été sauvegardée';
-		}
+			$success .= '• L’écriture liée a été sauvegardée<br />';
 
+			/* Synchroniser E1 */
+			if ($changement) {
+				$ec1->double_id = $ec2->id;
+				$success = "• L’écriture $nommage a été synchronisée.<br />".$success;
+			}
+
+		}
 
 		/* - - - - - - - - - - - - - - - - - - - - - -
 		Dans tous les cas
@@ -240,7 +299,7 @@ class EcritureController extends BaseController {
 		/* Save E1 */
 		$ec1->save();
 
-		$success .= '<br />L’écriture a bien été sauvegardée.';
+		$success = "• L’écriture $nommage a été sauvegardée.<br />".$success;
 
 		/* Rediriger */
 		Session::flash('success', $success);
@@ -250,6 +309,28 @@ class EcritureController extends BaseController {
 
 
 	public function destroy($id)
+	{
+		// return 'effacement désactvé';  // CTRL
+		// return 'effacement de l\écriture n° '.$id;  // CTRL
+
+		$ecriture = Ecriture::find($id);
+		// dd($ecriture); // CTRL
+
+		$ecriture->delete();
+
+		/* Le cas échéant traiter l'écriture liée */
+		if ($ecriture->type->req_banque2){
+			$deuze = Ecriture::whereDoubleId($ecriture->double_id)->where('id', '!=', $ecriture->id)->get();
+			// dd($deuze); // CTRL
+			$deuze = $deuze[0];
+			$deuze->delete();
+		}
+
+		return Redirect::to(Session::get('page_depart').'#ligne'.$id);
+	}
+
+
+	public function separateurs($id)
 	{
 		// return 'effacement désactvé';  // CTRL
 		// return 'effacement de l\écriture n° '.$id;  // CTRL

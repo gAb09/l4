@@ -4,6 +4,23 @@ function initialise() {
 	banque();
 }
 
+function separateur(select) {
+	var span = document.getElementById("sep1");
+	sep = separateurs[select.value];
+	span.innerHTML = sep;
+	// alert(sep);
+}
+
+
+function separateur2(select) {
+	var span = document.getElementById("sep2");
+	sep = separateurs[select.value];
+	span.innerHTML = sep;
+	// alert(sep);
+}
+
+
+
 function bascule_signe() {
 	var label = document.getElementById("banque2_label");
 
@@ -26,18 +43,21 @@ function banque() {
 	var div = document.getElementById("banque2");
 	var form = document.form;
 	var select = document.getElementById("double");
+	var label = document.getElementById("label_flag");
 
-	// alert(label.innerHTML);
+	// alert(separateurs);
 
 	/* Si le "type_id" sélectionné via le formulaire est dans la liste des types qui requièrent une banque liée
 	(c'est le tableau $type_dble_ecriture passé en json depuis ecriture_form.blade.php */
 		if (select.checked === true)
 		{
 			div.className="input"; /* Si oui on affiche la div banque liée */
+			label.innerHTML="Écriture double";
 		}
 		else
 		{
 			div.className="input invisible";
+			label.innerHTML="Écriture simple";
 		}
 
 	}

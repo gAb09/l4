@@ -15,8 +15,10 @@
 
 
 @section('topcontent2')
+		<a href ="{{ URL::to("compta/ecritures") }}" class="badge badge-locale badge_haut_page ">Toutes</a>
+
 		@foreach(Banque::all() as $bank)
-		<a href ="{{ URL::to("") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
+		<a href ="{{ URL::to("compta/ecritures/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
 		@endforeach
 @stop
 
@@ -54,7 +56,7 @@
 					@else
 					<br />&larr; 
 					@endif
-					<small>{{ $ecriture->banque2->banque->nom }}</small>
+					<small>{{ $ecriture->ecriture2->banque->nom }}</small>
 				@endif
 			</td>
 			<td>{{ $ecriture->libelle }} —

@@ -46,4 +46,10 @@ View::composer('compta/layout', function($view) {
 	$view->with(compact('menus'));
 });
 
+View::composer('compta/ecritures/form', function($view)
+{
+$separateurs = Type::lists('sep_justif', 'id');
+    $view->with(compact('separateurs'));
+});
+
 ?>

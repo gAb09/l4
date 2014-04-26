@@ -100,7 +100,7 @@
 					@else
 					<br />&larr; 
 					@endif
-					<small>{{ $ecriture->banque2->banque->nom }}</small>
+					<small>{{ $ecriture->ecriture2->banque->nom }}</small>
 				@endif
 			</td>
 			<td>

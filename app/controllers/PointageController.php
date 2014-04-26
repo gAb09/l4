@@ -24,8 +24,10 @@ class PointageController extends BaseController {
 		Session::put('page_depart', Request::path());
 
 		// Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut')->where('banque_id', '=', $id)->orderBy('date_valeur')->get();
-		// return var_dump($ecritures);  // CTRL
+		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')
+		->where('banque_id', '=', $id)
+		->orderBy('date_valeur')
+		->get();
 
 
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
@@ -33,7 +35,7 @@ class PointageController extends BaseController {
 			$message = 'Il n’y a aucune écriture pour la banque “';
 			$message .= Banque::find($id)->nom;
 			$message .= '”';
-			return Redirect::to('compta/pointage/banque')->withErrors($message);
+			return Redirect::to('compta/pointage')->withErrors($message);
 		}
 
 		// Créer la propriété $date_valeur pour que la vue puisse classer par mois
@@ -73,34 +75,5 @@ class PointageController extends BaseController {
 		return Response::make('', 204);
 	}
 
-	// public function pointage($id)
-	// {
-	// 	return 'pointage n°'.$id;  // CTRL
-	// 	// return var_dump(Input::all());  // CTRL
-
-	// 	$ecriture = Ecriture::find($id);
-
-	// 	$pointage = (Input::get('pointage')) ? 1 : 0 ;
-	// 	$ecriture->pointage = $pointage;
-
-	// 	$ecriture->save();
-
-	// 	return Response::make('', 204);
-	// }
-
-	public function pointageWww($id)
-	{
-		return 'pointageWww n°'.$id;  // CTRL
-		// return var_dump(Input::all());  // CTRL
-
-		$ecriture = Ecriture::find($id);
-
-		$pointage_www = (Input::get('pointage_www')) ? 1 : 0 ;
-		$ecriture->pointage_www = $pointage_www;
-
-		$ecriture->save();
-
-		return Response::make('', 204);
-	}
 
 }

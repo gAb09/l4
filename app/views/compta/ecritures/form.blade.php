@@ -1,4 +1,15 @@
 <!-- Dates aFa revoir traduction de la date -->
+
+<!-- Tableau pour actualisation du séparateur -->
+<script type="text/javascript">
+var separateurs = {};
+
+	<?php foreach($separateurs as $id => $sep) {
+		echo "separateurs['$id'] = '$sep';";
+	}
+	?>
+</script>
+
 <!-- Banque - Dates - Montant & Signe - Double écriture -->
 <fieldset>
 	<div class="input">
@@ -38,7 +49,7 @@
 	<div>
 		<!-- Ecriture double -->
 		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
-		{{ Form::label('double_flag', 'Écriture double', array ('class' => 'nobr')) }}
+		{{ Form::label('double_flag', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
 	</div>
 </fieldset>
 
@@ -62,7 +73,7 @@
 	<div class="input">
 		<!-- Type -->
 		{{ Form::label('type_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type_id', Type::listForInputSelect(), $ecriture->type_id, array ('class' => 'long') ) }}
+		{{Form::select('type_id', Type::listForInputSelect(), $ecriture->type_id, array ('class' => 'long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
 	<div class="input">
@@ -71,7 +82,7 @@
 
 		@if(isset($ecriture->type->sep_justif))
 		<div class="input nobr">
-			{{ $ecriture->type->sep_justif }}
+			<span id="sep1">{{ $ecriture->type->sep_justif }}</span>
 		</div>
 		@endif
 
@@ -88,19 +99,19 @@
 </fieldset>
 <?php
 
-if (!isset($ecriture->banque2->id))
-	{
-		$banque2_id = 'Sélectionnez la banque liée';
-		$type2_id = 'Sélectionnez le type d’écriture';
-		$justif2 = 'Saisissez éventuellement le justificatif';
-		$ecriture2_id = '';
-	}else
-	{
-		$banque2_id = $ecriture->banque2->banque_id;
-		$type2_id = $ecriture->banque2->type_id;
-		$justif2 = $ecriture->banque2->justificatif;
-		$ecriture2_id = $ecriture->banque2->id;
-	}
+if (!isset($ecriture->ecriture2->id))
+{
+	$banque2_id = 'Sélectionnez la banque liée';
+	$type2_id = 'Sélectionnez le type d’écriture';
+	$justif2 = 'Saisissez éventuellement le justificatif';
+	$ecriture2_id = '';
+}else
+{
+	$banque2_id = $ecriture->ecriture2->banque_id;
+	$type2_id = $ecriture->ecriture2->type_id;
+	$justif2 = $ecriture->ecriture2->justificatif;
+	$ecriture2_id = $ecriture->ecriture2->id;
+}
 
 ?>
 
@@ -115,20 +126,21 @@ if (!isset($ecriture->banque2->id))
 	<div class="input">
 		<!-- Type 2 -->
 		{{ Form::label('type2_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type2_id', Type::listForInputSelect(), $type2_id, array ('class' => 'long') ) }}
+		{{Form::select('type2_id', Type::listForInputSelect(), $type2_id, array ('class' => 'long', 'onChange' => 'javascript:separateur2(this);') ) }}
 	</div>
 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
 
-		@if(isset($ecriture->banque2->type->sep_justif))
 		<div class="input nobr">
-			{{ $ecriture->banque2->type->sep_justif }}
-		</div>
+			<span id="sep2">
+		@if(isset($ecriture->ecriture2->type->sep_justif))
+				{{ $ecriture->ecriture2->type->sep_justif }}
 		@endif
+			</span>
+		</div>
 
 		{{ Form::text('justif2', $justif2, array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
-

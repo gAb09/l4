@@ -74,6 +74,12 @@ body, .hero-unit, .navbar-inner {
 
 /* —————————————————————————————  PERSOS ————————————————————————*/
 
+.fermeture {
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
 /* - - - - - - - - - - - -  Titres  - - - - - - - - - - - -*/
 
 /*Nom des items dans les présentations en listes*/

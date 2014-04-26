@@ -101,8 +101,8 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 
 // /*----------------------  Pointage  ----------------------------------*/
-	Route::get('pointage/banque/{id?}', array('as' => 'home', 'uses' => 'PointageController@index'));
 	Route::post('pointage/{id?}-{statut_id}', 'PointageController@pointage');
+	Route::get('pointage/{id?}', array('as' => 'home', 'uses' => 'PointageController@index'));
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/
@@ -112,6 +112,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 	/*----------------------  Écritures  ----------------------------------*/
 	Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
+	Route::get('ecritures/{banque}', array('as' => '', 'uses' => 'EcritureController@index'));
 	Route::resource('ecritures', 'EcritureController');
 
 	/*----------------------  Types  ----------------------------------*/
