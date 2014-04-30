@@ -8,13 +8,13 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les comptes</h1>
+<h1 class="titrepage">Les comptes</h1>
 @stop
 
 
 @section('topcontent2')
-		<a href ="{{ URL::route('compta.comptes.create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter un nouveau compte</a>
+<a href ="{{ URL::route('compta.comptes.create') }}" class="badge badge-locale iconemedium add"
+style="font-size:1.1em">Ajouter un nouveau compte</a>
 @stop
 
 
@@ -33,33 +33,36 @@
 			<small> — Compte spécifique La Mauvaise Herbe</small></h3>
 			@endif
 
-		<h4>{{ $compte->libelle }}</h4>
+			<h4>{{ $compte->libelle }}</h4>
 
-		@if (!$compte->description_officiel) 
-		<p>Création La Mauvaise Herbe</p>
-		@else
-		<h5>Officielle (Wikipédia) :</h5>
-		<p>{{ $compte->description_officiel }}</p>
-		@endif
+			@if (!$compte->description_officiel) 
+			<p>Création La Mauvaise Herbe</p>
+			@else
+			<h5>Officielle (Wikipédia) :</h5>
+			<p>{{ $compte->description_officiel }}</p>
+			@endif
 
-		@if ($compte->description_comp)
-		<h5>Complément :</h5>
+			@if ($compte->description_comp)
+			<h5>Complément :</h5>
 			<p>{{ $compte->description_comp }}</p>
 			@endif
 
-		@if ($compte->description_lmh)
-		<h5>La Mauvaise Herbe : </h5>
+			@if ($compte->description_lmh)
+			<h5>La Mauvaise Herbe : </h5>
 			<p>{{ $compte->description_lmh }}</p>
 			@endif
 
-	</div>
-	<p><a href ="comptes/{{$compte['id']}}/edit">Modifier </a></p>
-	@endforeach
+		</div>
 
-	@stop
+		<p class="badge badge-locale iconesmall edit">
+			{{link_to_route('compta.comptes.edit', 'Modifier ce compte', $compte->id)}}
+		</p>
+		@endforeach
 
-	@section('footer')
-	@parent
-	<h3>  Le footer de comptes</h3>
+		@stop
 
-	@stop
+		@section('footer')
+		@parent
+		<h3>  Le footer de comptes</h3>
+
+		@stop

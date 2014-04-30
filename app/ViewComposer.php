@@ -22,6 +22,19 @@ View::composer('compta/layout', function($view) {
 	$view->with('body', $body);
 });
 
+/* Placement conditionnel de l'appel js sur pages types */
+View::composer('compta/layout', function($view) {
+	if(Request::segment(2) == 'types')
+	{
+		$body = 'onLoad="initialiseTypes();"';
+	}else
+	{
+		$body = '';
+	}
+
+	$view->with('body', $body);
+});
+
 
 /* Composition du menu principal */
 View::composer('compta/layout', function($view) {

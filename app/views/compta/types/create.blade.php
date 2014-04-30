@@ -23,7 +23,7 @@
 
 @include('compta/types/form')
 
-<br />{{ Form::submit('créer') }}
+<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 @stop

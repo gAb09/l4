@@ -4,8 +4,8 @@
 <script type="text/javascript">
 var separateurs = {};
 
-	<?php foreach($separateurs as $id => $sep) {
-		echo "separateurs['$id'] = '$sep';";
+	<?php foreach($separateurs as $id => $separateur) {
+		echo "separateurs['$id'] = '$separateur';";
 	}
 	?>
 </script>
@@ -144,3 +144,6 @@ if (!isset($ecriture->ecriture2->id))
 		{{ Form::text('justif2', $justif2, array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
+<p>
+{{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+</p>

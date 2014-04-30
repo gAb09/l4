@@ -74,16 +74,17 @@ return array(
         'db'              => true,  // Show database (PDO) queries and bindings
         'views'           => true,  // Views with their data
         'route'           => true,  // Current route information
-        'laravel'         => false, // Laravel version and environment
-        'events'          => false, // All events fired
+        'laravel'         => true, // Laravel version and environment
+        'events'          => true, // All events fired
         'twig'            => false, // Twig, requires barryvdh/laravel-twigbridge
         'default_request' => false, // Regular or special Symfony request logger
         'symfony_request' => true,  // Only one can be enabled..
         'mail'            => true,  // Catch mail messages
         'logs'            => false, // Add the latest log messages
         'files'           => false, // Show the included files
-        'config'          => false, // Display config settings
-        'auth'            => false, // Display Laravel authentication status
+        'config'          => true, // Display config settings
+        'auth'            => true, // Display Laravel authentication status
+        'session'         => true, // Display Laravel authentication status
     ),
 
     /*

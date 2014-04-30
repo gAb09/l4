@@ -76,6 +76,10 @@
 	content: "R";
 }
 
+.list:before {
+	content: "I";
+}
+
 .icon-pencil:before {
 	content: "\62";
 }

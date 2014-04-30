@@ -23,7 +23,7 @@
 
 @include('compta/ecritures/form')
 
-{{ Form::submit('Créer') }}
+{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 

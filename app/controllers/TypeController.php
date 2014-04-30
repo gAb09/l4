@@ -64,7 +64,7 @@ class TypeController extends BaseController {
 		$item->req_banque2 = (Input::get('req_banque2')) ? 1 : 0;
 		$item->req_justif = (Input::get('req_justif')) ? 1 : 0;
 		$item->sep_justif = Input::get('sep_justif');
-dd($item);
+
 		$item->save();
 
 		return Redirect::to('compta/types');

@@ -44,4 +44,6 @@
 	{{ Form::label('description_lmh', 'Description maison', array ('class' => '')) }}
 	{{ Form::textarea('description_lmh', $compte->description_lmh, array ('class' => '', 'style' => 'width:450px')) }}
 </div>
-
+<p>
+	{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+</p>

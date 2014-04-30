@@ -24,11 +24,11 @@
 
 @include('compta/comptes/form')
 
-<br />{{ Form::submit('Enregistrer') }}
+<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 {{ Form::open(array('url' => 'compta/comptes/'.$compte->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer') }}
+{{ Form::submit('Supprimer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 @stop

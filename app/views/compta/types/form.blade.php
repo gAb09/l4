@@ -12,19 +12,17 @@
 		</div>
 <hr />
 		<div>
-			<!-- "Banque destination" requis -->
-			{{ Form::checkbox('req_banque2', $type->req_banque2, $type->req_banque2, array ('class' => 'nobr')) }}
-			{{ Form::label('req_banque2', 'Champ "Banque de destination" requis', array ('class' => 'nobr')) }}
+			<!-- "Justificatif" requis -->
+			{{ Form::checkbox('req_justif', $type->req_justif, $type->req_justif, array ('class' => 'nobr', 'id' => 'req_justif_checkbox', 'onChange' => 'javascript:justifRequis(this);')) }}
+			{{ Form::label('req_justif', 'Champ "Justificatif" requis', array ('class' => 'nobr', 'id' => 'req_justif_label' ) ) }}
 		</div>
 <hr />
-		<div>
-			<!-- "Justificatif" requis -->
-			{{ Form::checkbox('req_justif', $type->req_justif, $type->req_justif, array ('class' => 'nobr')) }}
-			{{ Form::label('req_justif', 'Champ "Justificatif" requis', array ('class' => 'nobr')) }}
-		</div>
 
-		<div>
+		<div id="req_justif">
 			<!-- Separateur -->
-			{{ Form::label('sep_justif', 'Séparateur', array ('class' => 'nobr')) }}
+			{{ Form::label('sep_justif', 'Séparateur entre le type et le justificatif :', array ('class' => 'nobr')) }}
 			{{ Form::text('sep_justif', $type->sep_justif, array ('class' => '')) }}
+<hr />
 		</div>
+{{ link_to_action('TypeController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+<br />

@@ -194,7 +194,8 @@ class EcritureController extends BaseController {
 		 	    	}else{
 		 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Si vous êtes sûr de vos modifications vous pouvez cliquer sur le bouton “Enregistrer”.<br />Sinon vous pouvez revenir à la ";
 
-		 	    	}
+		 	    	}		Session::flash('success', $success);
+
 		 	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'page précédente'));
 
 		 	    	/* Redirection */

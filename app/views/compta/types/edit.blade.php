@@ -24,11 +24,11 @@
 
 @include('compta/types/form')
 
-<br />{{ Form::submit('Enregistrer') }}
+<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 {{ Form::open(array('url' => 'compta/types/'.$type->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer') }}
+{{ Form::submit('Supprimer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 @stop

@@ -112,7 +112,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 	/*----------------------  Écritures  ----------------------------------*/
 	Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
-	Route::get('ecritures/{banque}', array('as' => '', 'uses' => 'EcritureController@index'));
+	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@index'));
 	Route::resource('ecritures', 'EcritureController');
 
 	/*----------------------  Types  ----------------------------------*/
