@@ -23,7 +23,7 @@
 </head>
 
 <body {{$body}}>
-{{\phpinfo()}}
+
 	<div class="container-fluid">
 		<!-- Messages d'erreurs -->
 		@if($errors->all())
