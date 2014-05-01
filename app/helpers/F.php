@@ -44,16 +44,16 @@ class F{
 	** Pour saisie dans les formulaires
 	*/
 	public static function dateSaisie($date){
-		return $date->formatlocalized('%d/%m/%Y');
-	// 	return ucfirst(strftime('%d/%m/%Y', $date));
+		return $date->formatlocalized('%d-%m-%Y');
 	}
 
 	public static function dateSaisieSauv($date){
-		$parties = explode('/', $date);
+		$parties = explode('-', $date);
 
 		return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
 	// 	return ucfirst(strftime('%d/%m/%Y', $date));
 	}
+
 
 
 }

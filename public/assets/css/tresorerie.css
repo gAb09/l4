@@ -260,6 +260,12 @@ div#req_justif.invisible{
     height:0px;
 }
 
+input,
+select{
+    opacity: 0.8;
+    border-radius: 20px;
+}
+
 input{
     width:150px
 }
