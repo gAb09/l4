@@ -1,5 +1,4 @@
 *.DS_Store
-app/config*
 vendor/barryvdh
 app/.DS_Store
 vendor/.DS_Store
