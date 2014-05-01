@@ -1,10 +1,12 @@
-/*----------   Bascule du signe du montant (pages Recettes/Dépenses & Écritures) -----------*/
-function initialise() {
+/*----------   Actualisation de l'affichage du signe (pages Recettes/Dépenses & Écritures) -----------*/
+function initialiseSigne() {
+	// alert('Pages écritures');  // CTRL
 	bascule_signe();
 	banque();
 }
 
 function initialiseTypes() {
+	// alert('Pages Types'); // CTRL
 	justifRequis();
 }
 

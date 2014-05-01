@@ -1,41 +1,5 @@
 <?php
 
-/* appel des notes (Aide et Développement) en fonction de la page demandée */
-View::composer('compta/fenetre_note', function($view) {
-	if ($note = DB::table('notes')->where('path', '=', Notes::cleanPathNotes(Request::path()))->first())
-	{
-		$view->with('note', $note);
-	}
-});
-
-
-/* Placement conditionnel de l'appel js sur pages ecritures */
-View::composer('compta/layout', function($view) {
-	if(Request::segment(2) == 'ecritures')
-	{
-		$body = 'onLoad="initialise();"';
-	}else
-	{
-		$body = '';
-	}
-
-	$view->with('body', $body);
-});
-
-/* Placement conditionnel de l'appel js sur pages types */
-View::composer('compta/layout', function($view) {
-	if(Request::segment(2) == 'types')
-	{
-		$body = 'onLoad="initialiseTypes();"';
-	}else
-	{
-		$body = '';
-	}
-
-	$view->with('body', $body);
-});
-
-
 /* Composition du menu principal */
 View::composer('compta/layout', function($view) {
 	
@@ -64,5 +28,38 @@ View::composer('compta/ecritures/form', function($view)
 $separateurs = Type::lists('sep_justif', 'id');
     $view->with(compact('separateurs'));
 });
+
+
+
+/* appel des notes (Aide et Développement) en fonction de la page demandée */
+View::composer('compta/fenetre_note', function($view) {
+	if ($note = DB::table('notes')->where('path', '=', Notes::cleanPathNotes(Request::path()))->first())
+	{
+		$view->with('note', $note);
+	}
+});
+
+
+
+/* Déterminer quel appel js doit être fait au chargement de la page (body 'onLoad') */
+View::composer('compta/layout', function($view) {
+/* Sur les pages écritures (traitement selon le signe) */
+	if(Request::segment(2) == 'ecritures')
+	{
+		$body = 'onLoad="initialiseSigne();"';
+/* Sur les pages types (traitement selon justificatif requis ou non) */
+	}else if(Request::segment(2) == 'types')
+	{
+		$body = 'onLoad="initialiseTypes();"';
+/* Autres pages */
+	}else
+	{
+		$body = '';
+	}
+
+	$view->with('body', $body);
+});
+
+
 
 ?>
