@@ -245,13 +245,13 @@ label{
 }
 
 input.nobr, label.nobr{
-   display:inline;
-   margin-right:10px;
+ display:inline;
+ margin-right:10px;
 }
 
 div.input{
-   float:left;
-   margin-right:10px;
+ float:left;
+ margin-right:10px;
 }
 
 fieldset#banque2.invisible,
@@ -279,13 +279,18 @@ input.long{
 }
 
 input.margright, label.margright, button.margright{
-   display:inline;
-   margin-right:45px;
+ display:inline;
+ margin-right:45px;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"]:focus{
     vertical-align: top;
     margin-bottom: 20px;
+    outline: none;
+}
+
+input[type="radio"]:focus{
+    outline: none;
 }
 
 input[title~=Supprimer]{
@@ -300,6 +305,7 @@ div.success{
 
 textarea{
     width: 700px;
+    opacity: 0.7;
 }
 
 select#compte_id{
