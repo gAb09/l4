@@ -2,20 +2,8 @@
 
 class PointageController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
 
-	public function index($id = 1)
+	public function index($id = 1) // $id = 1 compte principal par défaut
 	{
 		// return 'recettes_depenses';  // CTRL
 
@@ -49,7 +37,7 @@ class PointageController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$solde = 0;
 
-		return View::make('compta/pointage')->with('ecritures', $ecritures)->with(compact('solde'))->with(compact('prev_mois'))->with(compact('banque'));
+		return View::make('compta.pointage')->with('ecritures', $ecritures)->with(compact('solde'))->with(compact('prev_mois'))->with(compact('banque'));
 
 	}
 

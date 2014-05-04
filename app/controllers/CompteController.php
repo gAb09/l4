@@ -1,91 +1,106 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationCompte;
 
 class CompteController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+	protected $validateur;
+
+
+	public function __construct(ValidationCompte $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+
 
 	public function index()
 	{
-		$comptes = Compte::all();
-		return View::Make('compta/comptes/index')->with('comptes', $comptes);
+		$comptes = Compte::orderBy('updated_at', 'desc')->get();
+
+		return View::Make('compta.comptes.index')->with('comptes', $comptes);
 	}
+
+
 
 	public function create()
 	{
-		// return 'Formulaire pour la création d\'un compte;  // CTRL
 		$compte = Compte::fillFormForCreate();
 
-		return View::Make('compta/comptes/create')->with('compte', $compte);
+		return View::Make('compta.comptes.create')->with('compte', $compte);
 	}
+
+
 
 	public function store()
 	{
-		// return 'Enregistrement d\'un nouveau compte';  // CTRL
-		// return var_dump(Input::all()); // CTRL
+		return dd(Input::except('_token')); // CTRL
 
-		$lmh = (Input::get('lmh')) ? 1 : 0 ;
-		$actif = (Input::get('actif')) ? 1 : 0 ;
+		$validate = $this->validateur->validate(Input::all());
 
-		Compte::create(array(
-			'numero' => Input::get('numero'),
-			'libelle' => Input::get('libelle'),
-			'description_officiel' => Input::get('description_officiel'),
-			'description_comp' => Input::get('description_comp'),
-			'description_lmh' => Input::get('description_lmh'),
-			'lmh' => $lmh,
-			'actif' => $actif,
-			));
-
-		return Redirect::to('compta/comptes');
+		if($validate === true) 
+		{
+			// return 'OK'; // CTRL
+			$compte = new Compte;
+			$compte->create(Input::except('_token'));
+			Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été créé');              
+			return Redirect::action('CompteController@index');
+		} else {
+			// return 'fails'; // CTRL
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+		}
 	}
+
+
+
 
 	public function edit($id)
 	{
-		// return 'edition du compte n° '.$id;  // CTRL
-
-		$compte = Compte::find($id);
+		$compte = Compte::FindOrFail($id);
 
 		return View::Make('compta/comptes/edit')->with('compte', $compte);
 	}
 
+
+
 	public function update($id)
 	{
-		// return 'update du compte n° '.$id;  // CTRL
-		 return var_dump(Input::all()); // CTRL
+		// return dd(Input::all());  // CTRL
 
-		$item = Compte::find($id);
+		$item = Compte::FindOrFail($id);
 
-		$item->description_officiel = Input::get('description_officiel');
-		$item->description_comp = Input::get('description_comp');
-		$item->description_lmh = Input::get('description_lmh');
-		$item->lmh = (Input::get('lmh')) ? 1 : 0;
-		$item->actif = (Input::get('actif')) ? 1 : 0;
+		$lmh = (Input::has('lmh')) ? 1 : 0 ; // aFa revoir conception entitè
+		$actif = (Input::has('actif')) ? 1 : 0 ;
 
-		$item->save();
+		/* Fournir une modification des règles au validateur */
+		$rules = array('numero' => 'unique:comptes,id,'.$id.'|required|not_in:6 chiffres max',);
 
-		return Redirect::to('compta/comptes');
+		$validate = $this->validateur->validate(Input::all(), $rules);
+
+		if($validate === true) 
+		{
+			$item->fill(array('lmh' => $lmh, 'actif' => $actif), Input::except('_method', '_token'));
+
+			$item->save();
+
+			Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été modifié');              
+			return Redirect::action('CompteController@index');
+		} else {
+			// return 'fails'; // CTRL
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+		}
 	}
+
+
 
 	public function destroy($id)
 	{
-		// return 'effacement désactvé';  // CTRL
-		// return 'effacement du compte n° '.$id;  // CTRL
-
-		$item = Compte::find($id);
+		$item = Compte::FindOrFail($id);
 		$item->delete();
 
-		return Redirect::to('compta/comptes');
+		Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été supprimé');              
+
+		return Redirect::action('CompteController@index');
 	}
 
 }

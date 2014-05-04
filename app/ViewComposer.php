@@ -39,27 +39,4 @@ View::composer('compta/fenetre_note', function($view) {
 	}
 });
 
-
-
-/* Déterminer quel appel js doit être fait au chargement de la page (body 'onLoad') */
-View::composer('compta/layout', function($view) {
-/* Sur les pages écritures (traitement selon le signe) */
-	if(Request::segment(2) == 'ecritures')
-	{
-		$body = 'onLoad="initialiseSigne();"';
-/* Sur les pages types (traitement selon justificatif requis ou non) */
-	}else if(Request::segment(2) == 'types')
-	{
-		$body = 'onLoad="initialiseTypes();"';
-/* Autres pages */
-	}else
-	{
-		$body = '';
-	}
-
-	$view->with('body', $body);
-});
-
-
-
 ?>

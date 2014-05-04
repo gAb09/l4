@@ -22,7 +22,11 @@
 
 </head>
 
-<body {{$body}}>
+<body 
+@section('body')
+
+@show
+>
 
 	<div class="container-fluid">
 		<!-- Messages d'erreurs -->
@@ -67,83 +71,89 @@
 				<div class="navbar">
 					<!-- MENU SECTION -->
 					<nav class="navbar-inner">
-						<p class="logo">Site de Bruno</p>
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a>
+						<p class="logo">{{ Session::get('site') }}
+						</p>
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						</a>
 						<div class="nav-collapse collapse">
 							<ul class="nav nav-tabs">
 								@foreach($sections as $section)
 								@if ($section->nom_sys == Request::segment(1))
 								<li class ="active">
-									@else
+								@else
+								<li>
+									@endif
+									<a href="{{ URL::to($section->nom_sys) }}"> {{ $section->etiquette }}</a>
+								</li>
+								@endforeach
+							</ul>
+						</div>
+					</nav>
+
+					<!-- SOUS MENUS -->
+					<nav class="navbar-inner">
+						<ul class="nav">
+							@foreach ($menus as $menu)
+							@if ($menu->publication == 1)
+							@if ($menu->nom_sys == Request::segment(2))
+							<li class ="dropdown active">
+							@else
+							<li class="dropdown">
+								@endif
+								<a href={{ URL::to($menu->route) }} >
+									{{ $menu->etiquette }}
+								</a>
+								@if(!$menu->children->isEmpty())
+								<ul class="dropdown-menu">
+									@foreach ($menu->children as $children)
+									@if($children->publication == 1)
 									<li>
-										@endif
-										<a href="{{ URL::to($section->nom_sys) }}"> {{ $section->etiquette }}</a></li>
-										@endforeach
-									</ul>
-								</div>
-							</nav>
-
-							<!-- SOUS MENUS -->
-							<nav class="navbar-inner">
-								<ul class="nav">
-									@foreach ($menus as $menu)
-									@if ($menu->publication == 1)
-									@if ($menu->nom_sys == Request::segment(2))
-									<li class ="dropdown active">
-										@else
-										<li class="dropdown">
-											@endif
-											<a href={{ URL::to($menu->route) }} >
-												{{ $menu->etiquette }}
-											</a>
-											@if(!$menu->children->isEmpty())
-											<ul class="dropdown-menu">
-												@foreach ($menu->children as $children)
-												@if($children->publication == 1)
-												<li>
-													<a href={{ URL::to($children->route) }} >
-														{{ $children->etiquette }}
-													</a>
-												</li>
-												@endif
-												@endforeach
-											</ul>
-											@endif
-										</li>
-										@endif
-										@endforeach
-									</ul>
-								</nav>
-							</div>
-
-						</header>
-					</div>
-
-					<!-- Avant contenu principal (topcontent, 2 zones) -->
-					<div class="row-fluid" style="padding-bottom:5px">
-
-						<div class="span5 offset1">
-							@yield('topcontent1')
-						</div>
-
-						<div class="span6">
-							@yield('topcontent2')
-						</div> 
-					</div>
-
-					<!-- CONTENU PRINCIPAL -->
-					<div class="row-fluid">
-						<div class="span11 offset1">
-							@yield('contenu')
-						</div>
-					</div>
-
-					<footer id="bas">
-						<hr>
-						@section('compta/footer')
-						© gAb
-						@show
-					</footer>
+										<a href={{ URL::to($children->route) }} >
+											{{ $children->etiquette }}
+										</a>
+									</li>
+									@endif
+									@endforeach
+								</ul>
+								@endif
+							</li>
+							@endif
+							@endforeach
+						</ul>
+					</nav>
 				</div>
-			</body>
-			</html>
+
+			</header>
+		</div>
+
+		<!-- Avant contenu principal (topcontent, 2 zones) -->
+		<div class="row-fluid" style="padding-bottom:5px">
+
+			<div class="span5 offset1">
+				@yield('topcontent1')
+			</div>
+
+			<div class="span6">
+				@yield('topcontent2')
+			</div> 
+		</div>
+
+		<!-- CONTENU PRINCIPAL -->
+		<div class="row-fluid">
+			<div class="span11 offset1">
+				@yield('contenu')
+			</div>
+		</div>
+
+		<footer id="bas">
+			<hr>
+			@section('compta/footer')
+			© gAb
+			@show
+		</footer>
+	</div>
+	@section('script')
+
+	@show
+</body>
+</html>

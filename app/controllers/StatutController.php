@@ -1,12 +1,24 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationStatut;
 
 class StatutController extends BaseController {
+
+	protected $validateur;
+
+
+	public function __construct(ValidationStatut $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+
 
 	public function index()
 	{
 		$statuts = Statut::all();
 
-		return View::Make('admin/statuts/index')->with(compact('statuts'));
+		return View::Make('admin.statuts.index')->with(compact('statuts'));
 	}
 
 	public function create()
@@ -15,7 +27,7 @@ class StatutController extends BaseController {
 
 		$statut = Statut::fillFormForCreate();
 
-		return View::Make('admin/statuts/create')->with(compact('statut'));
+		return View::Make('admin.statuts.create')->with(compact('statut'));
 	}
 
 	public function store()
@@ -30,11 +42,7 @@ class StatutController extends BaseController {
 
 		// } else {
 			// return 'OK'; // CTRL
-			if(Statut::create(array(
-				'nom' => Input::get('nom'),
-				'classe' => Input::get('classe'),
-				'description' => Input::get('description'),
-				)))
+			if(Statut::create(array(Input::except('_token'))))
 			{
 				Session::flash('success', 'Le statut "'.Input::get('nom').'" a bien été créé');
 			}

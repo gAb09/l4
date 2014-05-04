@@ -1,8 +1,10 @@
 <?php
 
 class Compte extends Eloquent {
+	use ModelTrait;
 
 	protected static $unguarded = true; // AFA
+
 
 	/* —————————  RELATIONS  —————————————————*/
 
@@ -11,17 +13,19 @@ class Compte extends Eloquent {
 		return $this->hasMany('Ecriture');
 	}
 
-	/* —————————  Liste pour input select  —————————————————*/
 
-	public static function listForInputSelect()
+	/* —————————  SCOPES  —————————————————*/
+
+	public static function scopeactif()
 	{
-		$list[0] = 'Faire une sélection';
-		foreach(static::all() as $item)
+		// dd(static::where('actif', '=', 1)->toSql());
+		foreach(static::where('actif', '=', 1)->get(['id', 'libelle']) as $item)
 		{
-			$list[$item->id] = $item->numero.' - '.$item->libelle;
+			$list[$item->id] = $item->libelle;
 		}
 		return $list;
 	}
+
 
 	/* —————————  Créer un objet Compte pour le formulaire de création  —————————————————*/
 
@@ -31,10 +35,8 @@ class Compte extends Eloquent {
 		$compte->numero = '6 chiffres max';
 		$compte->libelle = 'Saisissez un libellé clair';
 		$compte->description_officiel = '';
-		$compte->description_comp = 'Écrire ici pour apporter des informations complémentaires sur l’utilisation officielle de ce compte.';
-		$compte->description_lmh = 'Écrire ici pour définir les modalités d’utilisation de ce compte spécifique à La Mauvaise Herbe.';
-		$compte->lmh = 1;
-		$compte->actif = 1;
+		$compte->lmh = 0;
+		$compte->actif = 0;
 		return $compte;
 	}
 

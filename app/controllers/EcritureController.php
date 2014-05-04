@@ -1,8 +1,27 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Lib\Validations\ValidationEcriture;
 
 class EcritureController extends BaseController {
+
+	protected $validateur;
+
+	public function __construct(ValidationEcriture $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+	private $listes = array();
+
+	private function listes()
+	{
+		$this->listes['banque'] = Banque::listForInputSelect('nom');
+		$this->listes['compte'] = Compte::listForInputSelect('libelle', 'actif');
+		$this->listes['type'] = Type::listForInputSelect('nom');
+		return $this->listes;
+	}
+
+
 
 	public function index($banque = null)
 	{
@@ -12,27 +31,34 @@ class EcritureController extends BaseController {
 			$ecritures = Ecriture::all();
 		}else{
 			$ecritures = Ecriture::whereBanqueId($banque)->get();
-		// return var_dump($ecritures);  // CTRL
 		}
-		return View::Make('compta/ecritures/index')->with(compact('ecritures'));
+		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
+		if ($ecritures->isEmpty()){
+			$message = 'Il n’y a aucune écriture pour la banque “';
+			$message .= Banque::find($banque)->nom;
+			$message .= '”';
+			return Redirect::to('compta/ecritures')->withErrors($message);
+		}
+
+		return View::Make('compta.ecritures.index')->with(compact('ecritures'));
 	}
 
 
 
 	public function create()
 	{
-		// return 'Formulaire pour la création d\'une ecriture';  // CTRL
-
 		$mode_emploi = Ecriture::fillFormForCreate();  // AFa Revoir les form:model
 
-		return View::Make('compta/ecritures/create')->with('ecriture', $mode_emploi);
+		return View::Make('compta.ecritures.create')
+		->with('ecriture', $mode_emploi)
+		->with('list', self::listes())
+		;
 	}
 
 
 
 	public function store()
 	{
-		// return 'Enregistrement d\'une nouvelle ecriture“';  // CTRL
 		 // dd(Input::all()); 
 
 		/* Instancier écriture 1 */
@@ -42,8 +68,9 @@ class EcritureController extends BaseController {
 		if (!Input::get('double_flag')) {
 
 			$ec1 = static::hydrateSimple($ec1);
-
+// dd($ec1);
 			$ec1->save();
+			Session::flash('success',"L’écriture a été créée");
 
 		}else{
 			/* Si écriture double */
@@ -60,7 +87,7 @@ class EcritureController extends BaseController {
 
 			$ec1->double_id = $ec2->id;
 			$ec1->save();
-
+			Session::flash('success',"Les deux écritures ont été créées");
 		}
 
 		return Redirect::to(Session::get('page_depart'));
@@ -70,6 +97,7 @@ class EcritureController extends BaseController {
 
 	private static function hydrateSimple(Ecriture $ec1)
 	{		
+		// dd(Input::all()); // CTRL
 		$ec1->banque_id = Input::get('banque_id');
 		$ec1->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
 		$ec1->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
@@ -89,47 +117,26 @@ class EcritureController extends BaseController {
 
 	private static function hydrateDouble(Ecriture $ec1, Ecriture $ec2 = null)
 	{
+		/* Hydrater écriture 1 */
+		$ec1 = static::hydrateSimple($ec1);
+
 		/* Instancier écriture 2 */
 		if ($ec2 === null) {
 			$ec2 = new Ecriture;
 		}
 
-		/* banque */
-		$ec1->banque_id = Input::get('banque_id');
+		/* Hydrater écriture 2 */
 		$ec2->banque_id = Input::get('banque2_id');
-
-		/* date émission */
-		$ec1->date_emission = $ec2->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
-
-		/* date valeur */
-		$ec1->date_valeur = $ec2->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
-
-		/* montant */
-		$ec1->montant = $ec2->montant = Input::get('montant');
-
-		/* signe */
-		$ec1->signe_id = Input::get('signe_id');
+		$ec2->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
+		$ec2->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
+		$ec2->montant = Input::get('montant');
 		$ec2->signe_id = ($ec1->signe_id == 1)? 2 : 1;
-
-		/* libellé */
-		$ec1->libelle = $ec2->libelle = Input::get('libelle');
-
-		/* libellé détail */
-		$ec1->libelle_detail = $ec2->libelle_detail = Input::get('libelle_detail');
-
-		/* type */
-		$ec1->type_id = Input::get('type_id');
+		$ec2->libelle = Input::get('libelle');
+		$ec2->libelle_detail = Input::get('libelle_detail');
 		$ec2->type_id = Input::get('type2_id');
-
-		/* justificatif */
-		$ec1->justificatif = Input::get('justificatif');
 		$ec2->justificatif = Input::get('justif2');
-
-		/* compte */
-		$ec1->compte_id = $ec2->compte_id = Input::get('compte_id');
-
-		/* double flag */
-		$ec1->double_flag = $ec2->double_flag = Input::get('double_flag');
+		$ec2->compte_id = Input::get('compte_id');
+		$ec2->double_flag = Input::get('double_flag');
 
 		return array($ec1, $ec2);
 
@@ -137,19 +144,14 @@ class EcritureController extends BaseController {
 
 
 
-
 	public function edit($id)
 	{
-		// return 'edition de l\écriture n° '.$id;  // CTRL
-		try{
-			$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->get();
-		}
-		catch (ModelNotFoundException $e)
-		{
-			return (Response::make('L’écriture '.$id.' est introuvable', 404));
-		}
+		$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->get();
 
-		return View::Make('compta/ecritures/edit')->with('ecriture', $ec1[0]);
+		return View::Make('compta/ecritures/edit')
+		->with('ecriture', $ec1[0])
+		->with('list', self::listes())
+		;
 	}
 
 
@@ -203,6 +205,7 @@ class EcritureController extends BaseController {
 		 	    	->withInput(Input::get())
 		 	    	->with('ecriture', $ec1)
 		 	    	->with(compact('type_dble_ecriture'))
+		 	    	->with('list', self::listes())
 		 	    	;
 		 	    }
 
@@ -311,44 +314,24 @@ class EcritureController extends BaseController {
 
 	public function destroy($id)
 	{
-		// return 'effacement désactvé';  // CTRL
-		// return 'effacement de l\écriture n° '.$id;  // CTRL
-
-		$ecriture = Ecriture::find($id);
-		// dd($ecriture); // CTRL
-
-		$ecriture->delete();
-
+		$ecriture = Ecriture::where('id', '=', $id)->with('ecriture2')->get();
+		$ecriture = $ecriture[0];
+// dd($ecriture);
+		$success = '';
 		/* Le cas échéant traiter l'écriture liée */
-		if ($ecriture->type->req_banque2){
-			$deuze = Ecriture::whereDoubleId($ecriture->double_id)->where('id', '!=', $ecriture->id)->get();
-			// dd($deuze); // CTRL
+
+		if ($ecriture->ecriture2){
+			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->double_id)->get();
 			$deuze = $deuze[0];
 			$deuze->delete();
+			$success = "• La deuxième écriture à été supprimée.<br />";
 		}
+		$ecriture->delete();
+		$success = "• La première écriture à été supprimée.<br />$success";
 
+		Session::flash('success', $success);
 		return Redirect::to(Session::get('page_depart').'#ligne'.$id);
 	}
 
 
-	public function separateurs($id)
-	{
-		// return 'effacement désactvé';  // CTRL
-		// return 'effacement de l\écriture n° '.$id;  // CTRL
-
-		$ecriture = Ecriture::find($id);
-		// dd($ecriture); // CTRL
-
-		$ecriture->delete();
-
-		/* Le cas échéant traiter l'écriture liée */
-		if ($ecriture->type->req_banque2){
-			$deuze = Ecriture::whereDoubleId($ecriture->double_id)->where('id', '!=', $ecriture->id)->get();
-			// dd($deuze); // CTRL
-			$deuze = $deuze[0];
-			$deuze->delete();
-		}
-
-		return Redirect::to(Session::get('page_depart').'#ligne'.$id);
-	}
 }

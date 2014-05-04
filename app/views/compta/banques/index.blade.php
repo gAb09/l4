@@ -32,10 +32,6 @@
 <hr />
 @endforeach
 
-<?php
-echo App::make('odile')->est('bête');
-?>
-
 @stop
 
 @section('compta/footer')

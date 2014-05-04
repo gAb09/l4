@@ -55,7 +55,7 @@ return array(
 		"string"  => ":attribute doit être supérieur à :min caractères.",
 		"array"   => ":attribute doit contenir au moins :min items.",
 		),
-	"not_in"           => ":attribute correspond à l’une des valeurs non autorisées.",
+	"not_in"           => "Le champ “:attribute” contient une valeur non autorisée.",
 	"numeric"          => ":attribute doit être du type numérique.",
 	"regex"            => "Le format de :attribute est incorrect.",
 	"required"         => "Le champ :attribute doit être renseigné.",

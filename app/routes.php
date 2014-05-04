@@ -5,9 +5,9 @@ Route::get('compta/tost', function()
 	return View::make('tost');
 });
 
-Route::get('changedate', function()
+Route::get('php', function()
 	{
-	return View::make('ChangeFormatDate');
+	return var_dump(phpinfo());
 	});
 
 

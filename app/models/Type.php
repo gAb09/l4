@@ -1,6 +1,7 @@
 <?php
 
 class Type extends Eloquent {
+	use ModelTrait;
 
 	protected static $unguarded = true; // AFA
 
@@ -18,27 +19,15 @@ class Type extends Eloquent {
 	/* —————————  MUTATORS  —————————————————*/
 
 
-	/* —————————  Liste de sélection  —————————————————*/
-
-	public static function listForInputSelect()
-	{
-		$list[0] = 'Faire une sélection';
-		foreach(static::all() as $type)
-		{
-			$list[$type->id] = $type->nom;
-		}
-		return $list;
-
-	}
 
 	public static function fillFormForCreate()
 	{
 		$type = new Type();
 		$type->nom = 'Nom du type d’écriture';
-		$type->description = 'Ici la description éventuelle. En dessous, préciser si ce type d’écriture requiert une banque de destination, un justificatif et dans ce dernier cas les caractères de séparation pour les cas où le nom du type et le justificatif sont écrit à la suite l’un de l’autre.';
-		$type->req_banque2 = 0;
+		$type->description = 'Saisir ici la description éventuelle.
+En dessous, préciser si ce type d’écriture requiert un justificatif et le cas échéant, le séparateur.';
 		$type->req_justif = 0;
-		$type->sep_justif = 'Saisir le texte de liaison entre le type et le justificatif lorsqu’ils se trouveront réunis dans le même champ';
+		$type->sep_justif = 'Ici, texte de séparation';
 		return $type;
 	}
 

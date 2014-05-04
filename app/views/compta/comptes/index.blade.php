@@ -35,10 +35,8 @@ style="font-size:1.1em">Ajouter un nouveau compte</a>
 
 			<h4>{{ $compte->libelle }}</h4>
 
-			@if (!$compte->description_officiel) 
-			<p>Création La Mauvaise Herbe</p>
-			@else
-			<h5>Officielle (Wikipédia) :</h5>
+			@if ($compte->description_officiel) 
+			<h5>Description officielle (Wikipédia) :</h5>
 			<p>{{ $compte->description_officiel }}</p>
 			@endif
 

@@ -30,7 +30,7 @@ class RecDepController extends BaseController {
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page recdep par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
 			$message = 'Il n’y a aucune écriture pour la banque “';
-			$message .= Banque::find($id)->nom;
+			$message .= Banque::findOrFail($id)->nom;
 			$message .= '”';
 			return Redirect::to('compta/recdep')->withErrors($message);
 		}
@@ -45,7 +45,7 @@ class RecDepController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$prev_mois = 0;
 
-		return View::make('compta/recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
+		return View::make('compta.recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
 	}
 
 	public function create()

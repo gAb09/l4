@@ -1,63 +1,59 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationType;
 
 class TypeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+	protected $validateur;
+
+
+	public function __construct(ValidationType $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+
 
 	public function index()
 	{
 		$types = Type::all();
-		return View::Make('compta/types/index')->with('types', $types);
+		return View::Make('compta.types.index')->with('types', $types);
 	}
+
+
 
 	public function create()
 	{
 		$type = Type::fillFormForCreate();
-		// return 'Formulaire pour la création d\'un type d\'écriture';  // CTRL // AFa
-		return View::Make('compta/types/create')->with('type', $type);
+
+		return View::Make('compta.types.create')->with('type', $type);
 	}
+
+
 
 	public function store()
 	{
-		// return 'Enregistrement d\'un nouveau “type d\'écriture“';  // CTRL
+		// dd(Input::all()); // CTRL
+		Type::create(Input::except('_token'));
 
-		Type::create(array(
-			'nom' => Input::get('nom'),
-			'description' => Input::get('description'),
-			'req_banque2' => (Input::get('req_banque2')) ? 1 : 0,
-			'req_justif' => (Input::get('req_justif')) ? 1 : 0,
-			'sep_justif' => Input::get('sep_justif'),
-			));
-
-		return Redirect::to('compta/types');
+		Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été créé');
+		return Redirect::action('TypeController@index');
 	}
+
+
 
 	public function edit($id)
 	{
-		// return 'edition du type n° '.$id;  // CTRL
-
-		$type = Type::find($id);
+		$type = Type::findOrFail($id);
 
 		return View::Make('compta/types/edit')->with('type', $type);
 	}
 
 	public function update($id)
 	{
-		// return 'update du type n° '.$id;  // CTRL
-		// return var_dump( Input::all() );
+		// return dd(Input::all());
 
-		$item = Type::find($id);
+		$item = Type::findOrFail($id);
 
 		$item->nom = Input::get('nom');
 		$item->description = Input::get('description');
@@ -67,17 +63,17 @@ class TypeController extends BaseController {
 
 		$item->save();
 
-		return Redirect::to('compta/types');
+		Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été modifié');
+		return Redirect::action('TypeController@index');
 	}
 
 	public function destroy($id)
 	{
-		// return 'effacement du type n° '.$id;  // CTRL
-
-		$item = Type::find($id);
+		$item = Type::findOrFail($id);
 		$item->delete();
 
-		return Redirect::to('compta/types');
+		Session::flash('success', "Le type “$item->nom'” a bien été supprimé");
+		return Redirect::action('TypeController@index');
 	}
 
 }

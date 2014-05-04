@@ -64,6 +64,7 @@ class Menu extends Node {
     $menu = new Menu();
     $strings = [
     'nom_sys' => 'Saisir un nom “système”',
+    'publication' => 0,
     'description' => 'Saisir une description',
     ];
     $menu->fill($strings);
