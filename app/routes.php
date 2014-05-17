@@ -5,6 +5,11 @@ Route::get('compta/tost', function()
 	return View::make('tost');
 });
 
+// Route::get('compta/trans', function()
+// {
+// 	return ComptesOldController::trans();
+// });
+
 Route::get('php', function()
 	{
 	return var_dump(phpinfo());

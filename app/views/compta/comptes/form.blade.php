@@ -1,15 +1,19 @@
 @section('body')
- onLoad="togle_lmh();togle_actif();"
+onLoad="togle_actif();"
 @stop
 
 <!-- liste d'inputs commune au vues CREATE et EDIT -->
-@if($compte->lmh)
+
+{{ Form::hidden('pco', $compte->pco) }}
+{{ Form::hidden('numero', $compte->numero) }}
+
+@if(!$compte->pco)
 <div style="float:left">
 	<!-- Numéro -->
 	{{ Form::label('numero', 'Numéro', array ('class' => '')) }}
 	{{ Form::text('numero', $compte->numero, array ('class' => '', 'style' => 'width:100px;margin-right:10px')) }}
 </div>
-	@endif
+@endif
 
 <div>
 	<!-- Libellé -->
@@ -21,12 +25,6 @@
 	<!-- Compte actif -->
 	{{ Form::checkbox('actif', 1, $compte->actif, array ('class' => 'nobr', 'id' => 'actif_check', 'onChange' => 'javascript:togle_actif(this)')) }}
 	{{ Form::label('actif', '', array ('class' => 'nobr', 'id' => 'actif_label')) }}
-</div>
-
-<div>
-	<!-- Compte créé lmh -->
-	{{ Form::checkbox('lmh', 1, $compte->lmh, array ('class' => 'nobr', 'id' => 'lmh_check', 'onChange' => 'javascript:togle_lmh(this)')) }}
-	{{ Form::label('lmh', '', array ('class' => 'nobr', 'id' => 'lmh_label')) }}
 </div>
 
 <div>
@@ -45,14 +43,19 @@
 	{{ Form::textarea('description_comp', $compte->description_comp, array ('class' => '', 'style' => 'width:450px')) }}
 </div>
 
-<div id="description_lmh">
+<div>
+@if(!$compte->pco)
 	<!-- Descrition lmh (La Mauvaise Herbe) -->
 	{{ Form::label('description_lmh', 'Description maison', array ('class' => '')) }}
 	{{ Form::textarea('description_lmh', $compte->description_lmh, array ('class' => '', 'style' => 'width:450px')) }}
+@endif
 </div>
-<p>
-	{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
+
+<div style="clear:both">
+	<p>
+		{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+	</p>
+</div>
 
 @section('script')
 <script src="/assets/js/comptes.js">

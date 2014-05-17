@@ -112,6 +112,10 @@ h2.item {
     font-size:26px;
 }
 
+.pco {
+    color: #A11;
+}
+
 p.note {
     line-height : 0.2em;
 

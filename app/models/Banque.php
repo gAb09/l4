@@ -1,9 +1,11 @@
 <?php
 
 class Banque extends Eloquent {
+	/* Accès au listes pour input select */
 	use ModelTrait;
 
-	protected static $unguarded = true; // AFA
+	protected $guarded = array('id'); // AFA
+	protected $softDelete = true; // AFA
 
 
 	/* —————————  RELATIONS  —————————————————*/

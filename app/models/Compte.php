@@ -1,9 +1,11 @@
 <?php
+use Baum\Node;
 
-class Compte extends Eloquent {
+class Compte extends Node {
+	/* Accès au listes pour input select */
 	use ModelTrait;
 
-	protected static $unguarded = true; // AFA
+	// protected $guarded = array(); // AFA 
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -26,6 +28,28 @@ class Compte extends Eloquent {
 		return $list;
 	}
 
+
+	public static function scopeRoots()
+	{
+		$roots = Compte::where('parent', '=', 0)->orderBy('numero')->get();
+		return $roots;
+	}
+
+	public static function scopeImmChildren($parent)
+	{
+		$children = Compte::where('parent', '=', $parent)->orderBy('numero')->get();
+		return $children;
+	}
+
+/* 
+Recupérer les roots
+	Each Root :
+	Stocker root
+	Get children1
+		Each child1
+		Stocker child1
+		Get children
+ */
 
 	/* —————————  Créer un objet Compte pour le formulaire de création  —————————————————*/
 

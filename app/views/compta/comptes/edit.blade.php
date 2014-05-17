@@ -27,9 +27,11 @@
 <br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
+@if(!$compte->pco)
 {{ Form::open(array('url' => 'compta/comptes/'.$compte->id, 'method' => 'delete')) }}
 {{ Form::submit('Supprimer', array('class' => 'btn')) }}
 {{ Form::close() }}
+@endif
 
 @stop
 

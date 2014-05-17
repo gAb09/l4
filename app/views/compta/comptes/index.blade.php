@@ -9,12 +9,15 @@
 
 @section('topcontent1')
 <h1 class="titrepage">Les comptes</h1>
+<a href ="{{ URL::route('compta.comptes.create') }}" class="badge badge-locale iconemedium add"
+style="font-size:1.1em">Ajouter un nouveau compte</a>
 @stop
 
 
 @section('topcontent2')
-<a href ="{{ URL::route('compta.comptes.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter un nouveau compte</a>
+@foreach($roots as $root)
+{{ $root->numero }}{{ $root->libelle }}<br />
+@endforeach
 @stop
 
 
@@ -23,33 +26,31 @@ style="font-size:1.1em">Ajouter un nouveau compte</a>
 
 @foreach($comptes as $compte)
 <hr />
-@if($compte->actif == 1)
-<div class="compte actif">
-	@else
-	<div class="compte">
-		@endif
-		<h3>{{ $compte->numero }} 
-			@if($compte->lmh == 1) 
-			<small> — Compte spécifique La Mauvaise Herbe</small></h3>
-			@endif
+<div class="compte">
+	<div class="compte  {{ $compte->classe_actif }}">
 
-			<h4>{{ $compte->libelle }}</h4>
+		<h4 class=" {{ $compte->classe_pco }}">{{ $compte->numero }} – {{ $compte->libelle }}</h4>
 
+			<div>
 			@if ($compte->description_officiel) 
-			<h5>Description officielle (Wikipédia) :</h5>
-			<p>{{ $compte->description_officiel }}</p>
+			<h5 class="pco">Description officielle (Wikipédia) :</h5>
+			<p class="pco">{{ $compte->description_officiel }}</p>
 			@endif
+			</div>
 
+			<div>
 			@if ($compte->description_comp)
-			<h5>Complément :</h5>
+			<h5>Informations complémentaires :</h5>
 			<p>{{ $compte->description_comp }}</p>
 			@endif
+			</div>
 
+			<div>
 			@if ($compte->description_lmh)
-			<h5>La Mauvaise Herbe : </h5>
+			<h5>Compte spécifique La Mauvaise Herbe :</h5>
 			<p>{{ $compte->description_lmh }}</p>
 			@endif
-
+			</div>
 		</div>
 
 		<p class="badge badge-locale iconesmall edit">

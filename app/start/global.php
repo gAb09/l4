@@ -3,6 +3,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 setlocale(LC_ALL, 'fr_FR');
 
+Session::set('site', 'Site de Bruno');
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -64,10 +67,10 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
-// App::error(function(ModelNotFoundException $e)
-// {
-//     return (Response::make('L’écriture '.Request::segment(3).' n’a pu tre trouvée', 404));
-// });
+App::error(function(ModelNotFoundException $e)
+{
+    return (Response::make("Désolé ! Aucun élément ne correspond à votre demande…", 404));
+});
 
 
 /*

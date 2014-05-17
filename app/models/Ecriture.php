@@ -62,12 +62,6 @@ class Ecriture extends Eloquent {
 	}
 
 
-	public function setBanque2IdAttribute($value)
-	{
-		$result = ($value == 0) ? null : $value ;
-		$this->attributes['banque2_id'] = $result;
-	}
-
 
 	/* —————————  Créer un objet Ecriture pour le formulaire de création  —————————————————*/
 

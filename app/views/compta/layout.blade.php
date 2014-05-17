@@ -28,58 +28,52 @@
 @show
 >
 
-	<div class="container-fluid">
-		<!-- Messages d'erreurs -->
-		@if($errors->all())
-		<div class="alert row-fluid">
-			<div class="alert-danger">
-				<ul class="errors">
-					@foreach($errors->all() as $message)
-					<li>{{ $message }}</li>
-					@endforeach
-				</ul>
-			</div>
+<div class="container-fluid">
+	<!-- Messages d'erreurs -->
+	@if($errors->all())
+	<div class="alert-danger">
+		<ul class="errors">
+			@foreach($errors->all() as $message)
+			<li>{{ $message }}</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
+
+	<!-- Messages de succès -->
+	@if(Session::get('erreur'))
+	<div class="alert-danger">
+		{{ Session::get('erreur') }}
+	</div>
+	@endif
+
+	@if(Session::get('success'))
+	<div class="alert-success">
+		{{ Session::get('success') }}
+	</div>
+	@endif
+
+
+	<div class="row-fluid">
+
+		<div class="span1">
+			@include('compta/fenetre_note')
 		</div>
-		@endif
 
-		<!-- Messages de succès -->
-		@if(Session::get('erreur'))
-		<div class="alert container messages">
-			<div class="alert-danger">
-				{{ Session::get('erreur') }}
-			</div>
-		</div>
-		@endif
+		<header class="span11">
 
-		@if(Session::get('success'))
-		<div class="alert container messages">
-			<div class="alert-success">
-				{{ Session::get('success') }}
-			</div>
-		</div>
-		@endif
-
-
-		<div class="row-fluid">
-
-			<div class="span1">
-				@include('compta/fenetre_note')
-			</div>
-
-			<header class="span11">
-
-				<div class="navbar">
-					<!-- MENU SECTION -->
-					<nav class="navbar-inner">
-						<p class="logo">{{ Session::get('site') }}
-						</p>
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						</a>
-						<div class="nav-collapse collapse">
-							<ul class="nav nav-tabs">
-								@foreach($sections as $section)
-								@if ($section->nom_sys == Request::segment(1))
-								<li class ="active">
+			<div class="navbar">
+				<!-- MENU SECTION -->
+				<nav class="navbar-inner">
+					<p class="logo">{{ Session::get('site') }}
+					</p>
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav nav-tabs">
+							@foreach($sections as $section)
+							@if ($section->nom_sys == Request::segment(1))
+							<li class ="active">
 								@else
 								<li>
 									@endif
@@ -97,63 +91,63 @@
 							@if ($menu->publication == 1)
 							@if ($menu->nom_sys == Request::segment(2))
 							<li class ="dropdown active">
-							@else
-							<li class="dropdown">
-								@endif
-								<a href={{ URL::to($menu->route) }} >
-									{{ $menu->etiquette }}
-								</a>
-								@if(!$menu->children->isEmpty())
-								<ul class="dropdown-menu">
-									@foreach ($menu->children as $children)
-									@if($children->publication == 1)
-									<li>
-										<a href={{ URL::to($children->route) }} >
-											{{ $children->etiquette }}
-										</a>
-									</li>
+								@else
+								<li class="dropdown">
 									@endif
-									@endforeach
-								</ul>
+									<a href={{ URL::to($menu->route) }} >
+										{{ $menu->etiquette }}
+									</a>
+									@if(!$menu->children->isEmpty())
+									<ul class="dropdown-menu">
+										@foreach ($menu->children as $children)
+										@if($children->publication == 1)
+										<li>
+											<a href={{ URL::to($children->route) }} >
+												{{ $children->etiquette }}
+											</a>
+										</li>
+										@endif
+										@endforeach
+									</ul>
+									@endif
+								</li>
 								@endif
-							</li>
-							@endif
-							@endforeach
-						</ul>
-					</nav>
+								@endforeach
+							</ul>
+						</nav>
+					</div>
+
+				</header>
+			</div>
+
+			<!-- Avant contenu principal (topcontent, 2 zones) -->
+			<div class="row-fluid" style="padding-bottom:5px">
+
+				<div class="span5 offset1">
+					@yield('topcontent1')
 				</div>
 
-			</header>
-		</div>
-
-		<!-- Avant contenu principal (topcontent, 2 zones) -->
-		<div class="row-fluid" style="padding-bottom:5px">
-
-			<div class="span5 offset1">
-				@yield('topcontent1')
+				<div class="span6">
+					@yield('topcontent2')
+				</div> 
 			</div>
 
-			<div class="span6">
-				@yield('topcontent2')
-			</div> 
-		</div>
-
-		<!-- CONTENU PRINCIPAL -->
-		<div class="row-fluid">
-			<div class="span11 offset1">
-				@yield('contenu')
+			<!-- CONTENU PRINCIPAL -->
+			<div class="row-fluid">
+				<div class="span11 offset1">
+					@yield('contenu')
+				</div>
 			</div>
+
+			<footer id="bas">
+				<hr>
+				@section('compta/footer')
+				© gAb
+				@show
+			</footer>
 		</div>
+		@section('script')
 
-		<footer id="bas">
-			<hr>
-			@section('compta/footer')
-			© gAb
-			@show
-		</footer>
-	</div>
-	@section('script')
-
-	@show
-</body>
-</html>
+		@show
+	</body>
+	</html>

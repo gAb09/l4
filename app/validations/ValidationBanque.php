@@ -5,7 +5,7 @@ class ValidationBanque extends ValidationBase
 
 	protected $rules = array(
 		'nom' => 'unique:banques,nom|required|not_in:Saisir un nom',
-		'description' => 'required|not_in:Saisir une description', // inférieure à 500 caractères
+		'description' => 'not_in:Saisir une description', // inférieure à 500 caractères
 		);
 
 	public $messages = array(

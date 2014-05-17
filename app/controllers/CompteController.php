@@ -13,12 +13,42 @@ class CompteController extends BaseController {
 	}
 
 
-
 	public function index()
 	{
-		$comptes = Compte::orderBy('updated_at', 'desc')->get();
 
-		return View::Make('compta.comptes.index')->with('comptes', $comptes);
+		// $compte = Compte::find(1);
+		// $compte = new Compte;
+			// echo $compte->numero.'<br />';
+					// $compte->makeRoot();
+					// $compte->save();
+
+// $test = Compte::create(array('description_lmh' => 999999));
+// $test2 = Compte::create(array('numero' => 888888));
+// 		$test2->makeChildOf($test);
+
+
+		$roots = Compte::roots()
+		->get();
+
+		$root = Compte::find(862);
+		$compte = Compte::find(858);
+// dd($root);
+// dd($compte);
+// 		// dd(Compte::whereBetween('id', array('2', '10'))->get());
+
+		// $compte->makeChildOf($root);
+			// $compte->save();
+
+		$comptes = Compte::orderBy('numero', 'asc')->get();
+
+		/* Attribution du nom des classes selon les valeurs de certains attributs */
+		$comptes->map(function($compte){
+			$compte->classe_actif = ($compte->actif)? 'actif' : '';
+			$compte->classe_pco = ($compte->pco)? 'pco' : '';
+		});
+
+
+		return View::Make('compta.comptes.index')->with('comptes', $comptes)->with('roots', $roots);
 	}
 
 
@@ -69,9 +99,6 @@ class CompteController extends BaseController {
 
 		$item = Compte::FindOrFail($id);
 
-		$lmh = (Input::has('lmh')) ? 1 : 0 ; // aFa revoir conception entitè
-		$actif = (Input::has('actif')) ? 1 : 0 ;
-
 		/* Fournir une modification des règles au validateur */
 		$rules = array('numero' => 'unique:comptes,id,'.$id.'|required|not_in:6 chiffres max',);
 
@@ -79,8 +106,6 @@ class CompteController extends BaseController {
 
 		if($validate === true) 
 		{
-			$item->fill(array('lmh' => $lmh, 'actif' => $actif), Input::except('_method', '_token'));
-
 			$item->save();
 
 			Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été modifié');              
