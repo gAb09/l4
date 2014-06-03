@@ -66,8 +66,6 @@ class BanqueController extends BaseController {
 	{
 		$item = Banque::FindOrFail($id);
 
-		// dd(Input::except('_token', '_method'));
-
 		/* Fournir une modification des règles au validateur */
 		$rules = array('nom' => 'unique:banques,nom,'.$id.'|required|not_in:Saisir un nom');
 

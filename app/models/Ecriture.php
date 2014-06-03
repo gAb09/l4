@@ -1,7 +1,8 @@
 <?php
 class Ecriture extends Eloquent {
 
-	protected static $unguarded = true; // AFA
+	protected $guarded = array('id');
+	protected $softDelete = true; // AFA
 
 
 	public static function mutator() // aFa remove ?
@@ -57,8 +58,9 @@ class Ecriture extends Eloquent {
 
 	public function setMontantAttribute($value)
 	{
-		$value = str_replace(' ', '', $value);
-		$this->attributes['montant'] = str_replace(',', '.', $value);
+
+		$value = F::dateFtoPhp($value);
+		$this->attributes['montant'] = $value;
 	}
 
 
@@ -74,8 +76,8 @@ class Ecriture extends Eloquent {
 		$ecriture->montant = 00;
 		$ecriture->type_id = 0;
 		$ecriture->libelle = 'Saisir un libellé';
-		$ecriture->libelle_detail = 'Éventuellement le compléter';
-		$ecriture->justificatif = 'Éventuellement préciser un justificatif';
+		$ecriture->libelle_detail = 'Compléter éventuellement le libellé';
+		$ecriture->justificatif = INPUT_JUSTIF_TXT_DEFAUT;
 		$ecriture->compte_id = 0;
 		$ecriture->double_flag = false;
 		return $ecriture;

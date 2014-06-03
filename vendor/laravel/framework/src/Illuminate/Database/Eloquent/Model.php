@@ -236,9 +236,6 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 
 		$this->fill($attributes);
 
-//		var_dump($this->dates);
-//		die('stop');
-
 }
 
 	/**

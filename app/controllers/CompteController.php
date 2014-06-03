@@ -1,11 +1,19 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lib\Validations\ValidationCompte;
+use Baum\Node;
 
 class CompteController extends BaseController {
 
 	protected $validateur;
 
+	private $listes = array();
+
+	private function listerParentable()
+	{
+		$this->listes = Compte::listForInputSelect('libelle', 'Parentable');
+		return $this->listes;
+	}
 
 	public function __construct(ValidationCompte $validateur)
 	{
@@ -13,119 +21,194 @@ class CompteController extends BaseController {
 	}
 
 
-	public function index()
+	public function index($numero = null)
 	{
+		/* Assigner la liste des racines de comptes (classes) 
+		pour le tableau de sélectio des classes */
+		$classes = Compte::roots()->get();
+		// $classes->shift(); // aFa ?? retrait du pseudo compte "indéfini" 
 
-		// $compte = Compte::find(1);
-		// $compte = new Compte;
-			// echo $compte->numero.'<br />';
-					// $compte->makeRoot();
-					// $compte->save();
+		/* 
+		- Assigner $comptes qui contient les comptes à afficher
+		  selon la classe demandée par l'utilisateur,
+		  tous si paramètre dans l'url est null 
+		  + Assigner le titre de haut de page (lui aussi fonction de la demande) */
+		  if ($numero === null) {
+		  	$comptes = Compte::all();
+		  	$titre_page = 'Tous les comptes';
+		  }else{
+		  	$classe = Compte::where('numero', $numero)->first();
+		  	$comptes = $classe->getDescendantsAndSelf();
+		  	$titre_page = $classe->libelle;
+		  }
 
-// $test = Compte::create(array('description_lmh' => 999999));
-// $test2 = Compte::create(array('numero' => 888888));
-// 		$test2->makeChildOf($test);
-
-
-		$roots = Compte::roots()
-		->get();
-
-		$root = Compte::find(862);
-		$compte = Compte::find(858);
-// dd($root);
-// dd($compte);
-// 		// dd(Compte::whereBetween('id', array('2', '10'))->get());
-
-		// $compte->makeChildOf($root);
-			// $compte->save();
-
-		$comptes = Compte::orderBy('numero', 'asc')->get();
-
-		/* Attribution du nom des classes selon les valeurs de certains attributs */
-		$comptes->map(function($compte){
-			$compte->classe_actif = ($compte->actif)? 'actif' : '';
-			$compte->classe_pco = ($compte->pco)? 'pco' : '';
-		});
+		  /* Adapter les class css selon les valeurs de certains attributs */
+		  $comptes->map(function($compte){
+		  	$compte->class_actif = ($compte->actif)? 'actif' : '';
+		  	$compte->class_pco = ($compte->pco)? 'pco' : '';
+		  });
 
 
-		return View::Make('compta.comptes.index')->with('comptes', $comptes)->with('roots', $roots);
-	}
+		  return View::Make('compta.comptes.index')
+		  ->with('titre_page', $titre_page)
+		  ->with('comptes', $comptes)
+		  ->with('classes', $classes);
+		}
 
 
 
-	public function create()
-	{
-		$compte = Compte::fillFormForCreate();
-
-		return View::Make('compta.comptes.create')->with('compte', $compte);
-	}
-
-
-
-	public function store()
-	{
-		return dd(Input::except('_token')); // CTRL
-
-		$validate = $this->validateur->validate(Input::all());
-
-		if($validate === true) 
+		public function create()
 		{
+			$compte = Compte::fillFormForCreate();
+
+			return View::Make('compta.comptes.create')
+			->with('compte', $compte)
+			->with('position_class', 'invisible')
+			->with('parents', self::listerParentable())
+			;
+		}
+
+
+
+		public function store()
+		{
+			// return dd(Input::all());
+
+			$validate = $this->validateur->validate(Input::all());
+
+			if($validate === true) 
+			{
 			// return 'OK'; // CTRL
-			$compte = new Compte;
-			$compte->create(Input::except('_token'));
-			Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été créé');              
-			return Redirect::action('CompteController@index');
-		} else {
+				$compte = new Compte;
+				$compte = $compte->create(Input::except('_token', 'pere', 'position'));
+
+				$pere=Compte::where('id', Input::get('pere'))->first();
+				$frere=Compte::where('id', Input::get('position'))->first();
+
+				$compte->makeChildOf($pere);
+
+				if (Input::get('position')) {
+					$compte->moveToLeftOf($frere);
+				}
+
+				Session::flash('success', 'Le compte "'.Input::get('libelle').'" a bien été créé');              
+				return Redirect::action('CompteController@index');
+			} else {
 			// return 'fails'; // CTRL
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+				return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			}
 		}
-	}
 
 
 
 
-	public function edit($id)
-	{
-		$compte = Compte::FindOrFail($id);
-
-		return View::Make('compta/comptes/edit')->with('compte', $compte);
-	}
-
-
-
-	public function update($id)
-	{
-		// return dd(Input::all());  // CTRL
-
-		$item = Compte::FindOrFail($id);
-
-		/* Fournir une modification des règles au validateur */
-		$rules = array('numero' => 'unique:comptes,id,'.$id.'|required|not_in:6 chiffres max',);
-
-		$validate = $this->validateur->validate(Input::all(), $rules);
-
-		if($validate === true) 
+		public function edit($id)
 		{
-			$item->save();
+			$compte = Compte::FindOrFail($id);
+			/* Adapter les class css selon les valeurs de certains attributs */
+			$compte->class_pco = ($compte->pco)? 'pco' : '';
 
-			Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été modifié');              
+
+			return View::Make('compta.comptes.edit')
+			->with('compte', $compte)
+			->with('position_class', 'invisible')
+			->with('parents', self::listerParentable())
+			;
+		}
+
+
+
+		public function update($id)
+		{
+			$item = Compte::FindOrFail($id);
+
+			/* Fournir une modification aux règles du validateur */
+			$rules = array('numero' => 'required|numeric|not_in:6 chiffres max|unique:comptes,numero,'.$id.'|digit',);
+
+			$validate = $this->validateur->validate(Input::all(), $rules);
+
+			if($validate === true) 
+			{
+				$item->fill(Input::except('_token', '_method', 'pere', 'position'));
+
+				$item->save();
+
+				$pere=Compte::where('id', Input::get('pere'))->first();
+				$frere=Compte::where('id', Input::get('position'))->first();
+				$item->makeChildOf($pere);
+				if (!is_null($frere)) {
+					$item->moveToLeftOf($frere);
+				}
+
+
+				Session::flash('success', 'Le compte "'.Input::get('libelle').'" a bien été modifié');              
+				return Redirect::action('CompteController@index');
+			} else {
+				return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			}
+		}
+
+
+
+		public function destroy($id)
+		{
+		// dd('destroy compte : '.$id);
+			$item = Compte::FindOrFail($id);
+			$item->delete();
+
+			Session::flash('success', 'Le compte "'.Input::get('libelle').'" a bien été supprimé');              
+
 			return Redirect::action('CompteController@index');
-		} else {
-			// return 'fails'; // CTRL
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+		}
+
+		public function freres($id = null)
+		{
+			/* Obtenir le compte pere qui a été choisi et rechercher ses descendants immédiats */
+			$pere = Compte::where('id', Input::get('idpere'))->first();
+			$freres = $pere->getImmediateDescendants();
+
+			/* Si on est en mode édition retirer le compte concerné de la liste des descendants 
+			Si on est en mode création ce n'est pas nécessaire (nota : alors $id est null) */
+			$freres = $freres->filter(function($frere) use($id)
+			{
+				if ($frere->id != $id) {
+					return true;
+				}
+			});
+
+			/* Si on est en mode édition ($id != null)
+			assigner le compte frère suivant dans la liste pour checked dans le snippet html */
+
+			if (isset($id)) {
+				$this_position = Compte::where('id', $id)->first()->lft;
+				$next_position = $this_position+2;
+				$suivant = Compte::where('lft', $next_position)->first();
+				$next_id = (is_null($suivant)) ? null : $suivant->id ;
+			}
+
+			/* Construire (ou non) la réponse = snippet html des options de l'élément select */
+			if ($freres->isEmpty()) {
+				$reponse = null;
+			}else{
+				$select = "<select name='position'>";
+				$select .= "<option value='0'>Placer en dernier</option>";
+				foreach ($freres as $frere) {
+					if (isset($next_id) and $frere->id == $next_id) {
+						$selection = ' selected';
+					}else{
+						$selection = '';
+					}
+					$select .= "<option value='".$frere->id."'".$selection.">(".$frere->numero.") ".$frere->libelle."</option>";
+				} 
+				$select .= "</select>";
+
+
+				$reponse[0] = $select;
+				$reponse[1] = $pere->libelle;
+				// $reponse[2] = $next;
+				
+			}
+			return $reponse;
+
 		}
 	}
-
-
-
-	public function destroy($id)
-	{
-		$item = Compte::FindOrFail($id);
-		$item->delete();
-
-		Session::flash('success', 'Le compte "'.Input::get('nom').'" a bien été supprimé');              
-
-		return Redirect::action('CompteController@index');
-	}
-
-}

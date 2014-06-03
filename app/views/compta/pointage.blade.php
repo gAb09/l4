@@ -14,7 +14,7 @@
 
 @section('topcontent2')
 @foreach(Banque::all() as $bank)
-<a href ="{{ URL::to("compta/pointage/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
+<a href ="{{ URL::to("compta/pointage/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
 @endforeach
 @stop
 

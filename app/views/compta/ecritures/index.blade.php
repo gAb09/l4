@@ -8,23 +8,22 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les écritures</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 		<a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
 		style="font-size:1.1em">Ajouter une écriture</a>
 @stop
 
 
 @section('topcontent2')
-		<a href ="{{ URL::to("compta/ecritures") }}" class="badge badge-locale badge_haut_page ">Toutes</a>
+		<a href ="{{ URL::to("compta/ecritures") }}" class="badge badge-locale badge-big ">Toutes</a>
 
 		@foreach(Banque::all() as $bank)
-		<a href ="{{ URL::to("compta/banque/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
+		<a href ="{{ URL::to("compta/banque/$bank->id") }}" class="badge badge-locale badge_haut_page  badge-big">{{ $bank->nom }}</a>
 		@endforeach
 @stop
 
 
 @section('contenu')
-
 <table style="font-size:12px;border:0px">
 	<thead>
 		<th>Id</th>

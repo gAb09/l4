@@ -1,16 +1,14 @@
-function publication() {
-	var trigger = document.getElementById("publication_0");
-	var label0 = document.getElementById("publication0");
-	var label1 = document.getElementById("publication1");
-	alert(trigger.checked);
+function toggle_publication() {
+	var label = document.getElementById("publication_label");
+	var check = document.getElementById("publication_check");
 
-	if (trigger.checked === true) {
-		alert('masqué');
-		label0.className="nobr";
-		label1.className="nobr muted";
-	}else{
-		alert('publié');
-		label0.className="nobr muted";
-		label1.className="nobr";
+	if (check.checked === true)
+	{
+		label.innerHTML = "Menu activé";
+	}
+	else
+	{
+		label.innerHTML = "Menu désactivé";
 	}
 }
+

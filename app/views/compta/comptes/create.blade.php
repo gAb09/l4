@@ -18,8 +18,7 @@
 
 @section('contenu')
 <hr>
-
-{{ Form::open(array('url' => 'compta/comptes', 'method' => 'post')) }}
+{{ Form::open(['method' => 'post', 'action' => 'CompteController@store']) }}
 
 @include('compta/comptes/form')
 

@@ -23,11 +23,11 @@ class Menu extends Node {
     $menus = Menu::roots()->orderBy('id')->get();
 //    var_dump($items_racines); // CTRL
 
-    $menuslist[0] = 'Créer un nouveau menu';
+    $menuslist[0] = 'Créer une nouvelle racine';
 
     foreach ($menus as $menu)
     {
-      $menuslist[$menu->etiquette][$menu->id] = 'Placer à la racine de '.$menu->etiquette;
+      $menuslist[$menu->etiquette][$menu->id] = 'Placer au premier niveau de “'.$menu->etiquette.'”';
       foreach($menu->getImmediateDescendants() as $item)
       {
         $menuslist[$menu->etiquette][$item->id] = '• Enfant de '.$item->etiquette;

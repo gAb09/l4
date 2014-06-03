@@ -139,7 +139,7 @@
 				</div>
 			</div>
 
-			<footer id="bas">
+			<footer>
 				<hr>
 				@section('compta/footer')
 				© gAb

@@ -27,7 +27,7 @@
 	{{ Form::close() }}
 
 	{{ Form::open(array('url' => 'admin/statuts/'.$statut->id, 'method' => 'delete')) }}
-	{{ Form::submit('Supprimer', array('class' => 'btn')) }}
+{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 
 @stop

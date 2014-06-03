@@ -14,29 +14,7 @@ var separateurs = {};
 	?>
 </script>
 
-<?php
-
-/* Créer des variables pour permettre un affichage différent dans la partie banque 2 
-selon que l'on est en edit ou en create */
-if (!isset($ecriture->ecriture2->id))
-// mode create
-{
-	$banque_selected = 0;
-	$type2_selected = 0;
-	$justif2_selected = 'Saisissez éventuellement le justificatif';
-	$ecriture2_id = '';
-}else
-// mode edit
-{
-	$banque_selected = $ecriture->ecriture2->banque_id;
-	$type2_selected = $ecriture->ecriture2->type_id;
-	$justif2_selected = $ecriture->ecriture2->justificatif;
-	$ecriture2_id = $ecriture->ecriture2->id;
-}
-?>
-
-
-<!-- Banque - Dates - Montant & Signe - Double écriture -->
+<!-- Banque - Dates - Montant & Signe - Écriture simple/double - Verrou simple/double -->
 <fieldset>
 	<div class="input">
 		<!-- Banque -->
@@ -46,7 +24,7 @@ if (!isset($ecriture->ecriture2->id))
 
 	<!-- Date émission -->
 	<div class="input">
-		{{ Form::label('date_emission', 'Date écriture', array ('class' => '')) }}
+		{{ Form::label('date_emission', 'Date émission', array ('class' => '')) }}
 		{{ Form::text('date_emission', F::dateSaisie($ecriture->date_emission), array ('class' => 'calendrier')) }}
 
 		<br /><a href="" class="bouton">Aujourd'hui</a>
@@ -73,9 +51,14 @@ if (!isset($ecriture->ecriture2->id))
 		@endforeach
 	</div>
 	<div>
-		<!-- Ecriture double -->
+		<!-- Écriture simple/double -->
 		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
 		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
+	</div>
+	<div>
+		<!-- Verrou simple/double -->
+		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'double')) }}
+		{{ Form::label('verrou', 'Verrou basculement écriture simple/double', array ('class' => 'nobr', 'id' => 'verrou')) }}
 	</div>
 </fieldset>
 
@@ -125,17 +108,17 @@ if (!isset($ecriture->ecriture2->id))
 </fieldset>
 
 <!-- Banque 2 -->
-<fieldset id="banque2" >
+<fieldset id="ecriture2" >Écriture liée :
 	<div class="input">
 		<!-- Banque 2 -->
-		{{ Form::hidden('ecriture2_id', $ecriture2_id) }}
+		{{ Form::hidden('ecriture2_id', $e2['ecriture2_id']) }}
 		{{ Form::label('banque2_id', 'Banque liée', array ('class' => '', 'id' => 'banque2_label')) }}
-		{{ Form::select('banque2_id', $list['banque'], $banque_selected, array ('class' => 'rrert'))}}  <!-- aPo probleme de selected -->
+		{{ Form::select('banque2_id', $list['banque'], $e2['banque_selected'], array ('class' => 'rrert'))}}  <!-- aPo probleme de selected -->
 </div>
 	<div class="input">
 		<!-- Type 2 -->
 		{{ Form::label('type2_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type2_id', $list['type'], $type2_selected, array ('class' => 'long', 'onChange' => 'javascript:separateur2(this);') ) }}
+		{{Form::select('type2_id', $list['type'], $e2['type2_selected'], array ('class' => 'long', 'onChange' => 'javascript:separateur2(this);') ) }}
 	</div>
 
 	<div class="input">
@@ -150,12 +133,14 @@ if (!isset($ecriture->ecriture2->id))
 			</span>
 		</div>
 
-		{{ Form::text('justif2', $justif2_selected, array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
+		{{ Form::text('justif2', $e2['justif2_selected'], array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
+
 <p>
 {{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
 </p>
+		{{ var_dump(Input::all() ) }}
 
 @section('script')
 <script src="/assets/js/ecritures.js">

@@ -37,7 +37,7 @@ class MenuController extends \BaseController {
 		// return 'Store un nouveau "Menu"';
 		Menu::unguard();  // aFa Placer dans le model
 
-dd(Input::all());
+// dd(Input::all());
 		$menu = Menu::create(array(
 			'etiquette' => Input::get('etiquette'),
 			'nom_sys' => Input::get('nom_sys'),

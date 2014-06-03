@@ -5,7 +5,7 @@ class Compte extends Node {
 	/* Accès au listes pour input select */
 	use ModelTrait;
 
-	// protected $guarded = array(); // AFA 
+	protected $guarded = array('id');
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -15,13 +15,39 @@ class Compte extends Node {
 		return $this->hasMany('Ecriture');
 	}
 
-
 	/* —————————  SCOPES  —————————————————*/
 
-	public static function scopeactif()
+	public static function scopeParentable()
 	{
-		// dd(static::where('actif', '=', 1)->toSql());
-		foreach(static::where('actif', '=', 1)->get(['id', 'libelle']) as $item)
+		$result = self::all(array('id', 'libelle', 'numero'));
+		$items = $result->filter(function($item)
+		{
+			if (strlen($item->numero) < 6) {
+				return $item;
+			}
+		});
+
+		foreach($items as $item)
+		{
+			$list[$item->id] = '('.$item->numero.') '.$item->libelle;
+		}
+		return $list;
+	}
+
+	// public static function scopeFreres()
+	// {
+	// 	foreach(self::all(array('id', 'libelle', 'numero')) as $item)
+	// 	{
+	// 		$parent = Compte::where('id', Input::get('parent'))->first();
+	// 		$freres = $parent->getImmediateDescendants();
+	// 		$list[$item->id] = $item->numero.' : '.$item->libelle;
+	// 	}
+	// 	return $list;
+	// }
+
+	public static function scopeActif()
+	{
+		foreach(self::where('actif', '=', 1)->get(array('id', 'libelle')) as $item)
 		{
 			$list[$item->id] = $item->libelle;
 		}
@@ -29,40 +55,26 @@ class Compte extends Node {
 	}
 
 
-	public static function scopeRoots()
+	/* —————————  ACCESSORS  ————————————————— */
+
+	public function getNumeroAttribute($value)
 	{
-		$roots = Compte::where('parent', '=', 0)->orderBy('numero')->get();
-		return $roots;
+		settype($value, 'string');
+		return $value;
 	}
 
-	public static function scopeImmChildren($parent)
-	{
-		$children = Compte::where('parent', '=', $parent)->orderBy('numero')->get();
-		return $children;
-	}
 
-/* 
-Recupérer les roots
-	Each Root :
-	Stocker root
-	Get children1
-		Each child1
-		Stocker child1
-		Get children
- */
 
-	/* —————————  Créer un objet Compte pour le formulaire de création  —————————————————*/
+
+	/* —————————  Créer un objet Compte pour le formulaire de création  ————————————————— */
 
 	public static function fillFormForCreate()
 	{
 		$compte = new Compte();
-		$compte->numero = '6 chiffres max';
+		$compte->numero = 'Six chiffres max';
 		$compte->libelle = 'Saisissez un libellé clair';
 		$compte->description_officiel = '';
-		$compte->lmh = 0;
 		$compte->actif = 0;
 		return $compte;
 	}
-
-
 }

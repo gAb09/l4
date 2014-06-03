@@ -8,7 +8,7 @@
 
 
 @section('topcontent1')
-<h1 class="titrepage">Édition de l'écriture n°{{$ecriture->id}}</h1>
+<h1 class="titrepage">Édition de l'écriture “{{$ecriture->libelle}} {{$ecriture->libelle_detail}}” (n°{{$ecriture->id}})</h1>
 @stop
 
 
@@ -29,7 +29,7 @@
 {{ Form::close() }}
 
 {{ Form::open(array('url' => 'compta/ecritures/'.$ecriture->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', array('class' => 'btn')) }}
+{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
 {{ Form::close() }}
 
 <p>Créée le {{ F::dateCourteNb($ecriture->created_at) }}<br />

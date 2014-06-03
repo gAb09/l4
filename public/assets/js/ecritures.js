@@ -17,7 +17,7 @@ function bascule_signe() {
 
 /*----------   Affichage de la banque de destination (pages Écritures)-----------*/
 function banque() {
-	var div = document.getElementById("banque2");
+	var div = document.getElementById("ecriture2");
 	var form = document.form;
 	var select = document.getElementById("double");
 	var label = document.getElementById("label_flag");

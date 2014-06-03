@@ -28,7 +28,7 @@
 {{ Form::close() }}
 
 {{ Form::open(array('url' => 'compta/types/'.$type->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', array('class' => 'btn')) }}
+{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
 {{ Form::close() }}
 
 @stop

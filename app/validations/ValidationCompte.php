@@ -1,18 +1,25 @@
 <?php namespace Lib\Validations;
+use Illuminate\Validation\Validator;
+use Illuminate\Validation\Factory;
 
 class ValidationCompte extends ValidationBase
 {
-
-
 	protected $rules = array(
-		'numero' => 'unique:comptes,numero|required|not_in:6 chiffres max',
-		'libelle' => 'required|not_in:Saisissez un libellé clair', // inférieure à 500 caractères
+		"numero" => 'required|numeric|not_in:6 chiffres max|unique:comptes,numero,$id|digit', 
+		// Si changement sur les règles de cet attribut, penser à le reporter dans la méthode CompteController@update
+		'libelle' => 'required|not_in:Saisissez un libellé clair',
+		'pere' => 'not_in:Faire une sélection|inclusion',
+		/* Afa : Un compte de profondeur > 5 ne peu avooir d'enfant */
 		);
 
 	public $messages = array(
+		'numero.numeric' => 'Le champs Numéro ne peut contenir que des chiffres.',
+		'numero.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs Numéro.',
 		'numero.unique' => 'Il existe déjà un compte avec ce numéro.',
-		'libelle.not_in' => 'Oups… Vous n’avez rien saisi de nouveau dans le champs “Libellé” !',
-	// 	'description.not_in' => 'Il vaut mieux, soit laisser le champs :attribute vide, soit y saisir une description.',
+		'numero.digit' => 'Un compte ne peut comporter plus de 6 chiffres.',
+		'libelle.not_in' => 'Vous n’avez rien saisi dans le champs “Libellé” !',
+		'pere.not_in' => 'Vous n’avez pas désigné de "compte père" pour ce compte !',
+		'pere.inclusion' => "Le numéro d’un compte doit inclure celui du compte parent.",
 		);
 
 }

@@ -48,15 +48,19 @@ class F{
 	}
 
 	public static function dateSaisieSauv($date){
-		$parties = explode('-', $date);
-
-		return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
-	// 	return ucfirst(strftime('%d/%m/%Y', $date));
+		if ($test = substr_count($date, '-') == 2) {
+			$parties = explode('-', $date);
+			return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
+		}
 	}
 
-
-
+	public static function dateFtoPhp($value){
+		$value = str_replace(' ', '', $value);
+		$value = str_replace(',', '.', $value);
+		return $value;
+	}
 }
+
 
 	/* d
 	** Jour du mois en numérique, sur 2 chiffres (avec le zéro initial).
@@ -88,4 +92,4 @@ class F{
 	** Exemple : 2038
 	*/
 
-?>
+	?>
