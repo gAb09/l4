@@ -54,11 +54,12 @@ class F{
 		}
 	}
 
-	public static function dateFtoPhp($value){
+	public static function montantFtoPhp($value){
 		$value = str_replace(' ', '', $value);
 		$value = str_replace(',', '.', $value);
 		return $value;
 	}
+
 }
 
 

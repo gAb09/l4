@@ -26,7 +26,7 @@ class UtilisateurController extends \BaseController {
 		} else {  //validation OK
 			// return 'vlaidation ok';
 
-			$utilisateurs = Utilisateur::where('pseudo', '=', Input::get('pseudo'))->get();
+			$utilisateurs = Utilisateur::where('pseudo', Input::get('pseudo'))->get();
 			$utilisateur_checked = $utilisateurs[0];
 			// return var_dump($utilisateurs);
 			// return var_dump($utilisateur_checked);
@@ -121,7 +121,7 @@ class UtilisateurController extends \BaseController {
 			'mail' => Input::get('mail')
 			));
 
-		$utilisateurs = Utilisateur::where('pseudo', '=', Input::get('pseudo'))->get();
+		$utilisateurs = Utilisateur::where('pseudo', Input::get('pseudo'))->get();
 		// return var_dump($utilisateurs); // CTRL
 		$utilisateur_checked = $utilisateurs[0];
 		Auth::loginUsingId($utilisateur_checked->id);

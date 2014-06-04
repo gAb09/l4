@@ -1,5 +1,5 @@
 @section('body')
- onLoad="bascule_signe();banque();"
+onLoad="bascule_signe();banque();"
 @stop
 
 <!-- Dates aFa revoir traduction de la date -->
@@ -8,12 +8,31 @@
 <script type="text/javascript">
 var separateurs = {};
 
-	<?php foreach($separateurs as $id => $separateur) {
-		echo "separateurs['$id'] = '$separateur';";
-	}
-	?>
+<?php 
+echo "separateurs['0'] = 'uiuiui';";
+foreach($separateurs as $id => $separateur) {
+	echo "separateurs['$id'] = '$separateur';";
+}
+?>
 </script>
 
+<?php 
+$class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : "invisible" ;
+?>
+{{$class_verrou}}
+
+<fieldset>
+	<!-- Écriture simple/double -->
+	<div class="input nobr">
+		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
+		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
+	</div>
+	<!-- Verrou simple/double -->
+	<div class="{{$class_verrou}}" id = "verrou">
+		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'double')) }}
+		{{ Form::label('verrou', 'Verrou basculement écriture simple/double', array ('class' => 'nobr', 'id' => 'verrou')) }}
+	</div>
+</fieldset>
 <!-- Banque - Dates - Montant & Signe - Écriture simple/double - Verrou simple/double -->
 <fieldset>
 	<div class="input">
@@ -50,16 +69,6 @@ var separateurs = {};
 		{{ Form::label($signe["id_css"], $signe['etiquette'], array ('class' => 'nobr','style' => '', 'id' => '')) }}
 		@endforeach
 	</div>
-	<div>
-		<!-- Écriture simple/double -->
-		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
-		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
-	</div>
-	<div>
-		<!-- Verrou simple/double -->
-		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'double')) }}
-		{{ Form::label('verrou', 'Verrou basculement écriture simple/double', array ('class' => 'nobr', 'id' => 'verrou')) }}
-	</div>
 </fieldset>
 
 <!-- Libellés -->
@@ -83,18 +92,14 @@ var separateurs = {};
 		<!-- Type -->
 		{{ Form::label('type_id', 'Type', array ('class' => '')) }}
 		{{Form::select('type_id', $list['type'], $ecriture->type_id, array ('class' => 'long', 'onChange' => 'javascript:separateur(this);') ) }}
-</div>
+		<span>
+			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '/' }}
+		</span>
+	</div>
 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justificatif', 'Justificatif', array ('class' => '')) }}
-
-		@if(isset($ecriture->type->sep_justif))
-		<div class="input nobr">
-			<span id="sep1">{{ $ecriture->type->sep_justif }}</span>
-		</div>
-		@endif
-
 		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
@@ -111,36 +116,29 @@ var separateurs = {};
 <fieldset id="ecriture2" >Écriture liée :
 	<div class="input">
 		<!-- Banque 2 -->
-		{{ Form::hidden('ecriture2_id', $e2['ecriture2_id']) }}
+		{{ Form::hidden('ecriture2_id', isset($ecriture->ecriture2->id) ? : '') }}
 		{{ Form::label('banque2_id', 'Banque liée', array ('class' => '', 'id' => 'banque2_label')) }}
-		{{ Form::select('banque2_id', $list['banque'], $e2['banque_selected'], array ('class' => 'rrert'))}}  <!-- aPo probleme de selected -->
-</div>
+		{{ Form::select('banque2_id', $list['banque'], isset($ecriture->ecriture2->banque_id) ? $ecriture->ecriture2->banque_id : 0, array ('class' => 'rrert'))}}
+	</div>
 	<div class="input">
 		<!-- Type 2 -->
 		{{ Form::label('type2_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type2_id', $list['type'], $e2['type2_selected'], array ('class' => 'long', 'onChange' => 'javascript:separateur2(this);') ) }}
+		{{Form::select('type2_id', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'long', 'onChange' => 'javascript:separateur(this);') ) }}
+		<span>
+			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  '/'}}
+		</span>
 	</div>
 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
-
-		<div class="input nobr">
-			<span id="sep2">
-		@if(isset($ecriture->ecriture2->type->sep_justif))
-				{{ $ecriture->ecriture2->type->sep_justif }}
-		@endif
-			</span>
-		</div>
-
-		{{ Form::text('justif2', $e2['justif2_selected'], array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
+		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : INPUT_JUSTIF_TXT_DEFAUT, array ('class' => 'long margright')) }} 
 	</div>
 </fieldset>
 
 <p>
-{{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+	{{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
 </p>
-		{{ var_dump(Input::all() ) }}
 
 @section('script')
 <script src="/assets/js/ecritures.js">

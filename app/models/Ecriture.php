@@ -59,7 +59,7 @@ class Ecriture extends Eloquent {
 	public function setMontantAttribute($value)
 	{
 
-		$value = F::dateFtoPhp($value);
+		$value = F::montantFtoPhp($value);
 		$this->attributes['montant'] = $value;
 	}
 

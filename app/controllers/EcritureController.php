@@ -58,33 +58,14 @@ class EcritureController extends BaseController {
 
 	public function create()
 	{
-		$mode_emploi = Ecriture::fillFormForCreate();  // AFa Revoir les form:model
+		$fillFormForCreate = Ecriture::fillFormForCreate();  // AFa Revoir les form:model
 
 		return View::Make('compta.ecritures.create')
-		->with('ecriture', $mode_emploi)
+		->with('ecriture', $fillFormForCreate)
 		->with('list', self::lister())
-		->with('e2', self::create_SomeValuesFieldsetEcriture2())
 		;
 	}
 
-	private static function create_SomeValuesFieldsetEcriture2() {
-		return $values = array(
-			'banque_selected' => 0,
-			'type2_selected' => 0,
-			'justif2_selected' => INPUT_JUSTIF_TXT_DEFAUT,
-			'ecriture2_id' => '',
-			);
-	}
-
-	private static function edit_SomeValuesFieldsetEcriture2($ecriture) {
-		// return var_dump($ecriture);
-		return $values = array(
-			'banque_selected' => $ecriture->ecriture2->banque_id,
-			'type2_selected' => $ecriture->ecriture2->type_id,
-			'justif2_selected' => $ecriture->ecriture2->justificatif,
-			'ecriture2_id' => $ecriture->ecriture2->id,
-			);
-	}
 
 	public function store()
 	{
@@ -107,9 +88,9 @@ class EcritureController extends BaseController {
 		}else{
 			/* Si écriture double */ 
 
-			$couple = static::hydrateDouble($ec1, $ec2 = null);
-			$ec1 = $couple[0];
-			$ec2 = $couple[1];
+			$double = static::hydrateDouble($ec1, $ec2 = null);
+			$ec1 = $double[0];
+			$ec2 = $double[1];
 
 			$validation = $this->validateur->validate( Input::all() );
 			$validation2 = $this->validateur2->validate( Input::all() );
@@ -126,10 +107,8 @@ class EcritureController extends BaseController {
 
 			$ec1->save();
 
-		// /* double_id */
+		// /* Synchroniser */
 			$ec2->double_id = $ec1->id;
-
-
 			$ec2->save();
 
 			$ec1->double_id = $ec2->id;
@@ -141,7 +120,6 @@ class EcritureController extends BaseController {
 
 	private static function hydrateSimple(Ecriture $ec1)
 	{		
-		// dd(Input::all()); // CTRL
 		$ec1->banque_id = Input::get('banque_id');
 		$ec1->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
 		$ec1->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
@@ -165,7 +143,7 @@ class EcritureController extends BaseController {
 		$ec1 = static::hydrateSimple($ec1);
 
 		/* Instancier écriture 2 */
-		if ($ec2 === null) {
+		if ($ec2 === null) { // Store
 			$ec2 = new Ecriture;
 		}
 
@@ -190,18 +168,11 @@ class EcritureController extends BaseController {
 
 	public function edit($id)
 	{
-		$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->first();
-
-		if (isset($ec1->ecriture2->id)) {
-			$e2 = self::edit_SomeValuesFieldsetEcriture2($ec1);
-		}else{
-			$e2 = self::create_SomeValuesFieldsetEcriture2();
-		}
+		$ec1 = Ecriture::where('id', $id)->with('ecriture2')->first();
 
 		return View::Make('compta/ecritures/edit')
 		->with('ecriture', $ec1)
 		->with('list', self::lister())
-		->with('e2', $e2)
 		;
 	}
 
@@ -210,7 +181,7 @@ class EcritureController extends BaseController {
 	public function update($id)
 	{
 		/* Instancier ecriture 1 */
-		$ec1 = Ecriture::where('id', '=', $id)->with('ecriture2')->first();
+		$ec1 = Ecriture::where('id', $id)->with('ecriture2')->first();
 
 		/* Initialiser la variable destinée à contenir le message de succès */
 		$success = '';
@@ -248,17 +219,15 @@ class EcritureController extends BaseController {
  	    	}
 
  	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'page précédente'));
-
+ 	    	Session::flash('class_verrou', 'gfg');
  	    	/* Redirection */
- 	    	return Redirect::back()->withInput(Input::all());
+ 	    	return Redirect::to("compta/ecritures/$id/edit")->withInput(Input::all());
  	    }
 
 
 			/* - - - - - - - - - - - - - - - - - - - - - -
 			Traitement normal de l'update (Pas de changement de type OU BIEN celui-ci a été confirmé).  
 			- - - - - - - - - - - - - - - - - - - - - - - - */
-		   	// dd('Traitement de l’update'); // CTRL
-
 
 			/* - - - - - - - - - - - - - - - - - - - - - -
 			Si l'écriture est de type simple
@@ -270,7 +239,6 @@ class EcritureController extends BaseController {
 
 				/* - - - - - - - Si passage d'écriture double à simple - - - - - - - - - - - */
 				if ($changement and $doubleBefore == 1) {
-		 		// dd('2 en 1'); // CTRL
 
 					/* Supprimer E2 */
 					$ec2 = Ecriture::whereDoubleId($ec1->id)->where('id', '!=', $ec1->id)->get();
@@ -288,13 +256,10 @@ class EcritureController extends BaseController {
 			Si l'écriture est de type double…	
 			- - - - - - - - - - - - - - - - - - - - - - - - */
 		}else{
-		 		// var_dump('type double'); // CTRL
-
 				/* - - - - - - - - - - - - - - - - - - - - - -
 				… et était simple avant…
 				- - - - - - - - - - - - - - - - - - - - - - - - */
 				if ($changement) {
-			 		// dd('1 en 2');  // CTRL
 
 					/* Instancier E2 */
 					$ec2 = new Ecriture();
@@ -310,13 +275,8 @@ class EcritureController extends BaseController {
 				- - - - - - - - - - - - - - - - - - - - - - - - */
 			}else{
 
-			 	// dd('2 en 2');  // CTRL
-
 				/* Instancier E2 */
 				$ec2 = Ecriture::whereDoubleId($ec1->id)->get();
-
-				// dd($ec2);  // CTRL
-				// dd(DB::getQueryLog());
 
 				/* Vérification qu'il n’existe qu'une seule écriture liée */
 				if($ec2->count() > 1)
@@ -327,7 +287,7 @@ class EcritureController extends BaseController {
 			}
 
 			/* Hydrater les 2 écritures */
-			$couple = static::hydrateDouble($ec1, $ec2);
+			$double = static::hydrateDouble($ec1, $ec2);
 
 			/* Save E2 */
 			$validation2 = $this->validateur2->validate( Input::all() );
@@ -350,8 +310,6 @@ class EcritureController extends BaseController {
 		/* - - - - - - - - - - - - - - - - - - - - - -
 		Dans tous les cas
 		- - - - - - - - - - - - - - - - - - - - - - - - */
- 		// dd('type simple'); // CTRL
-		/* Save E1 */
 		$validation = $this->validateur->validate( Input::all() );
 
 		if ($validation === true) {
@@ -371,9 +329,9 @@ class EcritureController extends BaseController {
 
 	public function destroy($id)
 	{
-		$ecriture = Ecriture::where('id', '=', $id)->with('ecriture2')->get();
+		$ecriture = Ecriture::where('id', $id)->with('ecriture2')->get();
 		$ecriture = $ecriture[0];
-// dd($ecriture);
+
 		$success = '';
 		/* Le cas échéant traiter l'écriture liée */
 

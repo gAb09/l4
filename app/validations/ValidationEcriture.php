@@ -9,7 +9,7 @@ class ValidationEcriture extends ValidationBase
 		'montant' => 'required|fnumeric|notnull',
 		'signe_id' => 'required',
 		'libelle' => 'required|not_in:Saisir un libellé',
-		'libelle_detail' => 'not_in => Compléter éventuellement le libellé'],// aFa Utiliser constante
+		'libelle_detail' => 'not_in:Compléter éventuellement le libellé',// aFa Utiliser constante
 		'type_id' => 'not_in:0',
 		'justificatif' => 'not_in:Éventuellement préciser un justificatif',// aFa Utiliser constante
 		'compte_id' => 'not_in:0',

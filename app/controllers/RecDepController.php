@@ -24,7 +24,7 @@ class RecDepController extends BaseController {
 		Session::put('page_depart', Request::path());
 
 		// Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', '=', $id)->orderBy('date_emission')->get();
+		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', $id)->orderBy('date_emission')->get();
 		// return var_dump($ecritures);  // CTRL
 
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page recdep par défaut avec un message d'erreur

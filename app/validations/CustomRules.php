@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 /* - - - - - - - - - - - COMPTES - - - - - - - - -  */
 Validator::extend('inclusion', function($field, $value, $params)
 {
@@ -23,25 +23,39 @@ Validator::extend('digit', function($field, $value, $params)
 	}else{return true;}
 });
 
+
+
 /* - - - - - - - - - - - ECRITURES - - - - - - - - -  */
 Validator::extend('afteremission', function($field, $value, $params)
 {
-	if ($value <= Input::get('date_emission')) {
+	if ($test = substr_count($value, '-') == 2) {
+		$parties = explode('-', $value);
+		$valeur = Carbon::createFromDate($parties[2], $parties[1], $parties[0]);
+		// dd($valeur);
+	}
+	if ($test = substr_count(Input::get('date_emission'), '-') == 2) {
+		$parties = explode('-', Input::get('date_emission'));
+		$emission = Carbon::createFromDate($parties[2], $parties[1], $parties[0]);
+		// dd($emission);
+	}
+	if ($valeur <= $emission) {
 		return false;
 	}else{return true;}
 });
 
+
 Validator::extend('fnumeric', function($field, $value, $params)
 {
-	$value = F::dateFtoPhp($value);
+	$value = F::montantFtoPhp($value);
 	if (!is_numeric($value)) {
 		return false;
 	}else{return true;}
 });
 
+
 Validator::extend('notnull', function($field, $value, $params)
 {
-	$value = F::dateFtoPhp($value);
+	$value = F::montantFtoPhp($value);
 	settype($value, 'float');
 	if ($value == 0) {
 		return false;

@@ -35,7 +35,7 @@ En dessous, préciser si ce type d’écriture requiert un justificatif et le ca
 	/* Obtenir (au format json) la liste des "id" des types d'écriture requérant une banque liée */
 	public static function type_dble_ecriture()
 	{
-		$req_banque2 = Type::where('req_banque2', '=', 1)->get(array('id'))->toArray();
+		$req_banque2 = Type::where('req_banque2', 1)->get(array('id'))->toArray();
 
 		foreach ($req_banque2 as $key => $value) {
 			$array[] = ''.$value['id'].'';

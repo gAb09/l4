@@ -35,17 +35,12 @@ function banque() {
 		}
 	}
 
-	function separateur(select1) {
-		var span = document.getElementById("sep1");
-		sep = separateurs[select1.value];
+
+	function separateur(select) {
+		div = select.parentNode;
+		span = div.getElementsByTagName("SPAN")[0];
+		// alert(div+span);
+		sep = separateurs[select.value];
 		span.innerHTML = sep;
 	}
-
-
-	function separateur2(select2) {
-		var span = document.getElementById("sep2");
-		sep = separateurs[select2.value];
-		span.innerHTML = sep;
-	// alert(span);
-}
 
