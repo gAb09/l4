@@ -14,6 +14,23 @@ function bascule_signe() {
 }
 
 
+function bascule_verrou() {
+	var label = document.getElementById("label_verrou");
+	var verrou = document.getElementById("check_verrou");
+
+	if (verrou.checked == 1)
+	{
+		label.style.color="red"; /* aFA passer par les classe de span */
+		label.innerHTML= "verouillé";
+	}
+	else
+	{
+		label.style.color="green";
+		label.innerHTML= "déverouillé";
+	}
+}
+
+
 
 /*----------   Affichage de la banque de destination (pages Écritures)-----------*/
 function banque() {
@@ -43,4 +60,3 @@ function banque() {
 		sep = separateurs[select.value];
 		span.innerHTML = sep;
 	}
-

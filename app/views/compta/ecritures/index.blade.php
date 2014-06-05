@@ -9,16 +9,15 @@
 
 @section('topcontent1')
 		<h1 class="titrepage">{{$titre_page}}</h1>
-		<a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter une écriture</a>
+		{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
 @stop
 
 
 @section('topcontent2')
-		<a href ="{{ URL::to("compta/ecritures") }}" class="badge badge-locale badge-big ">Toutes</a>
+		{{link_to_route('compta.ecritures.index', 'Toutes', null, ["class" => "badge badge-locale badge-big"])}}
 
 		@foreach(Banque::all() as $bank)
-		<a href ="{{ URL::to("compta/banque/$bank->id") }}" class="badge badge-locale badge_haut_page  badge-big">{{ $bank->nom }}</a>
+		{{link_to_route('bank', $bank->nom, $bank->id, ["class" => "badge badge-locale badge-big"])}}
 		@endforeach
 @stop
 

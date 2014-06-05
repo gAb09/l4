@@ -12,9 +12,9 @@ http://laravel.sl-creation.org/laravel-4-chapitre-32-organiser-son-code/*/
 abstract class ValidationBase implements ValidationInterface
 {
 
-    public $rules;
+    protected $rules;
 
-    public $messages;
+    protected $messages;
 
     protected $validator;
 

@@ -187,11 +187,10 @@ class EcritureController extends BaseController {
 		$success = '';
 
 		/* Détecter si changement du flag double écriture */
-		$doubleBefore = $ec1->double_flag;
-		$doubleNow = Input::get('double_flag');
+		$doubleBefore = ($ec1->double_flag == 1 ? true : false);
+		$doubleNow = (is_null(Input::get('double_flag'))) ? false : true;
 
 		$changement = ($doubleBefore != $doubleNow) ? true : false ;
-
 
 		/* Déterminer si le changement de type est confirmée ou non */
 		$confirmOk = (Input::get('verrou') == 1 ) ? false : true ;
@@ -212,21 +211,21 @@ class EcritureController extends BaseController {
 
  	    	/* Le message sera composé différemment selon qu'il s'agit d'un passage d'une écriture double à une écriture simple  ou du passage inverse */
  	    	if ($doubleBefore){
- 	    		$message = "• Attention ! Vous demandez à passer d’une écriture double à une écriture simple.<br />• IMPORTANT : Notez bien que c’est l’écriture actuellement ouverte qui sera conservée et l’écriture liée va être automatiquement supprimée.<br />Vous pouvez :<br /> – Vérifier votre saisie et VALIDER ce choix en décochant “Verrou basculement écriture simple/double”,<br /> – ANNULER en revenant à la  ";
+ 	    		$message = "• Attention ! Vous demandez à passer d’une écriture double à une écriture simple.<br />• IMPORTANT : Notez bien que c’est l’écriture actuellement ouverte qui sera conservée et l’écriture liée va être automatiquement supprimée.<br />Vous pouvez :<br /> – Vérifier votre saisie et VALIDER ce choix en déverouillant ".VERROU.",<br /> – ANNULER en revenant à la ";
  	    	}else{
- 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Vous pouvez :<br /> – Vérifier votre saisie et VALIDER ce choix en décochant “Verrou basculement écriture simple/double”,<br /> – ANNULER en revenant à la  ";
+ 	    		$message = "Attention ! Vous cherchez à passer d’une écriture simple à une écriture double.<br />Vous pouvez :<br /> – Vérifier votre saisie et VALIDER ce choix en déverouillant ".VERROU.",<br /> – ANNULER en revenant à la ";
 
  	    	}
 
  	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'page précédente'));
  	    	Session::flash('class_verrou', 'gfg');
  	    	/* Redirection */
- 	    	return Redirect::to("compta/ecritures/$id/edit")->withInput(Input::all());
+ 	    	return Redirect::back()->withInput(Input::all());
  	    }
 
 
 			/* - - - - - - - - - - - - - - - - - - - - - -
-			Traitement normal de l'update (Pas de changement de type OU BIEN celui-ci a été confirmé).  
+			Traitement de l'update (Pas de changement de type OU BIEN celui-ci a été confirmé).  
 			- - - - - - - - - - - - - - - - - - - - - - - - */
 
 			/* - - - - - - - - - - - - - - - - - - - - - -
@@ -234,14 +233,22 @@ class EcritureController extends BaseController {
 			- - - - - - - - - - - - - - - - - - - - - - - - */
 			if (!$doubleNow == 1)
 			{
+				Session::flash('test.passage', '1 vers 1');
+				/* - - - - - - - - - - - - - - - - - - - - - -
+				… et était simple avant…
+				- - - - - - - - - - - - - - - - - - - - - - - - */
 				/* Hydrater ecriture 1 avec les nouvelles entrées*/
 				$ec1 = static::hydrateSimple($ec1);
 
-				/* - - - - - - - Si passage d'écriture double à simple - - - - - - - - - - - */
+				/* - - - - - - - - - - - - - - - - - - - - - -
+				… et était double avant…
+				- - - - - - - - - - - - - - - - - - - - - - - - */
 				if ($changement and $doubleBefore == 1) {
+					Session::flash('test.passage', '2 vers 1');
 
 					/* Supprimer E2 */
-					$ec2 = Ecriture::whereDoubleId($ec1->id)->where('id', '!=', $ec1->id)->get();
+					$ec2 = Ecriture::where('id', Input::get('ecriture2_id'))->get();
+
 					$ec2[0]->delete();
 
 					/* Désynchroniser E1 */
@@ -276,7 +283,7 @@ class EcritureController extends BaseController {
 			}else{
 
 				/* Instancier E2 */
-				$ec2 = Ecriture::whereDoubleId($ec1->id)->get();
+				$ec2 = Ecriture::where('id', Input::get('ecriture2_id'))->get();
 
 				/* Vérification qu'il n’existe qu'une seule écriture liée */
 				if($ec2->count() > 1)

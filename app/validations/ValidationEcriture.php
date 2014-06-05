@@ -2,7 +2,7 @@
 
 class ValidationEcriture extends ValidationBase
 {
-	public $rules = array(
+	protected $rules = array(
 		'banque_id' => 'not_in:0',
 		'date_emission' => 'required|alpha_dash|date_format:d-m-Y',
 		'date_valeur' => 'required|alpha_dash|date_format:d-m-Y|afteremission',
@@ -15,7 +15,7 @@ class ValidationEcriture extends ValidationBase
 		'compte_id' => 'not_in:0',
 		);
 
-	public $messages = array(
+	protected $messages = array(
 		'banque_id.not_in' => 'Vous n’avez pas selectionné de “Banque”.',
 		'date_emission.alpha_dash' => 'Le séparateur doit être un tiret (Date d’émission).',
 		'date_emission.date_format' => 'Le format de date doit être : jj-mm-aaaa (Date d’émission).',

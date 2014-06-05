@@ -105,3 +105,4 @@ require app_path().'/filters.php';
 require app_path().'/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 require app_path().'/validations/CustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 define('INPUT_JUSTIF_TXT_DEFAUT', 'Éventuellement préciser un justificatif');
+define('VERROU', '“Changement écriture simple/double”');

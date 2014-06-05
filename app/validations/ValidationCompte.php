@@ -12,7 +12,7 @@ class ValidationCompte extends ValidationBase
 		/* Afa : Un compte de profondeur > 5 ne peu avooir d'enfant */
 		);
 
-	public $messages = array(
+	protected $messages = array(
 		'numero.numeric' => 'Le champs Numéro ne peut contenir que des chiffres.',
 		'numero.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs Numéro.',
 		'numero.unique' => 'Il existe déjà un compte avec ce numéro.',

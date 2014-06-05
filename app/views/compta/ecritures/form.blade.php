@@ -13,13 +13,10 @@ echo "separateurs['0'] = 'uiuiui';";
 foreach($separateurs as $id => $separateur) {
 	echo "separateurs['$id'] = '$separateur';";
 }
+$class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : "invisible";
 ?>
 </script>
 
-<?php 
-$class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : "invisible" ;
-?>
-{{$class_verrou}}
 
 <fieldset>
 	<!-- Écriture simple/double -->
@@ -29,8 +26,9 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	</div>
 	<!-- Verrou simple/double -->
 	<div class="{{$class_verrou}}" id = "verrou">
-		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'double')) }}
-		{{ Form::label('verrou', 'Verrou basculement écriture simple/double', array ('class' => 'nobr', 'id' => 'verrou')) }}
+		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'check_verrou', 'onChange' => 'javascript:bascule_verrou();')) }}
+		{{VERROU}}
+		{{ Form::label('verrou', 'vérouillé', array ('class' => 'nobr', 'id' => 'label_verrou', 'style' => 'color:red')) }}
 	</div>
 </fieldset>
 <!-- Banque - Dates - Montant & Signe - Écriture simple/double - Verrou simple/double -->
@@ -113,10 +111,13 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 </fieldset>
 
 <!-- Banque 2 -->
-<fieldset id="ecriture2" >Écriture liée :
+<fieldset id="ecriture2" >
+	<p class="input">
+		Écriture liée :
+	</p>
 	<div class="input">
 		<!-- Banque 2 -->
-		{{ Form::hidden('ecriture2_id', isset($ecriture->ecriture2->id) ? : '') }}
+		{{ Form::hidden('ecriture2_id', isset($ecriture->ecriture2->id) ? $ecriture->ecriture2->id : '') }}
 		{{ Form::label('banque2_id', 'Banque liée', array ('class' => '', 'id' => 'banque2_label')) }}
 		{{ Form::select('banque2_id', $list['banque'], isset($ecriture->ecriture2->banque_id) ? $ecriture->ecriture2->banque_id : 0, array ('class' => 'rrert'))}}
 	</div>
