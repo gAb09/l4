@@ -394,16 +394,20 @@ div.classeRacine {
 */}
 
 /* Etats des écritures */
+.st_releve{
+    background-color: rgba(250, 250, 250, 0.2);
+}
+
 .st_www{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(110, 50, 50, 0.1);
 }
 
 .st_emise{
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(200, 50, 50, 0.3);
 }
 
 .st_prev{
-    background-color: rgba(200, 50, 50, 0.35);
+    background-color: rgba(200, 50, 50, 0.5);
 }
 
 /* Compte actif */

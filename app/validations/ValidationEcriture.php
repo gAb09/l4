@@ -21,7 +21,7 @@ class ValidationEcriture extends ValidationBase
 		'date_emission.date_format' => 'Le format de date doit être : jj-mm-aaaa (Date d’émission).',
 		'date_valeur.alpha_dash' => 'Le séparateur doit être un tiret (Date de valeur).',
 		'date_valeur.date_format' => 'Le format de date doit être : jj-mm-aaaa (Date de valeur).',
-		'date_valeur.afteremission' => 'La date de valeur doit être postérieure à la date d’émission',
+		'date_valeur.afteremission' => 'La date de valeur doit être postérieure ou égale à la date d’émission',
 		'montant.notnull' => 'Le montant ne peut être égal à 0',
 		'montant.fnumeric' => 'Le montant ne doit contenir que des chiffres, et éventuellement une virgule et des espaces',
 		'signe_id.required' => 'Vous n’avez pas précisé s’il s’agit d’une dépense ou d’une recette.',
