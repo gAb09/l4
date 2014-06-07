@@ -10,7 +10,7 @@ class Type extends Eloquent {
 
 	protected $default_values_for_create = array(
 		'nom' => 'Nom du type d’écriture',
-		'description' => 'Saisir ici la description éventuelle. En dessous, préciser si ce type d’écriture requiert un justificatif et le cas échéant, le séparateur.',
+		'description' => 'Saisir ici la description.',
 		'req_justif' => 0,
 		'sep_justif' => 'Ici, texte de séparation',
 	);
@@ -28,6 +28,12 @@ class Type extends Eloquent {
 
 	/* —————————  MUTATORS  —————————————————*/
 
+	public function setSepJustifAttribute($value)
+	{
+
+		$value = ' '.$value.' ';
+		$this->attributes['sep_justif'] = $value;
+	}
 
 
 

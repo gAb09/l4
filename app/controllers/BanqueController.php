@@ -47,7 +47,6 @@ class BanqueController extends BaseController {
 			Session::flash('success', 'La banque "'.Input::get('nom').'" a bien été crée');              
 			return Redirect::action('BanqueController@index');
 		} else {
-			// return 'fails'; // CTRL
 			return Redirect::back()->withInput(Input::all())->withErrors($validate);
 		}
 	}

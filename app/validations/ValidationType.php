@@ -5,14 +5,17 @@ class ValidationType extends ValidationBase
 
 
 	protected $rules = array(
-		// 'numero' => 'unique:comptes,numero|required|not_in:6 chiffres max',
-		// 'libelle' => 'required|not_in:Saisissez un libellé clair', // inférieure à 500 caractères
+		'nom' => 'unique:types,nom|required|not_in:Nom du type d’écriture',
+		'description' => 'required|not_in:Saisir ici la description.',
+		'sep_justif' => 'required',
 		);
 
 	public $messages = array(
-		// 'numero.unique' => 'Il existe déjà un compte avec ce numéro.',
-		// 'libelle.not_in' => 'Oups… Vous n’avez rien saisi de nouveau dans le champs “Libellé” !',
-	// 	'description.not_in' => 'Il vaut mieux, soit laisser le champs :attribute vide, soit y saisir une description.',
+		'nom.unique' => 'Il existe déjà un type d’écriture portant ce Nom.',
+		'nom.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Nom”.',
+		'description.required' => 'Vous n’avez rien saisi dans le champs “Description”',
+		'description.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Description”',
+		'sep_justif.required' => 'Vous n’avez pas choisi de séparateur.',
 		);
 
 }

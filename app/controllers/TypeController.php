@@ -17,7 +17,7 @@ class TypeController extends BaseController {
 	public function index()
 	{
 		$types = Type::all();
-		$tost = 'tost';
+
 		return View::Make('compta.types.index')->with('types', $types);
 	}
 
@@ -26,6 +26,7 @@ class TypeController extends BaseController {
 	public function create()
 	{
 		$type = new Type;
+
 		$type->fillFormForCreate();
 
 		return View::Make('compta.types.create')->with('type', $type);
@@ -36,12 +37,20 @@ class TypeController extends BaseController {
 	public function store()
 	{
 		// dd(Input::all()); // CTRL
-		Type::create(Input::except('_token'));
+		$validate = $this->validateur->validate(Input::all());
 
-		Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été créé');
-		return Redirect::action('TypeController@index');
+		if($validate === true) 
+		{
+
+			Type::create(Input::except('_token'));
+
+			Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été créé');
+
+			return Redirect::action('TypeController@index');
+		}else{
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+		}
 	}
-
 
 
 	public function edit($id)
@@ -57,24 +66,23 @@ class TypeController extends BaseController {
 
 		$item = Type::findOrFail($id);
 
-		$item->nom = Input::get('nom');
-		$item->description = Input::get('description');
-		$item->req_banque2 = (Input::get('req_banque2')) ? 1 : 0;
-		$item->req_justif = (Input::get('req_justif')) ? 1 : 0;
-		$item->sep_justif = Input::get('sep_justif');
+		$item->fill(Input::except('_token', '_method'));
 
 		$item->save();
 
 		Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été modifié');
+
 		return Redirect::action('TypeController@index');
 	}
 
 	public function destroy($id)
 	{
 		$item = Type::findOrFail($id);
+
 		$item->delete();
 
 		Session::flash('success', "Le type “$item->nom'” a bien été supprimé");
+
 		return Redirect::action('TypeController@index');
 	}
 

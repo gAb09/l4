@@ -20,7 +20,7 @@
 
 <hr />
 
-{{ Form::open(array('url' => 'compta/types/'.$type->id, 'method' => 'put')) }}
+{{ Form::open(['method' => 'PUT', 'action' => ['TypeController@update', $type->id]]) }}
 
 @include('compta/types/form')
 

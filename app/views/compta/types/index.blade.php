@@ -23,16 +23,20 @@ style="font-size:1.1em">Ajouter un nouveau type</a>
 
 @foreach($types as $type)
 
-@foreach($type['attributes'] as $att)
-{{$att}}
-@endforeach
 <hr />
 <h3>{{ $type->nom }} <small>(id n° {{ $type->id }})</small></h3>
-<p>• Séparateur : “{{ $type->sep_justif }}”</p>
-<p>• {{ $type->description }}</p>
-@if($type->req_justif)<p>• Ce type nécessitera de préciser un “Justificatif” lors de la saisie d'une écriture.</p>@endif
+
+<p>• Description :<br />{{ $type->description }}</p>
+
+@if($type->req_justif)
+<p>• Ce type nécessitera de préciser un justificatif lors de la saisie d'une écriture.
+<br />Le séparateur est : “{{ $type->sep_justif }}”
+</p>
+@endif
+</p>
+
 <p class="badge badge-locale iconesmall edit">
-	{{link_to_route('compta.types.edit', 'Modifier ce type', $type->id)}}
+	{{link_to_action('TypeController@edit', 'Modifier ce type', $type->id)}}
 </p>
 @endforeach
 
