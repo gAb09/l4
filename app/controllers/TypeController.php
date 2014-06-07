@@ -17,6 +17,7 @@ class TypeController extends BaseController {
 	public function index()
 	{
 		$types = Type::all();
+		$tost = 'tost';
 		return View::Make('compta.types.index')->with('types', $types);
 	}
 
@@ -24,7 +25,8 @@ class TypeController extends BaseController {
 
 	public function create()
 	{
-		$type = Type::fillFormForCreate();
+		$type = new Type;
+		$type->fillFormForCreate();
 
 		return View::Make('compta.types.create')->with('type', $type);
 	}

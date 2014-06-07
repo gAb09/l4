@@ -7,6 +7,12 @@ class Compte extends Node {
 
 	protected $guarded = array('id');
 
+	protected $default_values_for_create = array(
+		'numero' => 'Six chiffres max',
+		'libelle' => 'Saisissez un libellé clair',
+		'description_officiel' => '',
+		'actif' => 0,
+		);
 
 	/* —————————  RELATIONS  —————————————————*/
 
@@ -61,20 +67,5 @@ class Compte extends Node {
 	{
 		settype($value, 'string');
 		return $value;
-	}
-
-
-
-
-	/* —————————  Créer un objet Compte pour le formulaire de création  ————————————————— */
-
-	public static function fillFormForCreate()
-	{
-		$compte = new Compte();
-		$compte->numero = 'Six chiffres max';
-		$compte->libelle = 'Saisissez un libellé clair';
-		$compte->description_officiel = '';
-		$compte->actif = 0;
-		return $compte;
 	}
 }

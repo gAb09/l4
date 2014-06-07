@@ -3,7 +3,17 @@
 class Type extends Eloquent {
 	use ModelTrait;
 
+	protected $guarded = array('id'); // AFA
+	protected $softDelete = true; // AFA
+
 	protected static $unguarded = true; // AFA
+
+	protected $default_values_for_create = array(
+		'nom' => 'Nom du type d’écriture',
+		'description' => 'Saisir ici la description éventuelle. En dessous, préciser si ce type d’écriture requiert un justificatif et le cas échéant, le séparateur.',
+		'req_justif' => 0,
+		'sep_justif' => 'Ici, texte de séparation',
+	);
 
 	/* —————————  RELATIONS  —————————————————*/
 
@@ -20,18 +30,8 @@ class Type extends Eloquent {
 
 
 
-	public static function fillFormForCreate()
-	{
-		$type = new Type();
-		$type->nom = 'Nom du type d’écriture';
-		$type->description = 'Saisir ici la description éventuelle.
-En dessous, préciser si ce type d’écriture requiert un justificatif et le cas échéant, le séparateur.';
-		$type->req_justif = 0;
-		$type->sep_justif = 'Ici, texte de séparation';
-		return $type;
-	}
 
-	/* —————————  Helpers  —————————————————*/
+	/* —————————  Helpers  —————————————————*/ // aFa passer en requete ajax traitée par controleur ??
 	/* Obtenir (au format json) la liste des "id" des types d'écriture requérant une banque liée */
 	public static function type_dble_ecriture()
 	{

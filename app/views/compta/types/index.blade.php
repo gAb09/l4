@@ -8,7 +8,8 @@
 
 
 @section('topcontent1')
-<h1 class="titrepage">Les types d'écriture</h1>
+<h1 class="titrepage">Les types d'écriture
+</h1>
 @stop
 
 
@@ -21,6 +22,10 @@ style="font-size:1.1em">Ajouter un nouveau type</a>
 @section('contenu')
 
 @foreach($types as $type)
+
+@foreach($type['attributes'] as $att)
+{{$att}}
+@endforeach
 <hr />
 <h3>{{ $type->nom }} <small>(id n° {{ $type->id }})</small></h3>
 <p>• Séparateur : “{{ $type->sep_justif }}”</p>

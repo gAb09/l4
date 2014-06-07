@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -52,10 +52,32 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql' => array(
+		'dev' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'test',
+			'username'  => 'root',
+			'password'  => 'root',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
+		'prod' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'comptagb',
+			'username'  => 'root',
+			'password'  => 'root',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
+		'locale' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'lalocale',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

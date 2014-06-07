@@ -1,5 +1,6 @@
 <?php
 class Ecriture extends Eloquent {
+	use ModelTrait;
 
 	protected $guarded = array('id');
 	protected $softDelete = true; // AFA
@@ -9,6 +10,19 @@ class Ecriture extends Eloquent {
 	{
 		return static::$mutatorCache;
 	}
+
+	protected $default_values_for_create = array(
+		'banque_id' => 0,
+		'date_valeur' => '2014-01-01',
+		'date_emission' => '2014-01-01',
+		'montant' => 0,
+		'type_id' => 0,
+		'libelle' => 'Saisir un libellé',
+		'libelle_detail' => 'Compléter éventuellement le libellé',
+		'justificatif' => INPUT_JUSTIF_TXT_DEFAUT,
+		'compte_id' => 0,
+		'double_flag' => false,
+	);
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -66,22 +80,6 @@ class Ecriture extends Eloquent {
 
 
 	/* —————————  Créer un objet Ecriture pour le formulaire de création  —————————————————*/
-
-	public static function fillFormForCreate()
-	{
-		$ecriture = new Ecriture();
-		$ecriture->banque_id = 0;
-		$ecriture->attributes['date_valeur'] = '0000';
-		$ecriture->attributes['date_emission'] = '0000';
-		$ecriture->montant = 00;
-		$ecriture->type_id = 0;
-		$ecriture->libelle = 'Saisir un libellé';
-		$ecriture->libelle_detail = 'Compléter éventuellement le libellé';
-		$ecriture->justificatif = INPUT_JUSTIF_TXT_DEFAUT;
-		$ecriture->compte_id = 0;
-		$ecriture->double_flag = false;
-		return $ecriture;
-	}
 
 
 }

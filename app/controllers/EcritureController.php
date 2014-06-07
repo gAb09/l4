@@ -58,10 +58,11 @@ class EcritureController extends BaseController {
 
 	public function create()
 	{
-		$fillFormForCreate = Ecriture::fillFormForCreate();  // AFa Revoir les form:model
+		$ecriture = new Ecriture;
+		$ecriture->fillFormForCreate();
 
 		return View::Make('compta.ecritures.create')
-		->with('ecriture', $fillFormForCreate)
+		->with('ecriture', $ecriture)
 		->with('list', self::lister())
 		;
 	}
@@ -149,8 +150,8 @@ class EcritureController extends BaseController {
 
 		/* Hydrater écriture 2 */
 		$ec2->banque_id = Input::get('banque2_id');
-		$ec1->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
-		$ec1->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
+		$ec2->date_emission = F::dateSaisieSauv(Input::get('date_emission'));
+		$ec2->date_valeur = F::dateSaisieSauv(Input::get('date_valeur'));
 		$ec2->montant = Input::get('montant');
 		$ec2->signe_id = ($ec1->signe_id == 1)? 2 : 1;
 		$ec2->libelle = Input::get('libelle');

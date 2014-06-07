@@ -25,7 +25,8 @@ class BanqueController extends BaseController {
 
 	public function create()
 	{
-		$banque = Banque::fillFormForCreate();
+		$banque = new Banque;
+		$banque->fillFormForCreate();
 
 		return View::Make('compta.banques.create')->with(compact('banque'));
 	}

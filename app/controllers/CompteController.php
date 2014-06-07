@@ -59,7 +59,8 @@ class CompteController extends BaseController {
 
 		public function create()
 		{
-			$compte = Compte::fillFormForCreate();
+			$compte = new Compte;
+			$compte->fillFormForCreate();
 
 			return View::Make('compta.comptes.create')
 			->with('compte', $compte)
@@ -161,7 +162,7 @@ class CompteController extends BaseController {
 			return Redirect::action('CompteController@index');
 		}
 
-		public function freres($id = null)
+		public function freres($id = null) // aFa décomposer en scope dans model + Lister() dans controleur .
 		{
 			/* Obtenir le compte pere qui a été choisi et rechercher ses descendants immédiats */
 			$pere = Compte::where('id', Input::get('idpere'))->first();

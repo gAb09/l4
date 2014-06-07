@@ -8,25 +8,17 @@ class Banque extends Eloquent {
 	protected $softDelete = true; // AFA
 
 
+	protected $default_values_for_create = array(
+		'nom' => 'Saisir un nom',
+		'description' => 'Saisir une description',
+	);
+
+
 	/* —————————  RELATIONS  —————————————————*/
 
 	public function ecriture()
 	{
 		return $this->hasMany('Ecriture');
-	}
-
-
-	/* —————————  Créer un objet Banque pour le formulaire de création  —————————————————*/
-
-	public static function fillFormForCreate()
-	{
-		$banque = new Banque();
-		$strings = [
-		'nom' => 'Saisir un nom',
-		'description' => 'Saisir une description',
-		];
-		$banque->fill($strings);
-		return $banque;
 	}
 
 }
