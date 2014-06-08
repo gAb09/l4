@@ -39,7 +39,7 @@
 
 	<tbody>
 		@foreach($ecritures as $ecriture)
-		<tr class="surlignage"
+		<tr id ="{{$ecriture->id}}" class="surlignage"
 		ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 		<td>{{ $ecriture->id }}
 			<td>{{ F::dateCourteNb($ecriture->date_emission) }}</td>
@@ -67,6 +67,11 @@
 				<td>
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
+			<td>
+				@if ($ecriture->ecriture2)
+				<a class="iconemedium double" href ="{{ URL::to('compta/banque/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
+				@endif
+			</td>
 
 				@endforeach
 			</tr>

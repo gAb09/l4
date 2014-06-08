@@ -48,30 +48,4 @@ class RecDepController extends BaseController {
 		return View::make('compta.recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
 	}
 
-	public function create()
-	{
-		// return 'Formulaire pour la création d\'une ecriture';  // CTRL // AFa
-
-	}
-
-
-	public function edit($id)
-	{
-		// return 'edition de l\écriture n° '.$id;  // CTRL
-
-	}
-
-	public function update($id)
-	{
-		// return 'update_recettes_depenses n°'.$id;  // CTRL
-
-	}
-
-	public function destroy($id)
-	{
-		return 'effacement désactvé';  // CTRL
-		// return 'effacement de l\écriture n° '.$id;  // CTRL
-
-	}
-
 }
