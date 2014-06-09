@@ -66,7 +66,7 @@ return array(
 		'prod' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'comptagb',
+			'database'  => 'lalocale',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

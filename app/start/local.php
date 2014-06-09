@@ -1,6 +1,17 @@
 <?php
 
-Session::set('site', 'Site de Bruno');
+Session::set('site', 'Site interne de La Locale');
+
+
+/*
+|--------------------------------------------------------------------------
+| Liaison explicite de la classe "Odile" à l'IoC
+|-------------------------------------------------------------------------- */
+
+// App::bind('odile', function($app)
+// {
+//     return new Odile;
+// });
 
 /*
 |--------------------------------------------------------------------------
