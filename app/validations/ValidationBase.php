@@ -29,14 +29,7 @@ abstract class ValidationBase implements ValidationInterface
 
         $rules = $rules_sup+$this->rules;
 
-
-
-
-
-        var_dump($rules);
         /* Parser les règles pour y détecter d'éventuelles constantes */
-
-
         foreach ($rules as $key => &$rule)
         {
             $rule = (is_string($rule)) ? explode('|', $rule) : $rule;

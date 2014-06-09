@@ -68,11 +68,21 @@ class TypeController extends BaseController {
 
 		$item->fill(Input::except('_token', '_method'));
 
-		$item->save();
+		$validate = $this->validateur->validate(Input::all());
 
-		Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été modifié');
+		if($validate === true) 
+		{
 
-		return Redirect::action('TypeController@index');
+			$item->save();
+
+			Session::flash('success', 'Le type "'.Input::get('nom').'" a bien été modifié');
+
+			return Redirect::action('TypeController@index');
+
+		}else{
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+		}
+
 	}
 
 	public function destroy($id)
