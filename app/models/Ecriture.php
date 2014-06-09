@@ -1,13 +1,28 @@
 <?php
 class Ecriture extends Eloquent {
+	use ModelTrait;
 
-	protected static $unguarded = true; // AFA
+	protected $guarded = array('id');
+	protected $softDelete = true; // AFA
 
 
 	public static function mutator() // aFa remove ?
 	{
 		return static::$mutatorCache;
 	}
+
+	protected $default_values_for_create = array(
+		'banque_id' => 0,
+		'date_valeur' => CREATE_FORM_DEFAUT_TXT_DATE,
+		'date_emission' => CREATE_FORM_DEFAUT_TXT_DATE,
+		'montant' => 0,
+		'type_id' => 0,
+		'libelle' => CREATE_FORM_DEFAUT_TXT_LIBELLE,
+		'libelle_detail' => CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL,
+		'justificatif' => CREATE_FORM_DEFAUT_TXT_JUSTIF,
+		'compte_id' => 0,
+		'double_flag' => false,
+	);
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -51,41 +66,25 @@ class Ecriture extends Eloquent {
 
 
 	/* —————————  ACCESSORS  —————————————————*/
+	public function getMontantAttribute($value)
+	{
+		return F::nbre($value);
+	}
+
 
 
 	/* —————————  MUTATORS  —————————————————*/
 
 	public function setMontantAttribute($value)
 	{
-		$value = str_replace(' ', '', $value);
-		$this->attributes['montant'] = str_replace(',', '.', $value);
+
+		$value = F::montantFtoPhp($value);
+		$this->attributes['montant'] = $value;
 	}
 
-
-	public function setBanque2IdAttribute($value)
-	{
-		$result = ($value == 0) ? null : $value ;
-		$this->attributes['banque2_id'] = $result;
-	}
 
 
 	/* —————————  Créer un objet Ecriture pour le formulaire de création  —————————————————*/
-
-	public static function fillFormForCreate()
-	{
-		$ecriture = new Ecriture();
-		$ecriture->banque_id = 0;
-		$ecriture->attributes['date_valeur'] = '0000';
-		$ecriture->attributes['date_emission'] = '0000';
-		$ecriture->montant = 00;
-		$ecriture->type_id = 0;
-		$ecriture->libelle = 'Saisir un libellé';
-		$ecriture->libelle_detail = 'Éventuellement le compléter';
-		$ecriture->justificatif = 'Éventuellement préciser un justificatif';
-		$ecriture->compte_id = 0;
-		$ecriture->double_flag = false;
-		return $ecriture;
-	}
 
 
 }

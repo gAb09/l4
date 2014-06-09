@@ -15,11 +15,10 @@
 @section('topcontent2')
 @stop
 
-
 @section('contenu')
 <hr>
 
-{{ Form::open(array('name' => 'form', 'url' => 'compta/ecritures', 'method' => 'post')) }}
+{{ Form::model($ecriture, array('name' => 'form', 'url' => 'compta/ecritures', 'method' => 'post', 'action' => 'EcritureController@store')) }}
 
 @include('compta/ecritures/form')
 

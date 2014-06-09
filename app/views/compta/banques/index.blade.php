@@ -13,7 +13,7 @@
 
 
 @section('topcontent2')
-		<a href ="{{ URL::route('compta.banques.create') }}" class="badge badge-locale iconemedium add"
+		<a href ="{{ URL::action('BanqueController@create') }}" class="badge badge-locale iconemedium add"
 		style="font-size:1.1em">Ajouter une nouvelle banque</a>
 @stop
 
@@ -27,14 +27,10 @@
 <h2 class="item">{{ $banque->nom }}</h2>
 <h5>Description :</h5><p>{{ $banque->description }}</p>
 <p class="badge badge-locale iconesmall edit">
-	{{link_to_route('compta.banques.edit', 'Modifier cette banque', $banque->id)}}
+	{{link_to_action('BanqueController@edit', 'Modifier cette banque', $banque->id)}}
 </p>
 <hr />
 @endforeach
-
-<?php
-echo App::make('odile')->est('bête');
-?>
 
 @stop
 

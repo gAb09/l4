@@ -1,6 +1,15 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationMenu;
 
 class MenuController extends \BaseController {
+
+	protected $validateur;
+
+	public function __construct(ValidationMenu $validateur)
+	{
+		$this->validateur = $validateur;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -8,38 +17,31 @@ class MenuController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		// Récupération des menus
 		$menus = Menu::orderBy('parent_id')->orderBy('rang')->get();
-		// return var_dump($menus); // CTRL
 
-		return View::make('admin/menus/index')->with(compact('menus'));
+		return View::make('admin.menus.index')->with(compact('menus'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+
+
 	public function create() {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('admin/menus/create')->with(compact('menu'));
+		return View::make('admin.menus.create')->with(compact('menu'));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+
+
 	public function store() {
 		// return 'Store un nouveau "Menu"';
-		Menu::unguard();
+		Menu::unguard();  // aFa Placer dans le model
 
+// dd(Input::all());
 		$menu = Menu::create(array(
-			'nom_sys' => Input::get('nom_sys'),
 			'etiquette' => Input::get('etiquette'),
-			'publication' => Input::get('publication') ? 1 : 0,
+			'nom_sys' => Input::get('nom_sys'),
+			'publication' => Input::get('publication'),
 			'rang' => Input::get('rang'),
 			'route' => Input::get('route'),
 			'description' => Input::get('description') ? Input::get('description') : 'Sans description',
@@ -54,22 +56,8 @@ class MenuController extends \BaseController {
 		return Redirect::to('admin/menus');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id) {
-		return "Alors montre le ton menu n° $id";
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+
 	public function edit($id) {
 //		return 'Edition du Menu n°'.$id;
 
@@ -79,22 +67,18 @@ class MenuController extends \BaseController {
 		return View::make('admin/menus/edit')->with(compact('menu'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+
+
 	public function update($id) {
 		// return "Alors tu l'update ton menu n° $id";
 
-//		var_dump(Input::get()); //CTRL
+		// dd(Input::all()); //CTRL
 
 		$menu = Menu::find($id);
 
 		$menu->nom_sys = Input::get('nom_sys');
 		$menu->etiquette = Input::get('etiquette');
-		$menu->publication = (Input::get('publication')) ? 1 : 0;
+		$menu->publication = Input::get('publication');
 		$menu->rang = Input::get('rang');
 		$menu->route = Input::get('route');
 		$menu->description = Input::get('description');
@@ -111,12 +95,8 @@ class MenuController extends \BaseController {
 		return Redirect::to('admin/menus');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+
+
 	public function destroy($id) {
 		// return 'Suppression de l’item ou du menu n°'.$id;
 

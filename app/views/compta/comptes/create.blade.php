@@ -18,12 +18,11 @@
 
 @section('contenu')
 <hr>
-
-{{ Form::open(array('url' => 'compta/comptes', 'method' => 'post')) }}
+{{ Form::open(['method' => 'post', 'action' => 'CompteController@store']) }}
 
 @include('compta/comptes/form')
 
-<br />{{ Form::submit('créer', array('class' => 'btn')) }}
+<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}
 
 @stop

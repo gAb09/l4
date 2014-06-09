@@ -8,7 +8,7 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Édition de la banque n° {{$banque->id}} : {{$banque->nom}}</h1>
+<h1 class="titrepage">Édition de la banque n° {{$banque->id}} : {{$banque->nom}}</h1>
 @stop
 
 
@@ -20,16 +20,16 @@
 
 <hr />
 
-{{ Form::model($banque, ['method' => 'PUT', 'route' => ['compta.banques.update', $banque->id]]) }}
+{{ Form::model($banque, ['method' => 'PUT', 'action' => ['BanqueController@update', $banque->id]]) }}
 
 @include('compta/banques/form')
 
-	<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
-	{{ Form::close() }}
+<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
+{{ Form::close() }}
 
-	{{ Form::open(array('url' => 'compta/banques/'.$banque->id, 'method' => 'delete')) }}
-	{{ Form::submit('Supprimer', array('class' => 'btn')) }}
-	{{ Form::close() }}
+{{ Form::open(['method' => 'delete', 'action' => ['BanqueController@destroy', $banque->id]]) }}
+{{ Form::submit('Supprimer', array('class' => 'btn', 'onClick' => 'javascript:return(confirmation());')) }}
+{{ Form::close() }}
 
 @stop
 

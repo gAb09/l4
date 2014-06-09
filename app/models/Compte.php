@@ -1,8 +1,18 @@
 <?php
+use Baum\Node;
 
-class Compte extends Eloquent {
+class Compte extends Node {
+	/* Accès au listes pour input select */
+	use ModelTrait;
 
-	protected static $unguarded = true; // AFA
+	protected $guarded = array('id');
+
+	protected $default_values_for_create = array(
+		'numero' => CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO,
+		'libelle' => CREATE_FORM_DEFAUT_TXT_LIBELLE,
+		'description_officiel' => '',
+		'actif' => 0,
+		);
 
 	/* —————————  RELATIONS  —————————————————*/
 
@@ -11,32 +21,51 @@ class Compte extends Eloquent {
 		return $this->hasMany('Ecriture');
 	}
 
-	/* —————————  Liste pour input select  —————————————————*/
+	/* —————————  SCOPES  —————————————————*/
 
-	public static function listForInputSelect()
+	public static function scopeParentable()
 	{
-		$list[0] = 'Faire une sélection';
-		foreach(static::all() as $item)
+		$result = self::all(array('id', 'libelle', 'numero'));
+		$items = $result->filter(function($item)
 		{
-			$list[$item->id] = $item->numero.' - '.$item->libelle;
+			if (strlen($item->numero) < 6) {
+				return $item;
+			}
+		});
+
+		foreach($items as $item)
+		{
+			$list[$item->id] = '('.$item->numero.') '.$item->libelle;
 		}
 		return $list;
 	}
 
-	/* —————————  Créer un objet Compte pour le formulaire de création  —————————————————*/
+	// public static function scopeFreres()
+	// {
+	// 	foreach(self::all(array('id', 'libelle', 'numero')) as $item)
+	// 	{
+	// 		$parent = Compte::where('id', Input::get('parent'))->first();
+	// 		$freres = $parent->getImmediateDescendants();
+	// 		$list[$item->id] = $item->numero.' : '.$item->libelle;
+	// 	}
+	// 	return $list;
+	// }
 
-	public static function fillFormForCreate()
+	public static function scopeActif()
 	{
-		$compte = new Compte();
-		$compte->numero = '6 chiffres max';
-		$compte->libelle = 'Saisissez un libellé clair';
-		$compte->description_officiel = '';
-		$compte->description_comp = 'Écrire ici pour apporter des informations complémentaires sur l’utilisation officielle de ce compte.';
-		$compte->description_lmh = 'Écrire ici pour définir les modalités d’utilisation de ce compte spécifique à La Mauvaise Herbe.';
-		$compte->lmh = 1;
-		$compte->actif = 1;
-		return $compte;
+		foreach(self::where('actif', 1)->get(array('id', 'libelle')) as $item)
+		{
+			$list[$item->id] = $item->libelle;
+		}
+		return $list;
 	}
 
 
+	/* —————————  ACCESSORS  ————————————————— */
+
+	public function getNumeroAttribute($value)
+	{
+		settype($value, 'string');
+		return $value;
+	}
 }

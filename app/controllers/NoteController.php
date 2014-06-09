@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class NoteController extends BaseController {
 
@@ -19,7 +20,7 @@ class NoteController extends BaseController {
 	{
 		// return 'Enregistrement d’une nouvelle note';  // CTRL
 		Note::create(array(
-			'path' => Notes::cleanPathNotes(Input::get('path')),
+			'path' => Notes::cleanPathNotes(Input::get('path')), // aFa Mutator puis fill
 			'aide' => Input::get('aide'),
 			'dev' => Input::get('dev'),
 			));

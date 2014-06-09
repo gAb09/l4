@@ -14,7 +14,9 @@
 
 @section('topcontent2')
 @foreach(Banque::all() as $bank)
-<a href ="{{ URL::to("compta/pointage/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
+<a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+
+
 @endforeach
 @stop
 
@@ -33,9 +35,6 @@
 			Libellé
 		</th>
 		<th>
-			Type
-		</th>
-		<th>
 			Dépenses
 		</th>
 		<th>
@@ -43,6 +42,9 @@
 		</th>
 		<th>
 			Solde
+		</th>
+		<th>
+			Type
 		</th>
 		<th>
 			Banque(s)
@@ -91,22 +93,15 @@
 				{{ $ecriture->libelle_detail }}
 				@endif
 			</td>
-			<td>
-				{{ $ecriture->type->nom }}
-				@if($ecriture->justificatif)
-				{{ $ecriture->type->sep_justif }}
-				@endif
-				{{ $ecriture->justificatif }}
-			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				<?php $solde = $solde - $ecriture->montant; ?>
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				<?php $solde = $solde + $ecriture->montant; ?>
 				@endif
 			</td>
@@ -117,16 +112,23 @@
 					@endif
 					{{ number_format($solde, 2, ',', '&nbsp') }}
 				</td>
-			<td>{{ $ecriture->banque->nom }}
-				@if($ecriture->double_flag)
+				<td>
+					{{ $ecriture->type->nom }}
+					@if($ecriture->justificatif)
+					{{ $ecriture->type->sep_justif }}
+					@endif
+					{{ $ecriture->justificatif }}
+				</td>
+				<td>{{ $ecriture->banque->nom }}
+					@if($ecriture->double_flag)
 					@if($ecriture->signe->signe == -1)
 					<br />&rarr; 
 					@else
 					<br />&larr; 
 					@endif
 					<small>{{ $ecriture->ecriture2->banque->nom }}</small>
-				@endif
-			</td>
+					@endif
+				</td>
 				<td>
 					{{ F::dateCourteNb($ecriture->date_emission) }}
 				</td>
@@ -146,4 +148,8 @@
 
 	<h3>  Le footer de recettes_depenses</h3>
 
+	@stop
+	@section('script')
+	<script src="/assets/js/pointage.js">
+	</script>
 	@stop

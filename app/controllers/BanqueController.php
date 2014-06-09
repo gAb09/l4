@@ -1,104 +1,105 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationBanque;
 
 class BanqueController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+	protected $validateur;
+
+
+	public function __construct(ValidationBanque $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+
 
 	public function index()
 	{
-		$banques = Banque::where('id', '>', 0)->get();
+		$banques = Banque::all();
 
-		return View::Make('compta/banques/index')->with(compact('banques'));
+		return View::Make('compta.banques.index')->with(compact('banques'));
 	}
+
+
 
 	public function create()
 	{
-		// return 'Formulaire pour la création d\'une banque';  // CTRL
+		$banque = new Banque;
+		$banque->fillFormForCreate();
 
-		$banque = Banque::fillFormForCreate(); // aPo : Conserver ?
-
-		return View::Make('compta/banques/create')->with(compact('banque'));
+		return View::Make('compta.banques.create')->with(compact('banque'));
 	}
+
+
 
 	public function store()
 	{
-		// return 'Enregistrement d\'une nouvelle banque';  // CTRL
+		// dd(Input::except('_token'));
 
-		$validator = Validator::make(Input::all(), Banque::StoreRules(), Banque::Messages());
+		$validate = $this->validateur->validate(Input::all());
 
-		if ($validator->fails()) {
-			// return 'fails'; // CTRL
-			return Redirect::back()->withErrors($validator);
-
-		} else {
+		if($validate === true) 
+		{
 			// return 'OK'; // CTRL
-			if(Banque::create(array(
-				'nom' => Input::get('nom'),
-				'description' => Input::get('description'),
-				)))
-			{
-				Session::flash('success', 'La banque "'.Input::get('nom').'" a bien été crée');
-			}
-
-			return Redirect::route('compta.banques.index');
+			$banque = new Banque;
+			$banque->create(Input::except('_token'));
+			Session::flash('success', 'La banque "'.Input::get('nom').'" a bien été crée');              
+			return Redirect::action('BanqueController@index');
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
 		}
 	}
+
+
 
 	public function edit($id)
 	{
-		// return 'edition de la banque n° '.$id;  // CTRL
-
 		$banque = Banque::FindOrFail($id);
 
-		return View::Make('compta/banques/edit')->with(compact('banque'));
+		return View::Make('compta.banques.edit')->with(compact('banque'));
 	}
+
+
 
 	public function update($id)
 	{
-		// return 'update de la banque n° '.$id;  // CTRL
+		$item = Banque::FindOrFail($id);
 
-		$validator = Validator::make(Input::all(), Banque::UpdateRules(), Banque::Messages());
+		/* Fournir une modification des règles au validateur */
+		$rules = array('nom' => 'unique:banques,nom,'.$id.'|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM');
 
-		if ($validator->fails()) {
-			// return 'failed';  // CTRL
+		$validate = $this->validateur->validate(Input::all(), $rules);
 
-			return Redirect::back()->withErrors($validator);
+		if($validate === true) 
+		{
+			// return 'OK'; // CTRL
 
-		} else {  //
-		// return 'validation OK';  // CTRL
-
-			$item = Banque::find($id);
-
-			$item->nom = Input::get('nom');
-			$item->description = Input::get('description');
-
+			$item->fill(Input::except('_token', '_method'));
 			$item->save();
 
-			return Redirect::route('compta.banques.index');
+			Session::flash('success', 'La banque "'.Input::get('nom').'" a bien été modifiée');
+
+			return Redirect::action('BanqueController@index');
+		} else {
+			// return 'fails'; // CTRL
+			return Redirect::back()->withInput(Input::all())->withErrors($validate);
 		}
+
 	}
+
+
 
 	public function destroy($id)
 	{
 		// return 'effacement de la banque n° '.$id;  // CTRL
 
-		$item = Banque::find($id);
+		$item = Banque::FindOrFail($id);
 		if ($item->delete()) {
-			Session::flash('success', 'La banque "'.$item->nom.'" a bien été supprimée');
+			Session::flash('success', "La banque $item->nom a bien été supprimée");
 		};
 
-		return Redirect::to('compta/banques');
+		return Redirect::action('BanqueController@index');
 	}
 
 }

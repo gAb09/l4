@@ -18,7 +18,7 @@
 @section('contenu')
 <hr>
 
-{{ Form::model($banque, ['method' => 'post', 'route' => 'compta.banques.store']) }}
+{{ Form::model($banque, ['method' => 'post', 'action' => 'BanqueController@store']) }}
 
 @include('compta/banques/form')
 

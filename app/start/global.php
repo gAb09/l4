@@ -3,6 +3,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 setlocale(LC_ALL, 'fr_FR');
 
+Session::set('site', 'Site de Bruno');
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -57,10 +60,19 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
-// App::error(function(ModelNotFoundException $e)
-// {
-//     return (Response::make('L’écriture '.Request::segment(3).' n’a pu tre trouvée', 404));
-// });
+App::error(function(ModelNotFoundException $e)
+{
+  	$message = 'Désolé ! Aucun élément ne correspond à votre demande…';
+
+    return View::Make('404')->with('message', $message);
+});
+
+App::missing(function($exception)
+{
+	$message = 'Oups… Désolé, cette page n\'existe pas !';
+
+    return View::Make('404')->with('message', $message);
+});
 
 
 /*
@@ -93,6 +105,24 @@ App::down(function()
 
 require app_path().'/filters.php';
 require app_path().'/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'/helpers/menus.php'; // aPo  Est-ce bien là la bonne façon d'autoloader les menus ??
+require app_path().'/validations/CustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 
+/*
+|--------------------------------------------------------------------------
+| CONSTANTES
+|--------------------------------------------------------------------------
+|
+*/
 
+define('CREATE_FORM_DEFAUT_LIST', 'Faire une sélection');
+
+define('CREATE_FORM_DEFAUT_TXT_NOM', 'Saisir un nom');
+define('CREATE_FORM_DEFAUT_TXT_DESCRIPTION', 'Saisir une description');
+define('CREATE_FORM_DEFAUT_TXT_JUSTIF', 'Éventuellement préciser un justificatif');
+define('CREATE_FORM_DEFAUT_TXT_SEPARATEUR', 'Saisir un séparateur');
+define('CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO', 'Six chiffres max');
+define('CREATE_FORM_DEFAUT_TXT_LIBELLE', 'Saisissez un libellé clair');
+define('CREATE_FORM_DEFAUT_TXT_DATE', '2014-01-01');
+define('CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL', 'Compléter éventuellement le libellé');
+
+define('VERROU', '“Changement écriture simple/double”');

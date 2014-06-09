@@ -1,19 +1,19 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot');
-	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.woff') format('woff'),
-		url('fonts/icomoon.ttf') format('truetype'),
-		url('fonts/icomoon.svg#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?-9b7uxg');
+	src:url('fonts/icomoon.eot?#iefix-9b7uxg') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-9b7uxg') format('woff'),
+		url('fonts/icomoon.ttf?-9b7uxg') format('truetype'),
+		url('fonts/icomoon.svg?-9b7uxg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-.icone:before {
+
+[class^="icon-"], [class*=" icon-"] {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
-	font-size: 20px;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
@@ -23,6 +23,7 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 
 .iconesmall:before {
 	font-family: 'icomoon';
@@ -65,7 +66,7 @@
 }
 
 .enr:before {
-	content: "R";
+	content: "S";
 }
 
 .add:before {
@@ -73,25 +74,63 @@
 }
 
 .toggle:before {
-	content: "R";
+	content: "t";
 }
 
 .list:before {
-	content: "I";
+	content: "L";
 }
 
-.icon-pencil:before {
-	content: "\62";
+.double:before {
+	content: "2";
 }
-.icon-pencil2:before {
-	content: "\63";
+
+
+.icon-arrow-left:before {
+	content: "\70";
 }
-.icon-pencil3:before {
+.icon-arrow-right:before {
+	content: "\6e";
+}
+.icon-forward:before {
+	content: "\74";
+}
+.icon-checkmark:before {
+	content: "\73";
+}
+.icon-check-alt:before {
+	content: "\53";
+}
+.icon-x:before {
 	content: "\64";
 }
-.icon-quill:before {
+.icon-x-altx-alt:before {
+	content: "\44";
+}
+.icon-denied:before {
+	content: "\75";
+}
+.icon-mail:before {
+	content: "\6d";
+}
+.icon-plus:before {
+	content: "\63";
+}
+.icon-plus-alt:before {
+	content: "\43";
+}
+.icon-loop-alt1:before {
+	content: "\32";
+}
+.icon-arrow-right2:before {
+	content: "\72";
+}
+.icon-list:before {
+	content: "\4c";
+}
+.icon-pen-alt2:before {
 	content: "\65";
 }
-.icon-uniF756:before {
-	content: "\66";
+.icon-layers:before {
+	content: "\6c";
 }

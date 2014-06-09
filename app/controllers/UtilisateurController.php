@@ -1,19 +1,21 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Lib\Validations\ValidationUtilisateur;
 
 class UtilisateurController extends \BaseController {
 
-	public function identification() {
 
-		$rules = array(
-			'pseudo' => 'required',
-			'password' => 'required',
-			'pseudo' => 'exists:utilisateurs,pseudo'
-			);
-		$messages = array(
-			'pseudo.required' => 'Le champs "Pseudo" doit être renseigné.',
-			'pseudo.exists' => 'Le Pseudo "'.Input::get('pseudo').'" est inconnu.',
-			'password.required' => 'Le champs "Mot de passe" doit être renseigné.',
-			);
+	protected $validateur;
+
+
+	public function __construct(ValidationUtilisateur $validateur)
+	{
+		$this->validateur = $validateur;
+	}
+
+
+
+	public function identification() {
 		
 		$validator = Validator::make(Input::all(), $rules, $messages);
 
@@ -24,7 +26,7 @@ class UtilisateurController extends \BaseController {
 		} else {  //validation OK
 			// return 'vlaidation ok';
 
-			$utilisateurs = Utilisateur::where('pseudo', '=', Input::get('pseudo'))->get();
+			$utilisateurs = Utilisateur::where('pseudo', Input::get('pseudo'))->get();
 			$utilisateur_checked = $utilisateurs[0];
 			// return var_dump($utilisateurs);
 			// return var_dump($utilisateur_checked);
@@ -119,7 +121,7 @@ class UtilisateurController extends \BaseController {
 			'mail' => Input::get('mail')
 			));
 
-		$utilisateurs = Utilisateur::where('pseudo', '=', Input::get('pseudo'))->get();
+		$utilisateurs = Utilisateur::where('pseudo', Input::get('pseudo'))->get();
 		// return var_dump($utilisateurs); // CTRL
 		$utilisateur_checked = $utilisateurs[0];
 		Auth::loginUsingId($utilisateur_checked->id);

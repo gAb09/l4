@@ -24,13 +24,13 @@ class RecDepController extends BaseController {
 		Session::put('page_depart', Request::path());
 
 		// Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', '=', $id)->orderBy('date_emission')->get();
+		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', $id)->orderBy('date_emission')->get();
 		// return var_dump($ecritures);  // CTRL
 
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page recdep par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
 			$message = 'Il n’y a aucune écriture pour la banque “';
-			$message .= Banque::find($id)->nom;
+			$message .= Banque::findOrFail($id)->nom;
 			$message .= '”';
 			return Redirect::to('compta/recdep')->withErrors($message);
 		}
@@ -45,33 +45,7 @@ class RecDepController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$prev_mois = 0;
 
-		return View::make('compta/recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
-	}
-
-	public function create()
-	{
-		// return 'Formulaire pour la création d\'une ecriture';  // CTRL // AFa
-
-	}
-
-
-	public function edit($id)
-	{
-		// return 'edition de l\écriture n° '.$id;  // CTRL
-
-	}
-
-	public function update($id)
-	{
-		// return 'update_recettes_depenses n°'.$id;  // CTRL
-
-	}
-
-	public function destroy($id)
-	{
-		return 'effacement désactvé';  // CTRL
-		// return 'effacement de l\écriture n° '.$id;  // CTRL
-
+		return View::make('compta.recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
 	}
 
 }

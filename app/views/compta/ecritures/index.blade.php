@@ -8,23 +8,21 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les écritures</h1>
-		<a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter une écriture</a>
+		<h1 class="titrepage">{{$titre_page}}</h1>
+		{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
 @stop
 
 
 @section('topcontent2')
-		<a href ="{{ URL::to("compta/ecritures") }}" class="badge badge-locale badge_haut_page ">Toutes</a>
+		{{link_to_route('compta.ecritures.index', 'Toutes', null, ["class" => "badge badge-locale badge-big"])}}
 
 		@foreach(Banque::all() as $bank)
-		<a href ="{{ URL::to("compta/banque/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
+		{{link_to_route('bank', $bank->nom, $bank->id, ["class" => "badge badge-locale badge-big"])}}
 		@endforeach
 @stop
 
 
 @section('contenu')
-
 <table style="font-size:12px;border:0px">
 	<thead>
 		<th>Id</th>
@@ -41,7 +39,7 @@
 
 	<tbody>
 		@foreach($ecritures as $ecriture)
-		<tr class="surlignage"
+		<tr id ="{{$ecriture->id}}" class="surlignage"
 		ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 		<td>{{ $ecriture->id }}
 			<td>{{ F::dateCourteNb($ecriture->date_emission) }}</td>
@@ -62,13 +60,18 @@
 			<td>{{ $ecriture->libelle }} —
 				@if($ecriture->libelle_detail)@endif
 				{{ $ecriture->libelle_detail }}</td>
-				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::nbre($ecriture->montant) }}</td>
+				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::insecable($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
 				<td>{{ F::dateCourteNb($ecriture->created_at) }}</td>
 				<td>{{ F::dateCourteNb($ecriture->updated_at) }}</td>
 				<td>
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
+			<td>
+				@if ($ecriture->ecriture2)
+				<a class="iconemedium double" href ="{{ URL::to('compta/banque/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
+				@endif
+			</td>
 
 				@endforeach
 			</tr>

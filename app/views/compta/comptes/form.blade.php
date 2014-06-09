@@ -1,4 +1,13 @@
-		<!-- liste d'inputs commune au vues CREATE et EDIT -->
+@section('body')
+onLoad="togle_actif();getFreres();"
+@stop
+
+<!-- liste d'inputs commune au vues CREATE et EDIT -->
+
+{{ Form::hidden('pco', $compte->pco) }}
+{{ Form::hidden('numero', $compte->numero) }}
+
+@if(!$compte->pco)
 <div style="float:left">
 	<!-- Numéro -->
 	{{ Form::label('numero', 'Numéro', array ('class' => '')) }}
@@ -9,41 +18,61 @@
 	<!-- Libellé -->
 	{{ Form::label('libelle', 'Libellé', array ('class' => '')) }}
 	{{ Form::text('libelle', $compte->libelle, array ('class' => '', 'style' => 'width:800px')) }}
+	<hr class="filetfin">
 </div>
 
-<div style="float:left">
-	<!-- Compte actif -->
-	{{ Form::checkbox('actif', $compte->actif, $compte->actif, array ('class' => 'nobr')) }}
-	{{ Form::label('actif', 'Compte actif', array ('class' => 'nobr')) }}
+<div style="display:inline-block">
+	<!-- Pere -->
+	{{ Form::label('pere', 'Compte parent', array ('class' => '')) }}
+	{{ Form::select('pere', $parents, $compte->parent_id, array ('class' => 'nobr', 'onChange' => 'javascript:getFreres();')) }}
 </div>
-
-<div>
-	<!-- Compte créé lmh -->
-	{{ Form::checkbox('actif', $compte->lmh, $compte->lmh, array ('class' => 'nobr')) }}
-	{{ Form::label('lmh', 'Compte spécifique La Mauvaise Herbe', array ('class' => 'nobr')) }}
-</div>
-
-<div>
-	<!-- Descrition officelle -->
-	@if (Auth::check())
-	{{ Form::label('description_officiel', 'Description (Wikipédia)', array ('class' => '')) }}
-	{{ Form::textarea('description_officiel', $compte->description_officiel, array ('class' => '', 'style' => 'width:900px')) }}
-	@else
-	<p>{{$compte->description_officiel}}</p>
+<div id="div_position" class="{{$position_class}}" style="display:inline-block;margin-left:20px">
+	<!-- Position -->
+	{{ Form::label('position', 'Position', array ('class' => '', 'style' => 'width:80px')) }}
+	{{ Form::select('position', $parents, array ('class' => '')) }}
+	<div class="aide">
+		<span id ="span_pere"></span>Le compte parent sélectionné comporte déjà des sous-comptes. Par défaut, le compte en cours d'édition sera placé en dernier.
+		<br />Si vous voulez décider de sa position, utilisez la liste ci-contre (il sera alors placé AVANT l'item sélectionné).<br /></div>
+	</div>
+	<hr class="filetfin">
 	@endif
-</div>
 
-<div style="float:left">
-	<!-- Descrition complémentaire -->
-	{{ Form::label('description_comp', 'Description complémentaire', array ('class' => '')) }}
-	{{ Form::textarea('description_comp', $compte->description_comp, array ('class' => '', 'style' => 'width:450px')) }}
-</div>
+	<div>
+		<!-- Compte actif -->
+		{{ Form::checkbox('actif', 1, $compte->actif, array ('class' => 'nobr', 'id' => 'actif_check', 'onClick' => 'javascript:togle_actif()')) }}
+		{{ Form::label('actif', '', array ('class' => 'nobr', 'id' => 'actif_label')) }}
+		<hr class="filetfin"/>
+	</div>
 
-<div>
-	<!-- Descrition lmh (La Mauvaise Herbe) -->
-	{{ Form::label('description_lmh', 'Description maison', array ('class' => '')) }}
-	{{ Form::textarea('description_lmh', $compte->description_lmh, array ('class' => '', 'style' => 'width:450px')) }}
-</div>
-<p>
-	{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
+	<div>
+		<!-- Descrition officelle -->
+		@if($compte->pco and $compte->description_officiel)
+		<h5 class="pco">Description officielle : </h5>
+		<p class="pco">{{$compte->description_officiel}}</p>
+		@endif
+	</div>
+
+	<div style="float:left">
+		<!-- Descrition complémentaire -->
+		{{ Form::label('description_comp', 'Description complémentaire', array ('class' => '')) }}
+		{{ Form::textarea('description_comp', $compte->description_comp, array ('class' => '', 'style' => 'width:450px')) }}
+	</div>
+
+	<div>
+		@if(!$compte->pco)
+		<!-- Descrition lmh (La Mauvaise Herbe) -->
+		{{ Form::label('description_lmh', 'Description maison', array ('class' => '')) }}
+		{{ Form::textarea('description_lmh', $compte->description_lmh, array ('class' => '', 'style' => 'width:450px')) }}
+		@endif
+	</div>
+
+	<div style="clear:both">
+		<p>
+			{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+		</p>
+	</div>
+
+	@section('script')
+	<script src="/assets/js/comptes.js">
+	</script>
+	@stop

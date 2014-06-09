@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: pointage
+: Page inexistante
 
 @stop
 
 
 @section('contenu')
-
-{{ $message }}
-
+<h3> {{ $message }} </h3>
 @stop

@@ -1,15 +1,25 @@
 <?php
 
+
 Route::get('compta/tost', function()
 {
 	return View::make('tost');
 });
 
-Route::get('changedate', function()
-	{
-	return View::make('ChangeFormatDate');
-	});
+Route::get('compte/{id}', function($id)
+{
+	return var_dump(Compte::where('id', $id)->first()->lft);
+});
 
+// Route::get('compta/trans', function()
+// {
+// 	return ComptesOldController::trans();
+// });
+
+Route::get('php', function()
+{
+	return var_dump(phpinfo());
+});
 
 
 /*
@@ -90,8 +100,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 Route::group(array('prefix' => 'compta', 'before' => 'auth'), function() 
 {
 
+
 	Route::get('/', function(){
 		return Redirect::to('compta/ecritures');
+	});
+
+	Route::get('statuts', function(){
+		return View::make('compta/statuts_visu');
 	});
 
 	Route::get('tost', 'TostController@tost');
@@ -102,7 +117,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 // /*----------------------  Pointage  ----------------------------------*/
 	Route::post('pointage/{id?}-{statut_id}', 'PointageController@pointage');
-	Route::get('pointage/{id?}', array('as' => 'home', 'uses' => 'PointageController@index'));
+	Route::get('pointage/{id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/
@@ -111,7 +126,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	});
 
 	/*----------------------  Écritures  ----------------------------------*/
-	Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
+	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
 	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@index'));
 	Route::resource('ecritures', 'EcritureController');
 
@@ -119,13 +134,17 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	Route::resource('types', 'TypeController');
 
 	/*----------------------  Comptes  ----------------------------------*/
+	Route::get('comptes/freres', 'CompteController@freres');
+	Route::get('comptes/{id?}/freres', 'CompteController@freres');
+	Route::get('comptes/classe/{root?}', 'CompteController@index');
 	Route::resource('comptes', 'CompteController');
-	
+
 	/*----------------------  Banques  ----------------------------------*/
-	Route::resource('banques', 'BanqueController', 
-		array('names' => array('index' => 'banques.test')));
-	
+	Route::resource('banques', 'BanqueController');
+
 	/*----------------------  Notes  ----------------------------------*/
 	Route::resource('notes', 'NoteController');
-	
+
 });  // Fin de groupe prefix “compta”
+
+

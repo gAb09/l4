@@ -9,6 +9,10 @@ class F{
 		return number_format($nbre, 2, ',', ' '); // renvoie 1 234,56
 	}
 
+	public static function insecable($nbre){
+		return str_replace(' ', '&nbsp;', $nbre); 
+	}
+
 // Les dates
 
 	/* e b Y  séparateur nbspace => 15 déc 1960
@@ -48,15 +52,20 @@ class F{
 	}
 
 	public static function dateSaisieSauv($date){
-		$parties = explode('-', $date);
-
-		return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
-	// 	return ucfirst(strftime('%d/%m/%Y', $date));
+		if ($test = substr_count($date, '-') == 2) {
+			$parties = explode('-', $date);
+			return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
+		}
 	}
 
-
+	public static function montantFtoPhp($value){
+		$value = str_replace(' ', '', $value);
+		$value = str_replace(',', '.', $value);
+		return $value;
+	}
 
 }
+
 
 	/* d
 	** Jour du mois en numérique, sur 2 chiffres (avec le zéro initial).
@@ -88,4 +97,4 @@ class F{
 	** Exemple : 2038
 	*/
 
-?>
+	?>

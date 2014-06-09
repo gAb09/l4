@@ -19,7 +19,7 @@
 @section('contenu')
 <hr>
 
-{{ Form::open(array('url' => 'compta/types', 'method' => 'post')) }}
+{{ Form::open(['method' => 'post', 'action' => 'TypeController@store']) }}
 
 @include('compta/types/form')
 

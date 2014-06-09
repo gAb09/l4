@@ -8,21 +8,21 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
-		<a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter une écriture</a>
+<h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
+<a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
+style="font-size:1.1em">Ajouter une écriture</a>
 @stop
 
 
 @section('topcontent2')
-		@foreach(Banque::all() as $bank)
-		<a href ="{{ URL::to("compta/recdep/$bank->id") }}" class="badge badge-locale badge_haut_page ">{{ $bank->nom }}</a>
-		@endforeach
+@foreach(Banque::all() as $bank)
+<a href ="{{ URL::to("compta/recdep/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+@endforeach
 @stop
 
 
 @section('contenu')
-<table>
+<table style="font-size:12px;border:0px">
 	<thead>
 		<th>
 			Date d'émission
@@ -48,9 +48,6 @@
 		<th>
 			Compte
 		</th>
-		<th>
-			
-		</th>
 	</thead>
 
 	<tbody>
@@ -61,7 +58,7 @@
 		<?php $prev_mois = $ecriture->mois_emission ?>
 		@endif
 
-		<tr class="surlignage {{$ecriture->statut->classe}}" 
+		<tr id ="{{$ecriture->id}}" class="surlignage {{$ecriture->statut->classe}}" 
 			ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
 			<td>
@@ -77,12 +74,12 @@
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				@endif
 			</td>
 			<td>
@@ -95,28 +92,35 @@
 			<td>
 				{{ $ecriture->banque->nom }}
 				@if($ecriture->double_flag)
-					@if($ecriture->signe->signe == -1)
-					<br />&rarr; 
-					@else
-					<br />&larr; 
-					@endif
-					<small>{{ $ecriture->ecriture2->banque->nom }}</small>
+				@if($ecriture->signe->signe == -1)
+				<br />&rarr; 
+				@else
+				<br />&larr; 
+				@endif
+				<small>{{ $ecriture->ecriture2->banque->nom }}</small>
 				@endif
 			</td>
 			<td>
 				{{ F::dateCourteNb($ecriture->date_valeur) }}
 			</td>
 			<td>
-				{{ $ecriture->compte->numero }}
+				({{ $ecriture->compte->numero }}) 
+				{{ $ecriture->compte->libelle }}
 			</td>
 			<td>
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 			</td>
+			<td>
+				@if ($ecriture->ecriture2)
+				<a class="iconemedium double" href ="{{ URL::to('compta/recdep/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
+				@endif
+			</td>
+
 		</tr>
+
 		@endforeach
 	</tbody>
 </table>
-
 @stop
 
 @section('footer')
