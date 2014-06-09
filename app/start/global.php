@@ -3,7 +3,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 setlocale(LC_ALL, 'fr_FR');
 
-Session::set('site', 'Site de Bruno');
 
 
 /*

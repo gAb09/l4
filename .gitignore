@@ -6,3 +6,4 @@ vendor/.DS_Store
 app/start/local.php
 Tresorerie.sublime-project
 Tresorerie.sublime-workspace
+.gitignore

@@ -28,7 +28,7 @@ Route::get('php', function()
 |--------------------------------------------------------------------------*/
 Route::get('/', function()
 {
-	return Redirect::route('home');
+	return Redirect::route('pointage');
 });
 
 
