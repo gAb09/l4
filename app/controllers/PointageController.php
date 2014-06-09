@@ -5,8 +5,6 @@ class PointageController extends BaseController {
 
 	public function index($id = 1) // $id = 1 compte principal par défaut
 	{
-		// return 'recettes_depenses';  // CTRL
-
 		/* Si l'édition d’une écriture est demandée depuis cette page, 
 		il faut passer (via la session) à EcritureController@update pour la redirection */
 		Session::put('page_depart', Request::path());
@@ -37,7 +35,12 @@ class PointageController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$solde = 0;
 
-		return View::make('compta.pointage')->with('ecritures', $ecritures)->with(compact('solde'))->with(compact('prev_mois'))->with(compact('banque'));
+		return View::make('compta.pointage')
+		->with('ecritures', $ecritures)
+		->with(compact('solde'))
+		->with(compact('prev_mois'))
+		->with(compact('banque'))
+		;
 
 	}
 

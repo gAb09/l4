@@ -23,10 +23,27 @@ View::composer('compta/layout', function($view) {
 	$view->with(compact('menus'));
 });
 
+
+
+
+
 View::composer('compta/ecritures/form', function($view)
 {
-$separateurs = Type::lists('sep_justif', 'id');
-    $view->with(compact('separateurs'));
+	/* Lister les séparateurs pour le javascript */
+	$separateurs = Type::lists('sep_justif', 'id');
+
+	/* Composer les input radios pour le signe */
+	foreach(Signe::all() as $item)
+	{
+		$list_radios[$item->id]['id'] = 'id';
+		$list_radios[$item->id]['name'] = 'signe';
+		$list_radios[$item->id]['value'] = $item->id;
+		$list_radios[$item->id]['etiquette'] = $item->etiquette;
+		$list_radios[$item->id]['id_css'] = 'signe_'.$item->id;
+		$list_radios[$item->id]['fonction_js'] = $item->etiquette.'();';
+	}
+
+	$view->with(compact('separateurs'))->with(compact('list_radios'));
 });
 
 

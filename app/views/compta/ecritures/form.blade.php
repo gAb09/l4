@@ -63,12 +63,12 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Montant -->
 		{{ Form::label('montant', 'Montant', array ('class' => '')) }}
-		{{ Form::text('montant', F::nbre($ecriture->montant), array ('class' => '')) }}
+		{{ Form::text('montant', $ecriture->montant, array ('class' => '')) }}
 
 		<!-- Signe -->
-		@foreach(Signe::listForInputRadio($ecriture->signe_id) as $signes => $signe)
+		@foreach($list_radios as $signes => $signe)
 		<br />
-		{{ Form::radio('signe_id', $signe['value'], $signe["checked"], array ('class' => '', 'style' => 'vertical-align:inherit;', 'id' => $signe["id_css"], 'onClick' => 'javascript:bascule_signe();'))}}
+		{{ Form::radio('signe_id', $signe['value'], ($signe['id'] == $ecriture->signe_id) ? "checked" : "", array ('class' => '', 'style' => 'vertical-align:inherit;', 'id' => $signe["id_css"], 'onClick' => 'javascript:bascule_signe();'))}}
 		{{ Form::label($signe["id_css"], $signe['etiquette'], array ('class' => 'nobr','style' => '', 'id' => '')) }}
 		@endforeach
 	</div>

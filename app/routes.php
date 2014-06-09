@@ -117,7 +117,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 // /*----------------------  Pointage  ----------------------------------*/
 	Route::post('pointage/{id?}-{statut_id}', 'PointageController@pointage');
-	Route::get('pointage/{id?}', array('as' => 'home', 'uses' => 'PointageController@index'));
+	Route::get('pointage/{id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/

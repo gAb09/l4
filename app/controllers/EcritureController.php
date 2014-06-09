@@ -318,6 +318,7 @@ class EcritureController extends BaseController {
 		/* - - - - - - - - - - - - - - - - - - - - - -
 		Dans tous les cas
 		- - - - - - - - - - - - - - - - - - - - - - - - */
+		// dd(Input::all());
 		$validation = $this->validateur->validate( Input::all() );
 
 		if ($validation === true) {

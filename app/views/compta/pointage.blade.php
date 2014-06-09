@@ -14,7 +14,9 @@
 
 @section('topcontent2')
 @foreach(Banque::all() as $bank)
-<a href ="{{ URL::to("compta/pointage/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+<a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+
+
 @endforeach
 @stop
 
@@ -93,13 +95,13 @@
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				<?php $solde = $solde - $ecriture->montant; ?>
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				<?php $solde = $solde + $ecriture->montant; ?>
 				@endif
 			</td>

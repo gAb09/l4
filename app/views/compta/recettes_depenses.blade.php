@@ -74,12 +74,12 @@ style="font-size:1.1em">Ajouter une écriture</a>
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::nbre($ecriture->montant) }}
+				{{ F::insecable($ecriture->montant) }}
 				@endif
 			</td>
 			<td>

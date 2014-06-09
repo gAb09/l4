@@ -60,7 +60,7 @@
 			<td>{{ $ecriture->libelle }} —
 				@if($ecriture->libelle_detail)@endif
 				{{ $ecriture->libelle_detail }}</td>
-				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::nbre($ecriture->montant) }}</td>
+				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::insecable($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
 				<td>{{ F::dateCourteNb($ecriture->created_at) }}</td>
 				<td>{{ F::dateCourteNb($ecriture->updated_at) }}</td>

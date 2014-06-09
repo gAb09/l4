@@ -9,6 +9,10 @@ class F{
 		return number_format($nbre, 2, ',', ' '); // renvoie 1 234,56
 	}
 
+	public static function insecable($nbre){
+		return str_replace(' ', '&nbsp;', $nbre); 
+	}
+
 // Les dates
 
 	/* e b Y  séparateur nbspace => 15 déc 1960
