@@ -1,5 +1,8 @@
 <?php
 
+Session::set('site', 'Site interne de La Locale');
+
+
 /*
 |--------------------------------------------------------------------------
 | Liaison explicite de la classe "Odile" à l'IoC
