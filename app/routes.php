@@ -22,7 +22,6 @@ Route::get('php', function()
 });
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Route racine
@@ -101,6 +100,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 Route::group(array('prefix' => 'compta', 'before' => 'auth'), function() 
 {
 
+
 	Route::get('/', function(){
 		return Redirect::to('compta/ecritures');
 	});
@@ -146,3 +146,5 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	Route::resource('notes', 'NoteController');
 
 });  // Fin de groupe prefix “compta”
+
+

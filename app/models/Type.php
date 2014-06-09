@@ -12,7 +12,7 @@ class Type extends Eloquent {
 		'nom' => 'Nom du type d’écriture',
 		'description' => 'Saisir ici la description.',
 		'req_justif' => 0,
-		'sep_justif' => 'Ici, texte de séparation',
+		'sep_justif' => 'Saisir un séparateur',
 	);
 
 	/* —————————  RELATIONS  —————————————————*/

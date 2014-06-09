@@ -9,7 +9,7 @@ onLoad="bascule_signe();banque();"
 var separateurs = {};
 
 <?php 
-echo "separateurs['0'] = 'uiuiui';";
+echo "separateurs['0'] = 'uiuiui';"; // aFa ????
 foreach($separateurs as $id => $separateur) {
 	echo "separateurs['$id'] = '$separateur';";
 }
@@ -24,7 +24,11 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
 		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
 	</div>
+
+	@if($ecriture->double_flag)
 	<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
+	@endif
+
 	<!-- Verrou simple/double -->
 	<div class="{{$class_verrou}}" id = "verrou">
 		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'check_verrou', 'onChange' => 'javascript:bascule_verrou();')) }}
@@ -134,7 +138,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
-		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : INPUT_JUSTIF_TXT_DEFAUT, array ('class' => 'long margright')) }} 
+		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'long margright')) }} 
 	</div>
 </fieldset>
 

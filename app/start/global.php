@@ -69,7 +69,16 @@ App::error(function(Exception $exception, $code)
 
 App::error(function(ModelNotFoundException $e)
 {
-    return (Response::make("Désolé ! Aucun élément ne correspond à votre demande…", 404));
+  	$message = 'Désolé ! Aucun élément ne correspond à votre demande…';
+
+    return View::Make('404')->with('message', $message);
+});
+
+App::missing(function($exception)
+{
+	$message = 'Oups… Désolé, cette page n\'existe pas !';
+
+    return View::Make('404')->with('message', $message);
 });
 
 
@@ -104,5 +113,18 @@ App::down(function()
 require app_path().'/filters.php';
 require app_path().'/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 require app_path().'/validations/CustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-define('INPUT_JUSTIF_TXT_DEFAUT', 'Éventuellement préciser un justificatif');
+
+/*
+|--------------------------------------------------------------------------
+| CONSTANTES
+|--------------------------------------------------------------------------
+|
+*/
+
+define('CREATE_FORM_DEFAUT_LIST', 'Faire une sélection');
+
+define('CREATE_FORM_DEFAUT_TXT_NOM', 'Saisir un nom');
+define('CREATE_FORM_DEFAUT_TXT_DESCRIPTION', 'Saisir une description');
+define('CREATE_FORM_DEFAUT_TXT_JUSTIF', 'Éventuellement préciser un justificatif');
+
 define('VERROU', '“Changement écriture simple/double”');

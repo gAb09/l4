@@ -9,8 +9,8 @@ class Banque extends Eloquent {
 
 
 	protected $default_values_for_create = array(
-		'nom' => 'Saisir un nom',
-		'description' => 'Saisir une description',
+		'nom' => CREATE_FORM_DEFAUT_TXT_NOM,
+		'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
 	);
 
 

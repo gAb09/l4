@@ -104,6 +104,7 @@ style="font-size:1.1em">Ajouter une écriture</a>
 				{{ F::dateCourteNb($ecriture->date_valeur) }}
 			</td>
 			<td>
+				({{ $ecriture->compte->numero }}) 
 				{{ $ecriture->compte->libelle }}
 			</td>
 			<td>

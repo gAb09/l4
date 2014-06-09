@@ -7,7 +7,7 @@ class ValidationType extends ValidationBase
 	protected $rules = array(
 		'nom' => 'unique:types,nom|required|not_in:Nom du type d’écriture',
 		'description' => 'required|not_in:Saisir ici la description.',
-		'sep_justif' => 'required',
+		'sep_justif' => 'required|not_in:Saisir un séparateur',
 		);
 
 	public $messages = array(
@@ -16,6 +16,7 @@ class ValidationType extends ValidationBase
 		'description.required' => 'Vous n’avez rien saisi dans le champs “Description”',
 		'description.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Description”',
 		'sep_justif.required' => 'Vous n’avez pas choisi de séparateur.',
+		'sep_justif.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Séparateur”.',
 		);
 
 }

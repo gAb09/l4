@@ -19,7 +19,7 @@ trait ModelTrait
 				$list[$item->id] = $item->{$attribut};
 			}
 		}
-		$list[0] = 'Faire une sélection';
+		$list[0] = CREATE_FORM_DEFAUT_LIST;
 
 		return $list;
 	}

@@ -65,7 +65,7 @@ class Menu extends Node {
     $strings = [
     'nom_sys' => 'Saisir un nom “système”',
     'publication' => 0,
-    'description' => 'Saisir une description',
+    'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
     ];
     $menu->fill($strings);
     return $menu;

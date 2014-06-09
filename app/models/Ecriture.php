@@ -19,7 +19,7 @@ class Ecriture extends Eloquent {
 		'type_id' => 0,
 		'libelle' => 'Saisir un libellé',
 		'libelle_detail' => 'Compléter éventuellement le libellé',
-		'justificatif' => INPUT_JUSTIF_TXT_DEFAUT,
+		'justificatif' => CREATE_FORM_DEFAUT_TXT_JUSTIF,
 		'compte_id' => 0,
 		'double_flag' => false,
 	);

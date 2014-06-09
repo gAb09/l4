@@ -1,6 +1,6 @@
 *.DS_Store
 app/config
-vendor/barryvdh
+vendor/*
 app/.DS_Store
 vendor/.DS_Store
 app/start/local.php

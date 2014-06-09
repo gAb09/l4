@@ -8,23 +8,26 @@
 
 
 @section('topcontent1')
+
 <h1 class="titrepage">{{ $titre_page }}</h1>
 <a href ="{{ URL::route('compta.comptes.create') }}" class="badge badge-locale iconemedium add"
 style="font-size:1.1em">Ajouter un nouveau compte</a><br /><br />
 {{ link_to_action('CompteController@index', 'Voir tous les comptes', null, array('class' => "badge badge-locale iconemedium list", 'style' => "font-size:1.1em")) }}
+
 @stop
 
 
 @section('topcontent2')
+
 @foreach($classes as $classe)
 <div class="classeRacine">Classe {{ $classe->numero }} :
 	<br />{{ link_to_action('CompteController@index', $classe->libelle, $classe->numero) }}<br /></div>
 	@endforeach
+
 	@stop
 
 
 	@section('contenu')
-
 
 	@foreach($comptes as $compte)
 	<hr />
