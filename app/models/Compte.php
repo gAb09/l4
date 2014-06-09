@@ -8,8 +8,8 @@ class Compte extends Node {
 	protected $guarded = array('id');
 
 	protected $default_values_for_create = array(
-		'numero' => 'Six chiffres max',
-		'libelle' => 'Saisissez un libellé clair',
+		'numero' => CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO,
+		'libelle' => CREATE_FORM_DEFAUT_TXT_LIBELLE,
 		'description_officiel' => '',
 		'actif' => 0,
 		);

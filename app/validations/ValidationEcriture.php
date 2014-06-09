@@ -8,10 +8,10 @@ class ValidationEcriture extends ValidationBase
 		'date_valeur' => 'required|alpha_dash|date_format:d-m-Y|afteremission',
 		'montant' => 'required|fnumeric|notnull',
 		'signe_id' => 'required',
-		'libelle' => 'required|not_in:Saisir un libellé',
-		'libelle_detail' => 'not_in:Compléter éventuellement le libellé',// aFa Utiliser constante
+		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
+		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',// aFa Utiliser constante
 		'type_id' => 'not_in:0',
-		'justificatif' => 'not_in:Éventuellement préciser un justificatif',// aFa Utiliser constante
+		'justificatif' => 'not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',// aFa Utiliser constante
 		'compte_id' => 'not_in:0',
 		);
 

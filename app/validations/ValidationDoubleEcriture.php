@@ -4,7 +4,7 @@ class ValidationDoubleEcriture extends ValidationBase
 {
 	public $rules = array(
 		'banque2_id' => 'not_in:0|different:banque_id',
-		'justif2' => 'not_in:Éventuellement préciser un justificatif',// aFa Utiliser constante
+		'justif2' => 'not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',// aFa Utiliser constante
 		'type2_id' => 'not_in:0',
 		);
 

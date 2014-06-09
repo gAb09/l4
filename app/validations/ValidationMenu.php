@@ -4,8 +4,8 @@ class ValidationMenu extends ValidationBase
 {
 
 	// protected $rules = array(
-	// 	'nom' => 'unique:banques,nom|required|not_in:Saisir un nom',
-	// 	'description' => 'not_in:Saisir une description', // inférieure à 500 caractères
+	// 	'nom' => 'unique:banques,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
+	// 	'description' => 'not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION', // inférieure à 500 caractères
 	// 	);
 
 	// public $messages = array(

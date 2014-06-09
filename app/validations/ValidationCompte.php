@@ -5,11 +5,11 @@ use Illuminate\Validation\Factory;
 class ValidationCompte extends ValidationBase
 {
 	protected $rules = array(
-		"numero" => 'required|numeric|not_in:6 chiffres max|unique:comptes,numero,$id|digit', 
-		// Si changement sur les règles de cet attribut, penser à le reporter dans la méthode CompteController@update
-		'libelle' => 'required|not_in:Saisissez un libellé clair',
-		'pere' => 'not_in:Faire une sélection|inclusion',
-		/* Afa : Un compte de profondeur > 5 ne peu avooir d'enfant */
+		"numero" => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|unique:comptes,numero,$id|digit', 
+		// aFa Si changement sur les règles de cet attribut, penser à le reporter dans la méthode CompteController@update
+		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
+		'pere' => 'not_in:CREATE_FORM_DEFAUT_LIST|inclusion',
+		/* Afa : Règle "feuille" : un compte de profondeur > 5 ne peu avoir d'enfant */
 		);
 
 	protected $messages = array(

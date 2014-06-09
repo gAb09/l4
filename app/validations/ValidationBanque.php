@@ -4,8 +4,8 @@ class ValidationBanque extends ValidationBase
 {
 
 	protected $rules = array(
-		'nom' => 'unique:banques,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
-		'description' => 'not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION', // inférieure à 500 caractères
+		'nom' => 'unique:banques,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM', // aFa : Attention redondance dans controller@update
+		'description' => 'not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION', 
 		);
 
 	protected $messages = array(

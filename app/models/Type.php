@@ -9,10 +9,10 @@ class Type extends Eloquent {
 	protected static $unguarded = true; // AFA
 
 	protected $default_values_for_create = array(
-		'nom' => 'Nom du type d’écriture',
-		'description' => 'Saisir ici la description.',
+		'nom' => CREATE_FORM_DEFAUT_TXT_NOM,
+		'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
 		'req_justif' => 0,
-		'sep_justif' => 'Saisir un séparateur',
+		'sep_justif' => CREATE_FORM_DEFAUT_TXT_SEPARATEUR,
 	);
 
 	/* —————————  RELATIONS  —————————————————*/

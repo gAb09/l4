@@ -67,7 +67,7 @@ class BanqueController extends BaseController {
 		$item = Banque::FindOrFail($id);
 
 		/* Fournir une modification des règles au validateur */
-		$rules = array('nom' => 'unique:banques,nom,'.$id.'|required|not_in:Saisir un nom');
+		$rules = array('nom' => 'unique:banques,nom,'.$id.'|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM');
 
 		$validate = $this->validateur->validate(Input::all(), $rules);
 

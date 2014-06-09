@@ -5,9 +5,9 @@ class ValidationType extends ValidationBase
 
 
 	protected $rules = array(
-		'nom' => 'unique:types,nom|required|not_in:Nom du type d’écriture',
-		'description' => 'required|not_in:Saisir ici la description.',
-		'sep_justif' => 'required|not_in:Saisir un séparateur',
+		'nom' => 'unique:types,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
+		'description' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION.',
+		'sep_justif' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_SEPARATEUR',
 		);
 
 	public $messages = array(

@@ -126,5 +126,10 @@ define('CREATE_FORM_DEFAUT_LIST', 'Faire une sélection');
 define('CREATE_FORM_DEFAUT_TXT_NOM', 'Saisir un nom');
 define('CREATE_FORM_DEFAUT_TXT_DESCRIPTION', 'Saisir une description');
 define('CREATE_FORM_DEFAUT_TXT_JUSTIF', 'Éventuellement préciser un justificatif');
+define('CREATE_FORM_DEFAUT_TXT_SEPARATEUR', 'Saisir un séparateur');
+define('CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO', 'Six chiffres max');
+define('CREATE_FORM_DEFAUT_TXT_LIBELLE', 'Saisissez un libellé clair');
+define('CREATE_FORM_DEFAUT_TXT_DATE', '2014-01-01');
+define('CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL', 'Compléter éventuellement le libellé');
 
 define('VERROU', '“Changement écriture simple/double”');

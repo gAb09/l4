@@ -1,6 +1,8 @@
 <?php
 use Carbon\Carbon;
+
 /* - - - - - - - - - - - COMPTES - - - - - - - - -  */
+
 Validator::extend('inclusion', function($field, $value, $params)
 {
 	// Assigner le numéro du compte Père sélectionné
@@ -16,6 +18,7 @@ Validator::extend('inclusion', function($field, $value, $params)
 	}else{return true;}
 });
 
+
 Validator::extend('digit', function($field, $value, $params)
 {
 	if (strlen($value) > 6) {
@@ -23,9 +26,18 @@ Validator::extend('digit', function($field, $value, $params)
 	}else{return true;}
 });
 
+// aFA Créer règle "feuille" (une feuille ne peut avoir d'enfants)
+// Validator::extend('feuille', function($field, $value, $params)
+// {
+// 	if (strlen($value) > 6) {
+// 		return false;
+// 	}else{return true;}
+// });
+
 
 
 /* - - - - - - - - - - - ECRITURES - - - - - - - - -  */
+
 Validator::extend('afteremission', function($field, $value, $params)
 {
 	if ($test = substr_count($value, '-') == 2) {

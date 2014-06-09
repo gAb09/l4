@@ -123,8 +123,9 @@ class CompteController extends BaseController {
 		{
 			$item = Compte::FindOrFail($id);
 
-			/* Fournir une modification aux règles du validateur */
-			$rules = array('numero' => 'required|numeric|not_in:6 chiffres max|unique:comptes,numero,'.$id.'|digit',);
+			/* Fournir une modification aux règles au validateur */
+			// aFa créer méthode pour modifier une règle et non la supplanter
+			$rules = array('numero' => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|unique:comptes,numero,'.$id.'|digit',);
 
 			$validate = $this->validateur->validate(Input::all(), $rules);
 
