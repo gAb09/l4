@@ -1,6 +1,6 @@
 <?php
 
-Session::set('site', 'Site interne de La Locale');
+Session::set('site', 'Trésorerie Bruno');
 
 
 /*

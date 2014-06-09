@@ -40,7 +40,7 @@ onLoad="togle_actif();getFreres();"
 	<div>
 		<!-- Compte actif -->
 		{{ Form::checkbox('actif', 1, $compte->actif, array ('class' => 'nobr', 'id' => 'actif_check', 'onClick' => 'javascript:togle_actif()')) }}
-		{{ Form::label('actif', '', array ('class' => 'nobr', 'id' => 'actif_label')) }}
+		{{ Form::label('actif_check', '', array ('class' => 'nobr', 'id' => 'actif_label')) }}
 		<hr class="filetfin"/>
 	</div>
 

@@ -21,7 +21,7 @@ onLoad="justifToggle();"
 <div>
 	<!-- "Justificatif" requis -->
 		{{ Form::checkbox('req_justif', 1, $type->req_justif, array ('class' => 'nobr', 'id' => 'justif_check', 'onClick' => 'javascript:justifToggle()')) }}
-		{{ Form::label('req_justif', 'Champ “Justificatif” non requis', array ('class' => 'nobr', 'id' => 'justif_label')) }}
+		{{ Form::label('justif_check', 'Champ “Justificatif” non requis', array ('class' => 'nobr', 'id' => 'justif_label')) }}
 </div>
 Choisir si ce type d’écriture devra requérir un justificatif.
 <hr />
