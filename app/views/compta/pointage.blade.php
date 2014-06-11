@@ -23,8 +23,10 @@
 
 @section('contenu')
 
-		@foreach($ecritures as $ecriture)
-		@if($ecriture->mois_valeur != $prev_mois)
+@foreach($ecritures as $ecriture)
+{{$ecriture->mois_valeur}}
+<br />{{$prev_mois}}
+@if($ecriture->mois_valeur != $prev_mois)
 <table>
 	<thead>
 		<th>
@@ -64,93 +66,27 @@
 		<tr class="ligne_mois" id="{{F::dateUcMoisAnneeNb($ecriture->date_valeur)}}" >
 			<td colspan="11"> {{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
 			</td>
-		</tr>
-		<?php $prev_mois = $ecriture->mois_valeur ?>
-@else
-		<tr id="ligne{{ $ecriture->id }}" 
-			class="surlignage {{$ecriture->statut->classe}}" 
-			ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
+	</tr>
+		@include('compta/row')
+		@else
+				<?php $prev_mois = $ecriture->mois_valeur ?>
 
-			<td>
-				{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $ecriture->statut->id], 'method' => 'post', 'class' => 'pointage')) }}
+		@include('compta/row')
+	@endif
+	</tbody>
+</table>
+@endforeach
 
-				{{ Form::hidden('statut_id', $ecriture->statut_id, array('id' => 'input', 'class' => '')) }}
-				
+@stop
 
-				{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_pointage(this);submit();' )) }}
+@section('footer')
 
-				{{ form::close() }}
-			</td>
-			
-			<td>
-				{{ $ecriture->mois  }}
-				{{ F::dateCourteNb($ecriture->date_valeur) }}
-			</td>
-			<td>
-				{{ $ecriture->libelle }}
-				@if($ecriture->libelle_detail)
-				— 
-				{{ $ecriture->libelle_detail }}
-				@endif
-			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ F::insecable($ecriture->montant) }}
-				<?php $solde = $solde - $ecriture->montant; ?>
-				@endif
-			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 2)
-				{{ F::insecable($ecriture->montant) }}
-				<?php $solde = $solde + $ecriture->montant; ?>
-				@endif
-			</td>
-			@if($solde >= 0)
-			<td class="recette">
-				@else
-				<td class="depense">
-					@endif
-					{{ number_format($solde, 2, ',', '&nbsp') }}
-				</td>
-				<td>
-					{{ $ecriture->type->nom }}
-					@if($ecriture->justificatif)
-					{{ $ecriture->type->sep_justif }}
-					@endif
-					{{ $ecriture->justificatif }}
-				</td>
-				<td>{{ $ecriture->banque->nom }}
-					@if($ecriture->double_flag)
-					@if($ecriture->signe->signe == -1)
-					<br />&rarr; 
-					@else
-					<br />&larr; 
-					@endif
-					<small>{{ $ecriture->ecriture2->banque->nom }}</small>
-					@endif
-				</td>
-				<td>
-					{{ F::dateCourteNb($ecriture->date_emission) }}
-				</td>
-				<td>
-					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-		@endif
-			@endforeach
+@parent
 
-	@stop
+<h3>  Le footer de recettes_depenses</h3>
 
-	@section('footer')
-
-	@parent
-
-	<h3>  Le footer de recettes_depenses</h3>
-
-	@stop
-	@section('script')
-	<script src="/assets/js/pointage.js">
-	</script>
-	@stop
+@stop
+@section('script')
+<script src="/assets/js/pointage.js">
+</script>
+@stop
