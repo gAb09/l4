@@ -202,65 +202,65 @@ section.dev div.onglet{
 
 section.dev:hover div.onglet {
     background-color: #EAA4A4;
-}/*   TABLEAUX */
+    }/*   TABLEAUX */
 
-table {
-    width: 100%;
-    border-color: #8CB08C;
-    border-style: solid;
-    border-width: 1px;
-}
+    table {
+        width: 100%;
+        border-color: #8CB08C;
+        border-style: solid;
+        border-width: 1px;
+    }
 
-thead,
-tbody{
-    border-color: #5F835F;
-    border-style: solid;
-    border-width: 1px;
-}
+    thead,
+    tbody{
+        border-color: #5F835F;
+        border-style: solid;
+        border-width: 1px;
+    }
 
-thead{
-    background-color: #5F835F;
-    color: #F5E1B3;
-}
+    thead{
+        background-color: #5F835F;
+        color: #F5E1B3;
+    }
 
-td, th {
-    border-color: #5F835F;
-    border-style: solid;
-    border-width: 1px;
-    padding: 0px 5px;
-}
+    td, th {
+        border-color: #5F835F;
+        border-style: solid;
+        border-width: 1px;
+        padding: 0px 5px;
+    }
 
-th {
-    font-weight: bold;
-}
+    th {
+        font-weight: bold;
+    }
 
-tr.surlignage:hover{
-    border-width: 3px;
-    border-color: #777722;
-    box-shadow: 0px 0px 16px #aaa;
-}
+    tr.surlignage:hover{
+        border-width: 3px;
+        border-color: #777722;
+        box-shadow: 0px 0px 16px #aaa;
+    }
 
-caption.ligne_mois{
-    background-color: rgba(255, 255, 255, 0.1);
-    color:#5F835F;
-    text-align: center;
-    border: medium none;
-    font-size: 20px;
-    line-height: 30px;
-}
+    caption.ligne_mois{
+        background-color: rgba(255, 255, 255, 0.1);
+        color:#5F835F;
+        text-align: center;
+        border: medium none;
+        font-size: 20px;
+        line-height: 30px;
+    }
 
-td.niv2, td.before_niv2{
-    border-style:none;
-}
+    td.niv2, td.before_niv2{
+        border-style:none;
+    }
 
-td input[type="text"] {
-  width: 30px;
-  height: 11px;
-  margin: 6px 8px;
-  opacity: 0.7;
-}
+    td input[type="text"] {
+      width: 30px;
+      height: 11px;
+      margin: 6px 8px;
+      opacity: 0.7;
+  }
 
-td.gras{
+  td.gras{
     font-weight: bold;
     font-size: 1.12em;
 }
@@ -290,13 +290,13 @@ label{
 }
 
 input.nobr, label.nobr{
-   display:inline;
-   margin-right:10px;
+ display:inline;
+ margin-right:10px;
 }
 
 div.input{
-   float:left;
-   margin-right:10px;
+ float:left;
+ margin-right:10px;
 }
 
 fieldset.invisible,
@@ -311,6 +311,7 @@ tbody.replie
 {
     visibility:collapse;
 }
+
 
 input,
 select{
@@ -331,8 +332,8 @@ input.long{
 }
 
 input.margright, label.margright, button.margright{
-   display:inline;
-   margin-right:45px;
+ display:inline;
+ margin-right:45px;
 }
 
 input[type="checkbox"]:focus{
@@ -350,9 +351,9 @@ input[title~=Supprimer]{
 }
 
 div.aide {
- display: inline-block;
- font-size: .9em;
- line-height: 1.1em;
+   display: inline-block;
+   font-size: .9em;
+   line-height: 1.1em;
 }
 
 textarea{
@@ -378,13 +379,13 @@ form.pointage {
 
 /* Pages comptes */
 div.classeRacine {
-   background-color: #E0C396;
-   border-style: inset;
-   border-width: 1px;
-   display: inline-block;
-   font-size: 0.9em;
-   margin: 5px;
-   padding: 2px;
+ background-color: #E0C396;
+ border-style: inset;
+ border-width: 1px;
+ display: inline-block;
+ font-size: 0.9em;
+ margin: 5px;
+ padding: 2px;
 }
 
 
@@ -469,13 +470,13 @@ h4.nonpublie{
 */
 div.contenu /*h5{
     margin-top:-9px;
-}*/
+    }*/
 
-section.login{
-    width:300px;
-    height:200px;
-    margin:auto;
-    background-color: #CECA90;
-}
+    section.login{
+        width:300px;
+        height:200px;
+        margin:auto;
+        background-color: #CECA90;
+    }
 
 

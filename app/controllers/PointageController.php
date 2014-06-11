@@ -35,7 +35,7 @@ class PointageController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$solde = 0;
 
-		return View::make('compta.pointage')
+		return View::make('compta.pointage.main')
 		->with('ecritures', $ecritures)
 		->with(compact('solde'))
 		->with(compact('prev_mois'))
