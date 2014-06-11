@@ -23,6 +23,8 @@
 
 @section('contenu')
 
+		@foreach($ecritures as $ecriture)
+		@if($ecriture->mois_valeur != $prev_mois)
 <table>
 	<thead>
 		<th>
@@ -57,16 +59,14 @@
 		</th>
 	</thead>
 
+
 	<tbody>
-		@foreach($ecritures as $ecriture)
-		@if($ecriture->mois_valeur != $prev_mois)
 		<tr class="ligne_mois" id="{{F::dateUcMoisAnneeNb($ecriture->date_valeur)}}" >
 			<td colspan="11"> {{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
 			</td>
 		</tr>
 		<?php $prev_mois = $ecriture->mois_valeur ?>
-		@endif
-
+@else
 		<tr id="ligne{{ $ecriture->id }}" 
 			class="surlignage {{$ecriture->statut->classe}}" 
 			ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
@@ -136,9 +136,10 @@
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
 			</tr>
-			@endforeach
 		</tbody>
 	</table>
+		@endif
+			@endforeach
 
 	@stop
 
