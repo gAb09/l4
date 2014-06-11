@@ -142,9 +142,6 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	</div>
 </fieldset>
 
-<p>
-	{{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
 
 @section('script')
 <script src="/assets/js/ecritures.js">

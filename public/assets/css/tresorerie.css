@@ -56,6 +56,13 @@ hr.filetfin{
 }
 
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
+div.zapette {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+}
+
+
 footer {
     text-align: center;
 }

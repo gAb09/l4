@@ -9,8 +9,13 @@
 
 @section('topcontent1')
 <h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
+<!--a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
+style="font-size:1.1em">Ajouter une écriture</a-->
+@stop
+
+@section('zapette')
 <a href ="{{ URL::route('compta.ecritures.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter une écriture</a>
+style="font-size:1.1em">Ajouter<br />une écriture</a>
 @stop
 
 
