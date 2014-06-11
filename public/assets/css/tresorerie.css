@@ -240,7 +240,7 @@ tr.surlignage:hover{
     box-shadow: 0px 0px 16px #aaa;
 }
 
-tr.ligne_mois{
+caption.ligne_mois{
     background-color: rgba(255, 255, 255, 0.1);
     color:#5F835F;
     text-align: center;
@@ -304,6 +304,12 @@ div.invisible
 {
     display:none;
     height:0px;
+}
+
+thead.replie,
+tbody.replie
+{
+    visibility:collapse;
 }
 
 input,
