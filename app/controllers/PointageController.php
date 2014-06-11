@@ -21,7 +21,7 @@ class PointageController extends BaseController {
 			$message = 'Il n’y a aucune écriture pour la banque “';
 			$message .= Banque::find($id)->nom;
 			$message .= '”';
-			return Redirect::to('compta/pointage')->withErrors($message);
+			return Redirect::to('compta/pointage/main')->withErrors($message);
 		}
 
 		// Créer la propriété $date_valeur pour que la vue puisse classer par mois
