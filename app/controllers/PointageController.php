@@ -18,10 +18,10 @@ class PointageController extends BaseController {
 
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
-			$message = 'Il n’y a aucune écriture pour la banque “';
+		$message = 'Il n’y a aucune écriture pour la banque “';
 			$message .= Banque::find($id)->nom;
 			$message .= '”';
-			return Redirect::to('compta/pointage/main')->withErrors($message);
+			return Redirect::back()->withErrors($message);
 		}
 
 		// Créer la propriété $date_valeur pour que la vue puisse classer par mois
