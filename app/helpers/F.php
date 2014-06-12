@@ -29,7 +29,7 @@ class F{
 	** Pour permettre classement par mois années
 	*/
 	public static function dateClass($date){
-		return $date->formatlocalized('%Y-%m');
+		return $date->formatlocalized('%Y.%m');
 		// return strftime('%Y-%m', $date);
 	}
 

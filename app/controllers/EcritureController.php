@@ -35,6 +35,7 @@ class EcritureController extends BaseController {
 
 	public function index($banque = null)
 	{
+		dd($mois);
 		Session::put('page_depart', Request::path());
 
 		if ($banque === null) {
@@ -218,7 +219,7 @@ class EcritureController extends BaseController {
 
  	    	}
 
- 	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart').'#ligne'.$id, 'page précédente'));
+ 	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart')), 'page précédente');
  	    	Session::flash('class_verrou', 'gfg');
  	    	/* Redirection */
  	    	return Redirect::back()->withInput(Input::all());
@@ -330,8 +331,8 @@ class EcritureController extends BaseController {
 
 		/* Rediriger */
 		Session::flash('success', $success);
-		return Redirect::to(Session::get('page_depart').'#ligne'.$id);
-
+		$mois = self::getMoisForRedirect($ec1);
+		return Redirect::to(Session::get('page_depart')."#$mois");
 	}
 
 
@@ -354,8 +355,15 @@ class EcritureController extends BaseController {
 		$success = "• La première écriture à été supprimée.<br />$success";
 
 		Session::flash('success', $success);
-		return Redirect::to(Session::get('page_depart').'#ligne'.$id);
+		$mois = self::getMoisForRedirect($ec1);
+		return Redirect::to(Session::get('page_depart')."#$mois");
 	}
 
+
+	public static function getMoisForRedirect($ec1){
+		$mois = F::dateClass($ec1->date_valeur);
+		Session::put('mois', $mois);
+		return $mois;
+	}
 
 }

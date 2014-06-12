@@ -16,23 +16,23 @@
 @foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
 
-
 @endforeach
 @stop
 
 
 @section('contenu')
 
+	
 @foreach($ecritures as $ecriture)
 
 @if($ecriture->mois_valeur != $prev_mois)
 <table>
-	<caption class="ligne_mois" id="{{F::dateUcMoisAnneeNb($ecriture->date_valeur)}}" ondblclick="javascript:volet(this);">
+	<caption class="ligne_mois" id="{{$ecriture->mois_valeur}}" ondblclick="javascript:volet(this);">
 		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
 
 </caption>
-	<thead class="replie">
-		<th>
+	<thead class="replie" id="tetiere{{$ecriture->mois_valeur}}">
+		<th style="width:10px">
 			Statut
 		</th>
 		<th>
@@ -65,7 +65,7 @@
 	</thead>
 
 
-	<tbody class="replie">
+	<tbody class="replie" id="corps{{$ecriture->mois_valeur}}">
 		@include('compta/pointage/row')
 		<?php $prev_mois = $ecriture->mois_valeur ?>
 		@else
@@ -86,6 +86,20 @@
 
 @stop
 @section('script')
+
+<script type="text/javascript">
+
+<?php
+if( $mois = Session::get('mois') ){
+echo 'var mois = '.$mois.';';
+}else{
+echo 'var mois = "";';
+}
+?>
+
+</script>
+
 <script src="/assets/js/pointage.js">
 </script>
+
 @stop

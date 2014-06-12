@@ -202,65 +202,81 @@ section.dev div.onglet{
 
 section.dev:hover div.onglet {
     background-color: #EAA4A4;
-    }/*   TABLEAUX */
+}
+/*   TABLEAUX */
 
-    table {
-        width: 100%;
-        border-color: #8CB08C;
-        border-style: solid;
-        border-width: 1px;
-    }
+table {
+    width: 100%;
+    border-color: #8CB08C;
+    border-style: solid;
+    border-width: 1px;
+}
 
-    thead,
-    tbody{
-        border-color: #5F835F;
-        border-style: solid;
-        border-width: 1px;
-    }
+thead,
+tbody{
+    transition: opacity 2s;
+    border-color: #5F835F;
+    border-style: solid;
+    border-width: 1px;
+    /*visibility:visible;*/
+}
 
-    thead{
-        background-color: #5F835F;
-        color: #F5E1B3;
-    }
+thead.replie,
+tbody.replie
+{
+    transition: opacity 0s;
+    /*visibility:collapse;*/
+    overflow: auto;
+    opacity: 0;
+    display:table-column-group;
+}
 
-    td, th {
-        border-color: #5F835F;
-        border-style: solid;
-        border-width: 1px;
-        padding: 0px 5px;
-    }
+thead{
+    background-color: #5F835F;
+    color: #F5E1B3;
+}
 
-    th {
-        font-weight: bold;
-    }
+td, th {
+    border-color: #5F835F;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0px 5px;
+}
 
-    tr.surlignage:hover{
-        border-width: 3px;
-        border-color: #777722;
-        box-shadow: 0px 0px 16px #aaa;
-    }
+th {
+    font-weight: bold;
+}
 
-    caption.ligne_mois{
-        background-color: rgba(255, 255, 255, 0.1);
-        color:#5F835F;
-        text-align: center;
-        border: medium none;
-        font-size: 20px;
-        line-height: 30px;
-    }
+tr.surlignage:hover{
+    border-width: 3px;
+    border-color: #777722;
+    box-shadow: 0px 0px 16px #aaa;
+}
 
-    td.niv2, td.before_niv2{
-        border-style:none;
-    }
+caption.ligne_mois{
+    background-color: rgba(255, 255, 255, 0.1);
+    color:#5F835F;
+    text-align: left;
+    padding-left: 5px;
+    border: medium none;
+    font-size: 16px;
+    line-height: 28px;
+    box-shadow: 0px 2px 0px #aaa;
+}
 
-    td input[type="text"] {
-      width: 30px;
-      height: 11px;
-      margin: 6px 8px;
-      opacity: 0.7;
-  }
 
-  td.gras{
+td.niv2, td.before_niv2{
+    border-style:none;
+}
+
+td input[type="text"] {
+  width: 30px;
+  height: 11px;
+  margin: 6px 8px;
+  opacity: 0.7;
+}
+
+td.gras{
     font-weight: bold;
     font-size: 1.12em;
 }
@@ -304,12 +320,6 @@ div.invisible
 {
     display:none;
     height:0px;
-}
-
-thead.replie,
-tbody.replie
-{
-    visibility:collapse;
 }
 
 

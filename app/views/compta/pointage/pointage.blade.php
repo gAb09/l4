@@ -24,13 +24,12 @@
 @section('contenu')
 
 @foreach($ecritures as $ecriture)
-
 @if($ecriture->mois_valeur != $prev_mois)
+
 <table>
 	<caption class="ligne_mois" id="{{F::dateUcMoisAnneeNb($ecriture->date_valeur)}}" ondblclick="javascript:volet(this);">
-		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
-
-</caption>
+		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }} - {{$ecriture->mois_valeur}}
+	</caption>
 	<thead class="replie">
 		<th>
 			Statut
