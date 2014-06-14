@@ -1,3 +1,5 @@
+alert(txt_label);
+
 function bascule_signe() {
 	var label = document.getElementById("banque2_label");
 
@@ -15,21 +17,20 @@ function bascule_signe() {
 
 
 function bascule_verrou() {
-	var label = document.getElementById("label_verrou");
+	var label = document.getElementById("verrou");
 	var verrou = document.getElementById("check_verrou");
 
 	if (verrou.checked == 1)
 	{
 		label.style.color="red"; /* aFA passer par les classe de span */
-		label.innerHTML= "verouillé";
+		label.innerHTML= txt_label+"  VÉROUILLÉ";
 	}
 	else
 	{
 		label.style.color="green";
-		label.innerHTML= "déverouillé";
+		label.innerHTML= txt_label+"  DÉVÉROUILLÉ";
 	}
 }
-
 
 
 /*----------   Affichage de la banque de destination (pages Écritures)-----------*/

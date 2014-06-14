@@ -35,7 +35,6 @@ class EcritureController extends BaseController {
 
 	public function index($banque = null)
 	{
-		dd($mois);
 		Session::put('page_depart', Request::path());
 
 		if ($banque === null) {
@@ -220,7 +219,7 @@ class EcritureController extends BaseController {
  	    	}
 
  	    	Session::flash('erreur', $message .= link_to(Session::get('page_depart')), 'page précédente');
- 	    	Session::flash('class_verrou', 'gfg');
+ 	    	Session::flash('class_verrou', 'visible');
  	    	/* Redirection */
  	    	return Redirect::back()->withInput(Input::all());
  	    }
