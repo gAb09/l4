@@ -37,19 +37,21 @@ class EcritureController extends BaseController {
 	{
 		$par_page = (Input::get('par_page')) ? Input::get('par_page') : PAR_PAGE;
 		$tri_sur = (Input::get('tri_sur')) ? Input::get('tri_sur') : 'date_emission';
+		$tri_sur_ok = ($tri_sur == 'ids')? 'id' : $tri_sur;
+
 		$sens_tri = Input::get('sens_tri') ? Input::get('sens_tri') : 'asc';
 
-		var_dump($tri_sur);
-		var_dump($par_page);
-		var_dump($sens_tri);
+		// var_dump($tri_sur); // CTRL
+		// var_dump($par_page); // CTRL
+		// var_dump($sens_tri); // CTRL
 		Session::put('page_depart', Request::path());
 
 		if ($banque === null) {
-			$ecritures = Ecriture::orderBy($tri_sur, $sens_tri)->paginate($par_page);
+			$ecritures = Ecriture::orderBy($tri_sur_ok, $sens_tri)->paginate($par_page);
 			$titre_page = 'Toutes les écritures';
 		}else{
 			$bank_nom = Banque::find($banque)->nom;
-			$ecritures = Ecriture::whereBanqueId($banque)->orderBy($tri_sur, $sens_tri)->paginate($par_page);
+			$ecritures = Ecriture::whereBanqueId($banque)->orderBy($tri_sur_ok, $sens_tri)->paginate($par_page);
 			$titre_page = 'Écritures de la banque “'.$bank_nom.'”';
 		}
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
