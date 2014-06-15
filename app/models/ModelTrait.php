@@ -5,7 +5,7 @@
 trait ModelTrait
 {
 	
-	public static function listForInputSelect($attribut, $scope = null)
+	public static function listForInputSelect($attribut, $scope = null, $defaut = true)
 	{
 
 		if ($scope !== null) {
@@ -19,7 +19,9 @@ trait ModelTrait
 				$list[$item->id] = $item->{$attribut};
 			}
 		}
+		if ($defaut === true) {
 		$list[0] = CREATE_FORM_DEFAUT_LIST;
+		}
 
 		return $list;
 	}

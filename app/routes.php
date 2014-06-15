@@ -137,6 +137,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	Route::get('comptes/freres', 'CompteController@freres');
 	Route::get('comptes/{id?}/freres', 'CompteController@freres');
 	Route::get('comptes/classe/{root?}', 'CompteController@index');
+	Route::any('comptes/updateOne', array('as' => 'compta.comptes.updateOne', 'uses' => 'CompteController@updateOne'));
 	Route::resource('comptes', 'CompteController');
 
 	/*----------------------  Banques  ----------------------------------*/

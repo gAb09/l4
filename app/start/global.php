@@ -126,4 +126,4 @@ define('CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL', 'Compléter éventuellement le li
 
 define('VERROU', 'Changement écriture simple/double');
 
-define('PAR_PAGE', 30);
+define('PAR_PAGE', 20);
