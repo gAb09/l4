@@ -22,15 +22,15 @@
 
 @section('contenu')
 
-	
 @foreach($ecritures as $ecriture)
 
 @if($ecriture->mois_valeur != $prev_mois)
-<table>
-	<caption class="ligne_mois" id="{{$ecriture->mois_valeur}}" ondblclick="javascript:volet(this);">
-		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
 
-</caption>
+<table>
+	<caption class="ligne_mois" id="{{$ecriture->mois_valeur}}" onclick="javascript:volet(this);">
+		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
+	</caption>
+
 	<thead class="replie" id="tetiere{{$ecriture->mois_valeur}}">
 		<th style="width:10px">
 			Statut
@@ -66,14 +66,16 @@
 
 
 	<tbody class="replie" id="corps{{$ecriture->mois_valeur}}">
-		@include('compta/pointage/row')
 		<?php $prev_mois = $ecriture->mois_valeur ?>
+		@include('compta/pointage/row')
 		@else
 
 		@include('compta/pointage/row')
 		@endif
 		@endforeach
+
 	</tbody>
+
 </table>
 
 @stop
@@ -85,6 +87,7 @@
 <h3>  Le footer de recettes_depenses</h3>
 
 @stop
+
 @section('script')
 
 <script type="text/javascript">
@@ -100,6 +103,8 @@ echo 'var mois = "";';
 </script>
 
 <script src="/assets/js/pointage.js">
+</script>
+<script src="/assets/js/volets.js">
 </script>
 
 @stop

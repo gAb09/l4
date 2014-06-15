@@ -45,7 +45,7 @@ class RecDepController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$prev_mois = 0;
 
-		return View::make('compta.recettes_depenses')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
+		return View::make('compta.recdep.main')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
 	}
 
 }
