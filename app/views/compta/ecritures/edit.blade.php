@@ -31,6 +31,7 @@
 	array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
 </p>
 @stop
+
 <p>
 	{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}

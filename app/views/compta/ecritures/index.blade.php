@@ -109,9 +109,9 @@ $head = array(
 	<input id="par_page" class="court" type="text" value="{{$ecritures->getPerPage()}}" name="par_page" onChange="javascript:changeParPage('{{Request::url()}}', '{{$tri_sur}}', '{{$sens_tri}}');">
 
 
-	{{ Form::text('prev_tri_sur', $tri_sur, array ('class' => 'long', 'id' => 'prev_tri_sur')) }}
+	{{ Form::hidden('prev_tri_sur', $tri_sur, array ('class' => 'long', 'id' => 'prev_tri_sur')) }}
 
-	{{ Form::text('sens_tri', $sens_tri, array ('class' => 'long', 'id' => 'sens_tri')) }}
+	{{ Form::hidden('sens_tri', $sens_tri, array ('class' => 'long', 'id' => 'sens_tri')) }}
 
 	@stop
 

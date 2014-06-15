@@ -16,9 +16,11 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
 	</div>
 
+	<div class="input nobr">
 	@if($ecriture->double_flag)
 	<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
 	@endif
+	</div>
 
 	<!-- Verrou simple/double -->
 	<div class="{{$class_verrou}}">

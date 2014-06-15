@@ -66,12 +66,6 @@ onLoad="togle_actif();getFreres();"
 		@endif
 	</div>
 
-	<div style="clear:both">
-		<p>
-			{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-		</p>
-	</div>
-
 	@section('script')
 	<script src="/assets/js/comptes.js">
 	</script>
