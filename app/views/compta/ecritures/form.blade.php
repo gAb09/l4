@@ -23,12 +23,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<!-- Verrou simple/double -->
 	<div class="{{$class_verrou}}">
 		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'check_verrou', 'onChange' => 'javascript:bascule_verrou();')) }}
-<<<<<<< HEAD
-		{{VERROU}}
-		{{ Form::label('check_verrou', 'vérouillé', array ('class' => 'nobr', 'id' => 'label_verrou', 'style' => 'color:red')) }}
-=======
 		{{ Form::label('verrou', VERROU.' VÉROUILLÉ', array ('class' => 'nobr', 'id' => 'verrou', 'style' => 'color:red')) }}
->>>>>>> modif
 	</div>
 </fieldset>
 <!-- Banque - Dates - Montant & Signe - Écriture simple/double - Verrou simple/double -->
