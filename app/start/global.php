@@ -132,3 +132,5 @@ define('CREATE_FORM_DEFAUT_TXT_DATE', '2014-01-01');
 define('CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL', 'Compléter éventuellement le libellé');
 
 define('VERROU', 'Changement écriture simple/double');
+
+define('PAR_PAGE', 30);

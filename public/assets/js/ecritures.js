@@ -1,5 +1,3 @@
-alert(txt_label);
-
 function bascule_signe() {
 	var label = document.getElementById("banque2_label");
 
@@ -53,11 +51,40 @@ function banque() {
 		}
 	}
 
-
 	function separateur(select) {
 		div = select.parentNode;
 		span = div.getElementsByTagName("SPAN")[0];
 		// alert(div+span);
 		sep = separateurs[select.value];
 		span.innerHTML = sep;
+	}
+
+
+
+	function tri(path, param) {
+		var par_page = document.getElementById('par_page').value;
+		var sens_tri = document.getElementById('sens_tri').value;
+		var critere = param.id;
+		var prev_tri_sur = document.getElementById('prev_tri_sur').value;
+		if (prev_tri_sur === critere) {
+			if(sens_tri == "asc"){
+				sens = "desc";
+			}else{
+				sens = "asc";
+			}
+		}else{
+			sens = "asc";
+		}
+		var adresse = path+"?tri_sur="+critere+"&sens_tri="+sens+"&par_page="+par_page;
+		alert( sens);
+		location.href = adresse;
+	}
+
+
+	function changeParPage(path, tri_sur, sens) {
+		var par_page = document.getElementById('par_page').value;
+
+		var adresse = path+"?tri_sur="+tri_sur+"&sens_tri="+sens+"&par_page="+par_page;
+		// alert( adresse);
+		location.href = adresse;
 	}

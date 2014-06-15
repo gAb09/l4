@@ -2,7 +2,7 @@
 class Ecriture extends Eloquent {
 	use ModelTrait;
 
-	protected $guarded = array('id');
+	// protected $guarded = array('id');
 	protected $softDelete = true; // AFA
 
 

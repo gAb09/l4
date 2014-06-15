@@ -35,14 +35,21 @@ class EcritureController extends BaseController {
 
 	public function index($banque = null)
 	{
+		$par_page = (Input::get('par_page')) ? Input::get('par_page') : PAR_PAGE;
+		$tri_sur = (Input::get('tri_sur')) ? Input::get('tri_sur') : 'date_emission';
+		$sens_tri = Input::get('sens_tri') ? Input::get('sens_tri') : 'asc';
+
+		var_dump($tri_sur);
+		var_dump($par_page);
+		var_dump($sens_tri);
 		Session::put('page_depart', Request::path());
 
 		if ($banque === null) {
-			$ecritures = Ecriture::all();
+			$ecritures = Ecriture::orderBy($tri_sur, $sens_tri)->paginate($par_page);
 			$titre_page = 'Toutes les écritures';
 		}else{
 			$bank_nom = Banque::find($banque)->nom;
-			$ecritures = Ecriture::whereBanqueId($banque)->get();
+			$ecritures = Ecriture::whereBanqueId($banque)->orderBy($tri_sur, $sens_tri)->paginate($par_page);
 			$titre_page = 'Écritures de la banque “'.$bank_nom.'”';
 		}
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
@@ -51,7 +58,14 @@ class EcritureController extends BaseController {
 			return Redirect::to('compta/ecritures')->withErrors($message);
 		}
 
-		return View::Make('compta.ecritures.index')->with(compact('ecritures'))->with(compact('titre_page'));
+		/* Adapter les class css selon les valeurs de certains attributs */
+
+		return View::Make('compta.ecritures.index')
+		->with(compact('ecritures'))
+		->with(compact('titre_page'))
+		->with(compact('tri_sur'))
+		->with(compact('sens_tri'))
+		;
 	}
 
 

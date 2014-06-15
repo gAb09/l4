@@ -99,6 +99,7 @@ ul.nav li:hover{
 .badge-big {
     font-size: 18px;
     margin-top: 3px;
+    margin-right: 3px;
     padding: 6px;
 }
 
@@ -245,6 +246,10 @@ td, th {
 
 th {
     font-weight: bold;
+}
+
+th.tri_selon {
+    background-color: #416541;
 }
 
 tr.surlignage:hover{
