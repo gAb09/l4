@@ -25,18 +25,27 @@
 
 @include('compta/ecritures/form')
 
-{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
-{{ Form::close() }}
+@section('zapette')
+<p>
+	{{ link_to(Session::get('page_depart'), 'Retour liste', 
+	array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+</p>
+@stop
+
+<p>
+	{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
+	{{ Form::close() }}
+</p>
 
 {{ Form::open(array('url' => 'compta/ecritures/'.$ecriture->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
+{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 {{ Form::close() }}
 
 <p>Créée le {{ F::dateCourteNb($ecriture->created_at) }}<br />
 	Modifiée le {{ F::dateCourteNb($ecriture->updated_at) }}</p>
-@stop
+	@stop
 
-@section('compta/footer')
-@parent
-<h3>  Le footer de édition d'écritures</h3>
-@stop
+	@section('compta/footer')
+	@parent
+	<h3>  Le footer de édition d'écritures</h3>
+	@stop

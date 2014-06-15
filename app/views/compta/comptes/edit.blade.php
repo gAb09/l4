@@ -24,16 +24,22 @@
 
 @include('compta/comptes/form')
 
-<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
+<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}
 
 
 @if(!$compte->pco)
 {{ Form::open( ['method' => 'delete', 'action' => ['CompteController@destroy', $compte->id]] ) }}
-{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
+{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 {{ Form::close() }}
 @endif
 
+@stop
+
+@section('zapette')
+<p>
+	{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+</p>
 @stop
 
 @section('footer')

@@ -24,13 +24,19 @@
 
 @include('compta/banques/form')
 
-<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
+<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}
 
 {{ Form::open(['method' => 'delete', 'action' => ['BanqueController@destroy', $banque->id]]) }}
-{{ Form::submit('Supprimer', array('class' => 'btn', 'onClick' => 'javascript:return(confirmation());')) }}
+{{ Form::submit('Supprimer', array('class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());')) }}
 {{ Form::close() }}
 
+@stop
+
+@section('zapette')
+<p>
+	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+</p>
 @stop
 
 @section('footer')

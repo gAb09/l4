@@ -22,11 +22,11 @@
 
 @include('admin/menus/form')
 
-	<br />{{ Form::submit('Enregistrer', array('class' => 'btn')) }}
+	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
 
 	{{ Form::open(array('url' => 'admin/menus/'.$menu->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn', 'onClick' => 'javascript:return(confirmation());']) }}
+{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 
 @stop

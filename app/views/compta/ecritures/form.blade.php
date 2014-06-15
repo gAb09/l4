@@ -4,19 +4,10 @@ onLoad="bascule_signe();banque();"
 
 <!-- Dates aFa revoir traduction de la date -->
 
-<!-- Tableau pour actualisation du séparateur -->
-<script type="text/javascript">
-var separateurs = {};
-
-<?php 
-echo "separateurs['0'] = 'uiuiui';"; // aFa ????
-foreach($separateurs as $id => $separateur) {
-	echo "separateurs['$id'] = '$separateur';";
-}
+<?php
 $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : "invisible";
 ?>
-</script>
-
+<!-- Tableau pour actualisation du séparateur -->
 
 <fieldset>
 	<!-- Écriture simple/double -->
@@ -25,15 +16,16 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
 	</div>
 
+	<div class="input nobr">
 	@if($ecriture->double_flag)
 	<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
 	@endif
+	</div>
 
 	<!-- Verrou simple/double -->
-	<div class="{{$class_verrou}}" id = "verrou">
+	<div class="{{$class_verrou}}">
 		{{ Form::checkbox('verrou', '1', '1', array ('class' => 'nobr', 'id' => 'check_verrou', 'onChange' => 'javascript:bascule_verrou();')) }}
-		{{VERROU}}
-		{{ Form::label('check_verrou', 'vérouillé', array ('class' => 'nobr', 'id' => 'label_verrou', 'style' => 'color:red')) }}
+		{{ Form::label('verrou', VERROU.' VÉROUILLÉ', array ('class' => 'nobr', 'id' => 'verrou', 'style' => 'color:red')) }}
 	</div>
 </fieldset>
 <!-- Banque - Dates - Montant & Signe - Écriture simple/double - Verrou simple/double -->
@@ -142,11 +134,24 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	</div>
 </fieldset>
 
-<p>
-	{{ link_to(Session::get('page_depart'), 'Retour à la liste', array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
 
 @section('script')
 <script src="/assets/js/ecritures.js">
 </script>
+
+<script type="text/javascript">
+var separateurs = {};
+
+<?php 
+echo "separateurs['0'] = 'uiuiui';"; // aFa ????
+foreach($separateurs as $id => $separateur) {
+	echo "separateurs['$id'] = '$separateur';";
+}
+?>
+
+var txt_label = "{{VERROU}}";
+
+</script>
+
 @stop
+
