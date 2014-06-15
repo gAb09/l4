@@ -42,12 +42,18 @@ $head = array(
 	<table style="font-size:12px;border:0px">
 		<thead>
 			@foreach($head as $key => $value)
-
-			@if($key == $tri_sur) 
-			<th class="tri_selon" id="{{$key}}" onClick="javascript:tri('{{Request::url()}}', {{$key}});">{{$value}}</th>
-			@else
-			<th id="{{$key}}" onClick="javascript:tri('{{Request::url()}}', {{$key}});">{{$value}}</th>
-			@endif
+			<?php
+			if ($key == $tri_sur) {
+				if ($sens_tri == 'asc') {
+					$th_class = 'iconesmall asc tri_selon';
+				}else{
+					$th_class = 'iconesmall desc tri_selon';
+				}
+			}else{
+				$th_class = '';
+			}
+			?>
+			<th class="{{$th_class}}" id="{{$key}}" onClick="javascript:tri('{{Request::url()}}', {{$key}});">{{$value}}</th>
 
 			@endforeach
 		</thead>
