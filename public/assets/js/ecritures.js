@@ -15,21 +15,20 @@ function bascule_signe() {
 
 
 function bascule_verrou() {
-	var label = document.getElementById("label_verrou");
+	var label = document.getElementById("verrou");
 	var verrou = document.getElementById("check_verrou");
 
 	if (verrou.checked == 1)
 	{
 		label.style.color="red"; /* aFA passer par les classe de span */
-		label.innerHTML= "verouillé";
+		label.innerHTML= txt_label+"  VÉROUILLÉ";
 	}
 	else
 	{
 		label.style.color="green";
-		label.innerHTML= "déverouillé";
+		label.innerHTML= txt_label+"  DÉVÉROUILLÉ";
 	}
 }
-
 
 
 /*----------   Affichage de la banque de destination (pages Écritures)-----------*/
@@ -52,11 +51,43 @@ function banque() {
 		}
 	}
 
-
 	function separateur(select) {
 		div = select.parentNode;
 		span = div.getElementsByTagName("SPAN")[0];
 		// alert(div+span);
 		sep = separateurs[select.value];
 		span.innerHTML = sep;
+	}
+
+
+
+	function tri(path, param) {
+		var par_page = document.getElementById('par_page').value;
+		var sens_tri = document.getElementById('sens_tri').value;
+		var critere = param.id;
+		// if (critere == "ids") {
+		// 	critere = "id";
+		// }
+		var prev_tri_sur = document.getElementById('prev_tri_sur').value;
+		if (prev_tri_sur === critere) {
+			if(sens_tri == "asc"){
+				sens = "desc";
+			}else{
+				sens = "asc";
+			}
+		}else{
+			sens = "asc";
+		}
+		var adresse = path+"?tri_sur="+critere+"&sens_tri="+sens+"&par_page="+par_page;
+		// alert( adresse);
+		location.href = adresse;
+	}
+
+
+	function changeParPage(path, tri_sur, sens) {
+		var par_page = document.getElementById('par_page').value;
+
+		var adresse = path+"?tri_sur="+tri_sur+"&sens_tri="+sens+"&par_page="+par_page;
+		// alert( adresse);
+		location.href = adresse;
 	}

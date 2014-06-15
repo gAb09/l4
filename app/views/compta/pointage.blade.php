@@ -20,7 +20,6 @@
 @endforeach
 @stop
 
-
 @section('contenu')
 
 <table>

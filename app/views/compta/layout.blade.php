@@ -134,7 +134,10 @@
 
 			<!-- CONTENU PRINCIPAL -->
 			<div class="row-fluid">
-				<div class="span11 offset1">
+				<div class="span1 zapette">
+					@yield('zapette')
+				</div>
+				<div class="span11 offset1" style="margin-left:8.5%">
 					@yield('contenu')
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 Session::set('site', 'Trésorerie Bruno');
 
 
@@ -12,6 +13,9 @@ Session::set('site', 'Trésorerie Bruno');
 // {
 //     return new Odile;
 // });
+=======
+Session::set('site', 'Ma trésorerie');
+>>>>>>> modif
 
 /*
 |--------------------------------------------------------------------------

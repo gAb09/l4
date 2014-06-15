@@ -1,4 +1,5 @@
 *.DS_Store
+public/assets/.DS_Store
 app/config
 vendor/*
 app/.DS_Store
