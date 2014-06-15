@@ -17,9 +17,9 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	</div>
 
 	<div class="input nobr">
-	@if($ecriture->double_flag)
-	<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
-	@endif
+		@if($ecriture->double_flag)
+		<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
+		@endif
 	</div>
 
 	<!-- Verrou simple/double -->
@@ -71,13 +71,13 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Libellé -->
 		{{ Form::label('Libelle', 'Libellé', array ('class' => '')) }}
-		{{ Form::text('libelle', $ecriture->libelle, array ('class' => 'long')) }}
+		{{ Form::text('libelle', $ecriture->libelle, array ('class' => 'input-long')) }}
 	</div>
 
 	<div class="input">
 		<!-- Libellé détail -->
 		{{ Form::label('libelle_detail', 'Libellé détail', array ('class' => '')) }}
-		{{ Form::text('libelle_detail', $ecriture->libelle_detail, array ('class' => 'long margright')) }}
+		{{ Form::text('libelle_detail', $ecriture->libelle_detail, array ('class' => 'input-long margright')) }}
 	</div>
 </fieldset>
 
@@ -86,7 +86,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Type -->
 		{{ Form::label('type_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type_id', $list['type'], $ecriture->type_id, array ('class' => 'long', 'onChange' => 'javascript:separateur(this);') ) }}
+		{{Form::select('type_id', $list['type'], $ecriture->type_id, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 		<span>
 			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '/' }}
 		</span>
@@ -95,15 +95,35 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justificatif', 'Justificatif', array ('class' => '')) }}
-		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'long margright')) }}   <!-- aPo probleme de selected -->
+		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
+
 
 <!-- Compte -->
 <fieldset>
 	<div class="input">
-		{{ Form::label('compte_id', 'Compte', array ('class' => '', 'id' => 'compte')) }}
-		{{Form::select('compte_id', $list['compte'], $ecriture->type_id, array ('class' => '')) }}
+		{{ Form::label('compte_id', 'Compte', array ('class' => '', 'id' => 'compte_id')) }}
+		{{Form::select('compte_id', $list['compte'], $ecriture->type_id, array ('class' => 'input-long nobr', 'id' => 'compte_id_actif')) }}
+
+		<input id="desactive_compte" value="Désactiver ce compte" type="button" class="invisible" 
+		onclick = "modificationCompte('{{URL::action('CompteController@updateOne')}}', 0 )">
+		<span id="span_compte_activation" class="invisible"> Attention : après désactivation bien penser à réattribuer un compte.</span>
+
+	</div>
+</fieldset>
+
+<fieldset>
+		{{ Form::label('compte_activation', 'Activer/Désactiver un compte. 
+		', array ('class' => '', 'id' => 'compte', 'onClick' => 'javascript:bascule_compte(this)')) }}
+
+	<div id="div_compte_activation" class="invisible">
+		Activer un compte l’ajoutera à la liste de sélection ci-dessus.
+
+		<br />{{Form::select('compte_activation', $list['compte_activation'], '0', array ('class' => 'input-long', 'id' => 'compte_activation')) }}
+
+		<input value="Activer ce compte" type="button" class="btn btn-small btn-success"
+		onclick = "modificationCompte('{{URL::action('CompteController@updateOne')}}', 1 )">
 	</div>
 </fieldset>
 
@@ -116,12 +136,13 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<!-- Banque 2 -->
 		{{ Form::hidden('ecriture2_id', isset($ecriture->ecriture2->id) ? $ecriture->ecriture2->id : '') }}
 		{{ Form::label('banque2_id', 'Banque liée', array ('class' => '', 'id' => 'banque2_label')) }}
-		{{ Form::select('banque2_id', $list['banque'], isset($ecriture->ecriture2->banque_id) ? $ecriture->ecriture2->banque_id : 0, array ('class' => 'rrert'))}}
+		{{ Form::select('banque2_id', $list['banque'], isset($ecriture->ecriture2->banque_id) ? $ecriture->ecriture2->banque_id : 0, array ('target' => 'blank'))}}
 	</div>
 	<div class="input">
 		<!-- Type 2 -->
 		{{ Form::label('type2_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type2_id', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'long', 'onChange' => 'javascript:separateur(this);') ) }}
+
+		{{Form::select('type2_id', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 		<span>
 			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  '/'}}
 		</span>
@@ -130,7 +151,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
-		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'long margright')) }} 
+		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'input-long margright')) }} 
 	</div>
 </fieldset>
 

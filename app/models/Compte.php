@@ -40,6 +40,17 @@ class Compte extends Node {
 		return $list;
 	}
 
+	public static function scopeActivable()
+	{
+		$items = self::where('actif', '0')->orderBy('lft')->get(array('id', 'libelle', 'numero', 'actif'));
+
+		foreach($items as $item)
+		{
+			$list[$item->id] = '('.$item->numero.') '.$item->libelle;
+		}
+		return $list;
+	}
+
 	// public static function scopeFreres()
 	// {
 	// 	foreach(self::all(array('id', 'libelle', 'numero')) as $item)
@@ -53,9 +64,9 @@ class Compte extends Node {
 
 	public static function scopeActif()
 	{
-		foreach(self::where('actif', 1)->get(array('id', 'libelle')) as $item)
+		foreach(self::where('actif', 1)->get(array('id', 'libelle', 'numero')) as $item)
 		{
-			$list[$item->id] = $item->libelle;
+			$list[$item->id] = '('.$item->numero.') '.$item->libelle;
 		}
 		return $list;
 	}

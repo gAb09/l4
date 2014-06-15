@@ -118,6 +118,16 @@ class CompteController extends BaseController {
 		}
 
 
+		public function updateOne()
+		{
+			// dd(Input::get('valeur'));
+			$item = Compte::FindOrFail(Input::get('id'));
+			$item->actif = Input::get('valeur');
+			$item->save();
+				return Redirect::back();
+
+		}
+
 
 		public function update($id)
 		{
