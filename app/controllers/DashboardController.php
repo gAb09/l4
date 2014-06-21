@@ -1,52 +1,33 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationUtilisateur;
+use Lib\Validations\ValidationDashboard;
 
-class UtilisateurController extends \BaseController {
+class DashboardController extends \BaseController {
 
 
 	protected $validateur;
 
 
-	public function __construct(ValidationUtilisateur $validateur)
+	public function __construct(ValidationDashboard $validateur)
 	{
 		$this->validateur = $validateur;
 	}
 
 
+	/**
+	 * Deconnecte l’utilisateur.
+	 *
+	 * 
+	 */
+	public function deconnexion() {
 
-	public function identification() {
-		$validate = $this->validateur->validate(Input::all());
-
-
-		if($validate !== true) {
-			
-// dd($validate);
-			return Redirect::to('login')
-			->withErrors($validate)
-			->withInput(Input::all())
-			;
-
-		} else {
-
-			$utilisateur_checked = Utilisateur::where('login', Input::get('login'))->first();
-			// var_dump($utilisateur_checked); // CTRL
-			// echo $utilisateur_checked->password; // CTRL
-			// echo Hash::make('tempo'); // CTRL
-			// echo Input::get('password'); // CTRL
-
-			if (Auth::attempt(array('login' => Input::get('login'), 'password' => Input::get('password')))) {
-				// dd('identification ok !!!');
-
-				return Redirect::to('/');
-
-			} else {
-				// dd('identification pas OK !!!'); // CTRL
-
-				return Redirect::to('login')->withErrors('Désolé l’identification a échoué. Veullire réessayer');
-			}
-		}
+		Auth::logout();
+		Session::forget(('success'));
+		Session::flash('success', 'Vous venez d’être déconnecté');
+		return Redirect::route('login');
 	}
+
+
 
 
 	/**
@@ -73,6 +54,7 @@ class UtilisateurController extends \BaseController {
 		return View::make('guest/inscription_form')
 		;
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.

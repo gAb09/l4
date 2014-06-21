@@ -1,7 +1,3 @@
-<?php
-// $section = Session::get('section'); // aPo Détection du contexte pour Titre page et menus
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,7 +23,6 @@
 
 @show
 >
-
 <div class="container-fluid">
 	<!-- Messages d'erreurs -->
 	@if($errors->all())
@@ -69,6 +64,7 @@
 					</p>
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					</a>
+					@if(isset($menus))
 					<div class="nav-collapse collapse">
 						<ul class="nav nav-tabs">
 							
@@ -117,7 +113,7 @@
 							</ul>
 						</nav>
 					</div>
-
+					@endif
 				</header>
 			</div>
 
@@ -135,8 +131,20 @@
 
 			<!-- CONTENU PRINCIPAL -->
 			<div class="row-fluid">
-				<div class="span1 zapette">
+				<div class="zapette">
+
 					@yield('zapette')
+
+					@if(isset(Auth::user()->login ))
+					<p style="font-size:0.9em;margin-bottom:0px">Utilisateur connecté</p>
+
+					<p onClick="javascript:document.location.href='/dashboard';">{{ Auth::user()->login }}</p>
+
+					{{Form::button('Déconnexion', array('class' => 'btn btn-danger iconesmall delete', 'style' => '', 
+					'OnClick' => 'document.location.href="/dashboard/deconnexion";' ))}}
+
+					@endif
+
 				</div>
 				<div class="span11 offset1" style="margin-left:8.5%">
 					@yield('contenu')

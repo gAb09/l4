@@ -26,7 +26,7 @@ class CompteController extends BaseController {
 		/* Assigner la liste des racines de comptes (classes) 
 		pour le tableau de sélectio des classes */
 		$classes = Compte::roots()->get();
-		// $classes->shift(); // aFa ?? retrait du pseudo compte "indéfini" 
+		// $classes->shift(); // aFa ?? retrait du pseudocompte "indéfini" 
 
 		/* 
 		- Assigner $comptes qui contient les comptes à afficher
