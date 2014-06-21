@@ -64,7 +64,7 @@
 					</p>
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					</a>
-					@if(isset($menus))
+
 					<div class="nav-collapse collapse">
 						<ul class="nav nav-tabs">
 							
@@ -113,7 +113,7 @@
 							</ul>
 						</nav>
 					</div>
-					@endif
+
 				</header>
 			</div>
 
