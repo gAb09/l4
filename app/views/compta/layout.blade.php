@@ -50,7 +50,7 @@
 
 
 	<div class="row-fluid">
-{{dd($sections)}}
+
 		<div class="span1">
 			@include('compta/fenetre_note')
 		</div>
