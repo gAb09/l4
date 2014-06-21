@@ -55,7 +55,7 @@
 
 
 	<div class="row-fluid">
-
+{{dd($sections)}}
 		<div class="span1">
 			@include('compta/fenetre_note')
 		</div>
@@ -71,6 +71,7 @@
 					</a>
 					<div class="nav-collapse collapse">
 						<ul class="nav nav-tabs">
+							
 							@foreach($sections as $section)
 							@if ($section->nom_sys == Request::segment(1))
 							<li class ="active">
