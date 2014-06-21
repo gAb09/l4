@@ -57,6 +57,9 @@ hr.filetfin{
 
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
 div.zapette {
+    text-align: center;
+    background-color: #C8A94C;
+    width:9%;
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -318,13 +321,13 @@ label{
 }
 
 input.nobr, label.nobr{
- display:inline;
- margin-right:10px;
+   display:inline;
+   margin-right:10px;
 }
 
 div.input{
- float:left;
- margin-right:10px;
+   float:left;
+   margin-right:10px;
 }
 
 fieldset.invisible,
@@ -354,8 +357,8 @@ input.long{
 }
 
 input.margright, label.margright, button.margright{
- display:inline;
- margin-right:45px;
+   display:inline;
+   margin-right:45px;
 }
 
 input[type="checkbox"]:focus{
@@ -373,9 +376,9 @@ input[title~=Supprimer]{
 }
 
 div.aide {
-   display: inline-block;
-   font-size: .9em;
-   line-height: 1.1em;
+ display: inline-block;
+ font-size: .9em;
+ line-height: 1.1em;
 }
 
 textarea{
@@ -401,13 +404,13 @@ form.pointage {
 
 /* Pages comptes */
 div.classeRacine {
- background-color: #E0C396;
- border-style: inset;
- border-width: 1px;
- display: inline-block;
- font-size: 0.9em;
- margin: 5px;
- padding: 2px;
+   background-color: #E0C396;
+   border-style: inset;
+   border-width: 1px;
+   display: inline-block;
+   font-size: 0.9em;
+   margin: 5px;
+   padding: 2px;
 }
 
 
@@ -474,8 +477,20 @@ h4.nonpublie{
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
 
 
+.login{
+    width:500px;
+    height:200px;
+    margin:auto;
+    background-color: #CECA90;
+}
 
 
+div.ongletGb{
+    text-align: center;
+    position: relative;
+    margin-left: 4px;
+    display: inline;
+}
 
 
 
@@ -494,11 +509,5 @@ div.contenu /*h5{
     margin-top:-9px;
     }*/
 
-    section.login{
-        width:300px;
-        height:200px;
-        margin:auto;
-        background-color: #CECA90;
-    }
 
 

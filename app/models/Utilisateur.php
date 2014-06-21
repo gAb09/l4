@@ -5,6 +5,8 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class Utilisateur extends Eloquent implements UserInterface, RemindableInterface {
 
+	protected $guarded = array('id'); // AFA
+	protected $softDelete = true; // AFA
 	/**
 	 * The database table used by the model.
 	 *

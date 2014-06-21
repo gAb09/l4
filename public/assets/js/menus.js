@@ -1,5 +1,5 @@
 function toggle_publication() {
-	var label = document.getElementById("publication_label");
+	var label = document.getElementById("publication");
 	var check = document.getElementById("publication_check");
 
 	if (check.checked === true)

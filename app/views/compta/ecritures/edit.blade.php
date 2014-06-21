@@ -28,7 +28,7 @@
 @section('zapette')
 <p>
 	{{ link_to(Session::get('page_depart'), 'Retour liste', 
-	array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
+	array('class' => 'btn btn-primary iconesmall list',)); }}
 </p>
 @stop
 <p>

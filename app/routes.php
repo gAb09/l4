@@ -1,11 +1,6 @@
 <?php
 
 
-Route::get('compta/tost', function()
-{
-	return View::make('tost');
-});
-
 Route::get('compte/{id}', function($id)
 {
 	return var_dump(Compte::where('id', $id)->first()->lft);
@@ -36,14 +31,54 @@ Route::get('/', function()
 |--------------------------------------------------------------------------
 | Authentification
 |--------------------------------------------------------------------------*/
-Route::get('login', function()
+
+Route::get('login', array('as' => 'login', function()
 {
 	// return 'login';
-	return View::make('identification/form')->withTitre_page('ttst');
-});
+	return View::make('identification/form')
+	->with('titre_page', 'Identification')
+	;
+}));
 
-Route::post('identification', 'UtilisateurController@identification');
+Route::post('identification', 'IdentificationController@identification');
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard / Prefix "dash"
+|--------------------------------------------------------------------------*/
+
+Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function() 
+{
+	Route::get('/', function(){
+		return Redirect::to('dashboard/show');
+	});
+
+	Route::get('deconnexion', array('as' => 'deconnexion', 'uses' => 'DashboardController@deconnexion'));
+
+	Route::get('show', function()
+	{
+		return View::make('dashboard.show')
+		->with('titre_page', 'Mon compte')
+		;
+	});
+
+	Route::get('update', function()
+	{
+		return View::make('dashboard.update')
+		->with('titre_page', 'Mon compte')
+		;
+	});
+
+	Route::get('updatemdp', function()
+	{
+		return View::make('dashboard.updatemdp')
+		->with('titre_page', 'Mon compte')
+		;
+	});
+
+	Route::resource('user', 'UtilisateurController');
+	Route::put('user/mdp/{id?}', 'UtilisateurController@updatemdp');
+});  // Fin de groupe prefix admin
 
 /*
 |--------------------------------------------------------------------------

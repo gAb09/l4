@@ -8,7 +8,7 @@
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les statuts (Consultation)</h1>
+		<h1 class="titrepage">Lexique des statuts</h1>
 @stop
 
 

@@ -13,7 +13,7 @@ onLoad="justifToggle();"
 	<!-- Description -->
 	{{ Form::label('description', 'Description', array ('class' => '')) }}
 	{{ Form::textarea('description', $type->description, array ('class' => '')) }}
-	Pour obtenir un retour ligne saisir les caractères suivants : {{'&laquo;br /&raquo;'}}
+	Pour obtenir un retour ligne saisir les caractères suivants : {{'&lt;br /&gt;'}}
 </div>
 <hr />
 
@@ -32,10 +32,6 @@ Choisir si ce type d’écriture devra requérir un justificatif.
 	{{ Form::text('sep_justif', trim($type->sep_justif), array ('class' => '')) }}
 	Choisir le(s) caractère(s) ou le texte de séparation. Cela séparera “type” et “justificatif” dans les différentes listes et vues
 	<hr />
-
-</div>
-{{ link_to_action('TypeController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-<br />
 
 @section('script')
 <script src="/assets/js/types.js">
