@@ -1,36 +1,37 @@
-## MA trésorerie
+## MA tr√©sorerie
 
-Simple application permettant de gérer une compta personnelle ou de petite association.
+Simple application permettant de g√©rer une compta personnelle ou de petite association.
 
 ## Documentation
 
-#Possibilité de 
-• gérer plusieurs comptes (appelés “Banque”),
-• gérer les types d'écritures (chèques, virement, etc.),
-• gérer des écritures entre Banques internes,
-• intègre les comptes du Plan Comptable Officiel avec la possibilité de créer ses propres comptes,
+#Possibilit√© de 
+‚Ä¢ g√©rer plusieurs comptes (appel√©s ‚ÄúBanque‚Äù),
+‚Ä¢ g√©rer les types d'√©critures (ch√®ques, virement, etc.),
+‚Ä¢ g√©rer des √©critures entre Banques internes,
+‚Ä¢ int√®gre les comptes du Plan Comptable Officiel avec la possibilit√© de cr√©er ses propres comptes,
 
-#Les écritures peuvent traverser 4 ”statuts“ : 
-– prévisionnelle,
-– émise,
-– pointées (par rapport aux relevés en ligne)
-– pointées (par rapport aux relevés bancaires).
-Ces stauts ne sont accessibles qu'à l'administrateur
+#Les √©critures peuvent traverser 4 ‚Äústatuts‚Äù : 
+‚Ä¢ pr√©visionnelle,
+‚Ä¢ √©mise,
+‚Ä¢ point√©es (par rapport aux relev√©s en ligne)
+‚Ä¢ point√©es (par rapport aux relev√©s bancaires).
+Ces stauts ne sont accessibles qu'√† l'administrateur
 
 VUES :
-• Listage, création, modification et suppression pour chaque entités (Écritures, Types, Comptes Banques),
-• Tenue du livre des recettes/dépenses.
-• Pointage (par rapport à internet
+‚Ä¢ Listage, cr√©ation, modification et suppression pour chaque entit√©s (√©critures, Types, Comptes Banques),
+‚Ä¢ Tenue du livre des recettes/d√©penses.
+‚Ä¢ Pointage.
+‚Ä¢ Pr√©visionnel.
 
 GESTION des UTILISATEURS 
-• Administrateur
-• Secrétariat
-• Consultation (pour le CA de lasso par exemple).
+‚Ä¢ Administrateur
+‚Ä¢ Secr√©tariat
+‚Ä¢ Consultation (pour le CA de lasso par exemple).
 
 ADMINISTRATION
-• Gestion des statuts.
-• Gestion des menus.
-• Gestion des utilisateurs
+‚Ä¢ Gestion des statuts.
+‚Ä¢ Gestion des menus.
+‚Ä¢ Gestion des utilisateurs
 
 ### License
 
