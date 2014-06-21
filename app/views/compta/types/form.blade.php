@@ -13,7 +13,7 @@ onLoad="justifToggle();"
 	<!-- Description -->
 	{{ Form::label('description', 'Description', array ('class' => '')) }}
 	{{ Form::textarea('description', $type->description, array ('class' => '')) }}
-	Pour obtenir un retour ligne saisir les caractères suivants : {{'&laquo;br /&raquo;'}}
+	Pour obtenir un retour ligne saisir les caractères suivants : {{'&lt;br /&gt;'}}
 </div>
 <hr />
 

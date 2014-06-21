@@ -39,7 +39,7 @@ onLoad="toggle_publication();"
 
 	<!-- Publication -->
 	<div class="input nobr">
-		{{ Form::label('publication_check', '', array ('class' => 'nobr', 'id' => 'publication_label')) }}
+		{{ Form::label('publication', '', array ('class' => 'nobr', 'id' => 'publication')) }}
 		{{ Form::checkbox('publication', 1, $menu->publication, array ('class' => 'nobr', 'id' => 'publication_check', 'onChange' => 'javascript:toggle_publication()')) }}
 	</div>
 </fieldset>
