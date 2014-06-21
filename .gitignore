@@ -1,6 +1,6 @@
-*.DS_Store
+*.DS_Store*
 public/assets/.DS_Store
-app/config
+app/config/*
 vendor/*
 app/.DS_Store
 vendor/.DS_Store
