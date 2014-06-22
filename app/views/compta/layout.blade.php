@@ -23,6 +23,7 @@
 
 @show
 >
+
 <div class="container-fluid">
 	<!-- Messages d'erreurs -->
 	@if($errors->all())

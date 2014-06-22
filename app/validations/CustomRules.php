@@ -43,12 +43,15 @@ Validator::extend('afteremission', function($field, $value, $params)
 	if ($test = substr_count($value, '-') == 2) {
 		$parties = explode('-', $value);
 		$valeur = Carbon::createFromDate($parties[2], $parties[1], $parties[0]);
-		// dd($valeur);
+		// var_dump($valeur);
 	}
 	if ($test = substr_count(Input::get('date_emission'), '-') == 2) {
 		$parties = explode('-', Input::get('date_emission'));
 		$emission = Carbon::createFromDate($parties[2], $parties[1], $parties[0]);
 		// dd($emission);
+	}
+	if( !isset($valeur) OR !isset($emission) ){
+		return false;
 	}
 	if ($valeur < $emission) {
 		return false;

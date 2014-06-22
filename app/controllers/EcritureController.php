@@ -348,7 +348,7 @@ class EcritureController extends BaseController {
 		/* Rediriger */
 		Session::flash('success', $success);
 		$mois = self::getMoisForRedirect($ec1);
-		return Redirect::to(Session::get('page_depart')."#$mois");
+		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 	}
 
 
@@ -372,12 +372,16 @@ class EcritureController extends BaseController {
 
 		Session::flash('success', $success);
 		$mois = self::getMoisForRedirect($ec1);
-		return Redirect::to(Session::get('page_depart')."#$mois");
+		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 	}
 
 
-	public static function getMoisForRedirect($ec1){
+	public static function getMoisForRedirect($ec1){ // aPo redirection vers le mois
+		if(isset($ec1)){
 		$mois = F::dateClass($ec1->date_valeur);
+	}else{
+		$mois = "2014.01";
+	}
 		Session::put('mois', $mois);
 		return $mois;
 	}
