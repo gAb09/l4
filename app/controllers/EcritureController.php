@@ -27,6 +27,7 @@ class EcritureController extends BaseController {
 	{
 		$this->listes['banque'] = Banque::listForInputSelect('nom');
 		$this->listes['compte'] = Compte::listForInputSelect('libelle', 'Actif');
+		$this->listes['compte_activation'] = Compte::listForInputSelect('libelle', 'Activable', false);
 		$this->listes['type'] = Type::listForInputSelect('nom');
 		return $this->listes;
 	}

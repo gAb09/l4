@@ -40,6 +40,17 @@ class Compte extends Node {
 		return $list;
 	}
 
+	public static function scopeActivable()
+	{
+		$items = self::where('actif', '0')->orderBy('lft')->get(array('id', 'libelle', 'numero', 'actif'));
+
+		foreach($items as $item)
+		{
+			$list[$item->id] = '('.$item->numero.') '.$item->libelle;
+		}
+		return $list;
+	}
+
 	// public static function scopeFreres()
 	// {
 	// 	foreach(self::all(array('id', 'libelle', 'numero')) as $item)

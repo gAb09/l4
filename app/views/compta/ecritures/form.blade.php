@@ -102,8 +102,27 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 <!-- Compte -->
 <fieldset>
 	<div class="input">
-		{{ Form::label('compte_id', 'Compte', array ('class' => '', 'id' => 'compte')) }}
-		{{Form::select('compte_id', $list['compte'], $ecriture->type_id, array ('class' => '')) }}
+		{{ Form::label('compte_id', 'Compte', array ('class' => '', 'id' => 'compte_id')) }}
+		{{Form::select('compte_id', $list['compte'], $ecriture->type_id, array ('class' => 'input-long nobr', 'id' => 'compte_id_actif')) }}
+
+		<input id="desactive_compte" value="Désactiver ce compte" type="button" class="invisible" 
+		onclick = "modificationCompte('{{URL::action('CompteController@updateActif')}}', 0 )">
+		<span id="span_compte_activation" class="invisible"> Attention : après désactivation bien penser à réattribuer un compte.</span>
+
+	</div>
+</fieldset>
+
+<fieldset>
+		{{ Form::label('compte_activation', 'Activer/Désactiver un compte. 
+		', array ('class' => '', 'id' => 'compte', 'onClick' => 'javascript:bascule_compte(this)')) }}
+
+	<div id="div_compte_activation" class="invisible">
+		Activer un compte l’ajoutera à la liste de sélection ci-dessus.
+
+		<br />{{Form::select('compte_activation', $list['compte_activation'], '0', array ('class' => 'input-long', 'id' => 'compte_activation')) }}
+
+		<input value="Activer ce compte" type="button" class="btn btn-small btn-success"
+		onclick = "modificationCompte('{{URL::action('CompteController@updateActif')}}', 1 )">
 	</div>
 </fieldset>
 

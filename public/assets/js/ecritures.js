@@ -91,3 +91,36 @@ function banque() {
 		// alert( adresse);
 		location.href = adresse;
 	}
+
+	function modificationCompte(path, valeur) {
+		var compte_id = '';
+		if (valeur == 1) {
+			compte_id = document.getElementById('compte_activation').value;
+		}else{
+			compte_id = document.getElementById('compte_id_actif').value;
+		}
+
+		var adresse = path+"?id="+compte_id+"&valeur="+valeur;
+		// alert( adresse);
+		location.href = adresse;
+	}
+
+	function bascule_compte(label) {
+		var bouton = document.getElementById("desactive_compte");
+		var div = document.getElementById("div_compte_activation");
+		var nota = document.getElementById("span_compte_activation");
+
+		if (div.className === "")
+		{
+			nota.className = "invisible";
+			div.className = "invisible";
+			bouton.className = "invisible";
+		}
+		else
+		{
+			nota.className = "";
+			div.className = "";
+			bouton.className = "btn btn-small btn-danger";
+		}
+	}
+

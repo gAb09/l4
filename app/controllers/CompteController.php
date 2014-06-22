@@ -44,7 +44,7 @@ class CompteController extends BaseController {
 
 		  /* Adapter les class css selon les valeurs de certains attributs */
 		  $comptes->map(function($compte){
-		  	$compte->class_actif = ($compte->actif)? 'actif' : '';
+		  	$compte->classe_actif = ($compte->actif)? 'actif' : '';
 		  	$compte->class_pco = ($compte->pco)? 'pco' : '';
 		  });
 
@@ -150,6 +150,16 @@ class CompteController extends BaseController {
 			}
 		}
 
+
+		public function updateActif()
+		{
+			// dd(Input::get('valeur'));
+			$item = Compte::FindOrFail(Input::get('id'));
+			$item->actif = Input::get('valeur');
+			$item->save();
+				return Redirect::back();
+
+		}
 
 
 		public function destroy($id)
