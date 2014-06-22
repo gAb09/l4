@@ -26,14 +26,12 @@
 	</td>
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 1)
-		{{ F::insecable($ecriture->montant) }}
-		<?php $solde = $solde - $ecriture->montant; ?>
+		{{ F::nbre_insec($ecriture->montant) }}
 		@endif
 	</td>
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 2)
-		{{ F::insecable($ecriture->montant) }}
-		<?php $solde = $solde + $ecriture->montant; ?>
+		{{ F::nbre_insec($ecriture->montant) }}
 		@endif
 	</td>
 	@if($solde >= 0)
@@ -41,7 +39,7 @@
 		@else
 		<td class="depense">
 			@endif
-			{{ number_format($solde, 2, ',', '&nbsp') }}
+			{{ F::nbre_insec($solde) }}
 		</td>
 		<td>
 			{{ $ecriture->type->nom }}
