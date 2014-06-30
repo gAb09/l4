@@ -45,7 +45,7 @@ class EcritureController extends BaseController {
 		// var_dump($tri_sur); // CTRL
 		// var_dump($par_page); // CTRL
 		// var_dump($sens_tri); // CTRL
-		Session::put('page_depart', Request::path());
+		Session::put('page_depart', Request::getUri());
 
 		if ($banque === null) {
 			$ecritures = Ecriture::orderBy($tri_sur_ok, $sens_tri)->paginate($par_page);
@@ -100,7 +100,10 @@ class EcritureController extends BaseController {
 				$ec1->save();
 				Session::flash('success',"L’écriture a été créée");
 			}else{
-				return Redirect::back()->withInput(Input::all())->withErrors($validation);
+				return Redirect::back()
+				->withInput(Input::all())
+				->withErrors($validation)
+				;
 			}
 
 		}else{
@@ -371,7 +374,7 @@ class EcritureController extends BaseController {
 		$success = "• La première écriture à été supprimée.<br />$success";
 
 		Session::flash('success', $success);
-		$mois = self::getMoisForRedirect($ec1);
+		$mois = self::getMoisForRedirect($ecriture);
 		return Redirect::to(Session::get('page_depart')."#$mois");
 	}
 

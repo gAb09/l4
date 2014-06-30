@@ -1,5 +1,12 @@
 <?php
 
+Route::get('tost', function()
+{
+	// return 'login';
+	return View::make('tost')
+	;
+});
+
 
 Route::get('compte/{id}', function($id)
 {

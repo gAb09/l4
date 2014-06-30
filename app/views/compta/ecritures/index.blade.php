@@ -102,7 +102,7 @@ $head = array(
 	</table>
 
 	Écritures {{ $ecritures->getFrom() }} à {{ $ecritures->getTo() }} sur un total de {{ $ecritures->getTotal() }}, réparties sur {{ $ecritures->getLastPage() }} pages.
-	{{ $ecritures->links() }}
+	{{ $ecritures->appends(array('tri_sur' => $tri_sur, 'sens_tri' => $sens_tri))->links() }}
 	Le réglage par défaut est de {{PAR_PAGE}} écritures par page.
 	<br />Vous pouvez temporairement changer cette valeur ici : 
 
