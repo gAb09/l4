@@ -368,10 +368,10 @@ class EcritureController extends BaseController {
 			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->double_id)->get();
 			$deuze = $deuze[0];
 			$deuze->delete();
-			$success = "• La deuxième écriture à été supprimée.<br />";
+			$success = "• L’écriture liée à été supprimée.<br />";
 		}
 		$ecriture->delete();
-		$success = "• La première écriture à été supprimée.<br />$success";
+		$success = "• L’écriture à été supprimée.<br />$success";
 
 		Session::flash('success', $success);
 		$mois = self::getMoisForRedirect($ecriture);

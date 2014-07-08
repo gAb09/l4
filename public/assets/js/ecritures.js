@@ -124,3 +124,25 @@ function banque() {
 		}
 	}
 
+	function aujourdhuiEmission() {
+		var champs = document.getElementById("date_emission");
+		champs.value = aujourdhui();
+
+	}
+
+	function aujourdhuiValeur() {
+		var champs = document.getElementById("date_valeur");
+		champs.value = aujourdhui();
+
+	}
+
+	function aujourdhui() {
+		var today = new Date();
+		var jour = today.getDate();
+		var mois = today.getMonth()+1;
+		var an = today.getFullYear();
+		var date = jour+'-'+mois+'-'+an;
+		return date;
+
+	}
+

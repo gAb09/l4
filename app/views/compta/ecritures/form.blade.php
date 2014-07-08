@@ -41,7 +41,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('date_emission', 'Date émission', array ('class' => '')) }}
 		{{ Form::text('date_emission', F::dateSaisie($ecriture->date_emission), array ('class' => 'calendrier')) }}
 
-		<br /><a href="" class="bouton">Aujourd'hui</a>
+		<br /><div class="btn btn-date" OnClick="javascript:aujourdhuiEmission();">Aujourd'hui</div>
 	</div>
 
 	<!-- Date valeur -->
@@ -49,7 +49,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('date_valeur', 'Date de valeur', array ('class' => '')) }}
 		{{ Form::text('date_valeur', F::dateSaisie($ecriture->date_valeur), array ('class' => 'calendrier')) }}
 
-		<br /><a href="" class="bouton">Aujourd'hui</a>
+		<br /><div class="btn btn-date" OnClick="javascript:aujourdhuiValeur();">Aujourd'hui</div>
 	</div>
 
 	<div class="input">
