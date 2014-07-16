@@ -91,6 +91,9 @@ $head = array(
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
 				<td>
+					<a class="iconemedium delete" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
+				</td>
+				<td>
 					@if ($ecriture->ecriture2)
 					<a class="iconemedium double" href ="{{ URL::to('compta/banque/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
 					@endif

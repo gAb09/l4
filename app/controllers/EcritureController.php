@@ -84,6 +84,19 @@ class EcritureController extends BaseController {
 		;
 	}
 
+	public function duplicate($id)
+	{
+		$ecriture = Ecriture::where('id', $id)->with('ecriture2')->first();
+// dd($ec1);
+		// $ecriture = new Ecriture;
+		// $ecriture->fillFormForCreate();
+
+		return View::Make('compta.ecritures.create')
+		->with('ecriture', $ecriture)
+		->with('list', self::lister())
+		;
+	}
+
 
 	public function store()
 	{
