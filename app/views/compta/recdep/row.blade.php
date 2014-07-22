@@ -14,12 +14,12 @@
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::insecable($ecriture->montant) }}
+				{{ F::nbre_insec($ecriture->montant) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::insecable($ecriture->montant) }}
+				{{ F::nbre_insec($ecriture->montant) }}
 				@endif
 			</td>
 			<td>
@@ -47,10 +47,13 @@
 				({{ $ecriture->compte->numero }}) 
 				{{ $ecriture->compte->libelle }}
 			</td>
-			<td>
+			<td class="icone">
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 			</td>
-			<td>
+			<td class="icone">
+				<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
+			</td>
+			<td class="icone">
 				@if ($ecriture->ecriture2)
 				<a class="iconemedium double" href ="{{ URL::to('compta/recdep/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
 				@endif

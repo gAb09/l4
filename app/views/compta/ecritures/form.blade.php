@@ -41,7 +41,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('date_emission', 'Date émission', array ('class' => '')) }}
 		{{ Form::text('date_emission', F::dateSaisie($ecriture->date_emission), array ('class' => 'calendrier')) }}
 
-		<br /><a href="" class="bouton">Aujourd'hui</a>
+		<br /><div class="btn btn-date" OnClick="javascript:aujourdhuiEmission();">Aujourd'hui</div>
 	</div>
 
 	<!-- Date valeur -->
@@ -49,13 +49,13 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{ Form::label('date_valeur', 'Date de valeur', array ('class' => '')) }}
 		{{ Form::text('date_valeur', F::dateSaisie($ecriture->date_valeur), array ('class' => 'calendrier')) }}
 
-		<br /><a href="" class="bouton">Aujourd'hui</a>
+		<br /><div class="btn btn-date" OnClick="javascript:aujourdhuiValeur();">Aujourd'hui</div>
 	</div>
 
 	<div class="input">
 		<!-- Montant -->
 		{{ Form::label('montant', 'Montant', array ('class' => '')) }}
-		{{ Form::text('montant', $ecriture->montant, array ('class' => '')) }}
+		{{ Form::text('montant', F::nbre($ecriture->montant), array ('class' => '')) }}
 
 		<!-- Signe -->
 		@foreach($list_radios as $signes => $signe)
@@ -107,7 +107,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{Form::select('compte_id', $list['compte'], $ecriture->type_id, array ('class' => 'input-long nobr', 'id' => 'compte_id_actif')) }}
 
 		<input id="desactive_compte" value="Désactiver ce compte" type="button" class="invisible" 
-		onclick = "modificationCompte('{{URL::action('CompteController@updateOne')}}', 0 )">
+		onclick = "modificationCompte('{{URL::action('CompteController@updateActif')}}', 0 )">
 		<span id="span_compte_activation" class="invisible"> Attention : après désactivation bien penser à réattribuer un compte.</span>
 
 	</div>
@@ -123,7 +123,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<br />{{Form::select('compte_activation', $list['compte_activation'], '0', array ('class' => 'input-long', 'id' => 'compte_activation')) }}
 
 		<input value="Activer ce compte" type="button" class="btn btn-small btn-success"
-		onclick = "modificationCompte('{{URL::action('CompteController@updateOne')}}', 1 )">
+		onclick = "modificationCompte('{{URL::action('CompteController@updateActif')}}', 1 )">
 	</div>
 </fieldset>
 

@@ -56,6 +56,15 @@ $head = array(
 			<th class="{{$th_class}}" id="{{$key}}" onClick="javascript:tri('{{Request::url()}}', {{$key}});">{{$value}}</th>
 
 			@endforeach
+			<th class="icone">
+				Edit
+			</th>
+			<th class="icone">
+				Dupli
+			</th>
+			<th class="icone">
+				Liée
+			</th>
 		</thead>
 
 		<tbody>
@@ -83,12 +92,15 @@ $head = array(
 					— {{ $ecriture->libelle_detail }}
 					@endif
 				</td>
-				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::insecable($ecriture->montant) }}</td>
+				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::nbre_insec($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
 				<td>{{ F::dateCourteNb($ecriture->created_at) }}</td>
 				<td>{{ F::dateCourteNb($ecriture->updated_at) }}</td>
 				<td>
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
+				</td>
+				<td>
+					<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
 				</td>
 				<td>
 					@if ($ecriture->ecriture2)
@@ -102,7 +114,7 @@ $head = array(
 	</table>
 
 	Écritures {{ $ecritures->getFrom() }} à {{ $ecritures->getTo() }} sur un total de {{ $ecritures->getTotal() }}, réparties sur {{ $ecritures->getLastPage() }} pages.
-	{{ $ecritures->links() }}
+	{{ $ecritures->appends(array('tri_sur' => $tri_sur, 'sens_tri' => $sens_tri))->links() }}
 	Le réglage par défaut est de {{PAR_PAGE}} écritures par page.
 	<br />Vous pouvez temporairement changer cette valeur ici : 
 

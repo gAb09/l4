@@ -1,5 +1,12 @@
 <?php
 
+Route::get('tost', function()
+{
+	// return 'login';
+	return View::make('tost')
+	;
+});
+
 
 Route::get('compte/{id}', function($id)
 {
@@ -163,6 +170,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	/*----------------------  Écritures  ----------------------------------*/
 	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
 	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@index'));
+	Route::get('banque/dupli/{banque}', array('as' => 'dupli', 'uses' => 'EcritureController@duplicate'));
 	Route::resource('ecritures', 'EcritureController');
 
 	/*----------------------  Types  ----------------------------------*/
@@ -172,7 +180,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	Route::get('comptes/freres', 'CompteController@freres');
 	Route::get('comptes/{id?}/freres', 'CompteController@freres');
 	Route::get('comptes/classe/{root?}', 'CompteController@index');
-	Route::any('comptes/updateOne', array('as' => 'compta.comptes.updateOne', 'uses' => 'CompteController@updateOne'));
+	Route::any('comptes/updateactif', array('as' => 'compta.comptes.updateActif', 'uses' => 'CompteController@updateActif'));
 	Route::resource('comptes', 'CompteController');
 
 	/*----------------------  Banques  ----------------------------------*/

@@ -67,9 +67,11 @@
 
 	<tbody class="replie" id="corps{{$ecriture->mois_valeur}}">
 		<?php $prev_mois = $ecriture->mois_valeur ?>
+	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('compta/pointage/row')
 		@else
 
+	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('compta/pointage/row')
 		@endif
 		@endforeach

@@ -22,7 +22,7 @@ class Ecriture extends Eloquent {
 		'justificatif' => CREATE_FORM_DEFAUT_TXT_JUSTIF,
 		'compte_id' => 0,
 		'double_flag' => false,
-	);
+		);
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -66,10 +66,11 @@ class Ecriture extends Eloquent {
 
 
 	/* —————————  ACCESSORS  —————————————————*/
-	public function getMontantAttribute($value)
-	{
-		return F::nbre($value);
-	}
+	// public function getMontantAttribute($value)
+	// {
+	// 	$value = F::nbre($value);
+	// 	return $value;
+	// }
 
 
 

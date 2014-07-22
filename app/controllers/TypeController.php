@@ -68,7 +68,9 @@ class TypeController extends BaseController {
 
 		$item->fill(Input::except('_token', '_method'));
 
-		$validate = $this->validateur->validate(Input::all());
+		$rules = array('nom' => 'unique:types,nom,'.$id.'|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM');
+
+		$validate = $this->validateur->validate(Input::all(), $rules);
 
 		if($validate === true) 
 		{

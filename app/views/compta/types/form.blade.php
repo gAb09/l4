@@ -32,6 +32,7 @@ Choisir si ce type d’écriture devra requérir un justificatif.
 	{{ Form::text('sep_justif', trim($type->sep_justif), array ('class' => '')) }}
 	Choisir le(s) caractère(s) ou le texte de séparation. Cela séparera “type” et “justificatif” dans les différentes listes et vues
 	<hr />
+</div>
 
 @section('script')
 <script src="/assets/js/types.js">

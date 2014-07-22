@@ -57,6 +57,15 @@ style="font-size:1.1em">Ajouter une écriture</a>
 		<th>
 			Compte
 		</th>
+		<th class="icone">
+			Edit
+		</th>
+		<th class="icone">
+			Dupli
+		</th>
+		<th class="icone">
+			Liée
+		</th>
 	</thead>
 
 	<tbody class="replie" id="corps{{$ecriture->mois_emission}}">

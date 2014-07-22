@@ -21,7 +21,7 @@ class RecDepController extends BaseController {
 
 		/* Si l'édition d’une écriture est demandée depuis cette page, 
 		il faut passer (via la session) à EcritureController@update pour la redirection */
-		Session::put('page_depart', Request::path());
+		Session::put('page_depart', Request::getUri());
 
 		// Récupérer la collection d'écriture pour la banque demandée
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', $id)->orderBy('date_emission')->get();

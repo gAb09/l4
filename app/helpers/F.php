@@ -6,12 +6,15 @@ class F{
 
 // Les nombres
 	public static function nbre($nbre){
-		return number_format($nbre, 2, ',', ' '); // renvoie 1 234,56
+		$nbre = number_format($nbre, 2, ',', ' '); // renvoie 1 234,56
+		return $nbre;
 	}
 
-	public static function insecable($nbre){
-		return str_replace(' ', '&nbsp;', $nbre); 
+	public static function nbre_insec($nbre){
+		$nbre = number_format($nbre, 2, ',', html_entity_decode("&nbsp;")); // renvoie 1 234,56
+		return $nbre;
 	}
+
 
 // Les dates
 
