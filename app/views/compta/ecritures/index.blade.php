@@ -56,6 +56,15 @@ $head = array(
 			<th class="{{$th_class}}" id="{{$key}}" onClick="javascript:tri('{{Request::url()}}', {{$key}});">{{$value}}</th>
 
 			@endforeach
+			<th class="icone">
+				Edit
+			</th>
+			<th class="icone">
+				Dupli
+			</th>
+			<th class="icone">
+				Liée
+			</th>
 		</thead>
 
 		<tbody>
@@ -91,7 +100,7 @@ $head = array(
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
 				<td>
-					<a class="iconemedium delete" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
+					<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
 				</td>
 				<td>
 					@if ($ecriture->ecriture2)
