@@ -441,28 +441,30 @@ div.classeRacine {
 /* Compte type PCO*/
 .pco {
     color: #A11;
-/*    margin-bottom: 0px;
-*/}
-
-/* Etats des écritures */
-.st_releve{
-    background-color: rgba(250, 250, 250, 0.1);
 }
 
-.st_www{
-    background-color: rgba(250, 250, 250, 0.1);
-    color:#6d4d00;
+
+/* Etats des écritures */
+
+.st_prev{
+    background-color: #d8b9a2;
+    color:#8d6e57;
 }
 
 .st_emise{
-    background-color: rgba(110, 50, 50, 0.15);
-    color:#6d4d00;
+    background-color: #DDE5C5;
+    color:#8d6e57;
 }
 
-.st_prev{
-    background-color: rgba(200, 50, 50, 0.4);
-    color:#6d4d00;
+.st_www{
+    color:#8d6e57;
 }
+
+/*.st_releve{
+}
+*/
+
+
 
 /* Compte actif */
 div.compte.actif{

@@ -121,6 +121,7 @@ class CompteController extends BaseController {
 
 		public function update($id)
 		{
+			// dd(Input::all());
 			$item = Compte::FindOrFail($id);
 
 			/* Fournir une modification aux règles au validateur */
@@ -131,8 +132,10 @@ class CompteController extends BaseController {
 
 			if($validate === true) 
 			{
-				$item->fill(Input::except('_token', '_method', 'pere', 'position'));
 
+				$item->fill(Input::except('_token', '_method', 'pere', 'position'), array('actif' => '2'));
+$actif = (Input::Has('actif')) ? Input::get('actif') : null ;
+$item->setAttribute('actif', $actif);
 				$item->save();
 
 				$pere=Compte::where('id', Input::get('pere'))->first();
