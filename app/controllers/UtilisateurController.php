@@ -70,7 +70,7 @@ class UtilisateurController extends \BaseController {
 	public function create() {
 		// return 'formulaire de création d\'un nouvel utilisateur'; // CTRL
 
-		return View::make('guest/inscription_form')
+		return View::make('admin/utilisateurs/create')
 		;
 	}
 
@@ -81,29 +81,33 @@ class UtilisateurController extends \BaseController {
 	 */
 	public function store() {
 		// return 'Enregistrement new utilisateur'; // CTRL 
+// dd(Input::all());
 
 		$validate = $this->validateur->validate(Input::all());
-
-		if($validate === false) {
-			
 // dd($validate);
-			return Redirect::back()
-			->withErrors($validate)
-			->withInput(Input::all())
-			;
 
-		} else {
+		if($validate === true) {
+			
+// dd('OK');
 
 
 			$utilisateur = Utilisateur::create(array(
 				'login' => Input::get('login'),
-				'password' => Hash::Make(Input::get('password')),
+				'password' => Hash::Make(Input::get('mdp')),
 				'mail' => Input::get('mail')
 				));
 
 
 			Session::flash('success', 'l’utilisateur "'.Input::get('login').'" a bien été créé');              
 			return Redirect::back();
+
+		} else {
+
+// dd('pas OK');
+			return Redirect::back()
+			->withErrors($validate)
+			->withInput(Input::all())
+			;
 		}
 }
 

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>
 		@section('titre')
-		{{ Menu::where('nom_sys', Request::segment(1))->get()[0]->etiquette }}
+		{{ isset($titre_page) ? $titre_page : Menu::where('nom_sys', Request::segment(1))->get()[0]->etiquette }}
 		@show
 
 	</title>

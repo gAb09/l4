@@ -1,5 +1,6 @@
 <?php
 // aFa  décomposer en plusieurs viewcomposer ?
+
 /* Composition du menu principal */
 View::composer('compta/layout', function($view) {
 	

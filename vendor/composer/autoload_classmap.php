@@ -42,6 +42,7 @@ return array(
     'Lib\\Validations\\ValidationMenu' => $baseDir . '/app/validations/ValidationMenu.php',
     'Lib\\Validations\\ValidationStatut' => $baseDir . '/app/validations/ValidationStatut.php',
     'Lib\\Validations\\ValidationType' => $baseDir . '/app/validations/ValidationType.php',
+    'Lib\\Validations\\ValidationUtilisateur' => $baseDir . '/app/validations/ValidationUtilisateur.php',
     'Menu' => $baseDir . '/app/models/Menu.php',
     'MenuController' => $baseDir . '/app/controllers/MenuController.php',
     'MigrationCartalystSentryInstallGroups' => $vendorDir . '/cartalyst/sentry/src/migrations/2012_12_06_225929_migration_cartalyst_sentry_install_groups.php',
