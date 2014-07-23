@@ -28,14 +28,14 @@
 
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 1)
-		<?php $solde = $solde - $ecriture->montant; ?>
+
 		{{ F::nbre_insec($ecriture->montant) }}
 		@endif
 	</td>
 
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 2)
-		<?php $solde = $solde + $ecriture->montant; ?>
+
 		{{ F::nbre_insec($ecriture->montant) }}
 		@endif
 	</td>

@@ -66,11 +66,12 @@
 
 
 	<tbody class="replie" id="corps{{$ecriture->mois_valeur}}">
+		DIFF
 		<?php $prev_mois = $ecriture->mois_valeur ?>
 	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('compta/pointage/row')
 		@else
-
+IDEM
 	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('compta/pointage/row')
 		@endif
