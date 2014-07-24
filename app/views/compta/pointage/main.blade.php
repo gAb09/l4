@@ -92,17 +92,6 @@
 
 @section('script')
 
-<script type="text/javascript">
-
-<?php
-if( $mois = Session::get('mois') ){
-echo 'var mois = '.$mois.';';
-}else{
-echo 'var mois = "";';
-}
-?>
-
-</script>
 
 <script src="/assets/js/pointage.js">
 </script>
