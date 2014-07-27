@@ -68,7 +68,7 @@ class Ecriture extends Eloquent {
 	/* —————————  ACCESSORS  —————————————————*/
 	// public function getMontantAttribute($value)
 	// {
-	// 	$value = F::nbre($value);
+	// 	$value = Nbre::francais($value);
 	// 	return $value;
 	// }
 
@@ -79,7 +79,7 @@ class Ecriture extends Eloquent {
 	public function setMontantAttribute($value)
 	{
 
-		$value = F::montantFtoPhp($value);
+		$value = Nbre::sauv($value);
 		$this->attributes['montant'] = $value;
 	}
 

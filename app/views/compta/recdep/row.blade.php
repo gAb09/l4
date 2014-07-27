@@ -14,12 +14,12 @@
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 1)
-				{{ F::nbre_insec($ecriture->montant) }}
+				{{ Nbre::francais_insec($ecriture->montant) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->signe_id == 2)
-				{{ F::nbre_insec($ecriture->montant) }}
+				{{ Nbre::francais_insec($ecriture->montant) }}
 				@endif
 			</td>
 			<td>

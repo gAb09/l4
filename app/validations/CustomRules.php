@@ -61,7 +61,7 @@ Validator::extend('afteremission', function($field, $value, $params)
 
 Validator::extend('fnumeric', function($field, $value, $params)
 {
-	$value = F::montantFtoPhp($value);
+	$value = Nbre::sauv($value);
 	if (!is_numeric($value)) {
 		return false;
 	}else{return true;}
@@ -70,7 +70,7 @@ Validator::extend('fnumeric', function($field, $value, $params)
 
 Validator::extend('notnull', function($field, $value, $params)
 {
-	$value = F::montantFtoPhp($value);
+	$value = Nbre::sauv($value);
 	settype($value, 'float');
 	if ($value == 0) {
 		return false;
