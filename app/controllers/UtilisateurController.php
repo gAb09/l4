@@ -109,7 +109,7 @@ class UtilisateurController extends \BaseController {
 			->withInput(Input::all())
 			;
 		}
-}
+	}
 
 
 	/**
@@ -124,7 +124,12 @@ class UtilisateurController extends \BaseController {
 
 
 	public function updatemdp($id) {
-		return 'enregistrement des modifications du MOT DE pASSE de l’utilisateur n°' . $id;
+		// return 'enregistrement des modifications du MOT DE pASSE de l’utilisateur n°' . $id;
+
+		$utilisateur = Utilisateur::find($id);
+		$utilisateur->password = Hash::Make(Input::get('new_mdp'));
+		$utilisateur->save();
+		return Redirect::back();
 	}
 
 

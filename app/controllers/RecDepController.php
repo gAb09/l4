@@ -37,7 +37,7 @@ class RecDepController extends BaseController {
 
 		// Créer la propriété $mois_emission pour que la vue puisse classer par mois
 		$ecritures->map(function($ecriture, $ecritures){
-			$ecriture->mois_emission = F::dateClass($ecriture->date_emission);
+			$ecriture->mois_emission = Date::classAnMois($ecriture->date_emission);
 			return $ecritures;
 		});
 

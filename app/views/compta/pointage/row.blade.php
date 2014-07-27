@@ -15,7 +15,7 @@
 	
 	<td>
 		{{ $ecriture->mois  }}
-		{{ F::dateCourteNb($ecriture->date_valeur) }}
+		{{ Date::courte($ecriture->date_valeur) }}
 	</td>
 
 	<td>
@@ -68,7 +68,7 @@
 		</td>
 
 		<td>
-			{{ F::dateCourteNb($ecriture->date_emission) }}
+			{{ Date::courte($ecriture->date_emission) }}
 		</td>
 
 		<td>

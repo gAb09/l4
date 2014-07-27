@@ -41,8 +41,8 @@
 {{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 {{ Form::close() }}
 
-<p>Créée le {{ F::dateCourteNb($ecriture->created_at) }}<br />
-	Modifiée le {{ F::dateCourteNb($ecriture->updated_at) }}</p>
+<p>Créée le {{ Date::courte($ecriture->created_at) }}<br />
+	Modifiée le {{ Date::courte($ecriture->updated_at) }}</p>
 	@stop
 
 	@section('compta/footer')

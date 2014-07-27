@@ -51,7 +51,7 @@ Route::post('identification', 'IdentificationController@identification');
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard / Prefix "dash"
+| Dashboard / Prefix "dashboard"
 |--------------------------------------------------------------------------*/
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function() 
@@ -83,9 +83,9 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function()
 		;
 	});
 
-	Route::resource('user', 'UtilisateurController');
 	Route::put('user/mdp/{id?}', 'UtilisateurController@updatemdp');
-});  // Fin de groupe prefix admin
+
+});  // Fin de groupe Prefix "dashboard"
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +124,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 	/*----------------------  Statuts  ----------------------------------*/
 	Route::resource('statuts', 'StatutController');
+	
+	/*----------------------  Utilisateurs  ----------------------------------*/
+	Route::resource('user', 'UtilisateurController');
 	
 });  // Fin de groupe prefix admin
 

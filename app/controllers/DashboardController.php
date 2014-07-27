@@ -101,11 +101,6 @@ class DashboardController extends \BaseController {
 	}
 
 
-	public function updatemdp($id) {
-		return 'enregistrement des modifications du MOT DE pASSE de l’utilisateur n°' . $id;
-	}
-
-
 	/**
 	 * Remove the specified resource from storage.
 	 *

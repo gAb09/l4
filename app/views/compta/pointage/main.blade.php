@@ -28,7 +28,7 @@
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->mois_valeur}}" onclick="javascript:volet(this);">
-		{{ F::dateUcMoisAnneeNb($ecriture->date_valeur) }}
+		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_valeur}}">
@@ -96,11 +96,17 @@
 
 <?php
 if( $mois = Session::get('mois') ){
-echo 'var mois = '.$mois.';';
+echo 'var mois = "'.$mois.'";';
 }else{
 echo 'var mois = "";';
 }
 ?>
+	if (mois) {
+		var curhead = document.getElementById("corps"+mois);
+		var curcorps = document.getElementById("tetiere"+mois);
+		curhead.className = "";
+		curcorps.className = "";
+	}
 
 </script>
 

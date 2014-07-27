@@ -2,16 +2,16 @@
 
 @section('contenu')
 <div>
-{{ Form::open(['method' => 'put', 'action' => ['UtilisateurController@updatemdp', 'Auth::user()->id'] ] ) }}
+{{ Form::open(['method' => 'put', 'action' => ['UtilisateurController@updatemdp', Auth::user()->id] ] ) }}
 
-	{{ Form::label('password', 'Ancien mot de passe', array ('class' => '')) }}
-	{{ Form::text('password', null, array ('class' => '')) }}
+	{{ Form::label('mdp', 'Ancien mot de passe', array ('class' => '')) }}
+	{{ Form::text('mdp', null, array ('class' => '')) }}
 
-	{{ Form::label('newpassword', 'Nouveau mot de passe', array ('class' => '')) }}
-	{{ Form::text('newpassword', null, array ('class' => '')) }}
+	{{ Form::label('new_mdp', 'Nouveau mot de passe', array ('class' => '')) }}
+	{{ Form::text('new_mdp', null, array ('class' => '')) }}
 
-	{{ Form::label('newpasswordconf', 'Confirmation du nouveau mot de passe', array ('class' => '')) }}
-	{{ Form::text('newpasswordconf', null, array ('class' => '')) }}
+	{{ Form::label('new_mdp_conf', 'Confirmation du nouveau mot de passe', array ('class' => '')) }}
+	{{ Form::text('new_mdp_conf', null, array ('class' => '')) }}
 
 	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}

@@ -55,7 +55,7 @@ return array(
 		'dev' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'test',
+			'database'  => 'test_treso',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
@@ -66,7 +66,7 @@ return array(
 		'prod' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'comptagb',
+			'database'  => 'bruno_compta',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

@@ -26,7 +26,7 @@ class PointageController extends BaseController {
 
 		// Créer la propriété $date_valeur pour que la vue puisse classer par mois
 		$ecritures->map(function($ecriture, $ecritures){
-			$ecriture->mois_valeur = F::dateClass($ecriture->date_valeur);
+			$ecriture->mois_valeur = Date::classAnMois($ecriture->date_valeur);
 			return $ecritures;
 		});
 

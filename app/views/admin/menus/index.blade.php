@@ -47,7 +47,8 @@
 				<th>Rang</th>
 				<th>Route</th>
 				<th>Description</th>
-				<th>ID - Nom système</th>
+				<th>ID</th>
+				<th>Nom système</th>
 				<th>Modifier</th>
 			</thead>
 
@@ -76,7 +77,10 @@
 					{{ $item->description }}
 				</td>
 				<td>
-					{{ $item->id }} - {{ $item->nom_sys }}
+					{{ $item->id }}
+				</td>
+				<td>
+					{{ $item->nom_sys }}
 				</td>
 				<td>
 					<a  class="iconemedium edit" href="{{ URL::to('admin/menus/'.$item->id.'/edit') }}">
@@ -111,7 +115,10 @@
 					{{ $desc->description }}
 				</td>
 				<td>
-					{{ $desc->id }} - {{ $desc->nom_sys }}
+					{{ $desc->id }}
+				</td>
+				<td>
+					{{ $desc->nom_sys }}
 				</td>
 				<td>
 					<a  class="iconemedium edit" href="{{ URL::to('admin/menus/'.$desc->id.'/edit') }}">

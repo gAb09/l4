@@ -29,7 +29,7 @@ style="font-size:1.1em">Ajouter une écriture</a>
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->date_emission}}" onclick="javascript:volet(this);">
-		{{ F::dateUcMoisAnneeNb($ecriture->date_emission) }}
+		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_emission)) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_emission}}">
@@ -102,6 +102,12 @@ echo 'var mois = '.$mois.';';
 echo 'var mois = "";';
 }
 ?>
+	if (mois) {
+		var curhead = document.getElementById("corps"+mois);
+		var curcorps = document.getElementById("tetiere"+mois);
+		curhead.className = "";
+		curcorps.className = "";
+	}
 
 </script>
 

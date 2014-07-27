@@ -72,8 +72,8 @@ $head = array(
 			<tr id ="{{$ecriture->id}}" class="surlignage"
 				ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 				<td>{{ $ecriture->id }}</td>
-				<td>{{ F::dateCourteNb($ecriture->date_emission) }}</td>
-				<td>{{ F::dateCourteNb($ecriture->date_valeur) }}</td>
+				<td>{{ Date::courte($ecriture->date_emission) }}</td>
+				<td>{{ Date::courte($ecriture->date_valeur) }}</td>
 				<td>{{ $ecriture->type->nom}}
 					@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 				</td>
@@ -94,8 +94,8 @@ $head = array(
 				</td>
 				<td class="{{ $ecriture->signe->nom_sys }}">{{ F::nbre_insec($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
-				<td>{{ F::dateCourteNb($ecriture->created_at) }}</td>
-				<td>{{ F::dateCourteNb($ecriture->updated_at) }}</td>
+				<td>{{ Date::courte($ecriture->created_at) }}</td>
+				<td>{{ Date::courte($ecriture->updated_at) }}</td>
 				<td>
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>
