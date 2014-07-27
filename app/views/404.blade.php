@@ -1,4 +1,4 @@
-@extends('compta/layout')
+@extends('tresorerie/layout')
 
 @section('titre')
 @parent
