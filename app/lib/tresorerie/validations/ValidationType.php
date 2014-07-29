@@ -3,7 +3,6 @@
 class ValidationType extends ValidationBase
 {
 
-
 	protected $rules = array(
 		'nom' => 'unique:types,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
 		'description' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION.',
