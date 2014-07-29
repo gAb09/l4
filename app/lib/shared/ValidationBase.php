@@ -49,19 +49,6 @@ abstract class ValidationBase implements ValidationInterface
         }
     }
 
-    protected function parseParametersForConstantes($parameters)
-    {
-        $parameters = str_getcsv($parameters);
-
-        foreach ($parameters as $key => $value) {
-            if (defined($value))
-            {
-                $parameters[$key] = constant($value);
-            }
-        }
-        return $parameters;
-    }
-
     protected function parseRuleForConstantes($rule)
     {
         $parameters = array();
@@ -75,6 +62,19 @@ abstract class ValidationBase implements ValidationInterface
         }
 
         return $rule;
+    }
+
+    protected function parseParametersForConstantes($parameters)
+    {
+        $parameters = str_getcsv($parameters);
+
+        foreach ($parameters as $key => $value) {
+            if (defined($value))
+            {
+                $parameters[$key] = constant($value);
+            }
+        }
+        return $parameters;
     }
 
 }

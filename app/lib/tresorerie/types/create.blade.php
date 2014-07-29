@@ -1,4 +1,4 @@
-@extends('tresorerie/layout')
+@extends('tresorerie/views/layout')
 
 @section('titre')
 @parent
@@ -21,7 +21,7 @@
 
 {{ Form::open(['method' => 'post', 'action' => 'TypeController@store']) }}
 
-@include('tresorerie/types/form')
+@include('tresorerie/views/types/form')
 
 <br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}

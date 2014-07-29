@@ -1,4 +1,4 @@
-@extends('tresorerie/layout')
+@extends('tresorerie/views/layout')
 
 @section('titre')
 @parent
@@ -22,7 +22,7 @@
 
 {{ Form::open(['method' => 'PUT', 'action' => ['TypeController@update', $type->id]]) }}
 
-@include('tresorerie/types/form')
+@include('tresorerie/views/types/form')
 
 <br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}

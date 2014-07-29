@@ -148,7 +148,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 	});
 
 	Route::get('statuts', function(){
-		return View::make('tresorerie/statuts/visu');
+		return View::make('tresorerie/views/statuts/visu');
 	});
 
 	Route::get('tost', 'TostController@tost');
@@ -164,7 +164,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 	/*----------------------  Prévisionnel  ----------------------------------*/
 	Route::get('previsionnel', function(){
-		return View::make('tresorerie/previsionnel/index');
+		return View::make('tresorerie/views/previsionnel/index');
 	});
 
 	/*----------------------  Écritures  ----------------------------------*/
