@@ -16,14 +16,15 @@ class UtilisateurController extends \BaseController {
 
 
 	public function identification() {
-		$validate = $this->validateur->validate(Input::all());
+
+		$validation = $this->validateur->validate(Input::all(), $modes);
 
 
-		if($validate !== true) {
+		if($validation !== true) {
 			
-// dd($validate);
+// dd($validation);
 			return Redirect::to('login')
-			->withErrors($validate)
+			->withErrors($validation)
 			->withInput(Input::all())
 			;
 

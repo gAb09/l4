@@ -37,7 +37,9 @@ class BanqueController extends BaseController {
 	{
 		// dd(Input::except('_token'));
 
-		$validate = $this->validateur->validate(Input::all());
+		$modes['store'] = array();
+
+		$validate = $this->validateur->validate(Input::all(), $modes);
 
 		if($validate === true) 
 		{
@@ -56,7 +58,6 @@ class BanqueController extends BaseController {
 	public function edit($id)
 	{
 		$banque = Banque::FindOrFail($id);
-
 		return View::Make('tresorerie.views.banques.edit')->with(compact('banque'));
 	}
 
@@ -64,12 +65,15 @@ class BanqueController extends BaseController {
 
 	public function update($id)
 	{
+
+
 		$item = Banque::FindOrFail($id);
 
 		/* Fournir une modification des règles au validateur */
-		$rules = array('nom' => 'unique:banques,nom,'.$id.'|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM');
 
-		$validate = $this->validateur->validate(Input::all(), $rules);
+		$modes['update'] = array('id' => $id);
+
+		$validate = $this->validateur->validate(Input::all(), $modes);
 
 		if($validate === true) 
 		{

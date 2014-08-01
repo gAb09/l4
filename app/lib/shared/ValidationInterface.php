@@ -2,6 +2,6 @@
  
 interface ValidationInterface {
  
-    public function validate(array $inputs, $rules_sup = array());
+    public function validate(array $inputs, array $modes);
  
 }
