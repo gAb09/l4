@@ -44,7 +44,7 @@ abstract class ValidationBase implements ValidationInterface
 // dd($rules);
         // Faire la validation via les fonctions de Laravel
         $v = $this->validator->make($inputs, $rules, $this->messages);
-
+dd($v);
         if ($v->passes()) {
             return true;
         } else {
