@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'dev',
+	'default' => 'bruno',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,7 +63,7 @@ return array(
 			'prefix'    => '',
 		),
 
-		'prod' => array(
+		'bruno' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'bruno_compta',
