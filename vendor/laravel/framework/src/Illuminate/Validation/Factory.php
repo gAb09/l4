@@ -66,6 +66,8 @@ class Factory {
 	{
 		$this->container = $container;
 		$this->translator = $translator;
+		var_dump('Factory instancié');
+		// var_dump($this);
 	}
 
 	/**

@@ -2,6 +2,7 @@
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lib\Validations\ValidationBanque;
 
+
 class BanqueController extends BaseController {
 
 	protected $validateur;
@@ -10,6 +11,7 @@ class BanqueController extends BaseController {
 	public function __construct(ValidationBanque $validateur)
 	{
 		$this->validateur = $validateur;
+		// dd($this->validateur);  // CTRL
 	}
 
 
@@ -39,9 +41,9 @@ class BanqueController extends BaseController {
 
 		$modes['store'] = array();
 
-		$validate = $this->validateur->validate(Input::all(), $modes);
+		$validation = $this->validateur->valider(Input::all(), $modes);
 
-		if($validate === true) 
+		if($validation === true) 
 		{
 			// return 'OK'; // CTRL
 			$banque = new Banque;
@@ -49,7 +51,7 @@ class BanqueController extends BaseController {
 			Session::flash('success', 'La banque "'.Input::get('nom').'" a bien été crée');              
 			return Redirect::action('BanqueController@index');
 		} else {
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
 		}
 	}
 
@@ -69,15 +71,11 @@ class BanqueController extends BaseController {
 
 		$item = Banque::FindOrFail($id);
 
-		/* Fournir une modification des règles au validateur */
+		$validation = $this->validateur->valider(Input::all(), $id);
 
-		$modes['update'] = array('id' => $id);
-
-		$validate = $this->validateur->validate(Input::all(), $modes);
-
-		if($validate === true) 
+		if($validation === true) 
 		{
-			// return 'OK'; // CTRL
+			return 'OK'; // CTRL
 
 			$item->fill(Input::except('_token', '_method'));
 			$item->save();
@@ -87,7 +85,7 @@ class BanqueController extends BaseController {
 			return Redirect::action('BanqueController@index');
 		} else {
 			// return 'fails'; // CTRL
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
 		}
 
 	}

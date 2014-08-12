@@ -1,117 +1,58 @@
 <?php namespace Lib\Validations;
+use Illuminate\Validation\Factory as Factory;
+use Illuminate\Validation\Validator as Validator;
+use Symfony\Component\Translation\TranslatorInterface;
 
-use Illuminate\Validation\Factory as Validator;
-
-
-/* aFa Voir pourquoi le snippet suivant eest nécessaire par rapport au tuto de BestMomo 
-http://laravel.sl-creation.org/laravel-4-chapitre-32-organiser-son-code/*/
 \App::bind('Symfony\Component\Translation\TranslatorInterface', function($app) {
-   return $app['translator']; 
-});
+           return $app['translator'];
+       });
 
-abstract class ValidationBase implements ValidationInterface
+abstract class ValidationBase extends Validator implements ValidationInterface
 {
 
-    protected $liste_base;
+    protected $rules;
 
     protected $messages;
 
-    protected $validator;
+    protected $factory;
 
-    public function __construct(Validator $validator)
-    {
-        /* aFa Voir pourquoi le snippet suivant est nécessaire par rapport au tuto de BestMomo */
-        $this->validator = \App::make('validator'); 
+    public function __construct(Factory $factory){
+        $this->factory = $factory;
+       //  $this->rules = $this->explodeRules($this->rules);
+       // var_dump('validator instancié');
+
     }
+
 
 
     /**
      * Effectuer les validations de formulaires.
      *
      * @param  array  $input
-     * @param  array  $modes
+     * @param  array  $modes ( => (Mode ( ParamDyn => Valeur ))
      * Tableau indexés contenant des $mode = ($param => $value)
      * @return true|$messages
      */
-    public function validate(array $inputs, array $modes)
+    public function valider(array $input)
     {
-        var_dump('assemblerListes');
-        // Composer la liste finale en fonction du(des) mode(s)
-        $rules = $this->assemblerListes($modes);
-
+$this->data = $input;
         // Parser chaque règle pour y détecter des constantes et les remplacer par leur valeur
-        $rules = $this->parserListePourConstantes($rules);
-// dd($rules);
-        // Faire la validation via les fonctions de Laravel
-        $v = $this->validator->make($inputs, $rules, $this->messages);
-// dd($v);
-        if ($v->passes()) {
+        $this->rules = $this->parserListePourConstantes($this->rules);
+
+$validateur = \Validator::make($this->data, $this->rules, $this->messages);
+        // Faire la validation via Laravel
+        // dd('valider'); // CTRL
+        // dd($this->rules);
+        dd($this->messages);
+        // dd($validateur);
+
+        if ($validateur->passes()) {
             return true;
         } else {
-            return $v->messages();
+            return $validateur->messages();
         }
     }
 
-
-    /**
-     * Composer la liste finale.
-     * À partir de la liste de base, ajouter les listes de règles de chaque mode.
-     *
-     * @param  array  $modes
-     * @return array    $liste
-     */
-    private function assemblerListes($modes)
-    {
-        // D'abord la liste de base
-        $liste = $this->liste_base;
-
-        // Obtenir la liste de règles pour chaque mode et l'ajouter à la liste de base
-        if (!is_null($modes)) {
-            foreach ($modes as $mode => $params) {
-
-        // Composer le nom de la liste spécifique
-                $nom_liste = "liste_{$mode}";
-
-        // Obtenir la liste spécifique et l'ajouter à la liste globale
-                $liste = $liste + $this->getListeDuMode($nom_liste, $params);
-            }
-        }
-        return $liste;
-    }
-
-
-    /**
-     * Pour chaque mode, composer le nom de sa liste spécifique,
-     * et le cas échéant remplacer les paramètres par leur valeur.
-     *
-     * @param  string|array  $mode
-     * 
-     * @return array    $liste
-     */
-    private function getListeDuMode($nom_liste, $params)
-    {
-        $liste_mode = $this->$nom_liste;
-
-        foreach ($liste_mode as $attr => $ligne) {
-            $liste_mode[$attr] = $this->parserRules($ligne, $params); 
-        }
-        return $liste_mode;
-
-    }
-
-    /**
-     * Parser les règles pour y détecter d'éventuelles constantes.
-     *
-     * @param  array  $rules
-     * 
-     * @return array  $rules
-     */
-    private function parserRules($ligne, $params)
-    {
-        foreach ($params as $parametre => $valeur) {
-            $ligne = str_replace("<$parametre>", $valeur, $ligne);
-        }
-        return $ligne;  }
 
 
     /**
@@ -121,43 +62,41 @@ abstract class ValidationBase implements ValidationInterface
      * 
      * @return array  $rules
      */
-    private function parserListePourConstantes($rules)
+    private function parserListePourConstantes(&$rules)
     {
-        // // dd($rules);
-        foreach ($rules as $key => &$rule)
+        // echo 'parserListePourConstantes';var_dump($rules); // CTRL
+        foreach ($rules as $attribut => $lignes)
         {
-            $rule = (is_string($rule)) ? explode('|', $rule) : $rule;
-
-            foreach ($rule as $key => $value) {
-                $rule[$key] = $this->parseRuleForConstantes($value);
+            // var_dump($attribut);var_dump($lignes); // CTRL
+            if(is_array($lignes))
+            {
+                foreach ($lignes as $key => $ligne) {
+                    $rules[$attribut][$key] = $this->parseLigneForConstantes($ligne);
+                }
+            }else{
+                $rules[$attribut] = $this->parseLigneForConstantes($lignes);
             }
         }
+        // echo 'constantes remplacées';var_dump($rules); // CTRL
+
         return $rules;
     }
 
 
 
-
-
-
-
-
-
-
-
-    protected function parseRuleForConstantes($rule)
+    protected function parseLigneForConstantes($ligne)
     {
         $parameters = array();
 
-        if (strpos($rule, ':') !== false)
+        if (strpos($ligne, ':') !== false)
         {
-            list($regle, $parameters) = explode(':', $rule, 2);
+            list($regle, $parameters) = explode(':', $ligne, 2);
 
             $parameters = $this->parseParametersForConstantes($parameters);
-            $rule = $regle.':'.implode(',', $parameters);
+            $ligne = $regle.':'.implode(',', $parameters);
         }
 
-        return $rule;
+        return $ligne;
     }
 
     protected function parseParametersForConstantes($parameters)
@@ -173,6 +112,8 @@ abstract class ValidationBase implements ValidationInterface
         return $parameters;
     }
 
+// Rules [ =>   Attribut [ NomRègle => DéfinitionRègle ] ]
 
+// Messages [ => Attribut [ NomRègle => Message ] ]
 
 }
