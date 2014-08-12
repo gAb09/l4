@@ -24,7 +24,7 @@ class CompteController extends BaseController {
 	public function index($numero = null)
 	{
 		/* Assigner la liste des racines de comptes (classes) 
-		pour le tableau de sélectio des classes */
+		pour le tableau de sélection des classes */
 		$classes = Compte::roots()->get();
 		// $classes->shift(); // aFa ?? retrait du pseudocompte "indéfini" 
 
@@ -54,7 +54,7 @@ class CompteController extends BaseController {
 		  ->with('comptes', $comptes)
 		  ->with('classes', $classes);
 		}
-
+// aFa Trier par numéro ??
 
 
 		public function create()
@@ -75,13 +75,12 @@ class CompteController extends BaseController {
 		{
 			// return dd(Input::all());
 
-			$validate = $this->validateur->validate(Input::all());
+			$validation = $this->validateur->validerStore(Input::all());
 
-			if($validate === true) 
+			if($validation === true) 
 			{
-			// return 'OK'; // CTRL
 				$compte = new Compte;
-				$compte = $compte->create(Input::except('_token', 'pere', 'position'));
+				$compte = $compte->create(Input::except('_token', 'pere', 'thisid', 'position'));
 
 				$pere=Compte::where('id', Input::get('pere'))->first();
 				$frere=Compte::where('id', Input::get('position'))->first();
@@ -95,8 +94,7 @@ class CompteController extends BaseController {
 				Session::flash('success', 'Le compte "'.Input::get('libelle').'" a bien été créé');              
 				return Redirect::action('CompteController@index');
 			} else {
-			// return 'fails'; // CTRL
-				return Redirect::back()->withInput(Input::all())->withErrors($validate);
+				return Redirect::back()->withInput(Input::all())->withErrors($validation);
 			}
 		}
 
@@ -106,9 +104,9 @@ class CompteController extends BaseController {
 		public function edit($id)
 		{
 			$compte = Compte::FindOrFail($id);
+
 			/* Adapter les class css selon les valeurs de certains attributs */
 			$compte->class_pco = ($compte->pco)? 'pco' : '';
-
 
 			return View::Make('tresorerie.views.comptes.edit')
 			->with('compte', $compte)
@@ -121,19 +119,15 @@ class CompteController extends BaseController {
 
 		public function update($id)
 		{
-			// dd(Input::all());
+
 			$item = Compte::FindOrFail($id);
 
-			/* Fournir une modification aux règles au validateur */
-			// aFa créer méthode pour modifier une règle et non la supplanter
-			$rules = array('numero' => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|unique:comptes,numero,'.$id.'|digit',);
+			$validation = $this->validateur->validerUpdate(Input::all(), $id);
 
-			$validate = $this->validateur->validate(Input::except('libelle'), $rules);
-
-			if($validate === true) 
+			if($validation === true) 
 			{
 
-				$item->fill(Input::except('_token', '_method', 'pere', 'position'));
+				$item->fill(Input::except('_token', '_method', 'pere', 'thisid', 'position'));
 				$actif = (Input::Has('actif')) ? Input::get('actif') : null ;
 				$item->setAttribute('actif', $actif);
 				$item->save();
@@ -149,14 +143,13 @@ class CompteController extends BaseController {
 				Session::flash('success', 'Le compte "'.Input::get('libelle').'" a bien été modifié');              
 				return Redirect::action('CompteController@index');
 			} else {
-				return Redirect::back()->withInput(Input::all())->withErrors($validate);
+				return Redirect::back()->withInput(Input::all())->withErrors($validation);
 			}
 		}
 
 
 		public function updateActif()
 		{
-			// dd(Input::get('valeur'));
 			$item = Compte::FindOrFail(Input::get('id'));
 			$item->actif = Input::get('valeur');
 			$item->save();

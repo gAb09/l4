@@ -4,7 +4,7 @@ class ValidationType extends ValidationBase
 {
 
 	protected $rules = array(
-		'nom' => 'unique:types,nom|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
+		'nom' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_NOM',
 		'description' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_DESCRIPTION.',
 		'sep_justif' => 'required_with:req_justif|not_in:CREATE_FORM_DEFAUT_TXT_SEPARATEUR',
 		);
@@ -17,5 +17,15 @@ class ValidationType extends ValidationBase
 		'sep_justif.required_with' => 'Vous n’avez pas saisi de séparateur.',
 		'sep_justif.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Séparateur”.',
 		);
+
+	public function validerStore($inputs){
+		$this->rules['nom'] .= '|unique:types,nom';
+		return $this->valider($inputs);
+	}
+
+	public function validerUpdate($inputs, $id){
+		$this->rules['nom'] .= "|unique:types,nom,$id";
+		return $this->valider($inputs);
+	}
 
 }

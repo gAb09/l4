@@ -223,8 +223,6 @@ class Validator implements MessageProviderInterface {
 			foreach ($rules as $rule)
 			{
 				$this->validate($attribute, $rule);
-				var_dump($attribute);
-				var_dump($rule);
 			}
 		}
 

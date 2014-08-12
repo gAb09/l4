@@ -37,9 +37,9 @@ class TypeController extends BaseController {
 	public function store()
 	{
 		// dd(Input::all()); // CTRL
-		$validate = $this->validateur->validate(Input::all());
+		$validation = $this->validateur->validerStore(Input::all());
 
-		if($validate === true) 
+		if($validation === true) 
 		{
 
 			Type::create(Input::except('_token'));
@@ -48,7 +48,7 @@ class TypeController extends BaseController {
 
 			return Redirect::action('TypeController@index');
 		}else{
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
 		}
 	}
 
@@ -68,11 +68,9 @@ class TypeController extends BaseController {
 
 		$item->fill(Input::except('_token', '_method'));
 
-		$rules = array('nom' => 'unique:types,nom,'.$id.'|required|not_in:CREATE_FORM_DEFAUT_TXT_NOM');
+		$validation = $this->validateur->validerUpdate(Input::all(), $id);
 
-		$validate = $this->validateur->validate(Input::all(), $rules);
-
-		if($validate === true) 
+		if($validation === true) 
 		{
 
 			$item->save();
@@ -82,7 +80,7 @@ class TypeController extends BaseController {
 			return Redirect::action('TypeController@index');
 
 		}else{
-			return Redirect::back()->withInput(Input::all())->withErrors($validate);
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
 		}
 
 	}

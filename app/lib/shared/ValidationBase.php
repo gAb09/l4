@@ -3,11 +3,13 @@ use Illuminate\Validation\Factory as Factory;
 use Illuminate\Validation\Validator as Validator;
 use Symfony\Component\Translation\TranslatorInterface;
 
+// aFa : Voir pourquoi il faut binder le translator alors que ce n'est pas le cas dans le tuto de BestMomo
 \App::bind('Symfony\Component\Translation\TranslatorInterface', function($app) {
-           return $app['translator'];
-       });
+ return $app['translator'];
+});
 
-abstract class ValidationBase extends Validator implements ValidationInterface
+
+abstract class ValidationBase implements ValidationInterface
 {
 
     protected $rules;
@@ -18,9 +20,6 @@ abstract class ValidationBase extends Validator implements ValidationInterface
 
     public function __construct(Factory $factory){
         $this->factory = $factory;
-       //  $this->rules = $this->explodeRules($this->rules);
-       // var_dump('validator instancié');
-
     }
 
 
@@ -35,16 +34,19 @@ abstract class ValidationBase extends Validator implements ValidationInterface
      */
     public function valider(array $input)
     {
-$this->data = $input;
+        $this->data = $input;
+
         // Parser chaque règle pour y détecter des constantes et les remplacer par leur valeur
         $this->rules = $this->parserListePourConstantes($this->rules);
 
-$validateur = \Validator::make($this->data, $this->rules, $this->messages);
+        $validateur = \Validator::make($this->data, $this->rules, $this->messages);
+
         // Faire la validation via Laravel
-        // dd('valider'); // CTRL
-        // dd($this->rules);
-        dd($this->messages);
-        // dd($validateur);
+
+                                    echo "this->rules : ";var_dump($this->rules);
+                                    echo "this->messages : ";var_dump($this->messages);
+                                    // echo "validateur : ";var_dump($validateur);
+                                    // dd('valider'); // CTRL
 
         if ($validateur->passes()) {
             return true;
@@ -77,7 +79,7 @@ $validateur = \Validator::make($this->data, $this->rules, $this->messages);
                 $rules[$attribut] = $this->parseLigneForConstantes($lignes);
             }
         }
-        // echo 'constantes remplacées';var_dump($rules); // CTRL
+        echo 'constantes remplacées';var_dump($rules); // CTRL
 
         return $rules;
     }
