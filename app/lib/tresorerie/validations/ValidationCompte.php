@@ -5,10 +5,9 @@ use Illuminate\Validation\Factory;
 class ValidationCompte extends ValidationBase
 {
 	protected $rules = array(
-		"numero" => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|unique:comptes,numero,$id|digit', 
-		// aFa Si changement sur les règles de cet attribut, penser à le reporter dans la méthode CompteController@update
-		'libelle' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
-		'pere' => 'not_in:CREATE_FORM_DEFAUT_LIST|inclusion',
+		"numero" => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|digit', 
+		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
+		'pere' => 'not_in:CREATE_FORM_DEFAUT_LIST|inclusion|different:thisid',
 		/* Afa : Règle "feuille" : un compte de profondeur > 5 ne peu avoir d'enfant */
 		);
 
@@ -17,9 +16,20 @@ class ValidationCompte extends ValidationBase
 		'numero.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs Numéro.',
 		'numero.unique' => 'Il existe déjà un compte avec ce numéro.',
 		'numero.digit' => 'Un compte ne peut comporter plus de 6 chiffres.',
-		'libelle.not_in' => 'Vous n’avez rien saisi dans le champs “Libellé” !',
+		'libelle.required' => 'Vous n’avez pas saisi de “Libellé” !',
+		'libelle.not_in' => 'Vous n’avez rien saisi de nouveau dans le champs “Libellé” !',
 		'pere.not_in' => 'Vous n’avez pas désigné de "compte père" pour ce compte !',
 		'pere.inclusion' => "Le numéro d’un compte doit inclure celui du compte parent.",
+		'pere.different' => 'Erreur : ce compte et son compte parent portent le même numéro.',
 		);
 
+	public function validerStore($inputs){
+		$this->rules['numero'] .= '|unique:comptes,numero';
+		return $this->valider($inputs);
+	}
+
+	public function validerUpdate($inputs, $id){
+		$this->rules['numero'] .= "|unique:comptes,numero,$id";
+		return $this->valider($inputs);
+	}
 }

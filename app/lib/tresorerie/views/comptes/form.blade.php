@@ -5,6 +5,7 @@ onLoad="togle_actif();getFreres();"
 <!-- liste d'inputs commune au vues CREATE et EDIT -->
 
 {{ Form::hidden('pco', $compte->pco) }}
+{{ Form::hidden('thisid', $compte->id) }}
 
 @if($compte->pco)
 {{ Form::hidden('numero', $compte->numero) }}

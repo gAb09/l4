@@ -31,6 +31,7 @@ class EcritureController extends BaseController {
 		$this->listes['type'] = Type::listForInputSelect('nom');
 		return $this->listes;
 	}
+// aFa Séparer la génération des listes ?
 
 
 
@@ -61,8 +62,6 @@ class EcritureController extends BaseController {
 			return Redirect::to('tresorerie/ecritures')->withErrors($message);
 		}
 
-		/* Adapter les class css selon les valeurs de certains attributs */
-
 		return View::Make('tresorerie.views.ecritures.index')
 		->with(compact('ecritures'))
 		->with(compact('titre_page'))
@@ -87,9 +86,6 @@ class EcritureController extends BaseController {
 	public function duplicate($id)
 	{
 		$ecriture = Ecriture::where('id', $id)->with('ecriture2')->first();
-// dd($ec1);
-		// $ecriture = new Ecriture;
-		// $ecriture->fillFormForCreate();
 
 		return View::Make('tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
@@ -108,7 +104,7 @@ class EcritureController extends BaseController {
 
 			$ec1 = static::hydrateSimple($ec1);
 
-			$validation = $this->validateur->validate( Input::all() );
+			$validation = $this->validateur->valider( Input::all() );
 			if ($validation === true) {
 				$ec1->save();
 				Session::flash('success',"L’écriture a été créée");
@@ -126,8 +122,8 @@ class EcritureController extends BaseController {
 			$ec1 = $double[0];
 			$ec2 = $double[1];
 
-			$validation = $this->validateur->validate( Input::all() );
-			$validation2 = $this->validateur2->validate( Input::all() );
+			$validation = $this->validateur->valider( Input::all() );
+			$validation2 = $this->validateur2->valider( Input::all() );
 
 			if ($validation === true) {
 				if ($validation2 === true) {
@@ -334,7 +330,7 @@ class EcritureController extends BaseController {
 			$double = static::hydrateDouble($ec1, $ec2);
 
 			/* Save E2 */
-			$validation2 = $this->validateur2->validate( Input::all() );
+			$validation2 = $this->validateur2->valider( Input::all() );
 
 			if ($validation2 === true) {
 				$ec2->save();
@@ -355,7 +351,7 @@ class EcritureController extends BaseController {
 		Dans tous les cas
 		- - - - - - - - - - - - - - - - - - - - - - - - */
 		// dd(Input::all());
-		$validation = $this->validateur->validate( Input::all() );
+		$validation = $this->validateur->valider( Input::all() );
 
 		if ($validation === true) {
 			$ec1->save();

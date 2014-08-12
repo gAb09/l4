@@ -32,23 +32,19 @@ class StatutController extends BaseController {
 
 	public function store()
 	{
-		// return 'Enregistrement d\'un nouveau statut';  // CTRL
+		$validation = $this->validateur->validerStore(Input::all());
 
-		// $validator = Validator::make(Input::all(), Statut::StoreRules(), Statut::Messages());
-
-		// if ($validator->fails()) {
-		// 	// return 'fails'; // CTRL
-		// 	return Redirect::back()->withErrors($validator);
-
-		// } else {
+		if($validation === true) 
+		{
 			// return 'OK'; // CTRL
 			if(Statut::create(array(Input::except('_token'))))
 			{
 				Session::flash('success', 'Le statut "'.Input::get('nom').'" a bien été créé');
 			}
-
 			return Redirect::route('tresorerie.statuts.index');
-		// }
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
+		}
 	}
 
 	public function edit($id)
@@ -64,16 +60,11 @@ class StatutController extends BaseController {
 	{
 		// return 'update du statut n° '.$id;  // CTRL
 
-		// $validator = Validator::make(Input::all(), Statut::UpdateRules(), Statut::Messages());
+		$validation = $this->validateur->validerUpdate(Input::all());
 
-		// if ($validator->fails()) {
-		// 	// return 'failed';  // CTRL
-
-		// 	return Redirect::back()->withErrors($validator);
-
-		// } else {  //
-		// // return 'validation OK';  // CTRL
-
+		if($validation === true) 
+		{
+			// return 'OK'; // CTRL
 			$item = Statut::find($id);
 
 			$item->nom = Input::get('nom');
@@ -83,7 +74,9 @@ class StatutController extends BaseController {
 			$item->save();
 
 			return Redirect::route('tresorerie.statuts.index');
-		// }
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validation);
+		}
 	}
 
 	public function destroy($id)

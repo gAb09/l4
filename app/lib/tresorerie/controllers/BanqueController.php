@@ -37,11 +37,7 @@ class BanqueController extends BaseController {
 
 	public function store()
 	{
-		// dd(Input::except('_token'));
-
-		$modes['store'] = array();
-
-		$validation = $this->validateur->valider(Input::all(), $modes);
+		$validation = $this->validateur->validerStore(Input::all());
 
 		if($validation === true) 
 		{
@@ -67,8 +63,6 @@ class BanqueController extends BaseController {
 
 	public function update($id)
 	{
-
-
 		$item = Banque::FindOrFail($id);
 
 		$validation = $this->validateur->validerUpdate(Input::all(), $id);
@@ -84,7 +78,7 @@ class BanqueController extends BaseController {
 
 			return Redirect::action('BanqueController@index');
 		} else {
-			return 'fails'; // CTRL
+			// return 'fails'; // CTRL
 			return Redirect::back()->withInput(Input::all())->withErrors($validation);
 		}
 
