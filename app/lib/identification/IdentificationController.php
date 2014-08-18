@@ -16,14 +16,12 @@ class IdentificationController extends \BaseController {
 
 
 	public function identification() {
-		$validate = $this->validateur->validate(Input::all());
+		$validation = $this->validateur->valider(Input::all());
 
+		if($validation !== true) {
 
-		if($validate !== true) {
-			
-// dd($validate);
 			return Redirect::to('login')
-			->withErrors($validate)
+			->withErrors($validation)
 			->withInput(Input::all())
 			;
 
@@ -37,14 +35,14 @@ class IdentificationController extends \BaseController {
 
 			if (Auth::attempt(array('login' => Input::get('login'), 'password' => Input::get('password')))) {
 				// dd('identification ok !!!');
-
-				return Redirect::intended('/');
+				return Redirect::intended('/')
+				;
 
 			} else {
 				// dd('identification pas OK !!!'); // CTRL
 
 				return Redirect::to('login')
-				->withErrors('Désolé l’identification a échoué. veuillez réessayer')
+				->with('global', 'Désolés, vous n’avez pu être identifié')
 				->withInput(Input::all());
 			}
 		}

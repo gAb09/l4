@@ -15,48 +15,55 @@
 
 <body>
 
-<div class="container-fluid">
-	<!-- Messages d'erreurs -->
-	@if($errors->all())
-	<div class="alert-danger">
-		<ul class="errors">
-			@foreach($errors->all() as $message)
-			<li>{{ $message }}</li>
-			@endforeach
-		</ul>
-	</div>
-	@endif
+	<div class="container-fluid">
+		<!-- Messages d'erreurs -->
 
-	<!-- Messages de succès -->
-	@if(Session::get('erreur'))
-	<div class="alert-danger">
-		{{ Session::get('erreur') }}
-	</div>
-	@endif
-
-	@if(Session::get('success'))
-	<div class="alert-success">
-		{{ Session::get('success') }}
-	</div>
-	@endif
-@if(isset(Auth::user()->login))
-{{ Auth::user()->login }}
-@endif
-
-	<div class="login">
-		<h2>Bienvenue, vous pouvez vous identifiez</h2>
-		<div style="margin-left: 155px">
-			{{ Form::open(array('action' => 'IdentificationController@identification', 'method' => 'post')) }}
-
-			{{ Form::label('login', 'Login')}}
-			{{ Form::text('login', 'Saisissez votre Login')}}
-
-			{{ Form::label('password', 'Mot de passe')}}
-			{{ Form::password('password')}}
-			<br />
-			{{ Form::submit('Envoyer') }}
-			{{ Form::close() }}
+		<!-- Messages de succès -->
+		@if(Session::get('global'))
+		<div class="alert-danger">
+			{{Session::get('global')}}
 		</div>
-	</div>
-</body>
-</html>
+		@endif
+
+
+		@if(Session::get('success'))
+		<div class="alert-success">
+			{{ Session::get('success') }}
+		</div>
+		@endif
+
+		<div class="login">
+			<h2>Bienvenue, vous pouvez vous identifiez</h2>
+			<div style="margin-left: 155px">
+				{{ Form::open(array('action' => 'IdentificationController@identification', 'method' => 'post')) }}
+
+				@if ($errors->has('login'))
+				{{ Form::label('login', $errors->first('login'), array('class' => 'erreur')) }}
+				{{ Form::text('login', 'Saisissez votre Login', array('class' => 'erreur')) }}
+
+				@else
+				{{ Form::label('login', 'Login')}}
+				{{ Form::text('login', 'Saisissez votre Login', array('class' => '')) }}
+
+				@endif
+
+
+
+				@if ($errors->has('password'))
+				{{ Form::label('password', $errors->first('password'), array('class' => 'erreur')) }}
+				{{ Form::password('password', array('class' => 'erreur')) }}
+
+				@else
+				{{ Form::label('password', 'Mot de passe')}}
+				{{ Form::password('password', array('class' => '')) }}
+
+				@endif
+
+
+				<br />
+				{{ Form::submit('Envoyer') }}
+				{{ Form::close() }}
+			</div>
+		</div>
+	</body>
+	</html>

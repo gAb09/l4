@@ -465,6 +465,24 @@ div.classeRacine {
 */
 
 
+/* Formulaires en erreur */
+
+input.erreur{
+    border-color: #b94a48;
+    border-width: 2px;
+    background-color: #f2dede;
+}
+
+label.erreur{
+    color:#b94a48;
+}
+
+
+/*.st_releve{
+}
+*/
+
+
 
 /* Compte actif */
 div.compte.actif{
@@ -507,7 +525,7 @@ h4.nonpublie{
 
 .login{
     width:500px;
-    height:200px;
+    height:230px;
     margin:auto;
     background-color: #CECA90;
 }

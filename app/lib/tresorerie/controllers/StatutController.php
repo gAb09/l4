@@ -18,7 +18,7 @@ class StatutController extends BaseController {
 	{
 		$statuts = Statut::all();
 
-		return View::Make('tresorerie.views.statuts.index')->with(compact('statuts'));
+		return View::Make('tresorerie.views.statuts.visu')->with(compact('statuts'));
 	}
 
 	public function create()
