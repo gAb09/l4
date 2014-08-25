@@ -58,6 +58,8 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+
+
 App::error(function(ModelNotFoundException $e)
 {
   	$message = 'Désolé ! Aucun élément ne correspond à votre demande…';
@@ -70,6 +72,16 @@ App::missing(function($exception)
 	$message = 'Oups… Désolé, cette page n\'existe pas !';
 
     return View::Make('404')->with('message', $message);
+});
+
+Event::listen('ecriture.*', function()
+{
+  dd(Event::firing());
+});
+
+Event::listen('404', function()
+{
+  dd('404');
 });
 
 

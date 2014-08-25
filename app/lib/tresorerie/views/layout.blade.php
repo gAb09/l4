@@ -18,149 +18,95 @@
 
 </head>
 
-<body 
-@section('body')
-
-@show
->
-
-<div class="container-fluid">
-	<!-- Messages d'erreurs -->
-	@if($errors->all())
-	<div class="alert-danger">
-		<ul class="errors">
-			@foreach($errors->all() as $message)
-			<li>{{ $message }}</li>
-			@endforeach
-		</ul>
-	</div>
-	@endif
-
-	<!-- Messages de succès -->
-	@if(Session::get('erreur'))
-	<div class="alert-danger">
-		{{ Session::get('erreur') }}
-	</div>
-	@endif
-
-	@if(Session::get('success'))
-	<div class="alert-success">
-		{{ Session::get('success') }}
-	</div>
-	@endif
 
 
-	<div class="row-fluid">
 
-		<div class="span1">
-			@include('admin/aide/fenetre_note')
+
+<body @section('body')>
+	@show
+
+	<div class="container-fluid">
+
+
+
+		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
+		<div class="span 12 messages">
+
+			@include('shared/views/messages')
 		</div>
 
-		<header class="span11">
 
-			<div class="navbar">
-				<!-- MENU SECTION -->
-				<nav class="navbar-inner">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					</a>
 
-					<div class="nav-collapse collapse">
-						<ul class="nav nav-tabs">
-							<li><a>{{DB::getDatabaseName()}}</a></li>
-							@foreach($sections as $section)
-							@if ($section->nom_sys == Request::segment(1))
-							<li class ="active">
-								@else
-								<li>
-									@endif
-									<a href="{{ URL::to($section->nom_sys) }}"> {{ $section->etiquette }}</a>
-								</li>
-								@endforeach
-							</ul>
-						</div>
-					</nav>
+		<header class="row-fluid">
 
-					<!-- SOUS MENUS -->
-					<nav class="navbar-inner">
-						<p class="logo">{{ Session::get('site') }}
-						</p>
-						<ul class="nav">
-							@foreach ($menus as $menu)
-							@if ($menu->publication == 1)
-							@if ($menu->nom_sys == Request::segment(2))
-							<li class ="dropdown active">
-								@else
-								<li class="dropdown">
-									@endif
-									<a href={{ URL::to($menu->route) }} >
-										{{ $menu->etiquette }}
-									</a>
-									@if(!$menu->children->isEmpty())
-									<ul class="dropdown-menu">
-										@foreach ($menu->children as $children)
-										@if($children->publication == 1)
-										<li>
-											<a href={{ URL::to($children->route) }} >
-												{{ $children->etiquette }}
-											</a>
-										</li>
-										@endif
-										@endforeach
-									</ul>
-									@endif
-								</li>
-								@endif
-								@endforeach
-							</ul>
-						</nav>
-					</div>
 
-				</header>
+			<!-- - - - - - - - - - - - - - - - MENU SECTIONS - - - - - - - - - - - - - - -->
+
+			<nav class="navbar sections span12">
+				@include('shared/views/menuSections')
+			</nav>
+
+
+			<!-- - - - - - - - - - - - - - SOUS MENU - - - - - - - - - - - - - - -->
+
+			<nav class="navbar menus span10">
+				@include('shared/views/menus')
+			</nav>
+
+
+			<!-- - - - - - - - - - - - - - - - USER / DECONNEXION - - - - - - - - - - - - - - -->
+
+			<div class="span2 user_widget">
+				@include('shared/views/user_widget')
 			</div>
 
-			<!-- Avant contenu principal (topcontent, 2 zones) -->
-			<div class="row-fluid" style="padding-bottom:5px">
+		</header>
 
-				<div class="span5 offset1">
-					@yield('topcontent1')
-				</div>
+		<!-- - - - - - - - - - - - - - - - TOP CONTENT (2 zones) - - - - - - - - - - - - - - -->
 
-				<div class="span6">
-					@yield('topcontent2')
-				</div> 
+
+		<div class="row-fluid" style="padding-bottom:5px">
+
+			<div class="span6">
+				@yield('topcontent1')
 			</div>
 
-			<!-- CONTENU PRINCIPAL -->
-			<div class="row-fluid">
-				<div class="zapette">
-
-					@yield('zapette')
-
-					@if(isset(Auth::user()->login ))
-					<p style="font-size:0.9em;margin-bottom:0px">Utilisateur connecté</p>
-
-					<p onClick="javascript:document.location.href='/dashboard';">{{ Auth::user()->login }}</p>
-
-					{{Form::button('Déconnexion', array('class' => 'btn btn-danger iconesmall delete', 'style' => '', 
-					'OnClick' => 'document.location.href="/dashboard/deconnexion";' ))}}
-
-					@endif
-
-				</div>
-				<div class="span11 offset1" style="margin-left:8.5%">
-					@yield('contenu')
-				</div>
-			</div>
-
-			<footer>
-				<hr>
-				@section('tresorerie/footer')
-				© gAb
-				@show
-			</footer>
+			<div class="span6">
+				@yield('topcontent2')
+			</div> 
 		</div>
-		@section('script')
 
-		@show
-	</body>
-	</html>
+		<!-- - - - - - - - - - - - - - - - CONTENU - - - - - - - - - - - - - - -->
+
+		<div class="row-fluid">
+			<div>
+				@yield('contenu')
+			</div>
+		</div>
+
+
+		<!-- - - - - - - - - - - - - - - - FOOTER - - - - - - - - - - - - - - -->
+
+		<footer>
+			<hr>
+			@section('tresorerie/footer')
+			© gAb
+			@show
+		</footer>
+
+		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES - - - - - - - - - - - - - - -->
+
+		<div class="zapette">
+
+			ZAPETTE
+			@yield('zapette')
+
+		</div>
+
+
+	</div>
+	@section('script')
+
+	@show
+</body>
+</html>

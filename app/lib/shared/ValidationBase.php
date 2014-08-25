@@ -43,8 +43,8 @@ abstract class ValidationBase implements ValidationInterface
 
         // Faire la validation via Laravel
 
-                                    echo "this->rules : ";var_dump($this->rules);
-                                    echo "this->messages : ";var_dump($this->messages);
+                                    // echo "this->rules : ";var_dump($this->rules);
+                                    // echo "this->messages : ";var_dump($this->messages);
                                     // echo "validateur : ";var_dump($validateur);
                                     // dd('valider'); // CTRL
 
@@ -79,7 +79,7 @@ abstract class ValidationBase implements ValidationInterface
                 $rules[$attribut] = $this->parseLigneForConstantes($lignes);
             }
         }
-        echo 'constantes remplacées';var_dump($rules); // CTRL
+        // echo 'constantes remplacées';var_dump($rules); // CTRL
 
         return $rules;
     }

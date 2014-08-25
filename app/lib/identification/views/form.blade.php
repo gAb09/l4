@@ -16,21 +16,21 @@
 <body>
 
 	<div class="container-fluid">
-		<!-- Messages d'erreurs -->
 
-		<!-- Messages de succès -->
+		<!-- Messages d'erreurs -->
 		@if(Session::get('global'))
 		<div class="alert-danger">
 			{{Session::get('global')}}
 		</div>
 		@endif
 
-
+		<!-- Messages de succès -->
 		@if(Session::get('success'))
 		<div class="alert-success">
 			{{ Session::get('success') }}
 		</div>
 		@endif
+
 
 		<div class="login">
 			<h2>Bienvenue, vous pouvez vous identifiez</h2>
