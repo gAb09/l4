@@ -82,6 +82,9 @@
 
 @stop
 
+
+
+
 @section('footer')
 
 @parent
@@ -89,6 +92,9 @@
 <h3>  Le footer de recettes_depenses</h3>
 
 @stop
+
+
+
 
 @section('script')
 

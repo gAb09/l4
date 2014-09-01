@@ -1,6 +1,17 @@
 		<tr id ="{{$ecriture->id}}" class="surlignage {{$ecriture->statut->classe}}" 
 			ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
+	<td>
+		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $ecriture->statut->id], 'method' => 'post', 'class' => 'pointage')) }}
+
+		{{ Form::hidden('statut_id', $ecriture->statut_id, array('id' => 'input', 'class' => '')) }}
+		
+
+		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_pointage(this);submit();' )) }}
+
+		{{ form::close() }}
+	</td>
+	
 			<td>
 				{{ $ecriture->mois  }}
 				{{ Date::courte($ecriture->date_emission) }}

@@ -49,14 +49,14 @@
 
 			<!-- - - - - - - - - - - - - - SOUS MENU - - - - - - - - - - - - - - -->
 
-			<nav class="navbar menus span10">
+			<nav class="navbar menus span9">
 				@include('shared/views/menus')
 			</nav>
 
 
 			<!-- - - - - - - - - - - - - - - - USER / DECONNEXION - - - - - - - - - - - - - - -->
 
-			<div class="span2 user_widget">
+			<div class="span3 user_widget">
 				@include('shared/views/user_widget')
 			</div>
 
@@ -98,8 +98,8 @@
 
 		<div class="zapette">
 
-			ZAPETTE
 			@yield('zapette')
+			<br />ZAPETTE
 
 		</div>
 

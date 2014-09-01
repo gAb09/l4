@@ -3,7 +3,7 @@
 
 <span onClick="javascript:document.location.href='/dashboard';">{{ Auth::user()->login }}</span>
 
-{{Form::button('Déconnexion', array('class' => 'btn btn-danger btn-mini iconesmall delete', 'style' => '', 
+<br />{{Form::button('Déconnexion', array('class' => 'btn btn-danger btn-mini iconesmall delete', 'style' => '', 
 'OnClick' => 'document.location.href="/dashboard/deconnexion";' ))}}
 
 @endif

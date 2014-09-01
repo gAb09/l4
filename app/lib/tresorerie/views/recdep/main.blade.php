@@ -9,8 +9,6 @@
 
 @section('topcontent1')
 <h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
-<a href ="{{ URL::route('tresorerie.ecritures.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter une écriture</a>
 @stop
 
 
@@ -33,6 +31,9 @@ style="font-size:1.1em">Ajouter une écriture</a>
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_emission}}">
+		<th style="width:10px">
+			Statut
+		</th>
 		<th>
 			Date d'émission
 		</th>
@@ -83,6 +84,9 @@ style="font-size:1.1em">Ajouter une écriture</a>
 
 @stop
 
+
+
+
 @section('footer')
 
 @parent
@@ -90,6 +94,17 @@ style="font-size:1.1em">Ajouter une écriture</a>
 <h3>  Le footer de recettes_depenses</h3>
 
 @stop
+
+
+@section('zapette')
+
+<a href ="{{ URL::route('tresorerie.ecritures.create') }}" class="badge badge-locale iconemedium add"
+style="font-size:1.1em">Ajouter une écriture</a>
+
+@stop
+
+
+
 
 @section('script')
 
@@ -112,6 +127,9 @@ echo 'var mois = "";';
 </script>
 
 <script src="/assets/js/volets.js">
+</script>
+
+<script src="/assets/js/pointage.js">
 </script>
 
 @stop
