@@ -45,7 +45,15 @@ class RecDepController extends BaseController {
 		$banque = $ecritures[0]->banque->nom;
 		$prev_mois = 0;
 
-		return View::make('tresorerie.views.recdep.main')->with(compact('ecritures'))->with(compact('prev_mois'))->with(compact('banque'));
+		// Le tableau des statuts accessibles
+		$statuts = '1-2';
+
+		return View::make('tresorerie.views.recdep.main')
+		->with(compact('ecritures'))
+		->with(compact('prev_mois'))
+		->with(compact('banque'))
+		->with(compact('statuts'))
+		;
 	}
 
 }

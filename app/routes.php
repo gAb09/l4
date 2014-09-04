@@ -159,7 +159,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 // /*----------------------  Pointage  ----------------------------------*/
 	Route::post('pointage/{id?}-{statut_id}', 'PointageController@pointage');
-	Route::get('pointage/{id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
+	Route::get('pointage/{banque_id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/

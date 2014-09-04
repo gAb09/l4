@@ -3,12 +3,11 @@
 	ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
 	<td>
-		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $ecriture->statut->id], 'method' => 'post', 'class' => 'pointage')) }}
+		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts], 'method' => 'post', 'class' => 'pointage')) }}
 
-		{{ Form::hidden('statut_id', $ecriture->statut_id, array('id' => 'input', 'class' => '')) }}
-		
+		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
 
-		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_pointage(this);submit();' )) }}
+		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_statut_pointage(this);submit();' )) }}
 
 		{{ form::close() }}
 	</td>
