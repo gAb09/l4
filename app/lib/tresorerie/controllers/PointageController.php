@@ -15,7 +15,6 @@ class PointageController extends BaseController {
 		->orderBy('date_valeur')
 		->get();
 
-
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
 			$message = 'Il n’y a aucune écriture pour la banque “';
@@ -53,9 +52,8 @@ class PointageController extends BaseController {
 		// return 'pointage de l’écriture n° '.$id.'<br />Rang : '.$rang;  // CTRL
 		// return var_dump(Input::all());  // CTRL
 
-
 		$ecriture = Ecriture::find($id);
-		$statut_actuel = $ecriture->statut_id;
+		$statut_actuel = $ecriture->statut->rang;
 
 		// Composition du tableau des statuts et extraction des infos pour le traitement
 		$statuts = explode('-', $statuts);
@@ -69,8 +67,9 @@ class PointageController extends BaseController {
 
 
 			$new_statut = ($statut_actuel < $statut_fin) ? ++$statut_actuel : $statut_depart ;
+			$statut_id = Statut::where('rang', $new_statut)->first()->id;
 
-			$ecriture->statut_id = $new_statut;
+			$ecriture->statut_id = $statut_id;
 
 			var_dump($nombre_statuts);var_dump($statut_depart);var_dump($statut_fin);var_dump($new_statut);
 		// return var_dump($new_statut); // CTRL
@@ -80,7 +79,7 @@ class PointageController extends BaseController {
 			return Response::make('', 204);
 		} else {
 			// Si non retour à la page avec message
-			Session::flash('info', 'Il n’est pas possible depuis cette page de modifier le statut d’une écriture qui a le statut “'.$ecriture->statut->nom.'”');              
+			Session::flash('info', 'Cette écriture a le statut “'.$ecriture->statut->nom.'”. Il n’est pas possible de modifier celui-ci depuis cette page.');              
 			return Redirect::back();
 		}
 	}
