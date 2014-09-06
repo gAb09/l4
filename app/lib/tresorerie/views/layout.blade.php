@@ -30,7 +30,7 @@
 
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
-		<div class="span 12 messages">
+		<div class="span12 messages">
 
 			@include('shared/views/messages')
 		</div>

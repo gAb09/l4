@@ -57,6 +57,11 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+
+.icoclose:before {
+	content: "D";
+}
+
 .edit:before {
 	content: "e";
 }
