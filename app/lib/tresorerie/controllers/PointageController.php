@@ -12,6 +12,7 @@ class PointageController extends BaseController {
 		// Récupérer la collection d'écriture pour la banque demandée
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')
 		->where('banque_id', $banque_id)
+		->whereIn('statut_id', array(2, 3, 4))
 		->orderBy('date_valeur')
 		->get();
 

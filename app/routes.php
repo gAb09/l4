@@ -3,7 +3,7 @@
 Route::get('tost', function()
 {
 	// return 'login';
-	return View::make('example1')
+	return View::make('shared/views/test')
 	;
 });
 
