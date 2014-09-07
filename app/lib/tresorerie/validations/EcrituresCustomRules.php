@@ -30,6 +30,14 @@ Validator::extend('fnumeric', function($field, $value, $params)
 	}else{return true;}
 });
 
+Validator::extend('positif', function($field, $value, $params)
+{
+	$value = Nbre::sauv($value);
+	if ($value < 0) {
+		return false;
+	}else{return true;}
+});
+
 
 Validator::extend('notnull', function($field, $value, $params)
 {

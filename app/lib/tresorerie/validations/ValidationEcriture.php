@@ -6,7 +6,7 @@ class ValidationEcriture extends ValidationBase
 		'banque_id' => 'not_in:0',
 		'date_emission' => 'required|alpha_dash|date',
 		'date_valeur' => 'required|alpha_dash|date|afteremission',
-		'montant' => 'required|fnumeric|notnull',
+		'montant' => 'required|fnumeric|notnull|positif',
 		'signe_id' => 'required',
 		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
 		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',// aFa Utiliser constante
@@ -24,6 +24,7 @@ class ValidationEcriture extends ValidationBase
 		'date_valeur.afteremission' => 'La date de valeur doit être postérieure ou égale à la date d’émission',
 		'montant.notnull' => 'Le montant ne peut être égal à 0',
 		'montant.fnumeric' => 'Le montant ne doit contenir que des chiffres, et éventuellement une virgule et des espaces',
+		'montant.positif' => 'Le montant ne peut être un nombre négatif. Vous devez utiliser un nombre positif classé en “Dépense”.',
 		'signe_id.required' => 'Vous n’avez pas précisé s’il s’agit d’une dépense ou d’une recette.',
 		'libelle.required' => 'Vous n’avez pas indiqué de Libellé.',
 		'libelle.not_in' => 'Vous n’avez pas indiqué de Libellé.',

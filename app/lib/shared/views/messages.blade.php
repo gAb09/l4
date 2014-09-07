@@ -1,8 +1,8 @@
 <!-- Messages d'erreurs via Errors -->
 @if($errors->all())
 <div class="alert alert-danger">
-	<div style="display:block">
 		<i class="icoclose iconemedium" onClick="javascript:masquer(this)"> </i>
+	<div style="display:block">
 	</div>
 	<ul class="errors">
 		@foreach($errors->all() as $message)
