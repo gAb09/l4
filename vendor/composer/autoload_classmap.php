@@ -75,4 +75,5 @@ return array(
     'Way\\Generators\\Generators\\SeedGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/SeedGenerator.php',
     'Way\\Generators\\Generators\\TestGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/TestGenerator.php',
     'Way\\Generators\\Generators\\ViewGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/ViewGenerator.php',
+    'lib\\shared\\Traits\\IndexEcritures' => $baseDir . '/app/lib/shared/traits/IndexEcritures.php',
 );

@@ -11,4 +11,3 @@ function toggle_publication() {
 		label.innerHTML = "Menu désactivé";
 	}
 }
-
