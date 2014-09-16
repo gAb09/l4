@@ -54,6 +54,7 @@ return array(
     'NoteController' => $baseDir . '/app/lib/admin/aide/NoteController.php',
     'Notes' => $baseDir . '/app/lib/admin/aide/NoteHelper.php',
     'PointageController' => $baseDir . '/app/lib/tresorerie/controllers/PointageController.php',
+    'PrevController' => $baseDir . '/app/lib/tresorerie/controllers/PrevController.php',
     'RecDepController' => $baseDir . '/app/lib/tresorerie/controllers/RecDepController.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Signe' => $baseDir . '/app/lib/tresorerie/models/Signe.php',
@@ -75,5 +76,4 @@ return array(
     'Way\\Generators\\Generators\\SeedGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/SeedGenerator.php',
     'Way\\Generators\\Generators\\TestGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/TestGenerator.php',
     'Way\\Generators\\Generators\\ViewGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/ViewGenerator.php',
-    'lib\\shared\\Traits\\IndexEcritures' => $baseDir . '/app/lib/shared/traits/IndexEcritures.php',
 );

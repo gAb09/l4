@@ -69,11 +69,10 @@
 		<?php $prev_mois = $ecriture->mois_valeur ?>
 	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('tresorerie/views/pointage/row')
-		@else
+		@endif
 
 	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('tresorerie/views/pointage/row')
-		@endif
 		@endforeach
 
 	</tbody>

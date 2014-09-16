@@ -23,14 +23,14 @@
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_emission != $prev_mois)
+@if($ecriture->mois_classement != $prev_mois)
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->date_emission}}" onclick="javascript:volet(this);">
 		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_emission)) }}
 	</caption>
 
-	<thead class="replie" id="tetiere{{$ecriture->mois_emission}}">
+	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}">
 		<th style="width:10px">
 			Statut
 		</th>
@@ -69,13 +69,11 @@
 		</th>
 	</thead>
 
-	<tbody class="replie" id="corps{{$ecriture->mois_emission}}">
-		<?php $prev_mois = $ecriture->mois_emission ?>
-		@include('tresorerie/views/recdep/row')
-		@else
+	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
+		<?php $prev_mois = $ecriture->mois_classement ?>
 
-		@include('tresorerie/views/recdep/row')
 		@endif
+		@include('tresorerie/views/recdep/row')
 		@endforeach
 
 	</tbody>

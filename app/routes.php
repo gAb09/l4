@@ -163,9 +163,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/
-	Route::get('previsionnel', function(){
-		return View::make('tresorerie/views/previsionnel/index');
-	});
+	Route::get('previsionnel', 'PrevController@index');
 
 	/*----------------------  Écritures  ----------------------------------*/
 	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
