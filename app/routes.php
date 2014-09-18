@@ -3,7 +3,7 @@
 Route::get('tost', function()
 {
 	// return 'login';
-	return View::make('tost')
+	return View::make('shared/views/test')
 	;
 });
 
@@ -13,7 +13,7 @@ Route::get('compte/{id}', function($id)
 	return var_dump(Compte::where('id', $id)->first()->lft);
 });
 
-// Route::get('compta/trans', function()
+// Route::get('tresorerie/trans', function()
 // {
 // 	return ComptesOldController::trans();
 // });
@@ -42,7 +42,7 @@ Route::get('/', function()
 Route::get('login', array('as' => 'login', function()
 {
 	// return 'login';
-	return View::make('identification/form')
+	return View::make('identification/views/form')
 	->with('titre_page', 'Identification')
 	;
 }));
@@ -51,7 +51,7 @@ Route::post('identification', 'IdentificationController@identification');
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard / Prefix "dash"
+| Dashboard / Prefix "dashboard"
 |--------------------------------------------------------------------------*/
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function() 
@@ -83,24 +83,24 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function()
 		;
 	});
 
-	Route::resource('user', 'UtilisateurController');
 	Route::put('user/mdp/{id?}', 'UtilisateurController@updatemdp');
-});  // Fin de groupe prefix admin
+
+});  // Fin de groupe Prefix "dashboard"
 
 /*
 |--------------------------------------------------------------------------
 | Section Grille
 |--------------------------------------------------------------------------*/
 Route::get('grille', function(){
-	return View::make('compta/layout');
+	return View::make('tresorerie/layout');
 });
 
 Route::get('grille/emissions', function(){
-	return View::make('compta/layout');
+	return View::make('tresorerie/layout');
 });
 
 Route::get('grille/grille', function(){
-	return View::make('compta/layout');
+	return View::make('tresorerie/layout');
 });
 
 
@@ -122,8 +122,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 	Route::resource('menus', 'MenuController');
 
-	/*----------------------  Statuts  ----------------------------------*/
-	Route::resource('statuts', 'StatutController');
+	/*----------------------  Utilisateurs  ----------------------------------*/
+	Route::resource('user', 'UtilisateurController');
 	
 });  // Fin de groupe prefix admin
 
@@ -134,21 +134,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 /*
 |--------------------------------------------------------------------------
-| Section prefix "compta"
+| Section prefix "tresorerie"
 |--------------------------------------------------------------------------
 |
 |
 */
-Route::group(array('prefix' => 'compta', 'before' => 'auth'), function() 
+Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function() 
 {
 
 
 	Route::get('/', function(){
-		return Redirect::to('compta/ecritures');
+		return Redirect::to('tresorerie/ecritures');
 	});
 
 	Route::get('statuts', function(){
-		return View::make('compta/statuts_visu');
+		return View::make('tresorerie/views/statuts/visu');
 	});
 
 	Route::get('tost', 'TostController@tost');
@@ -158,14 +158,12 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 
 
 // /*----------------------  Pointage  ----------------------------------*/
-	Route::post('pointage/{id?}-{statut_id}', 'PointageController@pointage');
-	Route::get('pointage/{id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
+	Route::post('pointage/{id?}-{statuts?}', 'PointageController@pointage');
+	Route::get('pointage/{banque_id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
 
 
 	/*----------------------  Prévisionnel  ----------------------------------*/
-	Route::get('previsionnel', function(){
-		return View::make('compta/previsionnel');
-	});
+	Route::get('previsionnel', 'PrevController@index');
 
 	/*----------------------  Écritures  ----------------------------------*/
 	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
@@ -180,7 +178,7 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	Route::get('comptes/freres', 'CompteController@freres');
 	Route::get('comptes/{id?}/freres', 'CompteController@freres');
 	Route::get('comptes/classe/{root?}', 'CompteController@index');
-	Route::any('comptes/updateactif', array('as' => 'compta.comptes.updateActif', 'uses' => 'CompteController@updateActif'));
+	Route::any('comptes/updateactif', array('as' => 'tresorerie.comptes.updateActif', 'uses' => 'CompteController@updateActif'));
 	Route::resource('comptes', 'CompteController');
 
 	/*----------------------  Banques  ----------------------------------*/
@@ -189,6 +187,9 @@ Route::group(array('prefix' => 'compta', 'before' => 'auth'), function()
 	/*----------------------  Notes  ----------------------------------*/
 	Route::resource('notes', 'NoteController');
 
-});  // Fin de groupe prefix “compta”
+	/*----------------------  Statuts  ----------------------------------*/
+	Route::resource('statuts', 'StatutController');
+	
+});  // Fin de groupe prefix “tresorerie”
 
 

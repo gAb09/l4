@@ -11,11 +11,4 @@ function volet(capt) {
 		corps.className = "replie";
 	}
 
-	if (mois) {
-		var curhead = document.getElementById("corps"+mois);
-		var curcorps = document.getElementById("tetiere"+mois);
-		curhead.className = "";
-		curcorps.className = "";
-	}
-
 }

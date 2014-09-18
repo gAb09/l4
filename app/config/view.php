@@ -13,7 +13,10 @@ return array(
 	|
 	*/
 
-	'paths' => array(__DIR__.'/../views', __DIR__.'/../controllers/tost'),
+	'paths' => array(
+		__DIR__.'/../views',
+		__DIR__.'/../lib',
+		),
 
 	/*
 	|--------------------------------------------------------------------------

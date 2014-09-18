@@ -1,19 +1,10 @@
 @charset "utf-8";
 
 /* +++++++++++++++++++++++++++++++++++++++++++++  BASE  (éléments html de base ) +++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* –––––––––––––––––––– surcharge Bootstrap –––––––––––––––––––––––– */
+/* –––––––––––––––––––– surcharge  –––––––––––––––––––––––– */
 body {
-    padding-top: 20px;
     min-height: 2000px;
     color: #252;
-}
-body, .hero-unit, .navbar-inner {
-    background: -moz-radial-gradient(top left, rgba(180,140,0,.5), rgba(180,80,0,0));
-    background: -webkit-radial-gradient(top left, rgba(0,0,255,.5), rgba(0,240,0,0));
-    background: -ms-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
-    background: -o-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
-    background: radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));   
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8383FF', endColorstr='#D8D8FF', GradientType=0);
 }
 
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
@@ -40,6 +31,15 @@ hr.filetfin{
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /* –––––––––––––––––––– surcharge Bootstrap –––––––––––––––––––––––– */
+body, .hero-unit, .navbar-inner {
+    background: -moz-radial-gradient(top left, rgba(180,140,0,.5), rgba(180,80,0,0));
+    background: -webkit-radial-gradient(top left, rgba(0,0,255,.5), rgba(0,240,0,0));
+    background: -ms-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
+    background: -o-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
+    background: radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));   
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8383FF', endColorstr='#D8D8FF', GradientType=0);
+}
+
 .navbar {
     box-shadow: 3px 3px 3px #D8B979;
 }
@@ -58,14 +58,20 @@ hr.filetfin{
     color: #FFEEEE;
 }
 
+ul.nav li:hover{
+    color:#0088CC;
+}
+
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
+
 div.zapette {
-    text-align: center;
-    background-color: #C8A94C;
-    width:9%;
+    background-color: #5F835F;
+    padding-top: 10px;
+    width:100%;
+    height: 70px;
     position: fixed;
     left: 0px;
-    bottom: 0px;
+    bottom: -30px;
 }
 
 
@@ -85,10 +91,6 @@ footer {
     text-rendering: optimizelegibility;
 }
 
-ul.nav li:hover{
-    color:#0088CC;
-}
-
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
                                      MODULES
@@ -96,10 +98,6 @@ ul.nav li:hover{
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /* –––––––––––––––––––– surcharge Bootstrap –––––––––––––––––––––––– */
-.alert {
-  position: fixed;
-  z-index: 100;
-}
 
 .label-locale,
 .badge-locale {
@@ -135,92 +133,67 @@ ul.nav li:hover{
     border-bottom: 6px solid #DDBF8B;
 }
 
+.navbar-inner {
+    border-bottom: 6px solid #DDBF8B;
+}
 
+.row-fluid [class*="span"].user_widget{
+    margin-top: 5px;
+}
+
+nav.sections{
+    background-color: #C8A94C;
+    position: fixed;
+    height: 47px;
+    top: -46px;
+    margin-bottom: 0px;
+    left: 0px;
+    z-index: 100;
+    transition-property: top;
+    transition-duration: 0.3s;
+}
+
+nav.sections:hover {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    transition-property: top;
+    transition-duration: 0.6s;
+}
+
+.row-fluid [class*="span"].menus{
+    margin-left: 0%;
+}
+
+nav.menus {
+    position: relative;
+    top: 4px;
+    margin-left: -2%;
+}
 
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
-
-div.success{
-    color: #5A5;
-    background-color: #EFE;
-    border: 1px solid #88EE88;
+div.messages{
+    position: fixed;
+    left: 0px;
+    z-index: 300;
+    top:0px;
+    width:auto;
 }
 
-/*  Section coulissante ----------------------------------- */
-section.coulisse{
-    position:fixed;
-    top:22px;
-    left:-67%;
-    width:50%;
-    max-height:100%;
-    padding-left:10px;
-    font-size: 12px;
-    line-height: 14px;
-    background-color: #B7DBB7;
-    color: #000;
-    z-index:10;
-    transition-property: left;
-    transition-duration: 0.5s;
+div.messages.masquer{
+    top:-500px;
+    transition-property: top;
+    transition-duration: 2s;
 }
 
-section.coulisse p{
-    font-size:1.2em;
-    line-height:1.2em;
-    margin-top:5px;
+.icoclose:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
 }
 
-section.coulisse:hover {
-    left:0%;
-    transition-property:left;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-out;
-}
 
-div.onglet {
-    position:fixed;
-    top:0;
-    left:0%;
-    width: 30px;
-    height: 18px;
-    background-color: #225522;
-    padding: 2px 5px;
-    color:#FFF;
-    line-height: 16px;
-}
-
-section.coulisse:hover div.onglet {
-    background-color: #B7DBB7;
-    color: #000;
-}
-
-div#coulisse_form_creer,
-div#coulisse_form_editer{
-    display:none;
-}
-
-div#coulisse_form_creer.visible,
-div#coulisse_form_editer.visible{
-    display:block;
-}
-
-/*  Section coulissante "dev"  ----------------------------------- */
-section.dev{
-    background-color: #EAA4A4;
-}
-
-section.dev:hover{
-    padding-right: 40px;
-}
-
-section.dev div.onglet{
-    background-color: #CC3333;
-    left:40px;
-    padding: 2px 5px;
-    width: 90px;
-}
-
-section.dev:hover div.onglet {
-    background-color: #EAA4A4;
-}
 /*   TABLEAUX */
 
 table {
@@ -449,6 +422,7 @@ div.classeRacine {
 .st_prev{
     background-color: #d8b9a2;
     color:#8d6e57;
+    /*color:#eee;*/
 }
 
 .st_emise{
@@ -459,6 +433,24 @@ div.classeRacine {
 .st_www{
     color:#8d6e57;
 }
+
+/*.st_releve{
+}
+*/
+
+
+/* Formulaires en erreur */
+
+input.erreur{
+    border-color: #b94a48;
+    border-width: 2px;
+    background-color: #f2dede;
+}
+
+label.erreur{
+    color:#b94a48;
+}
+
 
 /*.st_releve{
 }
@@ -507,7 +499,7 @@ h4.nonpublie{
 
 .login{
     width:500px;
-    height:200px;
+    height:230px;
     margin:auto;
     background-color: #CECA90;
 }

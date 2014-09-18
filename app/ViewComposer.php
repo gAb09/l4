@@ -2,7 +2,7 @@
 // aFa  décomposer en plusieurs viewcomposer ?
 
 /* Composition du menu principal */
-View::composer('compta/layout', function($view) {
+View::composer('shared/views/layout', function($view) {
 	
 	$sections = Menu::roots()->where('publication', 1)->get();
 
@@ -16,7 +16,8 @@ View::composer('compta/layout', function($view) {
 
 
 /* Composition du sous-menu */
-View::composer('compta/layout', function($view) {
+View::composer('shared/views/layout', function($view) {
+
 
 	$section = Menu::where('nom_sys', Request::segment(1))->get();
 	$menus = Menu::where('parent_id', $section[0]->id)->get();
@@ -28,7 +29,7 @@ View::composer('compta/layout', function($view) {
 
 
 
-View::composer('compta/ecritures/form', function($view)
+View::composer('tresorerie/views/ecritures/form', function($view)
 {
 	/* Lister les séparateurs pour le javascript */
 	$separateurs = Type::lists('sep_justif', 'id');
@@ -50,7 +51,7 @@ View::composer('compta/ecritures/form', function($view)
 
 
 /* appel des notes (Aide et Développement) en fonction de la page demandée */
-View::composer('compta/fenetre_note', function($view) {
+View::composer('admin/aide/fenetre_note', function($view) {
 	if ($note = DB::table('notes')->where('path', Notes::cleanPathNotes(Request::path()))->first())
 	{
 		$view->with('note', $note);

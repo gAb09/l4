@@ -1,4 +1,4 @@
-@extends('compta/layout')
+@extends('shared/views/layout')
 
 @section('titre')
 @parent

@@ -34,6 +34,21 @@ $env = $app->detectEnvironment(array(
 
 /*
 |--------------------------------------------------------------------------
+| Détection de la base utilisée
+|--------------------------------------------------------------------------
+|
+| Nécessaire car plusieurs bases peuvent être utilisée selon le mode d'utilisation.
+| • Trésorerie : 
+| 	– 'bruno_compta' pour l'utilisation
+| 	– 'test_treso' pour le développement
+| 	– 'lalocale_treso' pour la sauvagarde de La Locale
+|
+*/
+
+// $BDD = $app->connection;
+
+/*
+|--------------------------------------------------------------------------
 | Bind Paths
 |--------------------------------------------------------------------------
 |

@@ -37,3 +37,8 @@ function getXMLHttpRequest() {
 
 	return xhr;
 }
+
+function masquer(objet)
+{
+	objet.setAttribute("style", "display:none");
+}

@@ -26,7 +26,11 @@ return array(
 	|
 	*/
 
+<<<<<<< HEAD
 	'default' => 'prod',
+=======
+	'default' => 'bruno',
+>>>>>>> 873a88a79e845b829c0ce2fa27697194461ebaf2
 
 	/*
 	|--------------------------------------------------------------------------
@@ -55,7 +59,7 @@ return array(
 		'dev' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'test',
+			'database'  => 'test_treso',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
@@ -63,7 +67,7 @@ return array(
 			'prefix'    => '',
 		),
 
-		'prod' => array(
+		'bruno' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'bruno_compta',

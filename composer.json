@@ -17,11 +17,14 @@
 			"app/commands",
 			"app/controllers",
 			"app/models",
-			"app/validations",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
-		]		
+			"app/tests/TestCase.php",
+			"app/lib"
+		],
+		"psr-4": {
+			"lib\\shared\\Traits\\": "app/lib/shared/traits"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [

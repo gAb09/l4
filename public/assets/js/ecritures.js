@@ -21,12 +21,12 @@ function bascule_verrou() {
 	if (verrou.checked == 1)
 	{
 		label.style.color="red"; /* aFA passer par les classe de span */
-		label.innerHTML= txt_label+"  VÉROUILLÉ";
+		label.innerHTML= txt_label+"  NON VALIDÉ";
 	}
 	else
 	{
 		label.style.color="green";
-		label.innerHTML= txt_label+"  DÉVÉROUILLÉ";
+		label.innerHTML= txt_label+"  VALIDÉ";
 	}
 }
 

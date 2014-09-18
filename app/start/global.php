@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 setlocale(LC_ALL, 'fr_FR');
 
 
-
+\Debugbar::disable();
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -22,8 +22,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
-	app_path().'/helpers',
-
+	app_path().'/lib',
 	));
 
 /*
@@ -59,6 +58,8 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+
+
 App::error(function(ModelNotFoundException $e)
 {
   	$message = 'Désolé ! Aucun élément ne correspond à votre demande…';
@@ -71,6 +72,16 @@ App::missing(function($exception)
 	$message = 'Oups… Désolé, cette page n\'existe pas !';
 
     return View::Make('404')->with('message', $message);
+});
+
+Event::listen('ecriture.*', function()
+{
+  dd(Event::firing());
+});
+
+Event::listen('404', function()
+{
+  dd('404');
 });
 
 
@@ -104,7 +115,8 @@ App::down(function()
 
 require app_path().'/filters.php';
 require app_path().'/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'/validations/CustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'/lib/tresorerie/validations/EcrituresCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'/lib/tresorerie/validations/ComptesCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 
 /*
 |--------------------------------------------------------------------------
