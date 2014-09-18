@@ -1,4 +1,4 @@
-@extends('tresorerie/views/layout')
+@extends('shared/views/layout')
 
 @section('titre')
 @parent
@@ -9,6 +9,7 @@
 
 @section('topcontent1')
 <h1 class="titrepage">Pointage de “{{ $banque }}”</h1>
+Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 
 
@@ -24,14 +25,16 @@
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_valeur != $prev_mois)
+@if($ecriture->mois_classement != $prev_mois)
 
 <table>
-	<caption class="ligne_mois" id="{{$ecriture->mois_valeur}}" onclick="javascript:volet(this);">
-		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
+
+
+	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
+			{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
 
-	<thead class="replie" id="tetiere{{$ecriture->mois_valeur}}">
+	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}" >
 		<th style="width:10px">
 			Statut
 		</th>
@@ -65,14 +68,16 @@
 	</thead>
 
 
-	<tbody class="replie" id="corps{{$ecriture->mois_valeur}}">
-		<?php $prev_mois = $ecriture->mois_valeur ?>
-	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
+	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
+		<?php $prev_mois = $ecriture->mois_classement ?>
+		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
+		@include('tresorerie/views/pointage/row')
+		@else
+
+		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
 		@include('tresorerie/views/pointage/row')
 		@endif
 
-	<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
-		@include('tresorerie/views/pointage/row')
 		@endforeach
 
 	</tbody>
@@ -80,8 +85,6 @@
 </table>
 
 @stop
-
-
 
 
 @section('footer')
@@ -101,24 +104,23 @@
 
 <?php
 if( $mois = Session::get('mois') ){
-echo 'var mois = "'.$mois.'";';
+	echo 'var mois = "'.$mois.'";';
 }else{
-echo 'var mois = "";';
+	echo 'var mois = "";';
 }
 ?>
-	if (mois) {
-		var curhead = document.getElementById("corps"+mois);
-		var curcorps = document.getElementById("tetiere"+mois);
-		curhead.className = "";
-		curcorps.className = "";
-	}
+if (mois) {
+	var curhead = document.getElementById("tetiere"+mois);
+	var curcorps = document.getElementById("corps"+mois);
+	curhead.className = "";
+	curcorps.className = "";
+}
 
-</script>
-
-
-<script src="/assets/js/pointage.js">
 </script>
 <script src="/assets/js/volets.js">
+</script>
+
+<script src="/assets/js/pointage.js">
 </script>
 
 @stop

@@ -1,4 +1,4 @@
-@extends('tresorerie/views/layout')
+@extends('shared/views/layout')
 
 @section('titre')
 @parent
@@ -9,6 +9,7 @@
 
 @section('topcontent1')
 <h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
+Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 
 
@@ -26,11 +27,11 @@
 @if($ecriture->mois_classement != $prev_mois)
 
 <table>
-	<caption class="ligne_mois" id="{{$ecriture->date_emission}}" onclick="javascript:volet(this);">
+	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
 		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_emission)) }}
 	</caption>
 
-	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}">
+	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}" >
 		<th style="width:10px">
 			Statut
 		</th>
@@ -110,17 +111,17 @@ style="font-size:1.1em">Ajouter une écriture</a>
 
 <?php
 if( $mois = Session::get('mois') ){
-echo 'var mois = '.$mois.';';
+	echo 'var mois = '.$mois.';';
 }else{
-echo 'var mois = "";';
+	echo 'var mois = "";';
 }
 ?>
-	if (mois) {
-		var curhead = document.getElementById("corps"+mois);
-		var curcorps = document.getElementById("tetiere"+mois);
-		curhead.className = "";
-		curcorps.className = "";
-	}
+if (mois) {
+	var curhead = document.getElementById("tetiere"+mois);
+	var curcorps = document.getElementById("corps"+mois);
+	curhead.className = "";
+	curcorps.className = "";
+}
 
 </script>
 

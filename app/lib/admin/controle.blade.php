@@ -1,4 +1,4 @@
-@extends('tresorerie/views/layout')
+@extends('shared/views/layout')
 
 @section('tresorerie/footer')
 @parent

@@ -1,4 +1,4 @@
-@extends('tresorerie/views/layout')
+@extends('shared/views/layout')
 @section('contenu')
 
 {{ Form::open(['method' => 'post', 'action' => 'UtilisateurController@store']) }}

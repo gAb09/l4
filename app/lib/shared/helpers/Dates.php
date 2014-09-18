@@ -1,5 +1,6 @@
 <?php
 
+
 /**
 * Classe de gestion des dates
 */
@@ -58,6 +59,21 @@ class Date
 			return $parties[2].'-'.$parties[1].'-'.$parties[0].' 00:00:00';
 		}
 	}
+
+	/* Pour Affichage du mois en cours d'édition
+	**
+	** return décembre 1960
+	** B Y
+	** Séparateur = nbspace
+	*/
+	public static function MoisEdit($string){
+		if (substr_count($string, '.') == 1) {
+			$parties = explode('.', $string);
+
+			// dd($date = $parties[0].', '.$parties[1].', 01, 00, 00, 00');
+			$date =  Carbon\Carbon::create($parties[0], $parties[1], 01, 00 ,00, 00);
+			return self::MoisAnneeInsec($date);		}
+		}
 
 // – – – – – – – – – –  Constantes php pour les dates – – – – – – – – – – – – – – 
 	/* d
