@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'dev',
+	'default' => 'prod',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ return array(
 		'prod' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'comptagb',
+			'database'  => 'bruno_compta',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
