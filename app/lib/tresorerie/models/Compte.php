@@ -8,7 +8,7 @@ class Compte extends Node {
 
 	protected $guarded = array('id');
 
-	protected $default_values_for_create = array(
+	protected static $default_values_for_create = array(
 		'numero' => CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO,
 		'libelle' => CREATE_FORM_DEFAUT_TXT_LIBELLE,
 		'description_officiel' => '',

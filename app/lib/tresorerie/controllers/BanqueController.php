@@ -27,7 +27,7 @@ class BanqueController extends BaseController {
 
 	public function create()
 	{
-		$banque = new Banque;
+		$banque = new Banque(Banque::fillFormForCreate());
 		$banque->fillFormForCreate();
 
 		return View::Make('tresorerie.views.banques.create')->with(compact('banque'));

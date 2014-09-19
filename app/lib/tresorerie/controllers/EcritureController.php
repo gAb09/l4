@@ -74,8 +74,7 @@ class EcritureController extends BaseController {
 
 	public function create()
 	{
-		$ecriture = new Ecriture;
-		$ecriture->fillFormForCreate();
+		$ecriture = new Ecriture(Ecriture::fillFormForCreate());
 
 		return View::Make('tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)

@@ -9,7 +9,7 @@ class Banque extends Eloquent {
 	protected $softDelete = true; // AFA
 
 
-	protected $default_values_for_create = array(
+	protected static $default_values_for_create = array(
 		'nom' => CREATE_FORM_DEFAUT_TXT_NOM,
 		'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
 	);
