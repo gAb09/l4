@@ -113,10 +113,11 @@ App::down(function()
 */
 
 
-require app_path().'/filters.php';
-require app_path().'/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'/lib/tresorerie/validations/EcrituresCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'/lib/tresorerie/validations/ComptesCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'/lib/shared/routes.php';
+require app_path().'/lib/shared/filters.php';
+require app_path().'/lib/shared/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'//lib/frontend/tresorerie/validations/EcrituresCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'//lib/frontend/tresorerie/validations/ComptesCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 
 /*
 |--------------------------------------------------------------------------
