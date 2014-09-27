@@ -9,7 +9,7 @@ class RecDepController extends BaseController {
 	private $order = 'date_emission';
 
 	// La vue appelée
-	private $view = 'tresorerie.views.recdep.main';
+	private $view = 'frontend.tresorerie.views.recdep.main';
 
 	// Le tableau des statuts modifiables depuis cette page
 	private $statuts_ok = '1-2';

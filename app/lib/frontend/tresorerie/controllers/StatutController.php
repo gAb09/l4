@@ -18,20 +18,22 @@ class StatutController extends BaseController {
 	{
 		$statuts = Statut::all();
 
-		return View::Make('tresorerie.views.statuts.visu')->with(compact('statuts'));
+		return View::Make('frontend.tresorerie.views.statuts.visu')->with(compact('statuts'));
 	}
 
 	public function create()
 	{
-		// return 'Formulaire pour la création d\'un statut';  // CTRL
+		return 'Formulaire pour la création d\'un statut';  // CTRL
 
 		$statut = new Statut(Statut::fillFormForCreate());
 
-		return View::Make('tresorerie.views.statuts.create')->with(compact('statut'));
+		return View::Make('frontend.tresorerie.views.statuts.create')->with(compact('statut'));
 	}
 
 	public function store()
 	{
+		return 'Faire les validations !';
+		
 		$validation = $this->validateur->validerStore(Input::all());
 
 		if($validation === true) 
@@ -53,12 +55,13 @@ class StatutController extends BaseController {
 
 		$statut = Statut::FindOrFail($id);
 
-		return View::Make('admin/statuts/edit')->with(compact('statut'));
+		return View::Make('backend/statuts/edit')->with(compact('statut'));
 	}
 
 	public function update($id)
 	{
 		// return 'update du statut n° '.$id;  // CTRL
+		return 'Faire les validations !';
 
 		$validation = $this->validateur->validerUpdate(Input::all());
 
@@ -88,7 +91,7 @@ class StatutController extends BaseController {
 			Session::flash('success', 'Le statut "'.$item->nom.'" a bien été supprimé');
 		};
 
-		return Redirect::to('admin/statuts');
+		return Redirect::to('backend/statuts');
 	}
 
 }

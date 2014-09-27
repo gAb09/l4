@@ -22,7 +22,7 @@
 
 {{ Form::model($banque, ['method' => 'PUT', 'action' => ['BanqueController@update', $banque->id]]) }}
 
-@include('tresorerie/views/banques/form')
+@include('frontend/tresorerie/views/banques/form')
 
 <br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}

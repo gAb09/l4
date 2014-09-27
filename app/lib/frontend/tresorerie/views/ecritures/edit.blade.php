@@ -23,7 +23,7 @@
 
 
 
-@include('tresorerie/views/ecritures/form')
+@include('frontend/tresorerie/views/ecritures/form')
 
 @section('zapette')
 <p>

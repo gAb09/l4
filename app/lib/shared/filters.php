@@ -37,7 +37,7 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::guest('login');
 });
 
-Route::filter('admin', function()
+Route::filter('backend', function()
 {
 	if (Auth::guest()) return Redirect::guest('login');
 });

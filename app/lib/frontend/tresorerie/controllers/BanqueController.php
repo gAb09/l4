@@ -20,7 +20,7 @@ class BanqueController extends BaseController {
 	{
 		$banques = Banque::all();
 
-		return View::Make('tresorerie.views.banques.index')->with(compact('banques'));
+		return View::Make('frontend.tresorerie.views.banques.index')->with(compact('banques'));
 	}
 
 
@@ -30,7 +30,7 @@ class BanqueController extends BaseController {
 		$banque = new Banque(Banque::fillFormForCreate());
 		$banque->fillFormForCreate();
 
-		return View::Make('tresorerie.views.banques.create')->with(compact('banque'));
+		return View::Make('frontend.tresorerie.views.banques.create')->with(compact('banque'));
 	}
 
 
@@ -56,7 +56,7 @@ class BanqueController extends BaseController {
 	public function edit($id)
 	{
 		$banque = Banque::FindOrFail($id);
-		return View::Make('tresorerie.views.banques.edit')->with(compact('banque'));
+		return View::Make('frontend.tresorerie.views.banques.edit')->with(compact('banque'));
 	}
 
 

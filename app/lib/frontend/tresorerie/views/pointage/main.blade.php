@@ -71,11 +71,11 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
 		<?php $prev_mois = $ecriture->mois_classement ?>
 		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
-		@include('tresorerie/views/pointage/row')
+		@include('frontend/tresorerie/views/pointage/row')
 		@else
 
 		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
-		@include('tresorerie/views/pointage/row')
+		@include('frontend/tresorerie/views/pointage/row')
 		@endif
 
 		@endforeach

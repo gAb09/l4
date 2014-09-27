@@ -64,7 +64,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function()
 
 	Route::get('moncompte', function()
 	{
-		return View::make('dashboard.moncompte')
+		return View::make('frontend.dashboard.moncompte')
 		->with('titre_page', 'Mon compte')
 		;
 	});
@@ -109,15 +109,15 @@ Route::get('grille/grille', function(){
 
 /*
 |--------------------------------------------------------------------------
-| Section prefix "admin"
+| Section prefix "backend"
 |--------------------------------------------------------------------------
 |
 |
 */
-Route::group(array('prefix' => 'admin', 'before' => 'auth'), function() 
+Route::group(array('prefix' => 'backend', 'before' => 'auth'), function() 
 {
 	Route::get('/', function(){
-		return Redirect::to('admin/menus');
+		return Redirect::to('backend/menus');
 	});
 
 	Route::resource('menus', 'MenuController');
@@ -125,7 +125,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	/*----------------------  Utilisateurs  ----------------------------------*/
 	Route::resource('user', 'UtilisateurController');
 	
-});  // Fin de groupe prefix admin
+});  // Fin de groupe prefix backend
 
 
 
@@ -148,7 +148,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 	});
 
 	Route::get('statuts', function(){
-		return View::make('tresorerie/views/statuts/visu');
+		return View::make('frontend/tresorerie/views/statuts/visu');
 	});
 
 	Route::get('tost', 'TostController@tost');

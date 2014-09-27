@@ -19,9 +19,9 @@
 @section('contenu')
 
 
-	{{ Form::open(array('url' => URL::to('admin/menus'), 'method' => 'post')) }}
+	{{ Form::open(array('url' => URL::to('backend/menus'), 'method' => 'post')) }}
 
-@include('admin/menus/form')
+@include('backend/menus/form')
 
 	<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 	{{ Form::close() }}

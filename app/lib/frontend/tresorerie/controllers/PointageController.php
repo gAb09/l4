@@ -42,7 +42,7 @@ class PointageController extends BaseController {
 		$solde = 0;
 
 
-		return View::make('tresorerie.views.pointage.main')
+		return View::make('frontend.tresorerie.views.pointage.main')
 		->with('ecritures', $ecritures)
 		->with(compact('solde'))
 		->with(compact('prev_mois'))

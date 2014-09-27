@@ -62,7 +62,7 @@ class EcritureController extends BaseController {
 			return Redirect::to('tresorerie/ecritures')->withErrors($message);
 		}
 
-		return View::Make('tresorerie.views.ecritures.index')
+		return View::Make('frontend.tresorerie.views.ecritures.index')
 		->with(compact('ecritures'))
 		->with(compact('titre_page'))
 		->with(compact('tri_sur'))
@@ -76,7 +76,7 @@ class EcritureController extends BaseController {
 	{
 		$ecriture = new Ecriture(Ecriture::fillFormForCreate());
 
-		return View::Make('tresorerie.views.ecritures.create')
+		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
 		;
@@ -86,7 +86,7 @@ class EcritureController extends BaseController {
 	{
 		$ecriture = Ecriture::where('id', $id)->with('ecriture2')->first();
 
-		return View::Make('tresorerie.views.ecritures.create')
+		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
 		;
@@ -199,7 +199,7 @@ class EcritureController extends BaseController {
 	{
 		$ec1 = Ecriture::where('id', $id)->with('ecriture2')->first();
 
-		return View::Make('tresorerie/views/ecritures/edit')
+		return View::Make('frontend/tresorerie/views/ecritures/edit')
 		->with('ecriture', $ec1)
 		->with('list', self::lister())
 		;

@@ -127,7 +127,6 @@ require app_path().'//lib/frontend/tresorerie/validations/ComptesCustomRules.php
 */
 
 define('CREATE_FORM_DEFAUT_LIST', 'Faire une sélection');
-
 define('CREATE_FORM_DEFAUT_TXT_NOM', 'Saisir un nom');
 define('CREATE_FORM_DEFAUT_TXT_DESCRIPTION', 'Saisir une description');
 define('CREATE_FORM_DEFAUT_TXT_JUSTIF', 'Éventuellement préciser un justificatif');

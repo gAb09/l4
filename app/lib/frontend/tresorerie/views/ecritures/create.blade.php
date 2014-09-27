@@ -20,7 +20,7 @@
 
 {{ Form::model($ecriture, array('name' => 'form', 'url' => 'tresorerie/ecritures', 'method' => 'post', 'action' => 'EcritureController@store')) }}
 
-@include('tresorerie/views/ecritures/form')
+@include('frontend/tresorerie/views/ecritures/form')
 
 {{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}

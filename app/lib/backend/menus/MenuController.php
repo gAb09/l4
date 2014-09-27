@@ -19,7 +19,7 @@ class MenuController extends \BaseController {
 	public function index() {
 		$menus = Menu::orderBy('parent_id')->orderBy('rang')->get();
 
-		return View::make('admin.menus.index')->with(compact('menus'));
+		return View::make('backend.menus.index')->with(compact('menus'));
 	}
 
 
@@ -28,7 +28,7 @@ class MenuController extends \BaseController {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('admin.menus.create')->with(compact('menu'));
+		return View::make('backend.menus.create')->with(compact('menu'));
 	}
 
 
@@ -54,7 +54,7 @@ class MenuController extends \BaseController {
 			$menu->makeChildOf(Menu::findOrFail($parent_id));
 		}
 
-		return Redirect::to('admin/menus');
+		return Redirect::to('backend/menus');
 	}
 
 
@@ -65,7 +65,7 @@ class MenuController extends \BaseController {
 		$menu = Menu::findOrFail($id);
 		// var_dump($menu); // CTRL
 
-		return View::make('admin/menus/edit')->with(compact('menu'));
+		return View::make('backend/menus/edit')->with(compact('menu'));
 	}
 
 
@@ -88,12 +88,14 @@ class MenuController extends \BaseController {
 
 		if ($parent_id != 0) {
 			$menu->makeChildOf(Menu::findOrFail($parent_id));
+		}else{
+			$menu->makeRoot();
 		}
 
 		$menu->save();
 
 		// return var_dump($menu); //CTRL
-		return Redirect::to('admin/menus');
+		return Redirect::to('backend/menus');
 	}
 
 
@@ -106,12 +108,12 @@ class MenuController extends \BaseController {
 		$desc = $menu->getDescendants();
 
 		if ($desc->count()) {
-			return Redirect::to('admin/menus')->withErrors('L’item “'.$menu->etiquette.'” possède des descendants, 
+			return Redirect::to('backend/menus')->withErrors('L’item “'.$menu->etiquette.'” possède des descendants, 
 				veuillez d‘abord les déplacer ou les supprimer.');
 		} else {
 		$menu->delete();
 			Session::flash('success', 'L’item "'.$menu->etiquette.'" a bien été supprimé');
-			return Redirect::to('admin/menus');
+			return Redirect::to('backend/menus');
 		}
 
 	}

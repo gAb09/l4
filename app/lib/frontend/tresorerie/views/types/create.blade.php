@@ -21,7 +21,7 @@
 
 {{ Form::open(['method' => 'post', 'action' => 'TypeController@store']) }}
 
-@include('tresorerie/views/types/form')
+@include('frontend/tresorerie/views/types/form')
 
 <br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}

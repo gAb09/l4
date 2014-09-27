@@ -20,7 +20,7 @@
 <hr>
 {{ Form::open(['method' => 'post', 'action' => 'CompteController@store']) }}
 
-@include('tresorerie/views/comptes/form')
+@include('frontend/tresorerie/views/comptes/form')
 
 <br />{{ Form::submit('Créer', array('class' => 'btn')) }}
 {{ Form::close() }}

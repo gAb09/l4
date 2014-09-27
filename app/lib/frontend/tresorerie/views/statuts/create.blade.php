@@ -19,7 +19,7 @@
 
 {{ Form::model($statut, ['method' => 'post', 'route' => 'tresorerie.statuts.store']) }}
 
-@include('admin/statuts/form')
+@include('backend/statuts/form')
 
 <br />
 {{ Form::submit('Créer', array('class' => 'btn')) }}

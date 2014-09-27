@@ -20,7 +20,7 @@
 
 {{ Form::model($banque, ['method' => 'post', 'action' => 'BanqueController@store']) }}
 
-@include('tresorerie/views/banques/form')
+@include('frontend/tresorerie/views/banques/form')
 
 <br />
 {{ Form::submit('Créer', array('class' => 'btn')) }}

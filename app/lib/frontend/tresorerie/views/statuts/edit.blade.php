@@ -21,12 +21,12 @@
 
 {{ Form::model($statut, ['method' => 'PUT', 'route' => ['tresorerie.statuts.update', $statut->id]]) }}
 
-@include('admin/statuts/form')
+@include('backend/statuts/form')
 
 	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
 
-	{{ Form::open(array('url' => 'admin/statuts/'.$statut->id, 'method' => 'delete')) }}
+	{{ Form::open(array('url' => 'backend/statuts/'.$statut->id, 'method' => 'delete')) }}
 {{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 

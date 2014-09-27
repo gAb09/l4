@@ -73,7 +73,7 @@
 		<?php $prev_mois = $ecriture->mois_classement ?>
 
 		@endif
-		@include('tresorerie/views/recdep/row')
+		@include('frontend/tresorerie/views/recdep/row')
 		@endforeach
 
 	</tbody>

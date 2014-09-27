@@ -22,7 +22,7 @@
 
 {{ Form::open(['method' => 'PUT', 'action' => ['TypeController@update', $type->id]]) }}
 
-@include('tresorerie/views/types/form')
+@include('frontend/tresorerie/views/types/form')
 
 <br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}

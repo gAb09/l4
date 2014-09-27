@@ -39,11 +39,11 @@
 
 				@if ($errors->has('login'))
 				{{ Form::label('login', $errors->first('login'), array('class' => 'erreur')) }}
-				{{ Form::text('login', 'Saisissez votre Login', array('class' => 'erreur')) }}
+				{{ Form::text('login', 'Saisissez votre Login', array('class' => 'erreur', 'onClick' => "if(this.value=='Saisissez votre Login')this.value='';")) }}
 
 				@else
 				{{ Form::label('login', 'Login')}}
-				{{ Form::text('login', 'Saisissez votre Login', array('class' => '')) }}
+				{{ Form::text('login', 'Saisissez votre Login', array('class' => '', 'onClick' => "if(this.value=='Saisissez votre Login')this.value='';")) }}
 
 				@endif
 

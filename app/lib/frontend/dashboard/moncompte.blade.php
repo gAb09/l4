@@ -1,4 +1,4 @@
-@extends('tresorerie/views/layout')
+@extends('frontend/views/layout')
 
 @section('contenu')
 

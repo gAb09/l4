@@ -18,14 +18,14 @@
 
 @section('contenu')
 
-{{ Form::model($menu, ['method' => 'PUT', 'route' => ['admin.menus.update', $menu->id]]) }}
+{{ Form::model($menu, ['method' => 'PUT', 'route' => ['backend.menus.update', $menu->id]]) }}
 
-@include('admin/menus/form')
+@include('backend/menus/form')
 
 	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
 
-	{{ Form::open(array('url' => 'admin/menus/'.$menu->id, 'method' => 'delete')) }}
+	{{ Form::open(array('url' => 'backend/menus/'.$menu->id, 'method' => 'delete')) }}
 {{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 

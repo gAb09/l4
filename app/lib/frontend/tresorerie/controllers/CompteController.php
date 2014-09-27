@@ -49,7 +49,7 @@ class CompteController extends BaseController {
 		  });
 
 
-		  return View::Make('tresorerie.views.comptes.index')
+		  return View::Make('frontend.tresorerie.views.comptes.index')
 		  ->with('titre_page', $titre_page)
 		  ->with('comptes', $comptes)
 		  ->with('classes', $classes);
@@ -62,7 +62,7 @@ class CompteController extends BaseController {
 			$compte = new Compte(Compte::fillFormForCreate());
 			// $compte->fillFormForCreate();
 
-			return View::Make('tresorerie.views.comptes.create')
+			return View::Make('frontend.tresorerie.views.comptes.create')
 			->with('compte', $compte)
 			->with('position_class', 'invisible')
 			->with('parents', self::listerParentable())
@@ -108,7 +108,7 @@ class CompteController extends BaseController {
 			/* Adapter les class css selon les valeurs de certains attributs */
 			$compte->class_pco = ($compte->pco)? 'pco' : '';
 
-			return View::Make('tresorerie.views.comptes.edit')
+			return View::Make('frontend.tresorerie.views.comptes.edit')
 			->with('compte', $compte)
 			->with('position_class', 'invisible')
 			->with('parents', self::listerParentable())

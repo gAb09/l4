@@ -9,7 +9,7 @@
 
 @section('topcontent1')
 		<h1 class="titrepage">Les menus</h1>
-		<a href ="{{ URL::route('admin.menus.create') }}" class="badge badge-locale iconemedium add"
+		<a href ="{{ URL::route('backend.menus.create') }}" class="badge badge-locale iconemedium add"
 		style="font-size:1.1em">Ajouter un menu ou un item</a>
 @stop
 
@@ -33,7 +33,7 @@
 	<h2 class ="item">• {{ $menu->etiquette }} </h2>
 		@endif
 
-		<p class="badge badge-locale iconesmall edit"><a href="{{ URL::to('admin/menus/'.$menu->id.'/edit') }}">Modifier ce menu</a></p>
+		<p class="badge badge-locale iconesmall edit"><a href="{{ URL::to('backend/menus/'.$menu->id.'/edit') }}">Modifier ce menu</a></p>
 		<p><strong>Rang = </strong>{{ $menu->rang }}</p>
 		<p><strong>Description : </strong>{{ $menu->description }}</p>
 
@@ -83,7 +83,7 @@
 					{{ $item->nom_sys }}
 				</td>
 				<td>
-					<a  class="iconemedium edit" href="{{ URL::to('admin/menus/'.$item->id.'/edit') }}">
+					<a  class="iconemedium edit" href="{{ URL::to('backend/menus/'.$item->id.'/edit') }}">
 					</a>
 				</td>
 			</tr>
@@ -121,7 +121,7 @@
 					{{ $desc->nom_sys }}
 				</td>
 				<td>
-					<a  class="iconemedium edit" href="{{ URL::to('admin/menus/'.$desc->id.'/edit') }}">
+					<a  class="iconemedium edit" href="{{ URL::to('backend/menus/'.$desc->id.'/edit') }}">
 					</a>
 				</td>
 			</tr>

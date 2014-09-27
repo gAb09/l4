@@ -18,7 +18,7 @@ class TypeController extends BaseController {
 	{
 		$types = Type::all();
 
-		return View::Make('tresorerie.views.types.index')->with('types', $types);
+		return View::Make('frontend.tresorerie.views.types.index')->with('types', $types);
 	}
 
 
@@ -27,7 +27,7 @@ class TypeController extends BaseController {
 	{
 		$type = new Type(Type::fillFormForCreate());
 
-		return View::Make('tresorerie.views.types.create')->with('type', $type);
+		return View::Make('frontend.tresorerie.views.types.create')->with('type', $type);
 	}
 
 
@@ -55,7 +55,7 @@ class TypeController extends BaseController {
 	{
 		$type = Type::findOrFail($id);
 
-		return View::Make('tresorerie/views/types/edit')->with('type', $type);
+		return View::Make('frontend/tresorerie/views/types/edit')->with('type', $type);
 	}
 
 	public function update($id)

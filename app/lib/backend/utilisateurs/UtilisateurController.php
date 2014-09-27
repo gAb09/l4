@@ -71,7 +71,7 @@ class UtilisateurController extends \BaseController {
 	public function create() {
 		// return 'formulaire de création d\'un nouvel utilisateur'; // CTRL
 
-		return View::make('admin/utilisateurs/create')
+		return View::make('backend/utilisateurs/create')
 		;
 	}
 
