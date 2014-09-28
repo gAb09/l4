@@ -1,11 +1,13 @@
-<?php namespace Lib\Validations;
+<?php
+namespace Lib\Validations;
+
 use Illuminate\Validation\Factory as Factory;
 use Illuminate\Validation\Validator as Validator;
 use Symfony\Component\Translation\TranslatorInterface;
 
-// aFa : Voir pourquoi il faut binder le translator alors que ce n'est pas le cas dans le tuto de BestMomo
+    // aFa : Voir pourquoi il faut binder le translator alors que ce n'est pas le cas dans le tuto de BestMomo
 \App::bind('Symfony\Component\Translation\TranslatorInterface', function($app) {
- return $app['translator'];
+   return $app['translator'];
 });
 
 
@@ -37,7 +39,7 @@ abstract class ValidationBase implements ValidationInterface
         $this->data = $input;
 
         // Parser chaque règle pour y détecter des constantes et les remplacer par leur valeur
-        $this->rules = $this->parserListePourConstantes($this->rules);
+        $this->rules = $this->parserRules($this->rules);
 
         $validateur = \Validator::make($this->data, $this->rules, $this->messages);
 
@@ -64,58 +66,90 @@ abstract class ValidationBase implements ValidationInterface
      * 
      * @return array  $rules
      */
-    private function parserListePourConstantes(&$rules)
+    private function parserRules($rules)
     {
-        // echo 'parserListePourConstantes';var_dump($rules); // CTRL
-        foreach ($rules as $attribut => $lignes)
+        // Parcourir $rules et extraire chaque regles_attribut
+        foreach ($rules as $attribut => $regles_attribut)
         {
-            // var_dump($attribut);var_dump($lignes); // CTRL
-            if(is_array($lignes))
-            {
-                foreach ($lignes as $key => $ligne) {
-                    $rules[$attribut][$key] = $this->parseLigneForConstantes($ligne);
-                }
+            if (strpos($regles_attribut, '|') !== false){
+                $regles_attribut =  $this->parserReglesAttribut($regles_attribut);  // Si plusieurs regles_attribut
+                $rules[$attribut] = $regles_attribut;
             }else{
-                $rules[$attribut] = $this->parseLigneForConstantes($lignes);
+                $regles_attribut =  $this->parserRegle($regles_attribut); // Si une seule
+                $rules[$attribut] = $regles_attribut;
             }
         }
-        // echo 'constantes remplacées';var_dump($rules); // CTRL
-
         return $rules;
     }
 
 
 
-    protected function parseLigneForConstantes($ligne)
-    {
-        $parameters = array();
 
-        if (strpos($ligne, ':') !== false)
+
+    /**
+     * Décomposer regles_attribut en règle.
+     *
+     * @param  string
+     * 
+     * @return string
+     */
+    private function parserReglesAttribut($regles_attribut)
+    {
+        $string = '';
+
+        $regles_attribut = explode('|', $regles_attribut); // on décompose en regle
+
+        foreach ($regles_attribut as $regle)
         {
-            list($regle, $parameters) = explode(':', $ligne, 2);
-
-            $parameters = $this->parseParametersForConstantes($parameters);
-            $ligne = $regle.':'.implode(',', $parameters);
+            $regle =  $this->parserRegle($regle);
+            $string .= $regle.'|';
         }
-
-        return $ligne;
+        return rtrim($string, '|');
     }
 
-    protected function parseParametersForConstantes($parameters)
+
+
+    /**
+     * Extraire les paramètres d'une règle.
+     *
+     * @param  string
+     * 
+     * @return string
+     */
+    private function parserRegle($regle)
     {
-        $parameters = str_getcsv($parameters);
+        if (strpos($regle, ':') !== false) {
+            list($nomregle, $parameters) = explode(':', $regle, 2);   // On extrait les paramètres s'ils existent
 
-        foreach ($parameters as $key => $value) {
-            if (defined($value))
-            {
-                $parameters[$key] = constant($value);
-            }
+            $parameters = $this->detecterConstante($parameters);
+
+            return $nomregle.':'.$parameters;
         }
-        return $parameters;
+        return $regle;
     }
 
-// Rules [ =>   Attribut [ NomRègle => DéfinitionRègle ] ]
 
-// Messages [ => Attribut [ NomRègle => Message ] ]
+    private function detecterConstante($parameters)
+    {
+        $string ='';
 
-}
+        if (strpos($parameters, ',') !== false) {  // Si plusieurs parametres
+
+            $parameters = str_getcsv($parameters);  // on décompose
+
+            foreach ($parameters as $parameter) {
+                if (defined($parameter)){
+                    $parameter = constant($parameter);
+                }
+                    $string .= $parameter.',';  // on traite et on recompose
+                }
+            }else{
+                if (defined($parameters))
+                {
+                    $parameters = constant($parameters);
+                }
+                $string = $parameters;
+            }
+            return rtrim($string, ',');
+        }
+    }

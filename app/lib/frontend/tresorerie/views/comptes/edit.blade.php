@@ -22,7 +22,7 @@
 
 {{ Form::open(['method' => 'PUT', 'action' => ['CompteController@update', $compte->id]]) }}
 
-@include('tresorerie/views/comptes/form')
+@include('frontend/tresorerie/views/comptes/form')
 
 <br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}

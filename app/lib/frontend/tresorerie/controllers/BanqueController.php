@@ -69,7 +69,7 @@ class BanqueController extends BaseController {
 
 		if($validation === true) 
 		{
-			return 'OK'; // CTRL
+			// return 'OK'; // CTRL
 
 			$item->fill(Input::except('_token', '_method'));
 			$item->save();
