@@ -45,5 +45,6 @@ function getFreres() {
 		}
 	};
 	xhr.open("GET", "freres?idpere="+idpere.value, true);
-	xhr.send(null);}
+	xhr.send(null);
+}
 

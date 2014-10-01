@@ -174,10 +174,13 @@ nav.menus {
 /* –––––––––––––––––––– Perso –––––––––––––––––––––––– */
 div.messages{
     position: fixed;
-    left: 0px;
+    right: 0px;
     z-index: 300;
     top:0px;
     width:auto;
+    transition-property: top;
+    transition-duration: 2s;
+
 }
 
 div.messages.masquer{
@@ -432,6 +435,10 @@ div.classeRacine {
 
 .st_www{
     color:#8d6e57;
+}
+
+.editable{
+    background-color:#C9A945;
 }
 
 /*.st_releve{
