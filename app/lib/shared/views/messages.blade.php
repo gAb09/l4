@@ -38,11 +38,4 @@
 @endif
 
 <script type="text/javascript">
-function masquer(icoclose)
-{
-	var message = icoclose.parentNode.parentNode;
-	message.className = message.className + ' masquer';
-	// alert(message.className);
-	// message.setAttribute('style', 'display:none')
-}
 </script>
