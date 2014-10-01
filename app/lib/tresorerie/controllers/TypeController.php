@@ -25,9 +25,7 @@ class TypeController extends BaseController {
 
 	public function create()
 	{
-		$type = new Type;
-
-		$type->fillFormForCreate();
+		$type = new Type(Type::fillFormForCreate());
 
 		return View::Make('tresorerie.views.types.create')->with('type', $type);
 	}

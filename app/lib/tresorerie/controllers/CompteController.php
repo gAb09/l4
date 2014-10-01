@@ -59,8 +59,8 @@ class CompteController extends BaseController {
 
 		public function create()
 		{
-			$compte = new Compte;
-			$compte->fillFormForCreate();
+			$compte = new Compte(Compte::fillFormForCreate());
+			// $compte->fillFormForCreate();
 
 			return View::Make('tresorerie.views.comptes.create')
 			->with('compte', $compte)

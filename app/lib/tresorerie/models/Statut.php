@@ -1,6 +1,8 @@
 <?php
+use lib\shared\Traits\ModelTrait;
 
 class Statut extends Eloquent {
+	use ModelTrait;
 
 	protected static $unguarded = true; // AFA
 
@@ -10,6 +12,12 @@ class Statut extends Eloquent {
 	{
 		return $this->hasMany('Ecriture');
 	}
+
+	protected static $default_values_for_create = [
+		'nom' => 'rehja,ea',
+		'classe' => 'Saisir un libellé',
+		'description' => 'Éventuellement le compléter',
+		];
 
 	/* —————————  Validation : règles et messages  —————————————————*/
 
@@ -43,15 +51,5 @@ class Statut extends Eloquent {
 
 	/* —————————  MUTATORS  —————————————————*/
 
-
-	/* —————————  Liste de sélection  —————————————————*/
-	public static function fillFormForCreate()
-	{
-		$statut = new Statut();
-		$statut->nom = 'rehja,ea';
-		$statut->classe = 'Saisir un libellé';
-		$statut->description = 'Éventuellement le compléter';
-		return $statut;
-	}
 
 }

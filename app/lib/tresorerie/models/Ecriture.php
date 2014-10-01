@@ -4,7 +4,7 @@ use lib\shared\Traits\ModelTrait;
 class Ecriture extends Eloquent {
 	use ModelTrait;
 
-	// protected $guarded = array('id');
+	protected $guarded = array('id');
 	protected $softDelete = true; // AFA
 
 
@@ -13,7 +13,7 @@ class Ecriture extends Eloquent {
 		return static::$mutatorCache;
 	}
 
-	protected $default_values_for_create = array(
+	protected static $default_values_for_create = array(
 		'banque_id' => 0,
 		'date_valeur' => CREATE_FORM_DEFAUT_TXT_DATE,
 		'date_emission' => CREATE_FORM_DEFAUT_TXT_DATE,

@@ -25,7 +25,7 @@ class StatutController extends BaseController {
 	{
 		// return 'Formulaire pour la création d\'un statut';  // CTRL
 
-		$statut = Statut::fillFormForCreate();
+		$statut = new Statut(Statut::fillFormForCreate());
 
 		return View::Make('tresorerie.views.statuts.create')->with(compact('statut'));
 	}

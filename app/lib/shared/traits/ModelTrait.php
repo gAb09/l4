@@ -27,11 +27,8 @@ trait ModelTrait
 		return $list;
 	}
 
-	public  function fillFormForCreate(){
-		foreach ($this->default_values_for_create as $key => $value) {
-			$this->{$key} = $this->default_values_for_create[$key];
-		}
-		return $this;
+	public static function fillFormForCreate(){
+		return static::$default_values_for_create;
 	}
 
 }
