@@ -23,7 +23,6 @@ class Menu extends Node {
    */
   public static function listForInputSelect() {
     $menus = Menu::roots()->orderBy('id')->get();
-//    var_dump($items_racines); // CTRL
 
     $menuslist[0] = 'Créer une nouvelle racine';
 
