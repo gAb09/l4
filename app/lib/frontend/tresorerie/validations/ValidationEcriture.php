@@ -9,9 +9,9 @@ class ValidationEcriture extends ValidationBase
 		'montant' => 'required|fnumeric|notnull|positif',
 		'signe_id' => 'required',
 		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
-		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',// aFa Utiliser constante
+		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',
 		'type_id' => 'not_in:0',
-		'justificatif' => 'not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',// aFa Utiliser constante
+		'justificatif' => 'not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',
 		'compte_id' => 'not_in:0',
 		);
 

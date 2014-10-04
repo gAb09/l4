@@ -26,7 +26,7 @@ class CompteController extends BaseController {
 		/* Assigner la liste des racines de comptes (classes) 
 		pour le tableau de sélection des classes */
 		$classes = Compte::roots()->get();
-		// $classes->shift(); // aFa ?? retrait du pseudocompte "indéfini" 
+		// $classes->shift(); 
 
 		/* 
 		- Assigner $comptes qui contient les comptes à afficher
@@ -54,7 +54,6 @@ class CompteController extends BaseController {
 		  ->with('comptes', $comptes)
 		  ->with('classes', $classes);
 		}
-// aFa Trier par numéro ??
 
 
 		public function create()

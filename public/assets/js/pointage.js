@@ -1,6 +1,8 @@
 /*----------  Pointage web = marquage comme pointé selon l'état fourni sur le site Caisse d´Épargne 
 Changement de la couleur du fond de ligne et update du pointage (pages "Pointage") -----------*/
+
 function bascule_statut_pointage(xxx) {// aFa automatiser l'attribution du nom de la classe 
+
 	// Obtenir le <tr> parent de l'input select name"pointage" et changer sa classe 
 	var row = xxx.parentNode.parentNode.parentNode;
 	var input = row.childNodes[1].childNodes[1].childNodes[2];

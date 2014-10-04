@@ -35,7 +35,6 @@ class MenuController extends \BaseController {
 
 	public function store() {
 		// return 'Store un nouveau "Menu"';
-		Menu::unguard();  // aFa Placer dans le model
 
 // dd(Input::all()); // CTRL
 		$publication = (Input::get('publication')) ? 1 : 0;

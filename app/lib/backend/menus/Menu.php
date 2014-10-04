@@ -13,6 +13,8 @@ class Menu extends Node {
    */
   protected $table = 'menus';
 
+  protected $unguard = true;
+
 
   /**
    * Construit un tableau destiné à la liste de sélection pour un input de type select :
@@ -70,5 +72,5 @@ class Menu extends Node {
     $menu->fill($strings);
     return $menu;
   }
-
+}
   /* —————————  MUTATORS  —————————————————*/

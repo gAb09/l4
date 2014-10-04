@@ -2,8 +2,6 @@
 onLoad="bascule_signe();banque();"
 @stop
 
-<!-- Dates aFa revoir traduction de la date -->
-
 <?php
 $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : "invisible";
 ?>
@@ -164,7 +162,6 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 var separateurs = {};
 
 <?php 
-echo "separateurs['0'] = 'uiuiui';"; // aFa ????
 foreach($separateurs as $id => $separateur) {
 	echo "separateurs['$id'] = '$separateur';";
 }
