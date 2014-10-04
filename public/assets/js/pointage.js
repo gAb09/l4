@@ -49,46 +49,6 @@ function bascule_statut_recdep(xxx) {
 }
 
 
-function setRowEditable(ligne) {
-	var xhr = getXMLHttpRequest();
-	var numero = ligne.id;
-	var libelle = document.getElementById("libelle"+numero);
-	var valeur = document.getElementById("valeur"+numero);
-	var depense = document.getElementById("depense"+numero);
-	var recette = document.getElementById("recette"+numero);
-
-
-	if (!libelle.hasAttribute("contenteditable")) {
-
-		libelle.setAttribute("contenteditable", "true");
-		libelle.className = libelle.className + " editable";
-
-		valeur.setAttribute("contenteditable", "true");
-		valeur.className = valeur.className + " editable";
-
-		if (isNaN(recette.innerHTML)) {
-			recette.setAttribute("contenteditable", "true");
-			recette.className = recette.className + " editable";
-		}
-
-		if (isNaN(depense.innerHTML)) {
-			depense.setAttribute("contenteditable", "true");
-			depense.className = depense.className + " editable";
-		}
-	}else{
-
-		libelle.removeAttribute("contenteditable");
-		libelle.className = libelle.className.replace(" editable", "");
-
-		valeur.removeAttribute("contenteditable");
-		valeur.className = valeur.className.replace(" editable", "");
-
-		recette.removeAttribute("contenteditable");
-		recette.className = recette.className.replace(" editable", "");
-
-		depense.removeAttribute("contenteditable");
-		depense.className = depense.className.replace(" editable", "");
-	}
 /*
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status === 0)) {

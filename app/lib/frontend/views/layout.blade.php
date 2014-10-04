@@ -99,7 +99,7 @@
 		<div class="zapette">
 
 			@yield('zapette')
-			<br />ZAPETTE
+			<br />Version 1
 
 		</div>
 
