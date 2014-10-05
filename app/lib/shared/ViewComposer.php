@@ -4,12 +4,7 @@
 /* Composition du menu principal */
 View::composer('frontend/views/layout', function($view) {
 	
-	$sections = Menu::roots()->where('publication', 1)->get();
-
-	$sections = $sections->sortBy(function($sections)
-	{
-		return $sections->lft;
-	});
+	$sections = Menu::where('publication', 1)->whereNull('parent_id')->orderBy('rang')->get();
 
 	$view->with(compact('sections'));
 });
