@@ -2,7 +2,7 @@
 
 @section('titre')
 @parent
-: les statuts - édition
+
 
 @stop
 
@@ -21,13 +21,13 @@
 
 {{ Form::model($statut, ['method' => 'PUT', 'route' => ['tresorerie.statuts.update', $statut->id]]) }}
 
-@include('backend/statuts/form')
+@include('frontend/tresorerie/views/statuts/form')
 
 	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
 
 	{{ Form::open(array('url' => 'backend/statuts/'.$statut->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
+{{ Form::submit('Supprimer ce statut', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 
 @stop

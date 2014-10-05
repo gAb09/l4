@@ -2,12 +2,11 @@
 
 @section('titre')
 @parent
-: les statuts - création
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d'un nouveau statut</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -19,7 +18,7 @@
 
 {{ Form::model($statut, ['method' => 'post', 'route' => 'tresorerie.statuts.store']) }}
 
-@include('backend/statuts/form')
+@include('frontend/tresorerie/views/statuts/form')
 
 <br />
 {{ Form::submit('Créer', array('class' => 'btn')) }}

@@ -9,9 +9,5 @@
 				<a href="{{ URL::to($section->nom_sys) }}"> {{ $section->etiquette }}</a>
 			</li>
 			@endforeach
-			<li>
-				<a href="{{ URL::to($section->nom_sys) }}"> {{DB::getDatabaseName()}}</a>
-			</li>
-
 		</ul>
 	</div>

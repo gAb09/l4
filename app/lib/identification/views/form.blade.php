@@ -15,21 +15,9 @@
 
 <body>
 
-	<div class="container-fluid">
+		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
+			@include('shared/views/messages')
 
-		<!-- Messages d'erreurs -->
-		@if(Session::get('global'))
-		<div class="alert-danger">
-			{{Session::get('global')}}
-		</div>
-		@endif
-
-		<!-- Messages de succès -->
-		@if(Session::get('success'))
-		<div class="alert-success">
-			{{ Session::get('success') }}
-		</div>
-		@endif
 
 
 		<div class="login">

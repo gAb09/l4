@@ -2,12 +2,11 @@
 
 @section('titre')
 @parent
-: les banques - création
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d'une nouvelle “banque”</h1>
+<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -22,10 +21,13 @@
 
 @include('frontend/tresorerie/views/banques/form')
 
-<br />
-{{ Form::submit('Créer', array('class' => 'btn')) }}
-{{ Form::close() }}
+@stop
 
+@section('zapette')
+{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Créer cette banque', array('class' => 'btn btn-success')) }}
+{{ Form::close() }}
 @stop
 
 @section('footer')

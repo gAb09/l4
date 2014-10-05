@@ -59,10 +59,10 @@ class PointageController extends BaseController {
 
 		$ecriture = Ecriture::find($id);
 
-		$last_statut_ok = $statuts_ok[strlen($statuts_ok)-1];
+		$last_statut_accessible = $statuts_accessibles[strlen($statuts_accessibles)-1];
 		$statut_actuel = ($ecriture->statut_id);
 
-		$new_statut = ($statut_actuel < $last_statut_ok) ? ++$statut_actuel : $statuts_ok[0] ;
+		$new_statut = ($statut_actuel < $last_statut_accessible) ? ++$statut_actuel : $statuts_accessibles[0] ;
 
 		$ecriture->statut_id = $new_statut;
 

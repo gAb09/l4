@@ -1,4 +1,4 @@
-@extends('shared/views/layout')
+@extends('frontend/views/layout')
 
 @section('contenu')
 

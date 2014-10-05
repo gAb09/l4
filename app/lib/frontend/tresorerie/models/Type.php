@@ -38,9 +38,10 @@ class Type extends Eloquent {
 
 
 
-	/* —————————  Helpers  —————————————————*/ // aFa passer en requete ajax traitée par controleur ??
+	/* —————————  Helpers  —————————————————*/
+	
 	/* Obtenir (au format json) la liste des "id" des types d'écriture requérant une banque liée */
-	public static function type_dble_ecriture()
+	public static function type_dble_ecriture() // aFa passer en requete ajax traitée par controleur ??
 	{
 		$req_banque2 = Type::where('req_banque2', 1)->get(array('id'))->toArray();
 

@@ -2,15 +2,11 @@
 
 @section('titre')
 @parent
-: les menus
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les menus</h1>
-		<a href ="{{ URL::route('backend.menus.create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter un menu ou un item</a>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -144,6 +140,11 @@
 
 		@endif <!-- $menu->isRoot() ? -->
 		@endforeach <!-- Fin foreach $menu -->
+
+	@section('zapette')
+		<a href ="{{ URL::route('backend.menus.create') }}" class="badge badge-locale iconemedium add"
+		style="font-size:1.1em">Créer un menu ou un item de menu</a>
+	@stop
 
 	</div>
 	@stop

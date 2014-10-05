@@ -31,8 +31,23 @@ function getXMLHttpRequest() {
 
 function masquer(icoclose)
 {
-	var message = icoclose.parentNode.parentNode;
+	var message = document.getElementById("messages");
+	var icoshow = document.getElementById("icoshowmessages");
+	var icohide = document.getElementById("icohidemessages");
+
 	message.className = message.className + ' masquer';
-	// alert(message.className);
-	// message.setAttribute('style', 'display:none')
+	icoshow.className = icoshow.className.replace(' hidden', '');
+	icohide.className = icohide.className + ' hidden';
+}
+
+
+function montrer(icoclose)
+{
+	var message = document.getElementById("messages");
+	var icoshow = document.getElementById("icoshowmessages");
+	var icohide = document.getElementById("icohidemessages");
+
+	message.className = message.className.replace(' masquer', '');
+	icoshow.className = icoshow.className + ' hidden';
+	icohide.className = icohide.className.replace(' hidden', '');
 }

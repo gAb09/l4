@@ -9,6 +9,7 @@ class Ecriture extends Eloquent {
 
 
 	public static function mutator() // aFa remove ?
+	
 	{
 		return static::$mutatorCache;
 	}

@@ -1,5 +1,7 @@
 @extends('frontend/views/layout')
 
+<?php $titre_page = 'Recettes/Dépenses de “'.$banque.'”' ?>
+
 @section('titre')
 @parent
 : recettes_depenses
@@ -8,7 +10,7 @@
 
 
 @section('topcontent1')
-<h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
+<h1 class="titrepage">{{ $titre_page }}</h1>
 Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 
@@ -97,8 +99,7 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 
 @section('zapette')
 
-<a href ="{{ URL::route('tresorerie.ecritures.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter une écriture</a>
+	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
 
 @stop
 

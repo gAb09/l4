@@ -7,9 +7,9 @@ class EcritureController extends BaseController {
 
 	protected $validateur;
 
-	protected $validateur2;
+	protected $validateur2; // Pour double écritures
 
-	/* Attribuer le nom donné à l'écriture n°1 dans les messages (souci de clarté pour l’utilisateur)
+	/* Attribuer le qualificatif donné à l'écriture n°1 dans les messages (souci de clarté pour l’utilisateur)
 	afin de pouvoir le changer globalement on le place dans une variable  */
 	private $nommage = 'en cours d’édition';
 
@@ -33,10 +33,17 @@ class EcritureController extends BaseController {
 	}
 // aFa Séparer la génération des listes ?
 
+	public function indexBanque($choix = null)
+	{
+		$banque = (is_null($choix)) ? Session::get('Etat.banque') : $choix ;
 
+		Session::set('Etat.banque', $banque);
+
+		return $this->index($banque);
+	}
 
 	public function index($banque = null)
-	{
+	{	
 		$par_page = (Input::get('par_page')) ? Input::get('par_page') : PAR_PAGE;
 		$tri_sur = (Input::get('tri_sur')) ? Input::get('tri_sur') : 'date_emission';
 		$tri_sur_ok = ($tri_sur == 'ids')? 'id' : $tri_sur;
@@ -54,7 +61,7 @@ class EcritureController extends BaseController {
 		}else{
 			$bank_nom = Banque::find($banque)->nom;
 			$ecritures = Ecriture::whereBanqueId($banque)->orderBy($tri_sur_ok, $sens_tri)->paginate($par_page);
-			$titre_page = 'Écritures de la banque “'.$bank_nom.'”';
+			$titre_page = 'Écritures de “'.$bank_nom.'”';
 		}
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
@@ -79,6 +86,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
+		->with('titre_page', "Création d’une écriture")
 		;
 	}
 
@@ -89,6 +97,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
+		->with('titre_page', "Duplication d’une écriture")
 		;
 	}
 
@@ -202,6 +211,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend/tresorerie/views/ecritures/edit')
 		->with('ecriture', $ec1)
 		->with('list', self::lister())
+		->with('titre_page', "Édition de l’écriture \"$ec1->libelle - $ec1->libelle_detail\" (n°$ec1->id)")
 		;
 	}
 
@@ -397,10 +407,10 @@ class EcritureController extends BaseController {
 
 	public static function getMoisForRedirect($ec1){ // aPo redirection vers le mois
 		if(isset($ec1)){
-		$mois = Date::classAnMois($ec1->date_valeur);
-	}else{
-		$mois = "2014.01";
-	}
+			$mois = Date::classAnMois($ec1->date_valeur);
+		}else{
+			$mois = "2014.01";
+		}
 		Session::put('mois', $mois);
 		return $mois;
 	}

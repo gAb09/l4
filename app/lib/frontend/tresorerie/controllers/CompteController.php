@@ -21,26 +21,27 @@ class CompteController extends BaseController {
 	}
 
 
-	public function index($numero = null)
+	public function index($choix = null)
 	{
+		$numero = (is_null($choix)) ? Session::get('Etat.classe') : $choix ;
+
+		/* Passer en session le numero,
+		pour mémoriser la classe sur laquelle
+		l’utilisateur est en cours de travail
+		et la mémoriser au fil de la navigation. */
+		Session::set('Etat.classe', $numero);
+
 		/* Assigner la liste des racines de comptes (classes) 
 		pour le tableau de sélection des classes */
 		$classes = Compte::roots()->get();
-		// $classes->shift(); // aFa ?? retrait du pseudocompte "indéfini" 
 
-		/* 
-		- Assigner $comptes qui contient les comptes à afficher
-		  selon la classe demandée par l'utilisateur,
-		  tous si paramètre dans l'url est null 
-		  + Assigner le titre de haut de page (lui aussi fonction de la demande) */
-		  if ($numero === null) {
-		  	$comptes = Compte::all();
-		  	$titre_page = 'Tous les comptes';
-		  }else{
-		  	$classe = Compte::where('numero', $numero)->first();
-		  	$comptes = $classe->getDescendantsAndSelf();
-		  	$titre_page = $classe->libelle;
-		  }
+
+		/* Assigner $comptes qui contient les comptes à afficher
+		   selon la classe demandée par l'utilisateur.
+		   + Assigner le titre de haut de page (lui aussi fonction de la demande) */
+		  $classe = Compte::where('numero', $numero)->first();
+		  $comptes = $classe->getDescendantsAndSelf();
+		  $titre_page = "Classe $numero : $classe->libelle";
 
 		  /* Adapter les class css selon les valeurs de certains attributs */
 		  $comptes->map(function($compte){
@@ -52,9 +53,9 @@ class CompteController extends BaseController {
 		  return View::Make('frontend.tresorerie.views.comptes.index')
 		  ->with('titre_page', $titre_page)
 		  ->with('comptes', $comptes)
-		  ->with('classes', $classes);
+		  ->with('classes', $classes)
+		  ;
 		}
-// aFa Trier par numéro ??
 
 
 		public function create()
@@ -66,6 +67,7 @@ class CompteController extends BaseController {
 			->with('compte', $compte)
 			->with('position_class', 'invisible')
 			->with('parents', self::listerParentable())
+			->with('titre_page', 'Création d’un nouveau compte')
 			;
 		}
 

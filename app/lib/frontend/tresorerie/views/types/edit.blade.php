@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les types d'écriture - édition
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Édition du type n° {{$type->id}} : {{$type->nom}}</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -24,23 +22,21 @@
 
 @include('frontend/tresorerie/views/types/form')
 
-<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
-{{ Form::close() }}
-
-{{ Form::open(array('url' => 'tresorerie/types/'.$type->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
-{{ Form::close() }}
-
 @stop
 
 @section('zapette')
-<p>
-	{{ link_to_action('TypeController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
+{{ link_to_action('TypeController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Modifier ce type', array('class' => 'btn btn-edit btn-zapette')) }}
+{{ Form::close() }}
+
+{{ Form::open(['method' => 'delete', 'action' => ['TypeController@destroy', $type->id]]) }}
+{{ Form::submit('Supprimer ce type', array('class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());')) }}
+{{ Form::close() }}
+
 @stop
 
 @section('footer')
 @parent
 <h3>  Le footer de types</h3>
-
 @stop

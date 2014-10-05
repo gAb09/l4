@@ -3,7 +3,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lib\Validations\ValidationMenu;
 
 class MenuController extends \BaseController {
-
+// aFa Faire les validations
+	
 	protected $validateur;
 
 	public function __construct(ValidationMenu $validateur)
@@ -19,7 +20,10 @@ class MenuController extends \BaseController {
 	public function index() {
 		$menus = Menu::orderBy('parent_id')->orderBy('rang')->get();
 
-		return View::make('backend.menus.index')->with(compact('menus'));
+		return View::make('backend.menus.index')
+		->with(compact('menus'))
+		->with('titre_page', "Gestion des menus")
+		;
 	}
 
 
@@ -28,14 +32,16 @@ class MenuController extends \BaseController {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('backend.menus.create')->with(compact('menu'));
+		return View::make('backend.menus.create')
+		->with(compact('menu'))
+		->with('titre_page', "Création d’un menu ou d’un item")
+		;
 	}
 
 
 
 	public function store() {
 		// return 'Store un nouveau "Menu"';
-		Menu::unguard();  // aFa Placer dans le model
 
 // dd(Input::all()); // CTRL
 		$publication = (Input::get('publication')) ? 1 : 0;
@@ -65,7 +71,10 @@ class MenuController extends \BaseController {
 		$menu = Menu::findOrFail($id);
 		// var_dump($menu); // CTRL
 
-		return View::make('backend/menus/edit')->with(compact('menu'));
+		return View::make('backend/menus/edit')
+		->with(compact('menu'))
+		->with('titre_page', "Modification de l’item ou du menu")
+		;
 	}
 
 

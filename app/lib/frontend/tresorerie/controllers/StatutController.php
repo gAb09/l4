@@ -14,20 +14,37 @@ class StatutController extends BaseController {
 
 
 
+	public function visu()
+	{
+		$statuts = Statut::all();
+
+		return View::Make('frontend.tresorerie.views.statuts.visu')
+		->with(compact('statuts'))
+		->with('titre_page', 'Lexique des statuts')
+		;
+	}
+
 	public function index()
 	{
 		$statuts = Statut::all();
 
-		return View::Make('frontend.tresorerie.views.statuts.visu')->with(compact('statuts'));
+		return View::Make('frontend.tresorerie.views.statuts.index')
+		->with(compact('statuts'))
+		->with('titre_page', 'Les statuts')
+		;
 	}
+
 
 	public function create()
 	{
-		return 'Formulaire pour la création d\'un statut';  // CTRL
+		return 'Action inhibée pour l’instant';  // CTRL
 
 		$statut = new Statut(Statut::fillFormForCreate());
 
-		return View::Make('frontend.tresorerie.views.statuts.create')->with(compact('statut'));
+		return View::Make('frontend.tresorerie.views.statuts.create')
+		->with('titre_page', 'Création d’un statut')
+		->with(compact('statut'))
+		;
 	}
 
 	public function store()
@@ -55,7 +72,7 @@ class StatutController extends BaseController {
 
 		$statut = Statut::FindOrFail($id);
 
-		return View::Make('backend/statuts/edit')->with(compact('statut'));
+		return View::Make('frontend/tresorerie/views/statuts/edit')->with(compact('statut'));
 	}
 
 	public function update($id)

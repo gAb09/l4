@@ -7,6 +7,13 @@ Route::get('tost', function()
 	;
 });
 
+Route::get('badges', function()
+{
+	// return 'login';
+	return View::make('shared/views/badges_buttons')
+	;
+});
+
 
 Route::get('compte/{id}', function($id)
 {
@@ -71,14 +78,14 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function()
 
 	Route::get('update_moncompte', function()
 	{
-		return View::make('dashboard.update_moncompte')
+		return View::make('frontend/dashboard.update_moncompte')
 		->with('titre_page', 'Modifier mon compte')
 		;
 	});
 
 	Route::get('update_mon_mdp', function()
 	{
-		return View::make('dashboard.update_mon_mdp')
+		return View::make('frontend/dashboard.update_mon_mdp')
 		->with('titre_page', 'Modifier mon mot de passe')
 		;
 	});
@@ -167,7 +174,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 	/*----------------------  Écritures  ----------------------------------*/
 	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
-	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@index'));
+	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@indexBanque'));
 	Route::get('banque/dupli/{banque}', array('as' => 'dupli', 'uses' => 'EcritureController@duplicate'));
 	Route::resource('ecritures', 'EcritureController');
 
@@ -188,6 +195,8 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 	Route::resource('notes', 'NoteController');
 
 	/*----------------------  Statuts  ----------------------------------*/
+	Route::get('statutsvisu', 'StatutController@visu');
+	Route::get('statuts', 'StatutController@index'); // aFa Résoudre le bug qui 
 	Route::resource('statuts', 'StatutController');
 	
 });  // Fin de groupe prefix “tresorerie”

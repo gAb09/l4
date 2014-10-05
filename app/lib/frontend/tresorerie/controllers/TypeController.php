@@ -18,7 +18,10 @@ class TypeController extends BaseController {
 	{
 		$types = Type::all();
 
-		return View::Make('frontend.tresorerie.views.types.index')->with('types', $types);
+		return View::Make('frontend.tresorerie.views.types.index')
+		->with('types', $types)
+		->with('titre_page','Les types d’écriture')
+		;
 	}
 
 
@@ -27,7 +30,10 @@ class TypeController extends BaseController {
 	{
 		$type = new Type(Type::fillFormForCreate());
 
-		return View::Make('frontend.tresorerie.views.types.create')->with('type', $type);
+		return View::Make('frontend.tresorerie.views.types.create')
+		->with('type', $type)
+		->with('titre_page', 'Création d’un “type d’écriture”')
+		;
 	}
 
 
@@ -55,7 +61,10 @@ class TypeController extends BaseController {
 	{
 		$type = Type::findOrFail($id);
 
-		return View::Make('frontend/tresorerie/views/types/edit')->with('type', $type);
+		return View::Make('frontend/tresorerie/views/types/edit')
+		->with('type', $type)
+		->with('titre_page', 'Édition du type “'.$type->nom.'” <small>(Id '.$type->id.')</small>')
+		;
 	}
 
 	public function update($id)

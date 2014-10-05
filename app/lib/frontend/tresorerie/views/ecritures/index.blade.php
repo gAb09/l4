@@ -2,19 +2,18 @@
 
 @section('titre')
 @parent
-: les écritures
+
 
 @stop
 
 
 @section('topcontent1')
 <h1 class="titrepage">{{$titre_page}}</h1>
-{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
 @stop
 
 
 @section('topcontent2')
-{{link_to_route('tresorerie.ecritures.index', 'Toutes', null, ["class" => "badge badge-locale badge-big"])}}
+{{link_to_route('tresorerie.ecritures.index', 'Toutes les écritures', null, ["class" => "badge badge-locale badge-big"])}}
 
 @foreach(Banque::all() as $bank)
 {{link_to_route('bank', $bank->nom, $bank->id, ["class" => "badge badge-locale badge-big"])}}
@@ -125,6 +124,10 @@ $head = array(
 
 	{{ Form::hidden('sens_tri', $sens_tri, array ('class' => 'long', 'id' => 'sens_tri')) }}
 
+	@stop
+
+	@section('zapette')
+	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
 	@stop
 
 	@section('tresorerie/footer')

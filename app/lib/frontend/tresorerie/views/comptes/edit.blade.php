@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les comptes - édition
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage  ">Édition du compte n° {{$compte->numero}} : <span class="{{ $compte->class_pco }}">{{$compte->libelle}}</span></h1>
+<h1 class="titrepage  ">Édition du compte n° {{$compte->numero}} : <span class="{{ $compte->class_pco }}">{{$compte->libelle}}</span></h1>
 @stop
 
 
@@ -24,22 +22,21 @@
 
 @include('frontend/tresorerie/views/comptes/form')
 
-<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
-{{ Form::close() }}
-
-
-@if(!$compte->pco)
-{{ Form::open( ['method' => 'delete', 'action' => ['CompteController@destroy', $compte->id]] ) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
-{{ Form::close() }}
-@endif
-
 @stop
 
+
 @section('zapette')
-<p>
-	{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
+	{{ link_to_action('CompteController@index', 'Retour à la liste', Session::get('Etat.classe'), array('class' => 'btn btn-info btn-zapette iconemedium list')); }}
+
+	{{ Form::submit('Modifier ce compte', array('class' => 'btn btn-edit btn-zapette')) }}
+	{{ Form::close() }}
+
+
+	@if(!$compte->pco)
+	{{ Form::open( ['method' => 'delete', 'action' => ['CompteController@destroy', $compte->id]] ) }}
+	{{ Form::submit('Supprimer ce compte', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
+	{{ Form::close() }}
+	@endif
 @stop
 
 @section('footer')

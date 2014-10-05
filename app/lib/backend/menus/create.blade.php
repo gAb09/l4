@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les menus - création
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d’un item de menu</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -23,10 +21,15 @@
 
 @include('backend/menus/form')
 
-	<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
-	{{ Form::close() }}
-
 @stop
+
+@section('zapette')
+{{ link_to_action('MenuController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Créer ce menu', array('class' => 'btn btn-success')) }}
+{{ Form::close() }}
+@stop
+
 
 @section('footer')
 @parent
