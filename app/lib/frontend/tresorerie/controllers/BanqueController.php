@@ -20,7 +20,10 @@ class BanqueController extends BaseController {
 	{
 		$banques = Banque::all();
 
-		return View::Make('frontend.tresorerie.views.banques.index')->with(compact('banques'));
+		return View::Make('frontend.tresorerie.views.banques.index')
+		->with(compact('banques'))
+		->with('titre_page', 'Les banques')
+		;
 	}
 
 
@@ -56,7 +59,10 @@ class BanqueController extends BaseController {
 	public function edit($id)
 	{
 		$banque = Banque::FindOrFail($id);
-		return View::Make('frontend.tresorerie.views.banques.edit')->with(compact('banque'));
+		return View::Make('frontend.tresorerie.views.banques.edit')
+		->with(compact('banque'))
+		->with('titre_page', 'Édition de la banque “'.$banque->nom.'”')
+		;
 	}
 
 

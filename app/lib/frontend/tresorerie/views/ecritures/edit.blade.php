@@ -25,13 +25,6 @@
 
 @include('frontend/tresorerie/views/ecritures/form')
 
-@section('zapette')
-<p>
-	{{ link_to(Session::get('page_depart'), 'Retour liste', 
-	array('class' => 'btn btn-primary iconesmall list',)); }}
-</p>
-@stop
-
 <p>
 	{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
@@ -43,9 +36,16 @@
 
 <p>Créée le {{ Date::courte($ecriture->created_at) }}<br />
 	Modifiée le {{ Date::courte($ecriture->updated_at) }}</p>
-	@stop
+@stop
 
-	@section('tresorerie/footer')
+	@section('zapette')
+<p>
+	{{ link_to(Session::get('page_depart'), 'Retour liste', 
+	array('class' => 'btn btn-primary iconesmall list',)); }}
+</p>
+@stop
+
+@section('tresorerie/footer')
 	@parent
 	<h3>  Le footer de édition d'écritures</h3>
 	@stop

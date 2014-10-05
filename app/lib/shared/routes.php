@@ -7,6 +7,13 @@ Route::get('tost', function()
 	;
 });
 
+Route::get('badges', function()
+{
+	// return 'login';
+	return View::make('shared/views/badges_buttons')
+	;
+});
+
 
 Route::get('compte/{id}', function($id)
 {

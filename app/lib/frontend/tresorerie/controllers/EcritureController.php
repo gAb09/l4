@@ -7,9 +7,9 @@ class EcritureController extends BaseController {
 
 	protected $validateur;
 
-	protected $validateur2;
+	protected $validateur2; // Pour double écritures
 
-	/* Attribuer le nom donné à l'écriture n°1 dans les messages (souci de clarté pour l’utilisateur)
+	/* Attribuer le qualificatif donné à l'écriture n°1 dans les messages (souci de clarté pour l’utilisateur)
 	afin de pouvoir le changer globalement on le place dans une variable  */
 	private $nommage = 'en cours d’édition';
 

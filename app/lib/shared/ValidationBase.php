@@ -60,7 +60,8 @@ abstract class ValidationBase implements ValidationInterface
 
 
     /**
-     * Parser les règles pour y détecter d'éventuelles constantes.
+     * Parser les règles pour y détecter d'éventuelles constantes,
+     * et effectuer leur remplacement par les chaînes paramétrées.
      *
      * @param  array  $rules
      * 

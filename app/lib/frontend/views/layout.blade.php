@@ -91,7 +91,7 @@
 			@show
 		</footer>
 
-		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES - - - - - - - - - - - - - - -->
+		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES (Zapette) - - - - - - - - - - - - - - -->
 
 		<div class="zapette">
 			<div class="zapette_actions">

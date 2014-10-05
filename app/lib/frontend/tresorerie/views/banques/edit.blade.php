@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les banques - édition
-
 @stop
 
 
 @section('topcontent1')
-<h1 class="titrepage">Édition de la banque n° {{$banque->id}} : {{$banque->nom}}</h1>
+<h1 class="titrepage">{{$titre_page}} <small>(Id = {{$banque->id}})</small></h1>
 @stop
 
 
@@ -24,19 +22,19 @@
 
 @include('frontend/tresorerie/views/banques/form')
 
-<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
+
+
+@stop
+
+@section('zapette')
+	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-primary btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Enregistrer', array('class' => 'btn btn-success btn-zapette')) }}
 {{ Form::close() }}
 
 {{ Form::open(['method' => 'delete', 'action' => ['BanqueController@destroy', $banque->id]]) }}
 {{ Form::submit('Supprimer', array('class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());')) }}
 {{ Form::close() }}
-
-@stop
-
-@section('zapette')
-<p>
-	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'badge badge-locale iconemedium list', 'style' => 'font-size:1.1em')); }}
-</p>
 @stop
 
 @section('footer')
