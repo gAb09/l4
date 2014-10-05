@@ -62,6 +62,16 @@
 	content: "D";
 }
 
+.icohidemessages:before {
+	content: "a";
+	font-size: 24px;
+}
+
+.icoshowmessages:before {
+	content: "i";
+	font-size: 24px;
+}
+
 .edit:before {
 	content: "e";
 }

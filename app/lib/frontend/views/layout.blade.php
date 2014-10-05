@@ -30,10 +30,7 @@
 
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
-		<div class="span12 messages">
-
 			@include('shared/views/messages')
-		</div>
 
 
 
@@ -97,9 +94,10 @@
 		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES - - - - - - - - - - - - - - -->
 
 		<div class="zapette">
-
+			<div class="zapette_actions">
 			@yield('zapette')
-			<br />Version 1
+			</div>
+			<p class="zapette_infos">Version 1 -- {{DB::getDatabaseName()}}</p>
 
 		</div>
 

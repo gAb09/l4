@@ -2,13 +2,13 @@
 
 @section('titre')
 @parent
-: les écritures - édition
+
 
 @stop
 
 
 @section('topcontent1')
-<h1 class="titrepage">Édition de l'écriture “{{$ecriture->libelle}} {{$ecriture->libelle_detail}}” (n°{{$ecriture->id}})</h1>
+<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 

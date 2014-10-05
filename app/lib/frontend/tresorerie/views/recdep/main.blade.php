@@ -1,5 +1,7 @@
 @extends('frontend/views/layout')
 
+<?php $titre_page = 'Recettes/Dépenses de “'.$banque.'”' ?>
+
 @section('titre')
 @parent
 : recettes_depenses
@@ -8,7 +10,7 @@
 
 
 @section('topcontent1')
-<h1 class="titrepage">Recettes/Dépenses de “{{ $banque }}”</h1>
+<h1 class="titrepage">{{ $titre_page }}</h1>
 Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 

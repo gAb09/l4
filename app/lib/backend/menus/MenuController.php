@@ -19,7 +19,10 @@ class MenuController extends \BaseController {
 	public function index() {
 		$menus = Menu::orderBy('parent_id')->orderBy('rang')->get();
 
-		return View::make('backend.menus.index')->with(compact('menus'));
+		return View::make('backend.menus.index')
+		->with(compact('menus'))
+		->with('titre_page', "Gestion des menus")
+		;
 	}
 
 
@@ -28,7 +31,10 @@ class MenuController extends \BaseController {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('backend.menus.create')->with(compact('menu'));
+		return View::make('backend.menus.create')
+		->with(compact('menu'))
+		->with('titre_page', "Création d’un menu ou d’un item")
+		;
 	}
 
 

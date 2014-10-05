@@ -2,14 +2,13 @@
 
 @section('titre')
 @parent
-: les écritures
+
 
 @stop
 
 
 @section('topcontent1')
 <h1 class="titrepage">{{$titre_page}}</h1>
-{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
 @stop
 
 
@@ -125,6 +124,10 @@ $head = array(
 
 	{{ Form::hidden('sens_tri', $sens_tri, array ('class' => 'long', 'id' => 'sens_tri')) }}
 
+	@stop
+
+	@section('zapette')
+	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
 	@stop
 
 	@section('tresorerie/footer')

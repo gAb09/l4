@@ -2,13 +2,13 @@
 
 @section('titre')
 @parent
-: les menus - création
+
 
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d’un item de menu</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -27,6 +27,11 @@
 	{{ Form::close() }}
 
 @stop
+
+@section('zapette')
+retour à la liste
+@stop
+
 
 @section('footer')
 @parent

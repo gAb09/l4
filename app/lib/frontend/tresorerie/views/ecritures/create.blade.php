@@ -2,13 +2,13 @@
 
 @section('titre')
 @parent
-: les écriture - création
+
 
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d'une nouvelle écriture</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 

@@ -2,19 +2,17 @@
 
 @section('titre')
 @parent
-: les banques
+
 
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Les banques</h1>
+		<h1 class="titrepage">$titre_page</h1>
 @stop
 
 
 @section('topcontent2')
-		<a href ="{{ URL::action('BanqueController@create') }}" class="badge badge-locale iconemedium add"
-		style="font-size:1.1em">Ajouter une nouvelle banque</a>
 @stop
 
 
@@ -32,6 +30,11 @@
 <hr />
 @endforeach
 
+@stop
+
+@section('zapette')
+		<a href ="{{ URL::action('BanqueController@create') }}" class="badge badge-locale iconemedium add"
+		style="font-size:1.1em">Créer une banque</a>
 @stop
 
 @section('tresorerie/footer')

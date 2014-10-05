@@ -54,7 +54,7 @@ class EcritureController extends BaseController {
 		}else{
 			$bank_nom = Banque::find($banque)->nom;
 			$ecritures = Ecriture::whereBanqueId($banque)->orderBy($tri_sur_ok, $sens_tri)->paginate($par_page);
-			$titre_page = 'Écritures de la banque “'.$bank_nom.'”';
+			$titre_page = 'Écritures de “'.$bank_nom.'”';
 		}
 		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page pointage par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
@@ -79,6 +79,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
+		->with('titre_page', "Création d’une écriture")
 		;
 	}
 
@@ -202,6 +203,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend/tresorerie/views/ecritures/edit')
 		->with('ecriture', $ec1)
 		->with('list', self::lister())
+		->with('titre_page', "Édition de l’écriture \"$ec1->libelle - $ec1->libelle_detail\" (n°$ec1->id)")
 		;
 	}
 

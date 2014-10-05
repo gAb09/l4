@@ -49,27 +49,3 @@ function bascule_statut_recdep(xxx) {
 
 
 }
-
-
-/*
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status === 0)) {
-
-			if (xhr.responseText) {
-				var tableau = eval('(' + xhr.responseText + ')');
-				var list = tableau.slice(0,1);
-				var name = tableau.slice(1,2);
-				// var suivant = tableau.slice(2,3);
-// alert(suivant);
-				div_position.className="";
-				list_freres.innerHTML = list;
-				// span_pere.innerHTML = name;
-			}else{
-				div_position.className="invisible";
-			}
-		}
-	};
-	xhr.open("GET", "freres?idpere="+idpere.value, true);
-	xhr.send(null); */
-}
-
