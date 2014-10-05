@@ -60,9 +60,6 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 			Banque(s)
 		</th>
 		<th>
-			Date d'émission
-		</th>
-		<th>
 			
 		</th>
 	</thead>

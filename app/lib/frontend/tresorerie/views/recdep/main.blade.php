@@ -11,7 +11,6 @@
 
 @section('topcontent1')
 <h1 class="titrepage">{{ $titre_page }}</h1>
-Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 
 
@@ -54,9 +53,6 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 		</th>
 		<th>
 			Banque(s)
-		</th>
-		<th>
-			Date de valeur
 		</th>
 		<th>
 			Compte
