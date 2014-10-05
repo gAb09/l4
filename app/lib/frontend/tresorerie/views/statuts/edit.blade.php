@@ -2,7 +2,7 @@
 
 @section('titre')
 @parent
-: les statuts - édition
+
 
 @stop
 

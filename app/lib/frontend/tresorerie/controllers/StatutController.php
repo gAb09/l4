@@ -14,11 +14,24 @@ class StatutController extends BaseController {
 
 
 
-	public function index()
+	public function visu()
 	{
 		$statuts = Statut::all();
 
-		return View::Make('frontend.tresorerie.views.statuts.visu')->with(compact('statuts'));
+		return View::Make('frontend.tresorerie.views.statuts.visu')
+		->with(compact('statuts'))
+		->with('titre_page', 'Lexique des statuts')
+		;
+	}
+
+	public function index()
+	{dd('index');
+		$statuts = Statut::all();
+
+		return View::Make('frontend.tresorerie.views.statuts.index')
+		->with(compact('statuts'))
+		->with('titre_page', 'Les statuts')
+		;
 	}
 
 	public function create()

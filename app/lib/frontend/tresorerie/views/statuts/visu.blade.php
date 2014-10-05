@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les statuts
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Lexique des statuts</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
