@@ -13,7 +13,7 @@
 
 
 @section('topcontent2')
-{{link_to_route('tresorerie.ecritures.index', 'Toutes', null, ["class" => "badge badge-locale badge-big"])}}
+{{link_to_route('tresorerie.ecritures.index', 'Toutes les écritures', null, ["class" => "badge badge-locale badge-big"])}}
 
 @foreach(Banque::all() as $bank)
 {{link_to_route('bank', $bank->nom, $bank->id, ["class" => "badge badge-locale badge-big"])}}
@@ -127,7 +127,7 @@ $head = array(
 	@stop
 
 	@section('zapette')
-	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "badge badge-locale iconemedium add", 'style' => 'font-size:1.1em'])}}
+	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
 	@stop
 
 	@section('tresorerie/footer')

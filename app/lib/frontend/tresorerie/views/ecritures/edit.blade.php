@@ -21,31 +21,24 @@
 <hr />
 {{ Form::model($ecriture, ['name' => 'form', 'method' => 'put', 'route' => ['tresorerie.ecritures.update', $ecriture->id]]) }}
 
-
-
 @include('frontend/tresorerie/views/ecritures/form')
-
-<p>
-	{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
-	{{ Form::close() }}
-</p>
-
-{{ Form::open(array('url' => 'tresorerie/ecritures/'.$ecriture->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
-{{ Form::close() }}
 
 <p>Créée le {{ Date::courte($ecriture->created_at) }}<br />
 	Modifiée le {{ Date::courte($ecriture->updated_at) }}</p>
-@stop
+	@stop
 
 	@section('zapette')
-<p>
-	{{ link_to(Session::get('page_depart'), 'Retour liste', 
-	array('class' => 'btn btn-info iconesmall list',)); }}
-</p>
-@stop
+	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
 
-@section('tresorerie/footer')
+	{{ Form::submit('Modifier cette écriture', array('class' => 'btn btn-edit btn-zapette')) }}
+	{{ Form::close() }}
+
+	{{ Form::open(array('url' => 'tresorerie/ecritures/'.$ecriture->id, 'method' => 'delete')) }}
+	{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
+	{{ Form::close() }}
+	@stop
+
+	@section('tresorerie/footer')
 	@parent
 	<h3>  Le footer de édition d'écritures</h3>
 	@stop

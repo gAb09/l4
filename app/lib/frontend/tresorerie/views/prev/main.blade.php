@@ -96,8 +96,7 @@
 
 @section('zapette')
 
-<a href ="{{ URL::route('tresorerie.ecritures.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter une écriture</a>
+	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
 
 @stop
 

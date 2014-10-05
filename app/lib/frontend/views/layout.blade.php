@@ -98,6 +98,12 @@
 			</div>
 			<p class="zapette_infos">
 				Version 1
+				• Banque : {{Session::get('Etat.banque')}}
+				• Mois : {{Session::get('Etat.mois')}}
+				• Ligne : {{Session::get('Etat.ligne')}}
+				• Nombre par page : {{Session::get('Etat.nbre_par_page')}}
+				• Tri (paramètre) : {{Session::get('Etat.tri')}}
+				• Tri (sens) : {{Session::get('Etat.tri_sens')}}
 				• Classe de compte : {{Session::get('Etat.classe')}}
 				• {{DB::getDatabaseName()}}</p>
 

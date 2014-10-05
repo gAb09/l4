@@ -33,10 +33,17 @@ class EcritureController extends BaseController {
 	}
 // aFa Séparer la génération des listes ?
 
+	public function indexBanque($choix = null)
+	{
+		$banque = (is_null($choix)) ? Session::get('Etat.banque') : $choix ;
 
+		Session::set('Etat.banque', $banque);
+
+		return $this->index($banque);
+	}
 
 	public function index($banque = null)
-	{
+	{	
 		$par_page = (Input::get('par_page')) ? Input::get('par_page') : PAR_PAGE;
 		$tri_sur = (Input::get('tri_sur')) ? Input::get('tri_sur') : 'date_emission';
 		$tri_sur_ok = ($tri_sur == 'ids')? 'id' : $tri_sur;
@@ -90,6 +97,7 @@ class EcritureController extends BaseController {
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
 		->with('list', self::lister())
+		->with('titre_page', "Duplication d’une écriture")
 		;
 	}
 
@@ -399,10 +407,10 @@ class EcritureController extends BaseController {
 
 	public static function getMoisForRedirect($ec1){ // aPo redirection vers le mois
 		if(isset($ec1)){
-		$mois = Date::classAnMois($ec1->date_valeur);
-	}else{
-		$mois = "2014.01";
-	}
+			$mois = Date::classAnMois($ec1->date_valeur);
+		}else{
+			$mois = "2014.01";
+		}
 		Session::put('mois', $mois);
 		return $mois;
 	}
