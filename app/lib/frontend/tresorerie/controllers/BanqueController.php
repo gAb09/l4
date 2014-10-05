@@ -33,7 +33,10 @@ class BanqueController extends BaseController {
 		$banque = new Banque(Banque::fillFormForCreate());
 		$banque->fillFormForCreate();
 
-		return View::Make('frontend.tresorerie.views.banques.create')->with(compact('banque'));
+		return View::Make('frontend.tresorerie.views.banques.create')
+		->with(compact('banque'))
+		->with('titre_page', 'Création d’une nouvelle banque')
+		;
 	}
 
 

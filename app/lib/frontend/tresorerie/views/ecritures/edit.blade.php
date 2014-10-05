@@ -41,7 +41,7 @@
 	@section('zapette')
 <p>
 	{{ link_to(Session::get('page_depart'), 'Retour liste', 
-	array('class' => 'btn btn-primary iconesmall list',)); }}
+	array('class' => 'btn btn-info iconesmall list',)); }}
 </p>
 @stop
 

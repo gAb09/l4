@@ -2,12 +2,11 @@
 
 @section('titre')
 @parent
-: les banques - création
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d'une nouvelle “banque”</h1>
+<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -22,10 +21,11 @@
 
 @include('frontend/tresorerie/views/banques/form')
 
-<br />
-{{ Form::submit('Créer', array('class' => 'btn')) }}
-{{ Form::close() }}
+@stop
 
+@section('zapette')
+{{ Form::submit('Créer une nouvelle banque', array('class' => 'btn btn-success')) }}
+{{ Form::close() }}
 @stop
 
 @section('footer')

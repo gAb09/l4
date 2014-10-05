@@ -27,7 +27,7 @@
 @stop
 
 @section('zapette')
-	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-primary btn-zapette iconesmall list')); }}
+	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
 
 {{ Form::submit('Enregistrer', array('class' => 'btn btn-success btn-zapette')) }}
 {{ Form::close() }}
