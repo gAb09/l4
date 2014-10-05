@@ -196,6 +196,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 	/*----------------------  Statuts  ----------------------------------*/
 	Route::get('statutsvisu', 'StatutController@visu');
+	Route::get('statuts', 'StatutController@index'); // aFa Résoudre le bug qui 
 	Route::resource('statuts', 'StatutController');
 	
 });  // Fin de groupe prefix “tresorerie”
