@@ -21,7 +21,7 @@
 
 {{ Form::model($statut, ['method' => 'PUT', 'route' => ['tresorerie.statuts.update', $statut->id]]) }}
 
-@include('backend/statuts/form')
+@include('frontend/tresorerie/views/statuts/form')
 
 	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
