@@ -28,7 +28,6 @@
 	<div class="container-fluid">
 
 
-
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
 			@include('shared/views/messages')
 
@@ -97,7 +96,10 @@
 			<div class="zapette_actions">
 			@yield('zapette')
 			</div>
-			<p class="zapette_infos">Version 1 -- {{DB::getDatabaseName()}}</p>
+			<p class="zapette_infos">
+				Version 1
+				• Classe de compte : {{Session::get('Etat.classe')}}
+				• {{DB::getDatabaseName()}}</p>
 
 		</div>
 

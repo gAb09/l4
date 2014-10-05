@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les comptes - création
-
 @stop
 
 
 @section('topcontent1')
-<h1 class="titrepage">Création d'un nouveau “compte”</h1>
+<h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
 
@@ -22,15 +20,16 @@
 
 @include('frontend/tresorerie/views/comptes/form')
 
-<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
-{{ Form::close() }}
+@stop
 
+@section('zapette')
+{{ link_to_action('CompteController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconemedium list', 'style' => 'font-size:1.1em')); }}
+
+{{ Form::submit('Créer ce compte', array('class' => 'btn btn_zapette, btn-success')) }}
+{{ Form::close() }}
 @stop
 
 @section('footer')
 @parent
 <h3>  Le footer de comptes</h3>
-
 @stop
-
-

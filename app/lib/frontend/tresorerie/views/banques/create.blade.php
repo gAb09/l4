@@ -24,7 +24,9 @@
 @stop
 
 @section('zapette')
-{{ Form::submit('Créer une nouvelle banque', array('class' => 'btn btn-success')) }}
+{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Créer cette banque', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}
 @stop
 
