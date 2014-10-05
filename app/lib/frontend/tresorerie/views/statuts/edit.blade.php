@@ -27,7 +27,7 @@
 	{{ Form::close() }}
 
 	{{ Form::open(array('url' => 'backend/statuts/'.$statut->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
+{{ Form::submit('Supprimer ce statut', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
 	{{ Form::close() }}
 
 @stop

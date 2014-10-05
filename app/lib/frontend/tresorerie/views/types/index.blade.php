@@ -2,20 +2,16 @@
 
 @section('titre')
 @parent
-: les types d'écriture
-
 @stop
 
 
 @section('topcontent1')
-<h1 class="titrepage">Les types d'écriture
+<h1 class="titrepage">{{ $titre_page }}
 </h1>
 @stop
 
 
 @section('topcontent2')
-<a href ="{{ URL::route('tresorerie.types.create') }}" class="badge badge-locale iconemedium add"
-style="font-size:1.1em">Ajouter un nouveau type</a>
 @stop
 
 
@@ -35,15 +31,22 @@ style="font-size:1.1em">Ajouter un nouveau type</a>
 @endif
 </p>
 
-<p class="badge badge-locale iconesmall edit">
+<p class="label label-edit iconesmall edit">
 	{{link_to_action('TypeController@edit', 'Modifier ce type', $type->id)}}
 </p>
+
+<br />
 @endforeach
 
 @stop
 
+
+@section('zapette')
+<a href ="{{ URL::route('tresorerie.types.create') }}" class="btn btn-success iconemedium add">Créer un nouveau type</a>
+@stop
+
+
 @section('footer')
 @parent
 <h3>  Le footer de types</h3>
-
 @stop

@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les types d'écriture - création
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Création d'un nouveau “type d'écriture”</h1>
+		<h1 class="titrepage">{{$titre_page}}</h1>
 @stop
 
 
@@ -23,7 +21,13 @@
 
 @include('frontend/tresorerie/views/types/form')
 
-<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
+@stop
+
+
+@section('zapette')
+{{ link_to_action('TypeController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Créer ce type', array('class' => 'btn btn-success btn-zapette')) }}
 {{ Form::close() }}
 
 @stop

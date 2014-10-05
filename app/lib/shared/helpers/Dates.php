@@ -10,11 +10,11 @@ class Date
 	/* Date courte
 	**
 	** return 15 déc 1960 (insécable)
-	** e b Y 
+	** e B Y 
 	** 2 séparateurs = nbspace 
 	*/
 	public static function courte(Carbon\Carbon $date){
-		return $date->formatlocalized('%e&nbsp%b&nbsp%Y');
+		return $date->formatlocalized('%e&nbsp%B&nbsp%Y');
 	}
 
 	/* Pour permettre classement des écritures par années puis mois

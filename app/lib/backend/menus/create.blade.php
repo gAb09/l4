@@ -2,8 +2,6 @@
 
 @section('titre')
 @parent
-
-
 @stop
 
 
@@ -23,13 +21,13 @@
 
 @include('backend/menus/form')
 
-	<br />{{ Form::submit('Créer', array('class' => 'btn')) }}
-	{{ Form::close() }}
-
 @stop
 
 @section('zapette')
-retour à la liste
+{{ link_to_action('MenuController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Créer ce menu', array('class' => 'btn btn-success')) }}
+{{ Form::close() }}
 @stop
 
 

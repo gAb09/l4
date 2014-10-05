@@ -2,8 +2,6 @@
 
 @section('titre')
 @parent
-
-
 @stop
 
 

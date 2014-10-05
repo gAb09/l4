@@ -2,13 +2,11 @@
 
 @section('titre')
 @parent
-: les menus - modification
-
 @stop
 
 
 @section('topcontent1')
-		<h1 class="titrepage">Édition de l’item ou du menu “{{ $menu->etiquette }}”</h1>
+		<h1 class="titrepage">{{$titre_page}} “{{$menu->etiquette}}” <small>(Id {{$menu->id}})</small></h1>
 @stop
 
 
@@ -22,13 +20,19 @@
 
 @include('backend/menus/form')
 
-	<br />{{ Form::submit('Enregistrer', array('class' => 'btn btn-success')) }}
-	{{ Form::close() }}
+@stop
 
-	{{ Form::open(array('url' => 'backend/menus/'.$menu->id, 'method' => 'delete')) }}
-{{ Form::submit('Supprimer', ['class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());']) }}
-	{{ Form::close() }}
 
+
+@section('zapette')
+{{ link_to_action('MenuController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+
+{{ Form::submit('Modifier ce menu', array('class' => 'btn btn-edit btn-zapette')) }}
+{{ Form::close() }}
+
+{{ Form::open(['method' => 'delete', 'action' => ['MenuController@destroy', $menu->id]]) }}
+{{ Form::submit('Supprimer ce menu', array('class' => 'btn btn-danger', 'onClick' => 'javascript:return(confirmation());')) }}
+{{ Form::close() }}
 @stop
 
 @section('footer')

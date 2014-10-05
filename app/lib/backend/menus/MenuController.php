@@ -3,7 +3,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lib\Validations\ValidationMenu;
 
 class MenuController extends \BaseController {
-
+// aFa Faire les validations
+	
 	protected $validateur;
 
 	public function __construct(ValidationMenu $validateur)
@@ -70,7 +71,10 @@ class MenuController extends \BaseController {
 		$menu = Menu::findOrFail($id);
 		// var_dump($menu); // CTRL
 
-		return View::make('backend/menus/edit')->with(compact('menu'));
+		return View::make('backend/menus/edit')
+		->with(compact('menu'))
+		->with('titre_page', "Modification de l’item ou du menu")
+		;
 	}
 
 

@@ -24,14 +24,12 @@ onLoad="justifToggle();"
 		{{ Form::label('justif_check', 'Champ “Justificatif” non requis', array ('class' => 'nobr', 'id' => 'justif_label')) }}
 </div>
 Choisir si ce type d’écriture devra requérir un justificatif.
-<hr />
 
 <div id="req_justif_div">
 	<!-- Separateur -->
 	{{ Form::label('sep_justif', 'Séparateur', array ('class' => 'nobr')) }}
 	{{ Form::text('sep_justif', trim($type->sep_justif), array ('class' => '')) }}
 	Choisir le(s) caractère(s) ou le texte de séparation. Cela séparera “type” et “justificatif” dans les différentes listes et vues
-	<hr />
 </div>
 
 @section('script')
