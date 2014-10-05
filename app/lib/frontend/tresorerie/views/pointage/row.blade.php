@@ -16,7 +16,7 @@ class="surlignage {{$ecriture->statut->classe}}"
 	@endif
 </td>
 
-<td>
+<td title="Émission : {{ Date::courteSec($ecriture->date_emission) }}">
 	{{ $ecriture->mois  }}
 	{{ Date::courte($ecriture->date_valeur) }}
 </td>
