@@ -3,7 +3,7 @@
 class PointageController extends BaseController {
 
 	// Le tableau des statuts accessibles
-	private $statuts_ok = '2-3-4';
+	private $statuts_accessibles = '2-3-4';
 
 	// Le critère de classement
 	private $order = 'date_valeur';
@@ -47,12 +47,12 @@ class PointageController extends BaseController {
 		->with(compact('solde'))
 		->with(compact('prev_mois'))
 		->with(compact('banque'))
-		->with(array('statuts_ok' => $this->statuts_ok))
+		->with(array('statuts_accessibles' => $this->statuts_accessibles))
 		;
 
 	}
 
-	public function pointage($id, $statuts_ok)
+	public function pointage($id, $statuts_accessibles)
 	{
 		// return 'pointage de l’écriture n° '.$id.'<br />Statut id : '.$statut_id;  // CTRL
 		// return var_dump(Input::all());  // CTRL

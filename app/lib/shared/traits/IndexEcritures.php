@@ -40,7 +40,7 @@ trait IndexEcritures {
 		->with(compact('ecritures'))
 		->with(compact('prev_mois'))
 		->with(compact('banque'))
-		->with(array('statuts_ok' => $this->statuts_ok))
+		->with(array('statuts_accessibles' => $this->statuts_accessibles))
 		;
 	}
 
