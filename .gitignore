@@ -3,6 +3,5 @@ vendor/*
 app/start/local.php
 Tresorerie.sublime-project
 Tresorerie.sublime-workspace
-.gitignore
 LaLocale.sublime-project
 LaLocale.sublime-workspace

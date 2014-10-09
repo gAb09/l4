@@ -2,8 +2,8 @@
 	ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
 	<td>
-		@if (strpos($statuts_ok, (string)$ecriture->statut->rang) !== false)
-		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts_ok], 'method' => 'post', 'class' => 'pointage')) }}
+		@if (strpos($statuts_accessibles, (string)$ecriture->statut->rang) !== false)
+		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
 
 		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
 

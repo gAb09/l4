@@ -12,7 +12,7 @@ class RecDepController extends BaseController {
 	private $view = 'frontend.tresorerie.views.recdep.main';
 
 	// Le tableau des statuts modifiables depuis cette page
-	private $statuts_ok = '1-2';
+	private $statuts_accessibles = '1-2';
 
 
 }
