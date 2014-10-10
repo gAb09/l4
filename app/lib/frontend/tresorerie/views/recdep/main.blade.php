@@ -125,7 +125,7 @@ if (mois) {
 <script src="/assets/js/volets.js">
 </script>
 
-<script src="/assets/js/pointage.js">
+<script src="/assets/js/incrementeStatuts.js">
 </script>
 
 @stop

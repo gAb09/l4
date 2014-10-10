@@ -86,9 +86,4 @@ class Ecriture extends Eloquent {
 		$this->attributes['montant'] = $value;
 	}
 
-
-
-	/* —————————  Créer un objet Ecriture pour le formulaire de création  —————————————————*/
-
-
 }

@@ -8,7 +8,8 @@
 
 
 @section('topcontent1')
-<h1 class="titrepage">Pointage de “{{ $banque }}”</h1>
+
+<h1 class="titrepage">Pointage de “{{ Session::get('Etat.banque') }}”</h1>
 Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 @stop
 
@@ -97,6 +98,18 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 
 @section('script')
 
+<!-- Transmettre le tableau de correspondance classe/id pour les statuts -->
+<script type="text/javascript">
+
+<?php
+echo "var classe_statut_selon_id = ".$classe_statut_selon_id.";";
+echo "var statuts_accessibles = '".$statuts_accessibles."';";
+?>
+
+</script>
+
+
+<!-- aFa Rédiger commentaire -->
 <script type="text/javascript">
 
 <?php
@@ -114,10 +127,13 @@ if (mois) {
 }
 
 </script>
+
+
 <script src="/assets/js/volets.js">
 </script>
 
-<script src="/assets/js/pointage.js">
+
+<script src="/assets/js/incrementeStatuts.js">
 </script>
 
 @stop
