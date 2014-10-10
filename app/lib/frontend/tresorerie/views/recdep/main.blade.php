@@ -1,10 +1,8 @@
 @extends('frontend/views/layout')
 
-<?php $titre_page = 'Recettes/Dépenses de “'.$banque.'”' ?>
 
 @section('titre')
 @parent
-: recettes_depenses
 
 @stop
 

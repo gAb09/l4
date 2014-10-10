@@ -78,6 +78,7 @@ div.zapette {
 }
 
 .zapette_infos {
+    font-size: 0.9em;
     color:#CCC;
     text-align:right;
     margin-right:5px;

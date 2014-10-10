@@ -2,15 +2,13 @@
 
 @section('titre')
 @parent
-: pointage
 
 @stop
 
 
 @section('topcontent1')
 
-<h1 class="titrepage">Pointage de “{{ Session::get('Etat.banque') }}”</h1>
-Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
+<h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
 

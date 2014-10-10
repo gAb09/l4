@@ -1,4 +1,5 @@
-<?php
+<?php // aFa Factoriser code pointage/prev/recdep
+
 use lib\shared\Traits\IndexEcritures;
 
 class PrevController extends BaseController {
