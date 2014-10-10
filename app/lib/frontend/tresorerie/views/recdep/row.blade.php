@@ -4,7 +4,7 @@
 <!-- Statut -->
 	<td>
 		@if (strpos($statuts_accessibles, (string)$ecriture->statut->rang) !== false)
-		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
+		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@incrementeStatut', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
 
 		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
 

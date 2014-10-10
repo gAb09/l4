@@ -51,6 +51,7 @@ return array(
     'MigrationCartalystSentryInstallUsersGroupsPivot' => $vendorDir . '/cartalyst/sentry/src/migrations/2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot.php',
     'Nbre' => $baseDir . '/app/lib/shared/helpers/Nbre.php',
     'PointageController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/PointageController.php',
+    'PointageRepo' => $baseDir . '/app/lib/frontend/tresorerie/repos/PointageRepository.php',
     'PrevController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/PrevController.php',
     'RecDepController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/RecDepController.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',

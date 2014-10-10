@@ -98,6 +98,7 @@
 			</div>
 			<p class="zapette_infos">
 				• Version 1
+				• Page départ : {{Session::get('page_depart')}}
 				• Banque : {{Session::get('Etat.banque')}}
 				• Mois : {{Session::get('Etat.mois')}}temporairement : {{ Date::MoisEdit(Session::get('mois')) }}
 				• Ligne : {{Session::get('Etat.ligne')}}

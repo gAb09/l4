@@ -1,17 +1,22 @@
 <tr 
-id="{{ $ecriture->id }}" 
+id="row_{{ $ecriture->id }}" 
 class="surlignage {{$ecriture->statut->classe}}" 
 ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
 	<!-- Statut -->
 	<td>
-		{{-- $Statuts ok est le tableau des statuts accessibles depuis cette page --}}
+	
 		@if (strpos($statuts_accessibles, (string)$ecriture->statut->rang) !== false)
-		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
+		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@incrementeStatut', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
 
-		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
+		{{ Form::hidden('input_id', $ecriture->statut->id, array('id' => "input_$ecriture->id", 'class' => '')) }}
 
-		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_statut_pointage(this);submit();' )) }}
+		{{ Form::button('', array(
+		'class' => 'btn btn-link iconemedium toggle', 
+		'id' => "btn_$ecriture->id", 
+		'style' => '', 
+		'OnClick' => 'bascule_statut_pointage(this);submit();' 
+		)) }}
 
 		{{ form::close() }}
 		@endif
