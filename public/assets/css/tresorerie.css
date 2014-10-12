@@ -78,6 +78,7 @@ div.zapette {
 }
 
 .zapette_infos {
+    font-size: 0.9em;
     color:#CCC;
     text-align:right;
     margin-right:5px;
@@ -550,16 +551,22 @@ div.compte.actif{
 
 
 /* Montant */
-span.depense,
-td.depense{
+.depense{
     text-align: right;
     color:#CC3333;
 }
 
-span.recette,
-td.recette{
+.recette{
     text-align: right;
     color:#0088CC;
+}
+
+
+.soldes{
+    background-color: #E5CEA2;
+    font-weight: bold;
+    text-align: left;
+    color:#252;
 }
 
 

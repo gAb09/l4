@@ -2,23 +2,20 @@
 
 @section('titre')
 @parent
-: pointage
-
 @stop
 
 
 @section('topcontent1')
-
-<h1 class="titrepage">Pointage de “{{ Session::get('Etat.banque') }}”</h1>
-Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
+<h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
 
 @section('topcontent2')
+
 @foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-
 @endforeach
+
 @stop
 
 
@@ -26,13 +23,11 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_classement != $prev_mois)
+@if($ecriture->mois_nouveau)
 
 <table>
-
-
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
-			{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
+		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}" >
@@ -52,13 +47,13 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 			Recettes
 		</th>
 		<th>
-			Solde
-		</th>
-		<th>
 			Type
 		</th>
 		<th>
 			Banque(s)
+		</th>
+		<th>
+			Compte
 		</th>
 		<th>
 			
@@ -67,13 +62,30 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 
 
 	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
-		<?php $prev_mois = $ecriture->mois_classement ?>
-		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
-		@include('frontend/tresorerie/views/pointage/row')
-		@else
 
-		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
+		@endif
+
 		@include('frontend/tresorerie/views/pointage/row')
+
+		@if($ecriture->last)
+		<tr class="soldes">
+			<td colspan="3">
+			</td>
+			<td class ='depense'>
+				{{$ecriture->solde_dep}}
+			</td>
+			<td class='recette'>
+				{{$ecriture->solde_rec}}
+			</td>
+			<td colspan="4">
+				Solde du mois : 
+				@if($ecriture->solde < 0)
+				<span class="depense">{{$ecriture->solde}}</span>
+				@else
+				<span class="recette">{{$ecriture->solde}}</span>
+				@endif
+			</td>
+		</tr>
 		@endif
 
 		@endforeach
@@ -86,14 +98,9 @@ Mois en cours d'édition : {{ Date::MoisEdit(Session::get('mois')) }}
 
 
 @section('footer')
-
 @parent
-
 <h3>  Le footer de recettes_depenses</h3>
-
 @stop
-
-
 
 
 @section('script')
@@ -128,10 +135,8 @@ if (mois) {
 
 </script>
 
-
 <script src="/assets/js/volets.js">
 </script>
-
 
 <script src="/assets/js/incrementeStatuts.js">
 </script>

@@ -37,7 +37,7 @@ class EcritureController extends BaseController {
 	{
 		$banque = (is_null($choix)) ? Session::get('Etat.banque') : $choix ;
 
-		Session::set('Etat.banque', $banque);
+		Session::push('Etat.banque', $banque);
 
 		return $this->index($banque);
 	}

@@ -1,11 +1,7 @@
 @extends('frontend/views/layout')
 
-<?php $titre_page = 'Recettes/Dépenses de “'.$banque.'”' ?>
-
 @section('titre')
 @parent
-: recettes_depenses
-
 @stop
 
 
@@ -15,9 +11,11 @@
 
 
 @section('topcontent2')
+
 @foreach(Banque::all() as $bank)
 <a href ="{{ URL::to("tresorerie/recdep/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
 @endforeach
+
 @stop
 
 
@@ -25,7 +23,7 @@
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_classement != $prev_mois)
+@if($ecriture->mois_nouveau)
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
@@ -69,10 +67,32 @@
 	</thead>
 
 	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
-		<?php $prev_mois = $ecriture->mois_classement ?>
 
 		@endif
+		
 		@include('frontend/tresorerie/views/recdep/row')
+
+		@if($ecriture->last)
+		<tr class="soldes">
+			<td colspan="3">
+			</td>
+			<td class ='depense'>
+				{{$ecriture->solde_dep}}
+			</td>
+			<td class='recette'>
+				{{$ecriture->solde_rec}}
+			</td>
+			<td colspan="4">
+				Solde du mois : 
+				@if($ecriture->solde < 0)
+				<span class="depense">{{$ecriture->solde}}</span>
+				@else
+				<span class="recette">{{$ecriture->solde}}</span>
+				@endif
+			</td>
+		</tr>
+		@endif
+
 		@endforeach
 
 	</tbody>
@@ -82,14 +102,9 @@
 @stop
 
 
-
-
 @section('footer')
-
 @parent
-
 <h3>  Le footer de recettes_depenses</h3>
-
 @stop
 
 
@@ -104,11 +119,23 @@
 
 @section('script')
 
+<!-- Transmettre le tableau de correspondance classe/id pour les statuts -->
+<script type="text/javascript">
+
+<?php
+echo "var classe_statut_selon_id = ".$classe_statut_selon_id.";";
+echo "var statuts_accessibles = '".$statuts_accessibles."';";
+?>
+
+</script>
+
+
+<!-- aFa Rédiger commentaire -->
 <script type="text/javascript">
 
 <?php
 if( $mois = Session::get('mois') ){
-	echo 'var mois = '.$mois.';';
+	echo 'var mois = "'.$mois.'";';
 }else{
 	echo 'var mois = "";';
 }
