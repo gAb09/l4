@@ -1,4 +1,5 @@
 <?php
+Session::forget('Etat.banque');
 
 Route::get('tost', function()
 {

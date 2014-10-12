@@ -5,9 +5,6 @@ class PointageController extends BaseController {
 	// Les statuts accessibles (séparés par un "-")
 	private $statuts_accessibles = '2-3-4';
 
-	// Le critère de classement
-	private $order = 'date_valeur';
-
 	private $ecr_repo = '';
 	private $bank_repo = '';
 	private $statut_repo = '';
@@ -26,7 +23,7 @@ class PointageController extends BaseController {
 		Session::put('page_depart', Request::getUri());
 
 		// A) Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = $this->ecr_repo->collection($id, $this->order);
+		$ecritures = $this->ecr_repo->collectionPointage($id);
 
 
 		/* S'il n'y a pas d'écriture pour la banque demandée : 
@@ -39,10 +36,6 @@ class PointageController extends BaseController {
 		}
 
 
-		// Initialiser les variables $prev_mois et $solde.
-		$prev_mois = 0; // B)
-		$solde = 0; // C)
-
 		/* Passer le nom et l’id de la banque à la session 
 		pour mémorisation de la banque en cours de traitement. */
 		Session::put('Etat.banque', $ecritures[0]->banque->nom);
@@ -54,8 +47,6 @@ class PointageController extends BaseController {
 		// Afficher la vue pointage pour la banque demandée. 
 		return View::make('frontend.tresorerie.views.pointage.main')
 		->with(compact('ecritures')) // A) 
-		->with(compact('prev_mois'))// B) 
-		->with(compact('solde'))// C) 
 		->with(compact('classe_statut_selon_id'))// D)
 		->with(array('statuts_accessibles' => $this->statuts_accessibles))
 		->with(array('titre_page' => "Pointage de ".Session::get('Etat.banque')))

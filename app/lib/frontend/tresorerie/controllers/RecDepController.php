@@ -39,24 +39,25 @@ class RecDepController extends BaseController {
 		}
 
 
-		// Initialiser les variables $prev_mois et $solde.
-		$prev_mois = 0; // B)
-		$solde = 0; // C)
+		/* B et C Initialiser les variables $prev_mois et $solde. */
+		$prev_mois = 0;
+		$solde = 0;
 
 		/* Passer le nom et l’id de la banque à la session 
 		pour mémorisation de la banque en cours de traitement. */
 		Session::put('Etat.banque', $ecritures[0]->banque->nom);
 		Session::put('Etat.banque_id', $ecritures[0]->banque->id);
 
-		// D) Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
+		/* D Assigner le tableau de correspondance
+		pour gestion js de l'affichage de l'incrémentation des statuts. */
 		$classe_statut_selon_id = $this->statut_repo->classeStatutSelonId();
 
-		// Afficher la vue pointage pour la banque demandée. 
+		/* Afficher la vue pointage pour la banque demandée. */ 
 		return View::make('frontend.tresorerie.views.recdep.main')
-		->with(compact('ecritures')) // A) 
-		->with(compact('prev_mois'))// B) 
-		->with(compact('solde'))// C) 
-		->with(compact('classe_statut_selon_id'))// D)
+		->with(compact('ecritures')) /* A */ 
+		->with(compact('prev_mois')) /* B */
+		->with(compact('solde')) /* C */
+		->with(compact('classe_statut_selon_id')) /* D */
 		->with(array('statuts_accessibles' => $this->statuts_accessibles)) 
 		->with(array('titre_page' => "Journal de ".Session::get('Etat.banque')))
 		;

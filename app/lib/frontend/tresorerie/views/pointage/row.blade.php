@@ -58,17 +58,6 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	</td>
 
 
-	<!-- Solde -->
-	<td 
-		@if($solde >= 0)
-		class="recette">
-		@else
-		class="depense">
-		@endif
-		{{ Nbre::francais_insec($solde) }}
-	</td>
-
-
 	<!-- Type -->
 	<td>
 		{{ $ecriture->type->nom }}
@@ -80,7 +69,8 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 
 
 	<!-- Banque -->
-	<td>{{ $ecriture->banque->nom }}
+	<td>
+		{{ $ecriture->banque->nom }}
 		@if($ecriture->double_flag)
 		@if($ecriture->signe->signe == -1)
 		<br />&rarr; 
@@ -89,6 +79,11 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 		@endif
 		<small>{{ $ecriture->ecriture2->banque->nom }}</small>
 		@endif
+	</td>
+
+	<!-- Compte -->
+	<td>
+		{{ $ecriture->compte->libelle }}
 	</td>
 
 

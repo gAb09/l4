@@ -26,7 +26,7 @@
 	@show
 
 	<div class="container-fluid">
-
+{{Session::get('Etat.banque')}}
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
 			@include('shared/views/messages')

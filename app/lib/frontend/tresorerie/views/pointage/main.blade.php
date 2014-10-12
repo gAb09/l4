@@ -24,13 +24,13 @@
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_classement != $prev_mois)
+@if($ecriture->mois_nouveau)
 
 <table>
 
 
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
-			{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
+		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}" >
@@ -50,13 +50,13 @@
 			Recettes
 		</th>
 		<th>
-			Solde
-		</th>
-		<th>
 			Type
 		</th>
 		<th>
 			Banque(s)
+		</th>
+		<th>
+			Compte
 		</th>
 		<th>
 			
@@ -65,13 +65,30 @@
 
 
 	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
-		<?php $prev_mois = $ecriture->mois_classement ?>
-		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
-		@include('frontend/tresorerie/views/pointage/row')
-		@else
 
-		<?php $solde = $solde + ($ecriture->montant*$ecriture->signe->signe); ?>
+		@endif
+
 		@include('frontend/tresorerie/views/pointage/row')
+
+		@if($ecriture->last)
+		<tr class="soldes">
+			<td colspan="3">
+			</td>
+			<td class ='depense'>
+				{{$ecriture->solde_dep}}
+			</td>
+			<td class='recette'>
+				{{$ecriture->solde_rec}}
+			</td>
+			<td colspan="4">
+				Solde du mois : 
+				@if($ecriture->solde < 0)
+				<span class="depense">{{$ecriture->solde}}</span>
+				@else
+				<span class="recette">{{$ecriture->solde}}</span>
+				@endif
+			</td>
+		</tr>
 		@endif
 
 		@endforeach
@@ -79,7 +96,7 @@
 	</tbody>
 
 </table>
-
+{{var_dump(Session::all())}}
 @stop
 
 
@@ -88,7 +105,6 @@
 @parent
 
 <h3>  Le footer de recettes_depenses</h3>
-
 @stop
 
 
