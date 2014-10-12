@@ -7,7 +7,7 @@ class EcritureRepository {
 	private $solde_rec = '';
 	private $rang = 0;
 
-	public function collectionPointage($id)
+	public function collectionCumulMois($id, $order)
 	{
 		$order = 'date_valeur';
 
@@ -91,7 +91,7 @@ class EcritureRepository {
 
 
 
-	public function collection($id, $order)
+	public function collectionCumulLigneEtMois($id, $order)
 	{
 
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')

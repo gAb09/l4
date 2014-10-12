@@ -2,21 +2,20 @@
 
 @section('titre')
 @parent
-
 @stop
 
 
 @section('topcontent1')
-
 <h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
 
 @section('topcontent2')
+
 @foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-
 @endforeach
+
 @stop
 
 
@@ -27,8 +26,6 @@
 @if($ecriture->mois_nouveau)
 
 <table>
-
-
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
 		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
@@ -96,18 +93,14 @@
 	</tbody>
 
 </table>
-{{var_dump(Session::all())}}
+
 @stop
 
 
 @section('footer')
-
 @parent
-
 <h3>  Le footer de recettes_depenses</h3>
 @stop
-
-
 
 
 @section('script')
@@ -142,10 +135,8 @@ if (mois) {
 
 </script>
 
-
 <script src="/assets/js/volets.js">
 </script>
-
 
 <script src="/assets/js/incrementeStatuts.js">
 </script>

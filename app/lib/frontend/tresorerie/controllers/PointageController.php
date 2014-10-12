@@ -22,8 +22,8 @@ class PointageController extends BaseController {
 		il faut passer (via la session) à EcritureController@update pour la redirection */
 		Session::put('page_depart', Request::getUri());
 
-		// A) Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = $this->ecr_repo->collectionPointage($id);
+		// Récupérer la collection d'écriture pour la banque demandée
+		$ecritures = $this->ecr_repo->collectionCumulMois($id, 'date_valeur');
 
 
 		/* S'il n'y a pas d'écriture pour la banque demandée : 
@@ -35,19 +35,18 @@ class PointageController extends BaseController {
 			return Redirect::back()->withErrors($message);
 		}
 
-
 		/* Passer le nom et l’id de la banque à la session 
 		pour mémorisation de la banque en cours de traitement. */
 		Session::put('Etat.banque', $ecritures[0]->banque->nom);
 		Session::put('Etat.banque_id', $ecritures[0]->banque->id);
 
-		// D) Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
+		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statut_repo->classeStatutSelonId();
 
 		// Afficher la vue pointage pour la banque demandée. 
 		return View::make('frontend.tresorerie.views.pointage.main')
-		->with(compact('ecritures')) // A) 
-		->with(compact('classe_statut_selon_id'))// D)
+		->with(compact('ecritures'))
+		->with(compact('classe_statut_selon_id'))
 		->with(array('statuts_accessibles' => $this->statuts_accessibles))
 		->with(array('titre_page' => "Pointage de ".Session::get('Etat.banque')))
 		;
@@ -69,6 +68,5 @@ class PointageController extends BaseController {
 
 		return Response::make('', 204);
 	}
-
 
 }
