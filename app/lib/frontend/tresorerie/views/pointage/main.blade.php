@@ -12,7 +12,7 @@
 
 @section('topcontent2')
 
-@foreach(Banque::all() as $bank)
+@foreach(Banque::all() as $bank) {{-- aFa passer dans repository --}}
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
 @endforeach
 

@@ -1,38 +1,14 @@
 		<tr id ="{{$ecriture->id}}" class="surlignage {{$ecriture->statut->classe}}" 
 			ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
-	<td>
-		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@pointage', $ecriture->id, $statuts], 'method' => 'post', 'class' => 'pointage')) }}
+			<!-- Dates -->
+			<td id="valeur{{ $ecriture->id }}" class="info">
+				{{ Date::courte($ecriture->date_valeur) }}
+				<span>
+					Date d’émission : <br />{{ Date::courte($ecriture->date_emission) }}
+				</span>
+			</td>
 
-		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
-		
-
-		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_statut_recdep(this);submit();' )) }}
-
-		{{ form::close() }}
-	</td>
-	
-			<td>
-				{{ $ecriture->mois  }}
-				{{ Date::courte($ecriture->date_emission) }}
-			</td>
-			<td>
-				{{ $ecriture->libelle }}
-				@if($ecriture->libelle_detail)
-				— 
-				{{ $ecriture->libelle_detail }}
-				@endif
-			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@endif
-			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 2)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@endif
-			</td>
 			<td>
 				{{ $ecriture->type->nom }}
 				@if($ecriture->justificatif)
@@ -40,34 +16,55 @@
 				@endif
 				{{ $ecriture->justificatif }}
 			</td>
+
 			<td>
-				{{ $ecriture->banque->nom }}
-				@if($ecriture->double_flag)
-				@if($ecriture->signe->signe == -1)
-				<br />&rarr; 
+				{{ $ecriture->libelle }}
+			</td>
+			<td>
+				@if($ecriture->libelle_detail)
+				{{ $ecriture->libelle_detail }}
+				@endif
+			</td>
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->signe_id == 1)
+				{{ Nbre::francais_insec($ecriture->montant) }}
 				@else
-				<br />&larr; 
-				@endif
-				<small>{{ $ecriture->ecriture2->banque->nom }}</small>
+				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
 				@endif
 			</td>
-			<td>
-				{{ Date::courte($ecriture->date_valeur) }}
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->signe_id == 1)
+				{{ Nbre::francais_insec($ecriture->montant) }}
+				@else
+				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@endif
 			</td>
-			<td>
-				({{ $ecriture->compte->numero }}) 
-				{{ $ecriture->compte->libelle }}
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->signe_id == 1)
+				{{ Nbre::francais_insec($ecriture->montant) }}
+				@else
+				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@endif
+			</td>
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->signe_id == 1)
+				{{ Nbre::francais_insec($ecriture->montant) }}
+				@else
+				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@endif
+			</td>
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->signe_id == 1)
+				{{ Nbre::francais_insec($ecriture->montant) }}
+				@else
+				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@endif
 			</td>
 			<td class="icone">
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 			</td>
 			<td class="icone">
 				<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
-			</td>
-			<td class="icone">
-				@if ($ecriture->ecriture2)
-				<a class="iconemedium double" href ="{{ URL::to('tresorerie/recdep/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
-				@endif
 			</td>
 
 		</tr>
