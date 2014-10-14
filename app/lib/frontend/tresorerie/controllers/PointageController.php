@@ -23,7 +23,7 @@ class PointageController extends BaseController {
 		Session::put('page_depart', Request::getUri());
 
 		// Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = $this->ecr_repo->collectionCumulMois($id, 'date_valeur');
+		$ecritures = $this->ecr_repo->collectionSoldeClasMois($id, 'date_valeur');
 
 
 		/* S'il n'y a pas d'écriture pour la banque demandée : 
