@@ -7,9 +7,6 @@ trait TraitRepository {
 
 	private $prev_mois = 'premier';
 
-	private $solde_dep = '';
-
-	private $solde_rec = '';
 
 	/**
 	 * Prépare l'affichage des lignes en tableaux d'un même mois/année.
@@ -64,93 +61,5 @@ trait TraitRepository {
 
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Prépare l'affichage des lignes en tableaux d'un même mois/année.
-	 *
-	 * @param $ligne. La ligne du tableau en cours de traitement.
-	 * @param $collection.
-	 * @param $order. Le critère pour l'ordre de classement.
-	 * @param $last. Le critère pour l'ordre de classement.
-	 *
-	 * @return Rien puisque appellée depuis une boucle each sur une collection
-	 *
-	 */
-	private function getSoldes($ligne, $collection, $order, $periode, $last){
-			/* Si nous sommes en soldes mensuels,
-			réinitialiser les soldes pour la première ligne du mois  */
-			if($periode == 'mois'){
-				if($ligne->mois_nouveau == 'nouveau')
-				{
-					$this->solde_dep = 0;
-					$this->solde_rec = 0;
-				}
-			}
-
-			/* Calculer le solde à chaque ligne */
-			if($ligne->signe_id == 1){
-				$this->solde_dep = $this->solde_dep + $ligne->montant;
-			}
-			if($ligne->signe_id == 2){
-				$this->solde_rec = $this->solde_rec + $ligne->montant;
-			}
-
-			/* C   On affecte les soldes à l'écriture */
-			$ligne->solde_dep = $this->solde_dep;
-			$ligne->solde_rec = $this->solde_rec;
-			$ligne->solde = $this->solde_rec - $this->solde_dep;
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Prépare l'affichage des lignes en tableaux d'un même mois/année.
-	 *
-	 * @param $ligne. La ligne du tableau en cours de traitement.
-	 *
-	 * @return Rien puisque appellée depuis une boucle each sur une collection
-	 *
-	 */
-	private function incrementeSoldeRecette($ligne, $solde){
-		if($ligne->signe_id == 2){
-			$solde = $solde + $ligne->montant;
-		}
-		return $solde;
-	}
-	private function incrementeSoldeDepense($ligne, $solde){
-		if($ligne->signe_id == 1){
-			$solde = $solde + $ligne->montant;
-		}
-		return $solde;
-	}
-
-
-
 
 }

@@ -47,6 +47,9 @@
 			Recettes
 		</th>
 		<th>
+			Solde
+		</th>
+		<th>
 			Type
 		</th>
 		<th>
@@ -72,10 +75,10 @@
 			<td colspan="3">
 			</td>
 			<td class ='depense'>
-				{{$ecriture->solde_dep}}
+				{{$ecriture->cumul_dep_mois}}
 			</td>
 			<td class='recette'>
-				{{$ecriture->solde_rec}}
+				{{$ecriture->cumul_rec_mois}}
 			</td>
 			<td colspan="4">
 				Solde du mois : 

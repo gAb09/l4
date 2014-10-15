@@ -561,6 +561,11 @@ div.compte.actif{
     color:#0088CC;
 }
 
+.cumul_absolu{
+    text-align: right;
+    color:#0088CC;
+}
+
 
 .soldes{
     background-color: #E5CEA2;

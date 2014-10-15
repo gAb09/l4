@@ -4,7 +4,13 @@ use lib\shared\Traits\TraitRepository;
 class PointageRepository {
 	use TraitRepository;
 
-	public function collectionPointage($id, $order, $periode = 'mois')
+	private $cumul_dep_mois = '';
+
+	private $cumul_rec_mois = '';
+
+	private $cumul_absolu = 0;
+
+	public function collectionPointage($id, $order)
 	{
 
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'compte', 'ecriture2')
@@ -21,19 +27,49 @@ class PointageRepository {
 		$last = $ecritures->count() -1;
 
 		/* Lancer la boucle sur la colection */
-		$ecritures->each(function($ecriture) use ($ecritures, $order, $periode, $last) {
+		$ecritures->each(function($ecriture) use ($ecritures, $order, $last) {
 
 
 			/* ----- Traitement du classement par mois ----- */
 			$this->classementParMois($ecriture, $ecritures, $order, $last);
 
 
-			/* ----- Traitement des soldes ----- */
-			$this->getSoldes($ecriture, $ecritures, $order, $periode, $last);
+			/* ----- Traitement des cumuls ----- */
 
-		});
+			/* Réinitialiser les cumuls pour la première ecriture de chaque mois 
+			(En tenant compte du report) */
+				if($ecriture->mois_nouveau == 'nouveau')
+				{
+					if($this->cumul_absolu >= 0)
+					{
+						$this->cumul_dep_mois = 0;
+						$this->cumul_rec_mois = $this->cumul_absolu;
+					}else{
+						$this->cumul_dep_mois = $this->cumul_absolu;
+						$this->cumul_rec_mois = 0;
+					}
+				}
 
-		return $ecritures;
+			/* Calculer les cumuls */
+			if($ecriture->signe_id == 1){
+				$this->cumul_dep_mois = $this->cumul_dep_mois + $ecriture->montant;
+				$this->cumul_absolu = $this->cumul_absolu - $ecriture->montant;
+			}
+			if($ecriture->signe_id == 2){
+				$this->cumul_rec_mois = $this->cumul_rec_mois = $this->cumul_rec_mois + $ecriture->montant;
+				$this->cumul_absolu = $this->cumul_absolu + $ecriture->montant;
+			}
+
+			/* C   On affecte les cumuls à l'écriture */
+			$ecriture->cumul_dep_mois = $this->cumul_dep_mois;
+			$ecriture->cumul_rec_mois = $this->cumul_rec_mois;
+			$ecriture->solde = $this->cumul_rec_mois - $this->cumul_dep_mois;
+			$ecriture->cumul_absolu = $this->cumul_absolu;
+
+
+	});
+
+	return $ecritures;
 
 	}
 
