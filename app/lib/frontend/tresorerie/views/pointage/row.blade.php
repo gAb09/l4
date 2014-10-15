@@ -15,7 +15,7 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 		'class' => 'btn btn-link iconemedium toggle', 
 		'id' => "btn_$ecriture->id", 
 		'style' => '', 
-		'OnClick' => 'bascule_statut_pointage(this);submit();' 
+		'OnClick' => 'bascule_statut(this);submit();' 
 		)) }}
 
 		{{ form::close() }}

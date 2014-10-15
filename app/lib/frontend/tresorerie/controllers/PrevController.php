@@ -1,4 +1,4 @@
-<?php // aFa Factoriser code pointage/prev/recdep
+<?php
 
 use lib\shared\Traits\IndexEcritures;
 

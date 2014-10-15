@@ -161,8 +161,8 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 	Route::get('tost', 'TostController@tost');
 
-	/*----------------------  Recettes dépenses  -----------------------------*/
-	Route::get('recdep/{id?}', 'RecDepController@index');
+	/*----------------------  Journal  -----------------------------*/
+	Route::get('journal/{id?}', 'JournalController@index');
 
 
 // /*----------------------  Pointage  ----------------------------------*/

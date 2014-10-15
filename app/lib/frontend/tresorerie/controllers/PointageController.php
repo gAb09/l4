@@ -1,4 +1,4 @@
-<?php // aFa Factoriser code pointage/prev/recdep
+<?php
 
 class PointageController extends BaseController {
 
