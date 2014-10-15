@@ -26,39 +26,30 @@
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@else
-				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				{{ $ecriture->montant }}
+			</td>
+			<td class="{{$ecriture->signe->nom_sys}}">
+				@if($ecriture->solde_1)
+				{{ $ecriture->solde_1 }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@else
-				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@if($ecriture->solde_2)
+				{{ $ecriture->solde_2 }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@else
-				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@if($ecriture->solde_3)
+				{{ $ecriture->solde_3 }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@else
-				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
+				@if($ecriture->solde_4)
+				{{ $ecriture->solde_4 }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				@if($ecriture->signe_id == 1)
-				{{ Nbre::francais_insec($ecriture->montant) }}
-				@else
-				{{ (Nbre::francais_insec($ecriture->montant)) * -1 }}
-				@endif
+				{{$ecriture->solde_total}}
 			</td>
 			<td class="icone">
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>

@@ -49,6 +49,9 @@ Choix des années
 			Banque 3
 		</th>
 		<th>
+			Banque 4
+		</th>
+		<th>
 			Solde global
 		</th>
 		<th class="icone">

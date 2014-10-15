@@ -31,27 +31,13 @@ class PrevController extends BaseController {
 		Session::put('page_depart', Request::getUri());
 
 		// Récupérer la collection d'écriture
-		$ecritures = $this->ecr_repo->collectionPrev('an');
+		$ecritures = $this->ecr_repo->collectionPrev();
 
-
-		/* S'il n'y a pas d'écriture pour la banque demandée : 
-		rediriger sur la page pointage par défaut avec un message d'erreur */
-		if (!$ecritures){
-			$message = 'Il n’y a aucune écriture pour la banque “';
-			$message .= $this->bank_repo->nomBanque($id);
-			$message .= '”';
-			return Redirect::back()->withErrors($message);
-		}
-
-		/* Passer le nom et l’id de la banque à la session 
-		pour mémorisation de la banque en cours de traitement. */
-		Session::put('Etat.banque', $ecritures[0]->banque->nom);
-		Session::put('Etat.banque_id', $ecritures[0]->banque->id);
 
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statut_repo->classeStatutSelonId();
 
-		/* Afficher la vue pointage pour la banque demandée. */ 
+		/* Afficher la vue prévisionnel */ 
 		return View::make('frontend.tresorerie.views.prev.main')
 		->with(compact('ecritures'))
 		->with(compact('classe_statut_selon_id'))
