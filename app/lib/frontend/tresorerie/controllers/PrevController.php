@@ -12,16 +12,10 @@ class PrevController extends BaseController {
 	// Le tableau des statuts modifiables depuis cette page
 	private $statuts_accessibles = '1-2';
 
-
-	private $ecr_repo = '';
-	private $bank_repo = '';
-	private $statut_repo = '';
-
-
 	public function __construct(){
-		$this->ecr_repo = new EcritureRepository;
-		$this->bank_repo = new BanqueRepository;
-		$this->statut_repo = new StatutRepository;
+		$this->prevRepo = new PrevRepository;
+		$this->banqueRepo = new BanqueRepository;
+		$this->statutRepo = new StatutRepository;
 	}
 
 	public function index()
@@ -31,11 +25,11 @@ class PrevController extends BaseController {
 		Session::put('page_depart', Request::getUri());
 
 		// Récupérer la collection d'écriture
-		$ecritures = $this->ecr_repo->collectionPrev();
+		$ecritures = $this->prevRepo->collectionPrev();
 
 
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
-		$classe_statut_selon_id = $this->statut_repo->classeStatutSelonId();
+		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
 
 		/* Afficher la vue prévisionnel */ 
 		return View::make('frontend.tresorerie.views.prev.main')
@@ -44,23 +38,6 @@ class PrevController extends BaseController {
 		->with(array('statuts_accessibles' => $this->statuts_accessibles)) 
 		->with(array('titre_page' => "Prévisionnel"))
 		;
-	}
-
-	// Afa  Passer dans un helper "pointage"
-	public function incrementeStatut($id, $statuts_accessibles)
-	{
-				// return 'pointage de l’écriture n° '.$id.'<br />Statut id : '.$statut_id;  // CTRL
-				// return var_dump(Input::all());  // CTRL
-
-		$ecriture = $this->ecr_repo->find($id);
-
-		$ecriture->statut_id = $this->statut_repo->incremente($statuts_accessibles, $ecriture);
-
-				// return var_dump($new_statut); // CTRL
-
-		$this->ecr_repo->save($ecriture);
-
-		return Response::make('', 204);
 	}
 
 }
