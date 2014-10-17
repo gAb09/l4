@@ -11,7 +11,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 
 	Route::get('/', function(){
-		return Redirect::to('tresorerie/ecritures');
+		return Redirect::to('tresorerie/journal');
 	});
 
 	Route::get('statuts', function(){

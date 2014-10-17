@@ -61,9 +61,9 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	<!-- Solde -->
 	<td class="cumul_absolu">
 		@if($ecriture->cumul_absolu < 0)
-		<span class="depense">{{$ecriture->cumul_absolu}}</span>
+		<span class="depense">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
 		@else
-		<span class="recette">{{$ecriture->cumul_absolu}}</span>
+		<span class="recette">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
 		@endif
 	</td>
 

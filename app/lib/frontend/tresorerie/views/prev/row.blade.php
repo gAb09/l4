@@ -26,30 +26,30 @@
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				{{ $ecriture->montant }}
+				{{ Nbre::francais_insec($ecriture->montant) }}
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->solde_1)
-				{{ $ecriture->solde_1 }}
+				{{ Nbre::francais_insec($ecriture->solde_1) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->solde_2)
-				{{ $ecriture->solde_2 }}
+				{{ Nbre::francais_insec($ecriture->solde_2) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->solde_3)
-				{{ $ecriture->solde_3 }}
+				{{ Nbre::francais_insec($ecriture->solde_3) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
 				@if($ecriture->solde_4)
-				{{ $ecriture->solde_4 }}
+				{{ Nbre::francais_insec($ecriture->solde_4) }}
 				@endif
 			</td>
 			<td class="{{$ecriture->signe->nom_sys}}">
-				{{$ecriture->solde_total}}
+				{{Nbre::francais_insec($ecriture->solde_total)}}
 			</td>
 			<td class="icone">
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>

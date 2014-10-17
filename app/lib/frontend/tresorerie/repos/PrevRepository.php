@@ -33,7 +33,6 @@ class PrevRepository {
 			/* ----  Traitement du regroupement par mois ----- */
 			$this->classementParMois($ecriture, $ecritures, $order, 'mois');
 
-
 			/* ----- Traitement des soldes par banques ----- */
 
 			/* On récupère la liste des banques à afficher */

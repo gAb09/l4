@@ -77,17 +77,17 @@
 			<td colspan="3">
 			</td>
 			<td class ='depense'>
-				{{$ecriture->cumul_dep_mois}}
+				{{Nbre::francais_insec($ecriture->cumul_dep_mois)}}
 			</td>
 			<td class='recette'>
-				{{$ecriture->cumul_rec_mois}}
+				{{Nbre::francais_insec($ecriture->cumul_rec_mois)}}
 			</td>
 			<td colspan="4">
 				Solde du mois : 
 				@if($ecriture->solde < 0)
-				<span class="depense">{{$ecriture->solde}}</span>
+				<span class="depense">{{Nbre::francais_insec($ecriture->solde)}}</span>
 				@else
-				<span class="recette">{{$ecriture->solde}}</span>
+				<span class="recette">{{Nbre::francais_insec($ecriture->solde)}}</span>
 				@endif
 			</td>
 		</tr>

@@ -6,7 +6,7 @@
 | Section Grille
 |--------------------------------------------------------------------------*/
 Route::get('grille', function(){
-	return View::make('frontend/grille/layout');
+	return View::make('frontend/views/layout');
 });
 
 Route::get('grille/emissions', function(){
