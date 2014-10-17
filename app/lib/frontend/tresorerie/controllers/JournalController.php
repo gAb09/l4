@@ -5,9 +5,6 @@ class JournalController extends BaseController {
 	// Les statuts accessibles (séparés par un "-")
 	private $statuts_accessibles = '1-2';
 
-	// Le critère de classement
-	private $order = 'date_emission';
-
 	public function __construct(){
 		$this->journalRepo = new JournalRepository;
 		$this->banqueRepo = new BanqueRepository;

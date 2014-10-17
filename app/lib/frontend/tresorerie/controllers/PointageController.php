@@ -5,7 +5,6 @@ class PointageController extends BaseController {
 	// Les statuts accessibles (séparés par un "-")
 	private $statuts_accessibles = '2-3-4';
 
-
 	public function __construct(){
 		$this->ecrRepo = new EcritureRepository;
 		$this->pointageRepo = new PointageRepository;
