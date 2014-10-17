@@ -1,13 +1,13 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationType;
+use Lib\Validations\TypeValidation;
 
 class TypeController extends BaseController {
 
 	protected $validateur;
 
 
-	public function __construct(ValidationType $validateur)
+	public function __construct(TypeValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}

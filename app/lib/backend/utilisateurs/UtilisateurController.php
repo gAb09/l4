@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationUtilisateur;
+use Lib\Validations\UtilisateurValidation;
 
 class UtilisateurController extends \BaseController {
 
@@ -8,7 +8,7 @@ class UtilisateurController extends \BaseController {
 	protected $validateur;
 
 
-	public function __construct(ValidationUtilisateur $validateur)
+	public function __construct(UtilisateurValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}

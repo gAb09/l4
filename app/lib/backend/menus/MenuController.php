@@ -1,13 +1,13 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationMenu;
+use Lib\Validations\MenuValidation;
 
 class MenuController extends \BaseController {
 // aFa Faire les validations
 	
 	protected $validateur;
 
-	public function __construct(ValidationMenu $validateur)
+	public function __construct(MenuValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}

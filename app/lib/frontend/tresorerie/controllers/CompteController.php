@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationCompte;
+use Lib\Validations\CompteValidation;
 use Baum\Node;
 
 class CompteController extends BaseController {
@@ -15,7 +15,7 @@ class CompteController extends BaseController {
 		return $this->listes;
 	}
 
-	public function __construct(ValidationCompte $validateur)
+	public function __construct(CompteValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}

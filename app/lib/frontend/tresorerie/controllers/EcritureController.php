@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationEcriture;
-use Lib\Validations\ValidationDoubleEcriture;
+use Lib\Validations\EcritureValidation;
+use Lib\Validations\EcritureDoubleValidation;
 
 class EcritureController extends BaseController {
 
@@ -15,7 +15,7 @@ class EcritureController extends BaseController {
 
 
 
-	public function __construct(ValidationEcriture $validateur, ValidationDoubleEcriture $validateur2)
+	public function __construct(EcritureValidation $validateur, EcritureDoubleValidation $validateur2)
 	{
 		$this->validateur = $validateur;
 		$this->validateur2 = $validateur2;
