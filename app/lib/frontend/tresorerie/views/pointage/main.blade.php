@@ -125,12 +125,9 @@ echo "var statuts_accessibles = '".$statuts_accessibles."';";
 <script type="text/javascript">
 
 <?php
-if( $mois = Session::get('mois') ){
-	echo 'var mois = "'.$mois.'";';
-}else{
-	echo 'var mois = "";';
-}
+	echo 'var mois = "'.Volets::getMoisCourant().'";';
 ?>
+
 if (mois) {
 	var curhead = document.getElementById("tetiere"+mois);
 	var curcorps = document.getElementById("corps"+mois);

@@ -95,12 +95,9 @@ Choix des années
 <script type="text/javascript">
 
 <?php
-if( $mois = Session::get('mois') ){
-echo 'var mois = '.$mois.';';
-}else{
-echo 'var mois = "";';
-}
+	echo 'var mois = "'.Volets::getMoisCourant().'";';
 ?>
+
 	if (mois) {
 		var curhead = document.getElementById("corps"+mois);
 		var curcorps = document.getElementById("tetiere"+mois);
