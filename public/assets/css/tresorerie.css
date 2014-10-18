@@ -264,18 +264,16 @@ table {
 
 thead,
 tbody{
-    transition: opacity 2s;
+    transition: opacity 1.3s;
     border-color: #5F835F;
     border-style: solid;
     border-width: 1px;
-    /*visibility:visible;*/
 }
 
 thead.replie,
 tbody.replie
 {
     transition: opacity 0s;
-    /*visibility:collapse;*/
     overflow: auto;
     opacity: 0;
     display:table-column-group;
