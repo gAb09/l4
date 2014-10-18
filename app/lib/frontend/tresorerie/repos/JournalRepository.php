@@ -10,6 +10,8 @@ class JournalRepository {
 
 	private $cumul_absolu = 0;
 
+	private $rang = 0;
+
 	public function collectionJournal($id, $order)
 	{
 
@@ -29,6 +31,11 @@ class JournalRepository {
 		/* Lancer la boucle sur la colection */
 		$ecritures->each(function($ecriture) use ($ecritures, $order, $last) {
 
+			/* Affecter la valeur de la propriété $this-rang initialisée à 0. */
+			$ecriture->rang = $this->rang;
+
+			/* Incrémenter pour la ligne suivante */
+			$this->rang++;
 
 			/* ----- Traitement du classement par mois ----- */
 			$this->classementParMois($ecriture, $ecritures, $order, $last);

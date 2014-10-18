@@ -3,8 +3,6 @@ namespace lib\shared\Traits;
 
 trait TraitRepository {
 
-	private $rang = 0;
-
 	private $prev_mois = 'premier';
 
 
@@ -23,12 +21,6 @@ trait TraitRepository {
 
 			/* Pour pouvoir accéder depuis une ligne à la ligne précédente :
 			Ajouter un attribut rang à chaque ligne.
-
-			/* Affecter la valeur de la propriété $this-rang initialisée à 0. */
-			$ligne->rang = $this->rang;
-
-			/* Incrémenter pour la ligne suivante */
-			$this->rang++;
 
 
 			/* Extraire le mois et l’année du critère de classement */
