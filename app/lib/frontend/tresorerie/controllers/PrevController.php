@@ -24,15 +24,17 @@ class PrevController extends BaseController {
 		il faut passer (via la session) à EcritureController@update pour la redirection */
 		Session::put('page_depart', Request::getUri());
 
-		// Récupérer la collection d'écriture
-		$ecritures = $this->prevRepo->collectionPrev();
+		$banques = $this->banqueRepo->isPrevisionnel();
 
+		// Récupérer la collection d'écriture
+		$ecritures = $this->prevRepo->collectionPrev($banques);
 
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
 
 		/* Afficher la vue prévisionnel */ 
 		return View::make('frontend.tresorerie.views.prev.main')
+		->with(compact('banques'))
 		->with(compact('ecritures'))
 		->with(compact('classe_statut_selon_id'))
 		->with(array('statuts_accessibles' => $this->statuts_accessibles)) 

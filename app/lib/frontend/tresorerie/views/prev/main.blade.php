@@ -33,24 +33,17 @@ Choix des années
 		<th>
 			Type
 		</th>
-		<th colspan="2">
+		<th>
 			Libellé
 		</th>
 		<th>
 			Montant
 		</th>
+@foreach($banques as $banque)		
 		<th>
-			Banque 1
+			{{$banque->nom}}
 		</th>
-		<th>
-			Banque 2
-		</th>
-		<th>
-			Banque 3
-		</th>
-		<th>
-			Banque 4
-		</th>
+@endforeach
 		<th>
 			Solde global
 		</th>

@@ -19,41 +19,47 @@
 
 			<td>
 				{{ $ecriture->libelle }}
-			</td>
-			<td>
 				@if($ecriture->libelle_detail)
-				{{ $ecriture->libelle_detail }}
+				 – {{ $ecriture->libelle_detail }}
 				@endif
 			</td>
+
 			<td class="{{$ecriture->signe->nom_sys}}">
 				{{ Nbre::francais_insec($ecriture->montant) }}
 			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
+
+			<td class="{{($ecriture->solde_1 >=0) ? 'recette' : 'depense' }}">
 				@if($ecriture->solde_1)
 				{{ Nbre::francais_insec($ecriture->solde_1) }}
 				@endif
 			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
+
+			<td class="{{($ecriture->solde_2 >=0) ? 'recette' : 'depense' }}">
 				@if($ecriture->solde_2)
 				{{ Nbre::francais_insec($ecriture->solde_2) }}
 				@endif
 			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
+
+			<td class="{{($ecriture->solde_3 >=0) ? 'recette' : 'depense' }}">
 				@if($ecriture->solde_3)
 				{{ Nbre::francais_insec($ecriture->solde_3) }}
 				@endif
 			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
+
+			<td class="{{($ecriture->solde_4 >=0) ? 'recette' : 'depense' }}">
 				@if($ecriture->solde_4)
 				{{ Nbre::francais_insec($ecriture->solde_4) }}
 				@endif
 			</td>
-			<td class="{{$ecriture->signe->nom_sys}}">
+
+			<td class="{{($ecriture->solde_total >=0) ? 'recette' : 'depense' }}">
 				{{Nbre::francais_insec($ecriture->solde_total)}}
 			</td>
+
 			<td class="icone">
 				<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 			</td>
+			
 			<td class="icone">
 				<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
 			</td>
