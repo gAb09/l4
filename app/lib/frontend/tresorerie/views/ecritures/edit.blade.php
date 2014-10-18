@@ -27,8 +27,9 @@
 	Modifiée le {{ Date::courte($ecriture->updated_at) }}</p>
 	@stop
 
+
 	@section('zapette')
-	{{ link_to_action('BanqueController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+	{{ link_to(Session::get('page_depart')."#".Session::get('mois'), 'Retour à la liste', array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
 
 	{{ Form::submit('Modifier cette écriture', array('class' => 'btn btn-edit btn-zapette')) }}
 	{{ Form::close() }}
