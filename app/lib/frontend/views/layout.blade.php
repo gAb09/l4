@@ -99,16 +99,15 @@
 				• Version 1
 				• Page départ : {{Session::get('page_depart')}}
 				••• En cours d'édition : 
-				• Banque : {{Session::get('Etat.banque')}}
-				• Mois  {{Date::MoisEdit(Session::get('Etat.mois'))}}temporairement : {{ Date::MoisEdit(Session::get('mois')) }}
-				• Ligne : {{Session::get('Etat.ligne')}}
-				••• Nombre par page : {{Session::get('Etat.nbre_par_page')}}
-				• Tri (paramètre) : {{Session::get('Etat.tri')}}
-				• Tri (sens) : {{Session::get('Etat.tri_sens')}}
-				• Classe de compte : {{Session::get('Etat.classe')}}
+				• Banque courante : {{Session::get('Courant.banque')}}
+				• Mois courant : {{Date::MoisEdit(Session::get('Courant.mois'))}}
+				• Ligne : {{Session::get('Courant.ligne')}}
+				••• Nombre par page : {{Session::get('Courant.nbre_par_page')}}
+				• Tri (paramètre) : {{Session::get('Courant.tri')}}
+				• Tri (sens) : {{Session::get('Courant.tri_sens')}}
+				• Classe de compte : {{Session::get('Courant.classe')}}
 				• BDD : {{DB::getDatabaseName()}}</p>
 
-		</div>
 
 
 	</div>

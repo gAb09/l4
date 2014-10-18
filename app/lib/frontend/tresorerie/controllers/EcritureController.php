@@ -35,9 +35,9 @@ class EcritureController extends BaseController {
 
 	public function indexBanque($choix = null)
 	{
-		$banque = (is_null($choix)) ? Session::get('Etat.banque') : $choix ;
+		$banque = (is_null($choix)) ? Session::get('Courant.banque') : $choix ;
 
-		Session::push('Etat.banque', $banque);
+		Session::push('Courant.banque', $banque);
 
 		return $this->index($banque);
 	}
@@ -116,6 +116,7 @@ class EcritureController extends BaseController {
 			if ($validation === true) {
 				$ec1->save();
 				Session::flash('success',"L’écriture a été créée");
+
 			}else{
 				return Redirect::back()
 				->withInput(Input::all())
@@ -152,7 +153,8 @@ class EcritureController extends BaseController {
 			$ec1->double_id = $ec2->id;
 			$ec1->save();
 		}
-		return Redirect::to(Session::get('page_depart'));
+		$mois = self::setMoisCourant($ec1);
+		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 
 	}
 
@@ -371,7 +373,7 @@ class EcritureController extends BaseController {
 
 		/* Rediriger */
 		Session::flash('success', $success);
-		$mois = self::getMoisForRedirect($ec1);
+		$mois = self::setMoisCourant($ec1);
 		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 	}
 
@@ -396,22 +398,22 @@ class EcritureController extends BaseController {
 
 		Session::flash('success', $success);
 
-		// $mois = self::getMoisForRedirect($ec1);
+		// $mois = self::setMoisCourant($ec1);
 		// return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 
-		$mois = self::getMoisForRedirect($ecriture);
+		$mois = self::setMoisCourant($ecriture);
 		return Redirect::to(Session::get('page_depart')."#$mois");
 
 	}
 
 
-	public static function getMoisForRedirect($ec1){ // aPo redirection vers le mois
+	public static function setMoisCourant($ec1){ // aPo redirection vers le mois
 		if(isset($ec1)){
 			$mois = Date::classAnMois($ec1->date_valeur);
 		}else{
 			$mois = "2014.01";
 		}
-		Session::put('mois', $mois);
+		Session::put('Courant.mois', $mois);
 		return $mois;
 	}
 

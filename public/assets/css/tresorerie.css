@@ -192,7 +192,7 @@ nav.sections{
     background-color: #C8A94C;
     position: fixed;
     height: 47px;
-    top: -46px;
+    top: -43px;
     margin-bottom: 0px;
     left: 0px;
     z-index: 100;
@@ -252,6 +252,15 @@ div.messages.masquer{
     top: -2px;
 }
 
+div.truc{
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+div.banques{
+    display: inline-block;
+}
 
 /*   TABLEAUX */
 

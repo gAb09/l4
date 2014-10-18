@@ -11,11 +11,12 @@
 
 
 @section('topcontent2')
-
-@foreach(Banque::all() as $bank)
-<a href ="{{ URL::to("tresorerie/journal/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-@endforeach
-
+<div class="banques">
+	@foreach(Banque::all() as $bank)
+	<a href ="{{ URL::to("tresorerie/journal/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+	@endforeach
+</div>
+@include('shared/views/Session_current')
 @stop
 
 

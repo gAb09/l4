@@ -4,11 +4,11 @@ use lib\shared\Traits\TraitRepository;
 class PointageRepository {
 	use TraitRepository;
 
-	private $cumul_dep_mois = '';
+	private $cumul_dep_mois = 0.0;
 
-	private $cumul_rec_mois = '';
+	private $cumul_rec_mois = 0.0;
 
-	private $cumul_absolu = 0;
+	private $cumul_absolu = 0.0;
 
 	private $rang = 0;
 

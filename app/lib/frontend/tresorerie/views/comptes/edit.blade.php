@@ -26,7 +26,7 @@
 
 
 @section('zapette')
-	{{ link_to_action('CompteController@index', 'Retour à la liste', Session::get('Etat.classe'), array('class' => 'btn btn-info btn-zapette iconemedium list')); }}
+	{{ link_to_action('CompteController@index', 'Retour à la liste', Session::get('Courant.classe'), array('class' => 'btn btn-info btn-zapette iconemedium list')); }}
 
 	{{ Form::submit('Modifier ce compte', array('class' => 'btn btn-edit btn-zapette')) }}
 	{{ Form::close() }}

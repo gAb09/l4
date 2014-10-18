@@ -9,12 +9,14 @@
 <h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
-
 @section('topcontent2')
 
-@foreach(Banque::all() as $bank) {{-- aFa passer dans repository --}}
+<div class="banques">
+	@foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-@endforeach
+	@endforeach
+</div>
+@include('shared/views/Session_current')
 
 @stop
 

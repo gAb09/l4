@@ -4,11 +4,11 @@ use lib\shared\Traits\TraitRepository;
 class JournalRepository {
 	use TraitRepository;
 
-	private $cumul_dep_mois = '';
+	private $cumul_dep_mois = 0.0;
 
-	private $cumul_rec_mois = '';
+	private $cumul_rec_mois = 0.0;
 
-	private $cumul_absolu = 0;
+	private $cumul_absolu = 0.0;
 
 	private $rang = 0;
 
@@ -52,12 +52,12 @@ class JournalRepository {
 
 			/* Calculer les cumuls */
 			if($ecriture->signe_id == 1){
-				$this->cumul_dep_mois = $this->cumul_dep_mois + $ecriture->montant;
-				$this->cumul_absolu = $this->cumul_absolu - $ecriture->montant;
+				$this->cumul_dep_mois += $ecriture->montant;
+				$this->cumul_absolu -= $ecriture->montant;
 			}
 			if($ecriture->signe_id == 2){
-				$this->cumul_rec_mois = $this->cumul_rec_mois = $this->cumul_rec_mois + $ecriture->montant;
-				$this->cumul_absolu = $this->cumul_absolu + $ecriture->montant;
+				$this->cumul_rec_mois += $ecriture->montant;
+				$this->cumul_absolu += $ecriture->montant;
 			}
 
 			/* Affecter les cumuls à l'écriture */
@@ -65,7 +65,6 @@ class JournalRepository {
 			$ecriture->cumul_rec_mois = $this->cumul_rec_mois;
 			$ecriture->solde = $this->cumul_rec_mois - $this->cumul_dep_mois;
 			$ecriture->cumul_absolu = $this->cumul_absolu;
-
 
 		});
 

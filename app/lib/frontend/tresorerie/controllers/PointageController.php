@@ -12,8 +12,15 @@ class PointageController extends BaseController {
 		$this->statutRepo = new StatutRepository;
 	}
 
-	public function index($id = 1) // $id = 1 compte principal par défaut
+	public function index($id = null) //
 	{
+		/* Si pas d'$id spécifié on utilise celui de la banque courante
+		(stocké en session) */
+		if (is_null($id))
+		{
+			$id = Session::get('Courant.banque_id');
+		}
+
 		/* Si l'édition d’une écriture est demandée depuis cette page, 
 		il faut passer (via la session) à EcritureController@update pour la redirection */
 		Session::put('page_depart', Request::getUri());
@@ -33,8 +40,8 @@ class PointageController extends BaseController {
 
 		/* Passer le nom et l’id de la banque à la session 
 		pour mémorisation de la banque en cours de traitement. */
-		Session::put('Etat.banque', $ecritures[0]->banque->nom);
-		Session::put('Etat.banque_id', $ecritures[0]->banque->id);
+		Session::put('Courant.banque', $ecritures[0]->banque->nom);
+		Session::put('Courant.banque_id', $ecritures[0]->banque->id);
 
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
@@ -44,7 +51,7 @@ class PointageController extends BaseController {
 		->with(compact('ecritures'))
 		->with(compact('classe_statut_selon_id'))
 		->with(array('statuts_accessibles' => $this->statuts_accessibles))
-		->with(array('titre_page' => "Pointage de ".Session::get('Etat.banque')))
+		->with(array('titre_page' => "Pointage de ".Session::get('Courant.banque')))
 		;
 	}
 
