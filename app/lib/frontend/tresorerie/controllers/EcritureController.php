@@ -245,7 +245,7 @@ class EcritureController extends BaseController {
 		/*	- stopper le processus,
 		- présenter un nouveau formulaire identique du point de vue des inputs, et qui
  	  		• conserve les entrées faites par l'utilisateur,
- 	    	• modifie l'action du formulaire (ajout de "/ok" en fin d'url) afin de ne pas être filtré à nouveau,
+ 	    	• modifie l'attribut action du formulaire (ajout de "/ok" en fin d'url) afin de ne pas être filtré à nouveau,
  	    	• affiche un message alertant sur le changement de type et donnant la possibilté d'annuler. */
 
  	    	/* Le message sera composé différemment selon qu'il s'agit d'un passage d'une écriture double à une écriture simple  ou du passage inverse */
