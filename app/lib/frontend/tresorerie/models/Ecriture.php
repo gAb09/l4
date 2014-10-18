@@ -69,11 +69,11 @@ class Ecriture extends Eloquent {
 
 
 	/* —————————  ACCESSORS  —————————————————*/
-	// public function getMontantAttribute($value)
-	// {
+	public function getMontantAttribute($value)
+	{
 		
-	// 	return (string) $value;
-	// }
+		return (double) $value;
+	}
 
 
 
