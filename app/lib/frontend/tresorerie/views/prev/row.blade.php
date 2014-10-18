@@ -28,29 +28,16 @@
 				{{ Nbre::francais_insec($ecriture->montant) }}
 			</td>
 
-			<td class="{{($ecriture->solde_1 >=0) ? 'recette' : 'depense' }}">
-				@if($ecriture->solde_1)
-				{{ Nbre::francais_insec($ecriture->solde_1) }}
-				@endif
-			</td>
+			@foreach($banques as $banque)
+			<?php $id = 'solde_'.$banque->id; ?>
 
-			<td class="{{($ecriture->solde_2 >=0) ? 'recette' : 'depense' }}">
-				@if($ecriture->solde_2)
-				{{ Nbre::francais_insec($ecriture->solde_2) }}
-				@endif
-			</td>
+				<td class="{{($ecriture->{$id} >=0) ? 'recette' : 'depense' }}">
+					@if($ecriture->{$id})
+					{{ Nbre::francais_insec($ecriture->{$id}) }}
+					@endif
+				</td>
 
-			<td class="{{($ecriture->solde_3 >=0) ? 'recette' : 'depense' }}">
-				@if($ecriture->solde_3)
-				{{ Nbre::francais_insec($ecriture->solde_3) }}
-				@endif
-			</td>
-
-			<td class="{{($ecriture->solde_4 >=0) ? 'recette' : 'depense' }}">
-				@if($ecriture->solde_4)
-				{{ Nbre::francais_insec($ecriture->solde_4) }}
-				@endif
-			</td>
+			@endforeach
 
 			<td class="{{($ecriture->solde_total >=0) ? 'recette' : 'depense' }}">
 				{{Nbre::francais_insec($ecriture->solde_total)}}
@@ -62,6 +49,12 @@
 			
 			<td class="icone">
 				<a class="iconemedium dupli" href ="{{ URL::action('EcritureController@duplicate', [$ecriture->id]) }}"></a>
+			</td>
+
+			<td class="icone">
+				@if ($ecriture->ecriture2)
+					<a class="iconemedium double" href =""></a>
+				@endif
 			</td>
 
 		</tr>
