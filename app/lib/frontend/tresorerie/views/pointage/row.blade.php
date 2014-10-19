@@ -80,7 +80,7 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	<!-- Banque -->
 	<td>
 		{{ $ecriture->banque->nom }}
-		@if($ecriture->double_flag)
+		@if($ecriture->is_double)
 		@if($ecriture->signe->signe == -1)
 		<br />&rarr; 
 		@else

@@ -108,7 +108,7 @@ class EcritureController extends BaseController {
 		$ec1 = new Ecriture;
 
 		/* Si écriture simple */
-		if (!Input::get('double_flag')) {
+		if (!Input::get('is_double')) {
 
 			$ec1 = static::hydrateSimple($ec1);
 
@@ -147,10 +147,10 @@ class EcritureController extends BaseController {
 			$ec1->save();
 
 		// /* Synchroniser */
-			$ec2->double_id = $ec1->id;
+			$ec2->soeur_id = $ec1->id;
 			$ec2->save();
 
-			$ec1->double_id = $ec2->id;
+			$ec1->soeur_id = $ec2->id;
 			$ec1->save();
 		}
 		$mois = self::setMoisCourant($ec1);
@@ -170,7 +170,7 @@ class EcritureController extends BaseController {
 		$ec1->type_id = Input::get('type_id');
 		$ec1->justificatif = Input::get('justificatif');
 		$ec1->compte_id = Input::get('compte_id');
-		$ec1->double_flag = Input::get('double_flag');
+		$ec1->is_double = Input::get('is_double');
 
 		return $ec1;
 	}
@@ -198,7 +198,7 @@ class EcritureController extends BaseController {
 		$ec2->type_id = Input::get('type2_id');
 		$ec2->justificatif = Input::get('justif2');
 		$ec2->compte_id = Input::get('compte_id');
-		$ec2->double_flag = Input::get('double_flag');
+		$ec2->is_double = Input::get('is_double');
 
 		return array($ec1, $ec2);
 
@@ -228,8 +228,8 @@ class EcritureController extends BaseController {
 		$success = '';
 
 		/* Détecter si changement du flag double écriture */
-		$doubleBefore = ($ec1->double_flag == 1 ? true : false);
-		$doubleNow = (is_null(Input::get('double_flag'))) ? false : true;
+		$doubleBefore = ($ec1->is_double == 1 ? true : false);
+		$doubleNow = (is_null(Input::get('is_double'))) ? false : true;
 
 		$changement = ($doubleBefore != $doubleNow) ? true : false ;
 
@@ -296,7 +296,7 @@ class EcritureController extends BaseController {
 					$ec2[0]->delete();
 
 					/* Désynchroniser E1 */
-					$ec1->double_id = null;
+					$ec1->soeur_id = null;
 
 					/* Composer messages */
 					$success = "• L’écriture $this->nommage a été désynchronisée…<br />• L’écriture liée a été supprimée<br />".$success;
@@ -317,7 +317,7 @@ class EcritureController extends BaseController {
 					$success .= '• L’écriture liée a été créée.<br />';
 
 					/* Synchroniser E2 */
-					$ec2->double_id = $id;
+					$ec2->soeur_id = $id;
 					$success .= '• L’écriture liée a été synchronisée.<br />';
 
 
@@ -352,7 +352,7 @@ class EcritureController extends BaseController {
 
 			/* Synchroniser E1 */
 			if ($changement) {
-				$ec1->double_id = $ec2->id;
+				$ec1->soeur_id = $ec2->id;
 				$success = "• L’écriture $this->nommage a été synchronisée.<br />".$success;
 			}
 
@@ -388,7 +388,7 @@ class EcritureController extends BaseController {
 		/* Le cas échéant traiter l'écriture liée */
 
 		if ($ecriture->ecriture2){
-			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->double_id)->get();
+			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->soeur_id)->get();
 			$deuze = $deuze[0];
 			$deuze->delete();
 			$success = "• L’écriture liée à été supprimée.<br />";

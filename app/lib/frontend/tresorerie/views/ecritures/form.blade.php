@@ -10,11 +10,11 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 <fieldset>
 	<!-- Écriture simple/double -->
 	<div class="input nobr">
-		{{ Form::checkbox('double_flag', '1', $ecriture->double_flag, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
+		{{ Form::checkbox('is_double', '1', $ecriture->is_double, array ('class' => 'nobr', 'id' => 'double', 'onChange' => 'javascript:banque();')) }}
 		{{ Form::label('double', 'Écriture double', array ('class' => 'nobr', 'id' => 'label_flag')) }}
 	</div>
 
-	@if($ecriture->double_flag)
+	@if($ecriture->is_double)
 	<div class="input nobr">
 	<a class="iconemedium double" href ="{{ URL::action('EcritureController@edit', $ecriture->ecriture2->id) }}"></a>Aller à l’écriture liée
 	</div>

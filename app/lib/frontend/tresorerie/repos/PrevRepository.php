@@ -59,7 +59,7 @@ class PrevRepository {
 				Attention le calcul est différent s'il s'agit d'une écriture double ou simple */
 				if($ecriture->banque_id == $bank->id){
 
-					if ($ecriture->double_flag != 1) {
+					if ($ecriture->is_double != 1) {
 						$this->solde[$bank->id] +=  $ecriture->montant;
 						$this->solde['total'] += $ecriture->montant;
 
@@ -69,7 +69,7 @@ class PrevRepository {
 
 					}
 
-					if ($ecriture->double_flag == 1)
+					if ($ecriture->is_double == 1)
 					{
 						// var_dump($ecriture->libelle);
 						// var_dump($ecriture->ecriture2->banque_id);
@@ -79,7 +79,7 @@ class PrevRepository {
 						if ($ecriture->ecriture2->banque_id == $bank->id) 
 						{
 							unset($ecritures[$ecriture->rang]);
-							$this->orphelin[] = $ecriture->double_id;
+							$this->orphelin[] = $ecriture->soeur_id;
 							var_dump($this->orphelin);dd($ecritures[$ecriture->rang]);
 						}
 
@@ -89,7 +89,7 @@ class PrevRepository {
 
 						if (!array_key_exists($ecriture->id, $this->tampon))
 						{
-							$this->tampon[$ecriture->double_id] = [
+							$this->tampon[$ecriture->soeur_id] = [
 							'bank2_id' => $ecriture->banque_id,
 							'montant' => $ecriture->montant,
 							'signe' => $ecriture->signe->signe,
