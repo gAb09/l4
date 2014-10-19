@@ -6,6 +6,8 @@ class PrevRepository {
 
 	private $tampon = array();
 
+	private $orphelin = array();
+
 	private $rang = 0;
 
 	public function collectionPrev($banques)
@@ -43,7 +45,10 @@ class PrevRepository {
 			/* ----  Traitement du regroupement par mois ----- */
 			$this->classementParMois($ecriture, $ecritures, $order, 'mois');
 
-			/* ----- Traitement des soldes par banques ----- */
+		});
+
+		/* ----- Traitement des soldes par banques ----- */
+		$ecritures->each(function($ecriture) use ($ecritures, $order, $banques) {
 
 			/* On récupère la liste des banques à afficher */
 			$ecriture->montant = $ecriture->montant * $ecriture->signe->signe;
@@ -66,6 +71,22 @@ class PrevRepository {
 
 					if ($ecriture->double_flag == 1)
 					{
+						// var_dump($ecriture->libelle);
+						// var_dump($ecriture->ecriture2->banque_id);
+						// var_dump($bank->id);
+						// var_dump('- - - ');
+
+						if ($ecriture->ecriture2->banque_id == $bank->id) 
+						{
+							unset($ecritures[$ecriture->rang]);
+							$this->orphelin[] = $ecriture->double_id;
+							var_dump($this->orphelin);dd($ecritures[$ecriture->rang]);
+						}
+
+						if (in_array($ecriture->id, $this->orphelin)) {
+							$ecriture->{'solde_'.$bank->id} = 999999;
+						}
+
 						if (!array_key_exists($ecriture->id, $this->tampon))
 						{
 							$this->tampon[$ecriture->double_id] = [
@@ -86,14 +107,16 @@ class PrevRepository {
 							$ecriture->{'solde_'.$tampon['bank2_id']} = $solde2;
 							$ecriture->solde_total = $this->solde['total'];
 						}
-					}				
+					}
 				}
 
 				// var_dump($ecriture);
 				// var_dump('----------------------------------------------------------------');
-			}
 
-		});
+			} //foreach banque
+
+		}); //each $ecriture
+
 				// dd($ecritures);
 
 // dd('fin');

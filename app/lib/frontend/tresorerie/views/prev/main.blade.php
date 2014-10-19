@@ -11,7 +11,8 @@
 
 
 @section('topcontent2')
-Choix des années
+Choix d'une période (en construction)
+<br />Choix de la banque principale (en construction)
 @stop
 
 
@@ -52,6 +53,9 @@ Choix des années
 		</th>
 		<th class="icone">
 			Dupli
+		</th>
+		<th class="icone">
+			Sœur
 		</th>
 	</thead>
 

@@ -14,10 +14,11 @@ class JournalController extends BaseController {
 	public function index($id = null) //
 	{
 		/* Si pas d'$id spécifié on utilise celui de la banque courante
-		(stocké en session) */
+		(stocké en session). Si on est en début de session on initialise alors à 1
+		qui est l'Id de la banque principale */
 		if (is_null($id))
 		{
-			$id = Session::get('Courant.banque_id');
+			$id = (Session::get('Courant.banque_id'))? Session::get('Courant.banque_id') : 1;
 		}
 
 		/* Si l'édition d’une écriture est demandée depuis cette page, 
