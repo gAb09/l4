@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationCompte;
+use Lib\Validations\CompteValidation;
 use Baum\Node;
 
 class CompteController extends BaseController {
@@ -15,7 +15,7 @@ class CompteController extends BaseController {
 		return $this->listes;
 	}
 
-	public function __construct(ValidationCompte $validateur)
+	public function __construct(CompteValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}
@@ -23,13 +23,13 @@ class CompteController extends BaseController {
 
 	public function index($choix = null)
 	{
-		$numero = (is_null($choix)) ? Session::get('Etat.classe') : $choix ;
+		$numero = (is_null($choix)) ? Session::get('Courant.classe') : $choix ;
 
 		/* Passer en session le numero,
 		pour mémoriser la classe sur laquelle
 		l’utilisateur est en cours de travail
 		et la mémoriser au fil de la navigation. */
-		Session::set('Etat.classe', $numero);
+		Session::set('Courant.classe', $numero);
 
 		/* Assigner la liste des racines de comptes (classes) 
 		pour le tableau de sélection des classes */

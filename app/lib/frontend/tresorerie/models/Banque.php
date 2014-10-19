@@ -12,7 +12,7 @@ class Banque extends Eloquent {
 	protected static $default_values_for_create = array(
 		'nom' => CREATE_FORM_DEFAUT_TXT_NOM,
 		'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
-	);
+		);
 
 
 	/* —————————  RELATIONS  —————————————————*/
@@ -22,4 +22,11 @@ class Banque extends Eloquent {
 		return $this->hasMany('Ecriture');
 	}
 
+
+	/* —————————  SCOPES  —————————————————*/
+
+	public function scopeIsPrevisionnel($query)
+	{
+		return $query->where('id', '!=', 0)->get();
+	}
 }

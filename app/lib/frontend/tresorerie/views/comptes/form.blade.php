@@ -14,18 +14,21 @@ onLoad="togle_actif();getFreres();"
 {{ Form::hidden('position', null) }}
 
 @else
-<div style="float:left">
+<div>
+<div style="display:inline-block">
 	<!-- Numéro -->
 	{{ Form::label('numero', 'Numéro', array ('class' => '')) }}
 	{{ Form::text('numero', $compte->numero, array ('class' => '', 'style' => 'width:100px;margin-right:10px')) }}
 </div>
 
-<div>
+<div style="display:inline-block">
 	<!-- Libellé -->
 	{{ Form::label('libelle', 'Libellé', array ('class' => '')) }}
 	{{ Form::text('libelle', $compte->libelle, array ('class' => '', 'style' => 'width:800px')) }}
+</div>
 	<hr class="filetfin">
 </div>
+
 
 <div style="display:inline-block">
 	<!-- Pere -->
@@ -58,13 +61,13 @@ onLoad="togle_actif();getFreres();"
 		@endif
 	</div>
 
-	<div style="float:left">
+	<div style="display:inline-block">
 		<!-- Descrition complémentaire -->
 		{{ Form::label('description_comp', 'Description complémentaire', array ('class' => '')) }}
 		{{ Form::textarea('description_comp', $compte->description_comp, array ('class' => '', 'style' => 'width:450px')) }}
 	</div>
 
-	<div>
+	<div style="display:inline-block">
 		@if(!$compte->pco)
 		<!-- Descrition lmh (La Mauvaise Herbe) -->
 		{{ Form::label('description_lmh', 'Description maison', array ('class' => '')) }}

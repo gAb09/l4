@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationType extends ValidationBase
+class TypeValidation extends ValidationBase
 {
 
 	protected $rules = array(

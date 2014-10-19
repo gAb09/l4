@@ -77,7 +77,7 @@ $head = array(
 					@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 				</td>
 				<td><b>{{ $ecriture->banque->nom }}</b>
-					@if($ecriture->double_flag)
+					@if($ecriture->is_double)
 					@if($ecriture->signe->signe == -1)
 					<br />&rarr; 
 					@else

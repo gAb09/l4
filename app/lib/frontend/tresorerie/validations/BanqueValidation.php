@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationBanque extends ValidationBase
+class BanqueValidation extends ValidationBase
 {
 
 	protected $rules = array(

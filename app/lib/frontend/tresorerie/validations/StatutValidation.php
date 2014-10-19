@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationStatut extends ValidationBase
+class StatutValidation extends ValidationBase
 {
 
 

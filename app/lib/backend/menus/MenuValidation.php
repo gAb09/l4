@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationMenu extends ValidationBase
+class MenuValidation extends ValidationBase
 {
 
 	// protected $rules = array(

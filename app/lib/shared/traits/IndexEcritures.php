@@ -17,12 +17,12 @@ trait IndexEcritures {
 		$ecritures = \Ecriture::with('signe', 'type', 'banque', 'statut', 'ecriture2')->where('banque_id', $id)->orderBy($this->order)->get();
 		// return var_dump($ecritures);  // CTRL
 
-		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page recdep par défaut avec un message d'erreur
+		// S'il n'y a pas d'écriture pour la banque demandée : rediriger sur la page journal par défaut avec un message d'erreur
 		if ($ecritures->isEmpty()){
 			$message = 'Il n’y a aucune écriture pour la banque “';
 			$message .= Banque::findOrFail($id)->nom;
 			$message .= '”';
-			return Redirect::to('tresorerie/recdep')->withErrors($message);
+			return Redirect::to('tresorerie/journal')->withErrors($message);
 		}
 
 		// Créer la propriété $mois_classement pour que la vue puisse classer par mois

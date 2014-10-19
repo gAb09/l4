@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationEcriture;
-use Lib\Validations\ValidationDoubleEcriture;
+use Lib\Validations\EcritureValidation;
+use Lib\Validations\EcritureDoubleValidation;
 
 class EcritureController extends BaseController {
 
@@ -15,7 +15,7 @@ class EcritureController extends BaseController {
 
 
 
-	public function __construct(ValidationEcriture $validateur, ValidationDoubleEcriture $validateur2)
+	public function __construct(EcritureValidation $validateur, EcritureDoubleValidation $validateur2)
 	{
 		$this->validateur = $validateur;
 		$this->validateur2 = $validateur2;
@@ -35,9 +35,9 @@ class EcritureController extends BaseController {
 
 	public function indexBanque($choix = null)
 	{
-		$banque = (is_null($choix)) ? Session::get('Etat.banque') : $choix ;
+		$banque = (is_null($choix)) ? Session::get('Courant.banque') : $choix ;
 
-		Session::push('Etat.banque', $banque);
+		Session::push('Courant.banque', $banque);
 
 		return $this->index($banque);
 	}
@@ -108,7 +108,7 @@ class EcritureController extends BaseController {
 		$ec1 = new Ecriture;
 
 		/* Si écriture simple */
-		if (!Input::get('double_flag')) {
+		if (!Input::get('is_double')) {
 
 			$ec1 = static::hydrateSimple($ec1);
 
@@ -116,6 +116,7 @@ class EcritureController extends BaseController {
 			if ($validation === true) {
 				$ec1->save();
 				Session::flash('success',"L’écriture a été créée");
+
 			}else{
 				return Redirect::back()
 				->withInput(Input::all())
@@ -146,13 +147,14 @@ class EcritureController extends BaseController {
 			$ec1->save();
 
 		// /* Synchroniser */
-			$ec2->double_id = $ec1->id;
+			$ec2->soeur_id = $ec1->id;
 			$ec2->save();
 
-			$ec1->double_id = $ec2->id;
+			$ec1->soeur_id = $ec2->id;
 			$ec1->save();
 		}
-		return Redirect::to(Session::get('page_depart'));
+		$mois = self::setMoisCourant($ec1);
+		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 
 	}
 
@@ -168,7 +170,7 @@ class EcritureController extends BaseController {
 		$ec1->type_id = Input::get('type_id');
 		$ec1->justificatif = Input::get('justificatif');
 		$ec1->compte_id = Input::get('compte_id');
-		$ec1->double_flag = Input::get('double_flag');
+		$ec1->is_double = Input::get('is_double');
 
 		return $ec1;
 	}
@@ -196,7 +198,7 @@ class EcritureController extends BaseController {
 		$ec2->type_id = Input::get('type2_id');
 		$ec2->justificatif = Input::get('justif2');
 		$ec2->compte_id = Input::get('compte_id');
-		$ec2->double_flag = Input::get('double_flag');
+		$ec2->is_double = Input::get('is_double');
 
 		return array($ec1, $ec2);
 
@@ -226,8 +228,8 @@ class EcritureController extends BaseController {
 		$success = '';
 
 		/* Détecter si changement du flag double écriture */
-		$doubleBefore = ($ec1->double_flag == 1 ? true : false);
-		$doubleNow = (is_null(Input::get('double_flag'))) ? false : true;
+		$doubleBefore = ($ec1->is_double == 1 ? true : false);
+		$doubleNow = (is_null(Input::get('is_double'))) ? false : true;
 
 		$changement = ($doubleBefore != $doubleNow) ? true : false ;
 
@@ -245,7 +247,7 @@ class EcritureController extends BaseController {
 		/*	- stopper le processus,
 		- présenter un nouveau formulaire identique du point de vue des inputs, et qui
  	  		• conserve les entrées faites par l'utilisateur,
- 	    	• modifie l'action du formulaire (ajout de "/ok" en fin d'url) afin de ne pas être filtré à nouveau,
+ 	    	• modifie l'attribut action du formulaire (ajout de "/ok" en fin d'url) afin de ne pas être filtré à nouveau,
  	    	• affiche un message alertant sur le changement de type et donnant la possibilté d'annuler. */
 
  	    	/* Le message sera composé différemment selon qu'il s'agit d'un passage d'une écriture double à une écriture simple  ou du passage inverse */
@@ -294,7 +296,7 @@ class EcritureController extends BaseController {
 					$ec2[0]->delete();
 
 					/* Désynchroniser E1 */
-					$ec1->double_id = null;
+					$ec1->soeur_id = null;
 
 					/* Composer messages */
 					$success = "• L’écriture $this->nommage a été désynchronisée…<br />• L’écriture liée a été supprimée<br />".$success;
@@ -315,7 +317,7 @@ class EcritureController extends BaseController {
 					$success .= '• L’écriture liée a été créée.<br />';
 
 					/* Synchroniser E2 */
-					$ec2->double_id = $id;
+					$ec2->soeur_id = $id;
 					$success .= '• L’écriture liée a été synchronisée.<br />';
 
 
@@ -350,7 +352,7 @@ class EcritureController extends BaseController {
 
 			/* Synchroniser E1 */
 			if ($changement) {
-				$ec1->double_id = $ec2->id;
+				$ec1->soeur_id = $ec2->id;
 				$success = "• L’écriture $this->nommage a été synchronisée.<br />".$success;
 			}
 
@@ -371,7 +373,7 @@ class EcritureController extends BaseController {
 
 		/* Rediriger */
 		Session::flash('success', $success);
-		$mois = self::getMoisForRedirect($ec1);
+		$mois = self::setMoisCourant($ec1);
 		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 	}
 
@@ -386,7 +388,7 @@ class EcritureController extends BaseController {
 		/* Le cas échéant traiter l'écriture liée */
 
 		if ($ecriture->ecriture2){
-			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->double_id)->get();
+			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->soeur_id)->get();
 			$deuze = $deuze[0];
 			$deuze->delete();
 			$success = "• L’écriture liée à été supprimée.<br />";
@@ -396,22 +398,22 @@ class EcritureController extends BaseController {
 
 		Session::flash('success', $success);
 
-		// $mois = self::getMoisForRedirect($ec1);
+		// $mois = self::setMoisCourant($ec1);
 		// return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
 
-		$mois = self::getMoisForRedirect($ecriture);
+		$mois = self::setMoisCourant($ecriture);
 		return Redirect::to(Session::get('page_depart')."#$mois");
 
 	}
 
 
-	public static function getMoisForRedirect($ec1){ // aPo redirection vers le mois
+	public static function setMoisCourant($ec1){ // aPo redirection vers le mois
 		if(isset($ec1)){
 			$mois = Date::classAnMois($ec1->date_valeur);
 		}else{
 			$mois = "2014.01";
 		}
-		Session::put('mois', $mois);
+		Session::put('Courant.mois', $mois);
 		return $mois;
 	}
 

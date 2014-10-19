@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationBanque;
+use Lib\Validations\BanqueValidation;
 
 
 class BanqueController extends BaseController {
@@ -8,7 +8,7 @@ class BanqueController extends BaseController {
 	protected $validateur;
 
 
-	public function __construct(ValidationBanque $validateur)
+	public function __construct(BanqueValidation $validateur)
 	{
 		$this->validateur = $validateur;
 		// dd($this->validateur);  // CTRL

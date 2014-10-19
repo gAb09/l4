@@ -7,4 +7,9 @@ class BanqueRepository {
 		return Banque::find($id)->nom;
 	}
 
+	public function isPrevisionnel()
+	{
+		return Banque::all();
+	}
+
 }

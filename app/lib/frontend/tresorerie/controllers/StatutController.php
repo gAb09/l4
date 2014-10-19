@@ -1,13 +1,13 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationStatut;
+use Lib\Validations\StatutValidation;
 
 class StatutController extends BaseController {
 
 	protected $validateur;
 
 
-	public function __construct(ValidationStatut $validateur)
+	public function __construct(StatutValidation $validateur)
 	{
 		$this->validateur = $validateur;
 	}

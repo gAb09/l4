@@ -1,26 +1,7 @@
 <?php
-Session::forget('Etat.banque');
-
-Route::get('tost', function()
-{
-	// return 'login';
-	return View::make('shared/views/test')
-	;
-});
-
-Route::get('badges', function()
-{
-	// return 'login';
-	return View::make('shared/views/badges_buttons')
-	;
-});
 
 
-Route::get('compte/{id}', function($id)
-{
-	return var_dump(Compte::where('id', $id)->first()->lft);
-});
-
+// Pour importer et/ou modifier import fichier compte .ods
 // Route::get('tresorerie/trans', function()
 // {
 // 	return ComptesOldController::trans();
@@ -38,7 +19,7 @@ Route::get('php', function()
 |--------------------------------------------------------------------------*/
 Route::get('/', function()
 {
-	return Redirect::route('pointage');
+	return Redirect::route('journal');
 });
 
 
@@ -136,70 +117,7 @@ Route::group(array('prefix' => 'backend', 'before' => 'auth'), function()
 });  // Fin de groupe prefix backend
 
 
+require_once("/frontend/tresorerie/routes.php");
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Section prefix "tresorerie"
-|--------------------------------------------------------------------------
-|
-|
-*/
-Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function() 
-{
-
-
-	Route::get('/', function(){
-		return Redirect::to('tresorerie/ecritures');
-	});
-
-	Route::get('statuts', function(){
-		return View::make('frontend/tresorerie/views/statuts/visu');
-	});
-
-	Route::get('tost', 'TostController@tost');
-
-	/*----------------------  Recettes dépenses  -----------------------------*/
-	Route::get('recdep/{id?}', 'RecDepController@index');
-
-
-// /*----------------------  Pointage  ----------------------------------*/
-	Route::post('pointage/{id?}-{statuts?}', 'PointageController@incrementeStatut');
-	Route::get('pointage/{banque_id?}', array('as' => 'pointage', 'uses' => 'PointageController@index'));
-
-
-	/*----------------------  Prévisionnel  ----------------------------------*/
-	Route::get('previsionnel', 'PrevController@index');
-
-	/*----------------------  Écritures  ----------------------------------*/
-	// Route::put('ecritures/{id}/ok', array('as' => 'confirmupdate', 'uses' => 'EcritureController@update'));
-	Route::get('banque/{banque}', array('as' => 'bank', 'uses' => 'EcritureController@indexBanque'));
-	Route::get('banque/dupli/{banque}', array('as' => 'dupli', 'uses' => 'EcritureController@duplicate'));
-	Route::resource('ecritures', 'EcritureController');
-
-	/*----------------------  Types  ----------------------------------*/
-	Route::resource('types', 'TypeController');
-
-	/*----------------------  Comptes  ----------------------------------*/
-	Route::get('comptes/freres', 'CompteController@freres');
-	Route::get('comptes/{id?}/freres', 'CompteController@freres');
-	Route::get('comptes/classe/{root?}', 'CompteController@index');
-	Route::any('comptes/updateactif', array('as' => 'tresorerie.comptes.updateActif', 'uses' => 'CompteController@updateActif'));
-	Route::resource('comptes', 'CompteController');
-
-	/*----------------------  Banques  ----------------------------------*/
-	Route::resource('banques', 'BanqueController');
-
-	/*----------------------  Notes  ----------------------------------*/
-	Route::resource('notes', 'NoteController');
-
-	/*----------------------  Statuts  ----------------------------------*/
-	Route::get('statutsvisu', 'StatutController@visu');
-	Route::get('statuts', 'StatutController@index'); // aFa Résoudre le bug qui 
-	Route::resource('statuts', 'StatutController');
-	
-});  // Fin de groupe prefix “tresorerie”
 
 

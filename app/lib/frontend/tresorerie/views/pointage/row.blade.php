@@ -15,7 +15,7 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 		'class' => 'btn btn-link iconemedium toggle', 
 		'id' => "btn_$ecriture->id", 
 		'style' => '', 
-		'OnClick' => 'bascule_statut_pointage(this);submit();' 
+		'OnClick' => 'bascule_statut(this);submit();' 
 		)) }}
 
 		{{ form::close() }}
@@ -58,6 +58,15 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	</td>
 
 
+	<!-- Solde -->
+	<td class="cumul_absolu">
+		@if($ecriture->cumul_absolu < 0)
+		<span class="depense">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
+		@else
+		<span class="recette">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
+		@endif
+	</td>
+
 	<!-- Type -->
 	<td>
 		{{ $ecriture->type->nom }}
@@ -71,7 +80,7 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	<!-- Banque -->
 	<td>
 		{{ $ecriture->banque->nom }}
-		@if($ecriture->double_flag)
+		@if($ecriture->is_double)
 		@if($ecriture->signe->signe == -1)
 		<br />&rarr; 
 		@else

@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationDoubleEcriture extends ValidationBase
+class EcritureDoubleValidation extends ValidationBase
 {
 	public $rules = array(
 		'banque2_id' => 'not_in:0|different:banque_id',

@@ -2,20 +2,17 @@
 
 @section('titre')
 @parent
-: recettes_depenses
-
 @stop
 
 
 @section('topcontent1')
-<h1 class="titrepage">Prévisionnel</h1>
+<h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
 
 @section('topcontent2')
-@foreach(Banque::all() as $bank)
-<a href ="{{ URL::to("tresorerie/recdep/$bank->id") }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-@endforeach
+Choix d'une période (en construction)
+<br />Choix de la banque principale (en construction)
 @stop
 
 
@@ -23,7 +20,7 @@
 
 @foreach($ecritures as $ecriture)
 
-@if($ecriture->mois_classement != $prev_mois)
+@if($ecriture->mois_nouveau)
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->date_valeur}}" onclick="javascript:volet(this);">
@@ -31,32 +28,25 @@
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}">
-		<th style="width:10px">
-			Statut
-		</th>
 		<th>
-			Date d'émission
-		</th>
-		<th>
-			Libellé
-		</th>
-		<th>
-			Dépenses
-		</th>
-		<th>
-			Recettes
+			Date de valeur
 		</th>
 		<th>
 			Type
 		</th>
 		<th>
-			Banque(s)
+			Libellé
 		</th>
 		<th>
-			Date de valeur
+			Montant
 		</th>
+@foreach($banques as $banque)		
 		<th>
-			Compte
+			{{$banque->nom}}
+		</th>
+@endforeach
+		<th>
+			Solde global
 		</th>
 		<th class="icone">
 			Edit
@@ -65,15 +55,16 @@
 			Dupli
 		</th>
 		<th class="icone">
-			Liée
+			Sœur
 		</th>
 	</thead>
 
 	<tbody class="replie" id="corps{{$ecriture->mois_classement}}">
-		<?php $prev_mois = $ecriture->mois_classement ?>
 
 		@endif
-		@include('frontend/tresorerie/views/recdep/row')
+
+		@include('frontend/tresorerie/views/prev/row')
+
 		@endforeach
 
 	</tbody>
@@ -108,12 +99,9 @@
 <script type="text/javascript">
 
 <?php
-if( $mois = Session::get('mois') ){
-echo 'var mois = '.$mois.';';
-}else{
-echo 'var mois = "";';
-}
+	echo 'var mois = "'.Volets::getMoisCourant().'";';
 ?>
+
 	if (mois) {
 		var curhead = document.getElementById("corps"+mois);
 		var curcorps = document.getElementById("tetiere"+mois);

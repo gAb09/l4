@@ -2,7 +2,7 @@
 use Illuminate\Validation\Validator;
 use Illuminate\Validation\Factory;
 
-class ValidationCompte extends ValidationBase
+class CompteValidation extends ValidationBase
 {
 	protected $rules = array(
 		"numero" => 'required|numeric|not_in:CREATE_FORM_DEFAUT_TXT_COMPTE_NUMERO|digit', 

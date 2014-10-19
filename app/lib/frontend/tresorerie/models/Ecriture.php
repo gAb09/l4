@@ -24,7 +24,7 @@ class Ecriture extends Eloquent {
 		'libelle_detail' => CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL,
 		'justificatif' => CREATE_FORM_DEFAUT_TXT_JUSTIF,
 		'compte_id' => 0,
-		'double_flag' => false,
+		'is_double' => false,
 		);
 
 
@@ -47,7 +47,7 @@ class Ecriture extends Eloquent {
 
 	public function ecriture2()
 	{
-		return $this->belongsTo('Ecriture', 'double_id');
+		return $this->belongsTo('Ecriture', 'soeur_id');
 	}
 
 	public function signe()
@@ -69,11 +69,11 @@ class Ecriture extends Eloquent {
 
 
 	/* —————————  ACCESSORS  —————————————————*/
-	// public function getMontantAttribute($value)
-	// {
-	// 	$value = Nbre::francais($value);
-	// 	return $value;
-	// }
+	public function getMontantAttribute($value)
+	{
+		
+		return (double) $value;
+	}
 
 
 

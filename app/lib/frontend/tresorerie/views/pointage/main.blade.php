@@ -9,12 +9,14 @@
 <h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
-
 @section('topcontent2')
 
-@foreach(Banque::all() as $bank)
+<div class="banques">
+	@foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
-@endforeach
+	@endforeach
+</div>
+@include('shared/views/Session_current')
 
 @stop
 
@@ -47,6 +49,9 @@
 			Recettes
 		</th>
 		<th>
+			Solde
+		</th>
+		<th>
 			Type
 		</th>
 		<th>
@@ -72,17 +77,17 @@
 			<td colspan="3">
 			</td>
 			<td class ='depense'>
-				{{$ecriture->solde_dep}}
+				{{Nbre::francais_insec($ecriture->cumul_dep_mois)}}
 			</td>
 			<td class='recette'>
-				{{$ecriture->solde_rec}}
+				{{Nbre::francais_insec($ecriture->cumul_rec_mois)}}
 			</td>
 			<td colspan="4">
 				Solde du mois : 
 				@if($ecriture->solde < 0)
-				<span class="depense">{{$ecriture->solde}}</span>
+				<span class="depense">{{Nbre::francais_insec($ecriture->solde)}}</span>
 				@else
-				<span class="recette">{{$ecriture->solde}}</span>
+				<span class="recette">{{Nbre::francais_insec($ecriture->solde)}}</span>
 				@endif
 			</td>
 		</tr>
@@ -120,12 +125,9 @@ echo "var statuts_accessibles = '".$statuts_accessibles."';";
 <script type="text/javascript">
 
 <?php
-if( $mois = Session::get('mois') ){
-	echo 'var mois = "'.$mois.'";';
-}else{
-	echo 'var mois = "";';
-}
+	echo 'var mois = "'.Volets::getMoisCourant().'";';
 ?>
+
 if (mois) {
 	var curhead = document.getElementById("tetiere"+mois);
 	var curcorps = document.getElementById("corps"+mois);

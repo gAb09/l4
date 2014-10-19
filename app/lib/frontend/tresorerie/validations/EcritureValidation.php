@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationEcriture extends ValidationBase
+class EcritureValidation extends ValidationBase
 {
 	protected $rules = array(
 		'banque_id' => 'not_in:0',

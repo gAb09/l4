@@ -1,6 +1,6 @@
 <?php namespace Lib\Validations;
 
-class ValidationUtilisateur extends ValidationBase
+class UtilisateurValidation extends ValidationBase
 {
 
 

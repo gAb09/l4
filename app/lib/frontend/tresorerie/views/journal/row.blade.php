@@ -1,20 +1,26 @@
-<tr id ="{{$ecriture->id}}" class="surlignage {{$ecriture->statut->classe}}" 
-	ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
+<tr 
+id="row_{{ $ecriture->id }}" 
+class="surlignage {{$ecriture->statut->classe}}" 
+ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 
-<!-- Statut -->
+	<!-- Statut -->
 	<td>
+	
 		@if (strpos($statuts_accessibles, (string)$ecriture->statut->rang) !== false)
 		{{ Form::open(array('name' => 'pointage', 'action' => ['PointageController@incrementeStatut', $ecriture->id, $statuts_accessibles], 'method' => 'post', 'class' => 'pointage')) }}
 
-		{{ Form::hidden('rang', $ecriture->statut->rang, array('id' => 'input', 'class' => '')) }}
+		{{ Form::hidden('input_id', $ecriture->statut->id, array('id' => "input_$ecriture->id", 'class' => '')) }}
 
-
-		{{ Form::button('', array('class' => 'btn btn-link iconemedium toggle', 'style' => '', 'OnClick' => 'bascule_statut_recdep(this);submit();' )) }}
+		{{ Form::button('', array(
+		'class' => 'btn btn-link iconemedium toggle', 
+		'id' => "btn_$ecriture->id", 
+		'style' => '', 
+		'OnClick' => 'bascule_statut(this);submit();' 
+		)) }}
 
 		{{ form::close() }}
 		@endif
 	</td>
-
 
 <!-- Dates -->
 	<td id="valeur{{ $ecriture->id }}" class="info">
@@ -62,7 +68,7 @@
 <!-- Banque -->
 	<td>
 		{{ $ecriture->banque->nom }}
-		@if($ecriture->double_flag)
+		@if($ecriture->is_double)
 		@if($ecriture->signe->signe == -1)
 		<br />&rarr; 
 		@else
@@ -95,7 +101,7 @@
 <!-- Ecriture liée -->
 	<td class="icone">
 		@if ($ecriture->ecriture2)
-		<a class="iconemedium double" href ="{{ URL::to('tresorerie/recdep/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
+		<a class="iconemedium double" href ="{{ URL::to('tresorerie/journal/'.$ecriture->ecriture2->banque_id.'#'.$ecriture->ecriture2->id) }}"></a>
 		@endif
 	</td>
 

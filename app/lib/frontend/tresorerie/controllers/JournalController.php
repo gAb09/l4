@@ -1,13 +1,12 @@
 <?php
 
-class PointageController extends BaseController {
+class JournalController extends BaseController {
 
 	// Les statuts accessibles (séparés par un "-")
-	private $statuts_accessibles = '2-3-4';
+	private $statuts_accessibles = '1-2';
 
 	public function __construct(){
-		$this->ecrRepo = new EcritureRepository;
-		$this->pointageRepo = new PointageRepository;
+		$this->journalRepo = new JournalRepository;
 		$this->banqueRepo = new BanqueRepository;
 		$this->statutRepo = new StatutRepository;
 	}
@@ -27,7 +26,7 @@ class PointageController extends BaseController {
 		Session::put('page_depart', Request::getUri());
 
 		// Récupérer la collection d'écriture pour la banque demandée
-		$ecritures = $this->pointageRepo->collectionPointage($id, 'date_valeur');
+		$ecritures = $this->journalRepo->collectionJournal($id, 'date_emission');
 
 
 		/* S'il n'y a pas d'écriture pour la banque demandée : 
@@ -47,30 +46,13 @@ class PointageController extends BaseController {
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
 
-		// Afficher la vue pointage pour la banque demandée. 
-		return View::make('frontend.tresorerie.views.pointage.main')
+		/* Afficher la vue pointage pour la banque demandée. */ 
+		return View::make('frontend.tresorerie.views.journal.main')
 		->with(compact('ecritures'))
 		->with(compact('classe_statut_selon_id'))
-		->with(array('statuts_accessibles' => $this->statuts_accessibles))
-		->with(array('titre_page' => "Pointage de ".Session::get('Courant.banque')))
+		->with(array('statuts_accessibles' => $this->statuts_accessibles)) 
+		->with(array('titre_page' => "Journal de ".Session::get('Courant.banque')))
 		;
-	}
-
-
-	public function incrementeStatut($id, $statuts_accessibles)
-	{
-		// return 'pointage de l’écriture n° '.$id.'<br />Statut id : '.$statut_id;  // CTRL
-		// return var_dump(Input::all());  // CTRL
-
-		$ecriture = $this->ecrRepo->find($id);
-
-		$ecriture->statut_id = $this->statutRepo->incremente($statuts_accessibles, $ecriture);
-
-			// return var_dump($new_statut); // CTRL
-
-		$this->ecrRepo->save($ecriture);
-
-		return Response::make('', 204);
 	}
 
 

@@ -1,7 +1,7 @@
 /*----------  Pointage web = marquage comme pointé selon l'état fourni sur le site Caisse d´Épargne 
 Changement de la couleur du fond de ligne et update du pointage (pages "Pointage") -----------*/
 
-function bascule_statut_pointage(xxx) {// aFa automatiser l'attribution du nom de la classe 
+function bascule_statut(xxx) {// aFa automatiser l'attribution du nom de la classe 
 
 	// Obtenir l'id de la ligne via le bouton
 	var id_ecriture = xxx.id.replace('btn_', '');
