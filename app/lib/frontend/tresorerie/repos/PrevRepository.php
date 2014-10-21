@@ -4,7 +4,7 @@ use lib\shared\Traits\TraitRepository;
 class PrevRepository {
 	use TraitRepository;
 
-	private $tampon = array();
+	private $skip = array();
 
 	private $orphelin = array();
 
@@ -15,8 +15,23 @@ class PrevRepository {
 		$order = 'date_valeur';
 
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'compte', 'ecriture2')
-		->orderBy($order)
-		->get();
+		->leftJoin('ecritures as s', function($join)
+		{
+			$join->on('s.id', '=', 'ecritures.soeur_id')
+			;
+
+		})
+		->whereNull('ecritures.is_double')
+		->orWhere('s.banque_id', '!=', 1)
+		->orderBy("ecritures.$order")
+		->orderBy("ecritures.banque_id")
+		->get(['ecritures.*', 's.banque_id as banque_soeur_id'])
+		// ->toArray()
+		// ->toSql()
+		;
+
+		// dd($ecritures);
+
 
 		if ($ecritures->isEmpty())
 		{
@@ -57,61 +72,58 @@ class PrevRepository {
 
 				/* On calcule les soldes de chaque banque à chaque ligne
 				Attention le calcul est différent s'il s'agit d'une écriture double ou simple */
+
+				$prev_solde_1 = $this->solde[1];
+				$prev_solde_2 = $this->solde[2];
+				$prev_solde_3 = $this->solde[3];
+				$prev_solde_4 = $this->solde[4];
+
+				/* Si l'écriture concerne cette banque */
 				if($ecriture->banque_id == $bank->id){
 
-					if ($ecriture->is_double != 1) {
+					/* Si l'écriture est simple */
+					if (!$ecriture->is_double){
 						$this->solde[$bank->id] +=  $ecriture->montant;
 						$this->solde['total'] += $ecriture->montant;
-
-						/*  On affecte les soldes à l'écriture */
-						$ecriture->{'solde_'.$bank->id} = $this->solde[$bank->id];
-						$ecriture->solde_total = $this->solde['total'];
-
 					}
 
-					if ($ecriture->is_double == 1)
-					{
-						// var_dump($ecriture->libelle);
-						// var_dump($ecriture->ecriture2->banque_id);
-						// var_dump($bank->id);
-						// var_dump('- - - ');
+					/* Si l'écriture est double et concerne la banque principale (1) */
+					if (!is_null($ecriture->is_double) and $ecriture->banque_id == 1) {
+						$this->solde[1] +=  $ecriture->montant;
+						$this->solde[$ecriture->banque_soeur_id] -=  $ecriture->montant;
+						// $this->solde['total'] += $ecriture->montant;
+					}
 
-						if ($ecriture->ecriture2->banque_id == $bank->id) 
-						{
-							unset($ecritures[$ecriture->rang]);
-							$this->orphelin[] = $ecriture->soeur_id;
-							var_dump($this->orphelin);dd($ecritures[$ecriture->rang]);
-						}
+					/* Si l'écriture est double, ne concerne pas la banque principale (1)
+					et dont la soeur n'a pas été encore traitée */
+					if (!is_null($ecriture->is_double) and $ecriture->banque_id != 1) {
+						if (!in_array($ecriture->id, $this->skip)) {
+						$this->solde[$ecriture->banque_id] +=  $ecriture->montant;
+						$this->solde[$ecriture->banque_soeur_id] -=  $ecriture->montant;
+						// $this->solde['total'] += $ecriture->montant;
 
-						if (in_array($ecriture->id, $this->orphelin)) {
-							$ecriture->{'solde_'.$bank->id} = 999999;
-						}
-
-						if (!array_key_exists($ecriture->id, $this->tampon))
-						{
-							$this->tampon[$ecriture->soeur_id] = [
-							'bank2_id' => $ecriture->banque_id,
-							'montant' => $ecriture->montant,
-							'signe' => $ecriture->signe->signe,
-							];
-							unset($ecritures[$ecriture->rang]);
-
+						// et on ajoute l'écriture soeur à la liste des skip
+						$this->skip[] = $ecriture->soeur_id;
 						}else{
-							$tampon = $this->tampon[$ecriture->id];
-							$this->solde[$bank->id] = $this->solde[$bank->id] + $ecriture->montant;
-							$solde2 = $this->solde[$tampon['bank2_id']];
-							$solde2 = $solde2 + ($ecriture->montant * -1);
-
-							/*  On affecte les soldes à l'écriture */
-							$ecriture->{'solde_'.$bank->id} = $this->solde[$bank->id];
-							$ecriture->{'solde_'.$tampon['bank2_id']} = $solde2;
-							$ecriture->solde_total = $this->solde['total'];
+						// On ne tient pas compte de cette écriture
+							unset($ecritures[$ecriture->rang]);
 						}
 					}
-				}
 
-				// var_dump($ecriture);
-				// var_dump('----------------------------------------------------------------');
+					/*  On affecte les soldes à l'écriture */
+					$ecriture->solde_1 = $this->solde[1];
+					$ecriture->solde_2 = $this->solde[2];
+					$ecriture->solde_3 = $this->solde[3];
+					$ecriture->solde_4 = $this->solde[4];
+					$ecriture->solde_total = $this->solde['total'];
+
+
+					/*  On affiche ou non chaque solde selon qu'il a changé ou non*/
+					$ecriture->show_1 = ($this->solde[1] == $prev_solde_1)? false : true;
+					$ecriture->show_2 = ($this->solde[2] == $prev_solde_2)? false : true;
+					$ecriture->show_3 = ($this->solde[3] == $prev_solde_3)? false : true;
+					$ecriture->show_4 = ($this->solde[4] == $prev_solde_4)? false : true;
+				}
 
 			} //foreach banque
 

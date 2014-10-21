@@ -53,7 +53,7 @@ class PointageRepository {
 						$this->cumul_dep_mois = 0;
 						$this->cumul_rec_mois = $this->cumul_absolu;
 					}else{
-						$this->cumul_dep_mois = $this->cumul_absolu;
+						$this->cumul_dep_mois = $this->cumul_absolu * -1;
 						$this->cumul_rec_mois = 0;
 					}
 				}

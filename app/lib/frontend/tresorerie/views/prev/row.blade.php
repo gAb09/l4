@@ -30,9 +30,10 @@
 
 			@foreach($banques as $banque)
 			<?php $id = 'solde_'.$banque->id; ?>
+			<?php $show = 'show_'.$banque->id; ?>
 
 				<td class="{{($ecriture->{$id} >=0) ? 'recette' : 'depense' }}">
-					@if($ecriture->{$id})
+					@if($ecriture->{$show})
 					{{ Nbre::francais_insec($ecriture->{$id}) }}
 					@endif
 				</td>
