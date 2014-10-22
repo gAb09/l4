@@ -95,18 +95,20 @@
 			<div class="zapette_actions">
 			@yield('zapette')
 			</div>
+			<h4 style="text-align: center">• • • Version test • • •</h4>
+
 			<p class="zapette_infos">
-				• Version 1
-				• Page départ : {{Session::get('page_depart')}}
-				••• En cours d'édition : 
+				<span>••• Page départ : {{Session::get('page_depart')}}</span>
+				<span>•••</span><span>En cours d'édition : 
 				• Banque courante : {{Session::get('Courant.banque')}}
 				• Mois courant : {{Date::MoisEdit(Session::get('Courant.mois'))}}
-				• Ligne : {{Session::get('Courant.ligne')}}
-				••• Nombre par page : {{Session::get('Courant.nbre_par_page')}}
-				• Tri (paramètre) : {{Session::get('Courant.tri')}}
-				• Tri (sens) : {{Session::get('Courant.tri_sens')}}
-				• Classe de compte : {{Session::get('Courant.classe')}}
-				• BDD : {{DB::getDatabaseName()}}</p>
+				• Ligne : {{Session::get('Courant.ligne')}}</span>
+				<span><br />
+					<span>•••</span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}
+				<span>•</span>Tri (paramètre) : {{Session::get('Courant.tri')}}
+				<span>•</span>Tri (sens) : {{Session::get('Courant.tri_sens')}}</span>
+				<span>•••</span>Classe de compte : {{Session::get('Courant.classe')}}</span>
+				<span>•••</span>BDD : {{DB::getDatabaseName()}}</span></p>
 
 
 

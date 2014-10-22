@@ -33,6 +33,8 @@ return array(
     'EcritureRepository' => $baseDir . '/app/lib/frontend/tresorerie/repos/EcritureRepository.php',
     'IdentificationController' => $baseDir . '/app/lib/identification/IdentificationController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'Import' => $baseDir . '/app/lib/divers/imports/Import.php',
+    'ImportController' => $baseDir . '/app/lib/divers/imports/ImportController.php',
     'JournalController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/JournalController.php',
     'JournalRepository' => $baseDir . '/app/lib/frontend/tresorerie/repos/JournalRepository.php',
     'Lib\\Validations\\BanqueValidation' => $baseDir . '/app/lib/frontend/tresorerie/validations/BanqueValidation.php',

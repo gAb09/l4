@@ -12,6 +12,11 @@ Route::get('php', function()
 	return var_dump(phpinfo());
 });
 
+Route::get('import', function()
+{
+	return ImportController::importe();
+});
+
 
 /*
 |--------------------------------------------------------------------------

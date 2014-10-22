@@ -36,12 +36,7 @@ form{
 
 /* –––––––––––––––––––– surcharge Bootstrap –––––––––––––––––––––––– */
 body, .hero-unit, .navbar-inner {
-    background: -moz-radial-gradient(top left, rgba(180,140,0,.5), rgba(180,80,0,0));
-    background: -webkit-radial-gradient(top left, rgba(0,0,255,.5), rgba(0,240,0,0));
-    background: -ms-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
-    background: -o-radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));
-    background: radial-gradient(top left, rgba(0,160,0,.5), rgba(0,240,0,0));   
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8383FF', endColorstr='#D8D8FF', GradientType=0);
+    background-color: #EDDCC1;
 }
 
 .navbar {
@@ -80,13 +75,20 @@ div.zapette {
 .zapette_infos {
     font-size: 0.9em;
     color:#CCC;
-    text-align:right;
+    text-align:center;
     margin-right:5px;
 }
 
-.zapette_actions {
+.zapette_infos {
+    font-size: 0.9em;
+    color:#CCC;
+    text-align:center;
+    margin-right:5px;
+}
+
+.zapette_infos span{
     margin-left:5px;
-    margin-top:5px;
+    margin-right:5px;
 }
 
 
@@ -306,8 +308,8 @@ td.info:hover,td.info:focus
 
 td.info span{
     position:absolute;
-    margin-top:18px;
-    margin-left:-80px;
+/*    margin-top:18px;
+*/    margin-left: 40px;
     color:#FFF; background-color:#C9A945;
     padding:0px 4px;
     border-radius:3px;
