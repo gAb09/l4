@@ -5,7 +5,7 @@
 			<td id="valeur{{ $ecriture->id }}" class="info">
 				{{ Date::courte($ecriture->date_valeur) }}
 				<span>
-					Date d’émission : <br />{{ Date::courte($ecriture->date_emission) }}
+					Date d’émission : {{ Date::courte($ecriture->date_emission) }}
 				</span>
 			</td>
 

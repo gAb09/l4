@@ -308,8 +308,8 @@ td.info:hover,td.info:focus
 
 td.info span{
     position:absolute;
-    margin-top:18px;
-    margin-left:-80px;
+/*    margin-top:18px;
+*/    margin-left: 40px;
     color:#FFF; background-color:#C9A945;
     padding:0px 4px;
     border-radius:3px;
