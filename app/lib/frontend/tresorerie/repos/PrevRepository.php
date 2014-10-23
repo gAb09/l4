@@ -73,12 +73,16 @@ class PrevRepository {
 				/* On calcule les soldes de chaque banque à chaque ligne
 				Attention le calcul est différent s'il s'agit d'une écriture double ou simple */
 
-				/* On conserve las soldes de l'écriture précédente 
+				/* On conserve les soldes de l'écriture précédente 
 				pour déterminer s'ils seront affichés ou non. */
-				$prev_solde_1 = $this->solde[1];
-				$prev_solde_2 = $this->solde[2];
-				$prev_solde_3 = $this->solde[3];
-				$prev_solde_4 = $this->solde[4];
+				$nbre_banques = $banques->count();
+				$i = 1;
+
+				while ($i <= $nbre_banques) {
+					$prev_solde_ = 'prev_solde_'.$i;
+					$$prev_solde_ = $this->solde[$i];
+					$i++;
+				}
 
 				/* Si l'écriture concerne cette banque */
 				if($ecriture->banque_id == $bank->id){
@@ -126,23 +130,37 @@ class PrevRepository {
 						}
 
 					}
+
 					/*  On affecte les soldes à l'écriture */
-					$ecriture->solde_1 = $this->solde[1];
-					$ecriture->solde_2 = $this->solde[2];
-					$ecriture->solde_3 = $this->solde[3];
-					$ecriture->solde_4 = $this->solde[4];
+
+					$i = 1;
+
+					while ($i <= $nbre_banques) {
+					$solde_ = 'solde_'.$i;
+
+						$ecriture->$solde_ = $this->solde[$i];
+						$i++;
+					}
 					$ecriture->solde_total = $this->solde['total'];
 
 					/*  On affiche ou non chaque solde selon qu'il a changé ou non */
-					$ecriture->show_1 = ($this->solde[1] == $prev_solde_1)? false : true;
-					$ecriture->show_2 = ($this->solde[2] == $prev_solde_2)? false : true;
-					$ecriture->show_3 = ($this->solde[3] == $prev_solde_3)? false : true;
-					$ecriture->show_4 = ($this->solde[4] == $prev_solde_4)? false : true;
+					$i = 1;
+
+					while ($i <= $nbre_banques) {
+					$show_ = 'show_'.$i;
+					$prev_solde_ = 'prev_solde_'.$i;
+					
+						$ecriture->$show_ = ($this->solde[$i] == $$prev_solde_)? false : true;
+						$i++;
+					}
+
+
+
 				}
 			}
 		});
-	return $ecritures;
+return $ecritures;
 
-	}
+}
 
 }

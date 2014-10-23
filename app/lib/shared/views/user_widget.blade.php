@@ -4,7 +4,7 @@
 <span onClick="javascript:document.location.href='/dashboard';">{{ Auth::user()->login }}</span>
 
 {{Form::button('Déconnexion', array('class' => 'btn btn-danger btn-mini iconesmall delete', 'style' => '', 
-'OnClick' => 'document.location.href="/dashboard/deconnexion";' ))}}
-
+'OnClick' => 'document.location.href="/deconnexion";' ))}}
+{{Auth::user()->role}}
 @endif
 

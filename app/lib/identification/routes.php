@@ -14,3 +14,6 @@ Route::get('login', array('as' => 'login', function()
 }));
 
 Route::post('identification', 'IdentificationController@identification');
+
+Route::get('deconnexion', array('as' => 'deconnexion', 'uses' => 'DashboardController@deconnexion'));
+

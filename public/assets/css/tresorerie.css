@@ -235,7 +235,7 @@ div.messages{
 
 
 div.messages.masquer{
-    top:-386px;
+    top:-400px;
     height:400px;
     transition: top 1s;
 }
