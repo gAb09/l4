@@ -42,7 +42,7 @@ class IdentificationController extends \BaseController {
 				// dd('identification pas OK !!!'); // CTRL
 
 				return Redirect::to('login')
-				->with('global', 'Désolés, vous n’avez pu être identifié')
+				->with('erreur', 'Désolés, votre identification a échouée…')
 				->withInput(Input::all());
 			}
 		}
