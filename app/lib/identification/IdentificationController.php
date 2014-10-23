@@ -35,16 +35,16 @@ class IdentificationController extends \BaseController {
 
 			if (Auth::attempt(array('login' => Input::get('login'), 'password' => Input::get('password')))) {
 				// dd('identification ok !!!');
-				return Redirect::intended('/')
+				// dd(auth::user()->page);
+				return Redirect::to(auth::user()->page)
 				;
 
 			} else {
 				// dd('identification pas OK !!!'); // CTRL
 
 				return Redirect::to('login')
-				->with('erreur', 'Désolés, votre identification a échouée…')
-				->withInput(Input::all());
-			}
+				->with('erreur', 'Désolés, vous n’avez pu être identifié')
+				->withInput(Input::all());			}
 		}
 	}
 }
