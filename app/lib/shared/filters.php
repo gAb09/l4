@@ -34,13 +34,29 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+    if (Auth::guest()) 
+    return Redirect::route('login')->with('erreur', 'Il faut montrer patte blanche…');
 });
 
-Route::filter('backend', function()
+
+Route::filter('admin', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::user()->role !='admin') 
+	return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée');
 });
+
+Route::filter('tresorerie', function()
+{
+	if (Auth::user()->role !='secretariat') 
+	return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée');
+});
+
+Route::filter('user', function()
+{
+	if (!Auth::check() or Auth::user()->role == 'CA') 
+	return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée');
+});
+
 
 
 Route::filter('auth.basic', function()
