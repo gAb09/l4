@@ -254,7 +254,10 @@ div.messages.masquer{
     top: -2px;
 }
 
-div.truc{
+div.items_courant{
+    background-color: #F2E8DA;
+    border-radius: 12px;
+    padding: 5px;
     margin-left: 10px;
     display: inline-block;
     vertical-align: top;
