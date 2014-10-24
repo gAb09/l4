@@ -26,12 +26,19 @@ $app->redirectIfTrailingSlash();
 |
 */
 
-$env = $app->detectEnvironment(array(
 
-	'prod' => array('lalocale.gbom.o2switch.net'),
-	'local' => array('alubook-ii'),
+$env = $app->detectEnvironment(function()
+{
+    return $_SERVER['HTTP_HOST'];
+});
+// $env = $app->detectEnvironment(array(
 
-));
+// 	'prod' => array('lalocale.gbom.o2switch.net'),
+// 	'local' => array('http://alubook-ii/~brunogabiot/Bruno'),
+// 	'testlocale' => array('http://alubook-ii/~brunogabiot/Locale'),
+// 	// 'autre' => array('alubook-ii'),
+
+// ));
 
 
 /*

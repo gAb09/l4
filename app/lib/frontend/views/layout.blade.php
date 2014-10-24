@@ -46,7 +46,7 @@
 
 			<nav class="navbar menus span9">
 				@include('shared/views/menus')
-			<h5 style="text-align: center">• • • Version test • • • Base de données : {{DB::getDatabaseName()}} • • •</h5>
+			<h5 style="text-align: center">• • • Version test • • • Base de données : {{DB::getDatabaseName()}}{{App::environment()}} • • •</h5>
 			</nav>
 
 
