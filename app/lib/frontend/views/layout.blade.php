@@ -28,7 +28,7 @@
 	<div class="container-fluid">
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
-			@include('shared/views/messages')
+		@include('shared/views/messages')
 
 
 
@@ -46,7 +46,7 @@
 
 			<nav class="navbar menus span9">
 				@include('shared/views/menus')
-			<h5 style="text-align: center">• • • Version test • • • Base de données : {{DB::getDatabaseName()}}{{App::environment()}} • • •</h5>
+				<h5 style="text-align: center">• • • Version test • • • Environement : {{App::environment()}} • • •</h5>
 			</nav>
 
 
@@ -94,27 +94,35 @@
 
 		<div class="zapette">
 			<div class="zapette_actions">
-			@yield('zapette')
+				@yield('zapette')
 			</div>
 
 			<p class="zapette_infos">
 				<span>••• Page départ : {{Session::get('page_depart')}}</span>
-				<span>•••</span><span>En cours d'édition : 
-				• Banque courante : {{Session::get('Courant.banque')}}
-				• Mois courant : {{Date::MoisEdit(Session::get('Courant.mois'))}}
-				• Ligne : {{Session::get('Courant.ligne')}}</span>
-				<span><br />
-					<span>•••</span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}
-				<span>•</span>Tri (paramètre) : {{Session::get('Courant.tri')}}
-				<span>•</span>Tri (sens) : {{Session::get('Courant.tri_sens')}}</span>
-				<span>•••</span>Classe de compte : {{Session::get('Courant.classe')}}</span>
-				<span>•••</span></span></p>
+				<span>•••</span>
+				<span>En cours d'édition : 
+					• Banque courante : {{Session::get('Courant.banque')}}
+					• Mois courant : {{Date::MoisEdit(Session::get('Courant.mois'))}}
+					• Ligne : {{Session::get('Courant.ligne')}}
+				</span>
+				<br />
+				<span>•••</span>
+				<span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}</span>
+				<span>•</span>
+				<span>Tri (paramètre) : {{Session::get('Courant.tri')}}</span>
+				<span>•</span>
+				<span>Tri (sens) : {{Session::get('Courant.tri_sens')}}</span>
+				<span>•••</span>
+				<span>Classe de compte : {{Session::get('Courant.classe')}}</span>
+				<span>•••</span>
+				<span>Base de données : {{DB::getDatabaseName()}}</span>
+				<span>•••</span>
+			</p>
 
 
+		</div>
+		@section('script')
 
-	</div>
-	@section('script')
-
-	@show
-</body>
-</html>
+		@show
+	</body>
+	</html>
