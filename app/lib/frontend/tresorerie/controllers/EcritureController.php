@@ -388,7 +388,7 @@ class EcritureController extends BaseController {
 		/* Le cas échéant traiter l'écriture liée */
 
 		if ($ecriture->ecriture2){
-			$deuze = Ecriture::whereDoubleId($ecriture->ecriture2->soeur_id)->get();
+			$deuze = Ecriture::whereSoeurId($ecriture->ecriture2->soeur_id)->get();
 			$deuze = $deuze[0];
 			$deuze->delete();
 			$success = "• L’écriture liée à été supprimée.<br />";
