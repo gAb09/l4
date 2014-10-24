@@ -34,13 +34,40 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) 
+		return Redirect::route('login')->with('erreur', 'Il faut montrer patte blanche…');
 });
 
-Route::filter('backend', function()
+
+Route::filter('admin', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::user()->role == 'admin')
+	{
+
+	}else{
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone admin');
+	}
 });
+
+
+Route::filter('tresorerie', function()
+{
+	if (Auth::user()->role == 'secretariat' or Auth::user()->role == 'admin')
+	{
+
+	}else{
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone treso');
+	}
+});
+
+
+
+Route::filter('user', function()
+{
+	if (!Auth::check() or Auth::user()->role == 'CA') 
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone user');
+});
+
 
 
 Route::filter('auth.basic', function()

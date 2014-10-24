@@ -4,7 +4,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 setlocale(LC_ALL, 'fr_FR');
 
 
-// \Debugbar::disable();
+\Debugbar::disable();
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader

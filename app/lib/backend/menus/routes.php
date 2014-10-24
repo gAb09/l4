@@ -8,7 +8,7 @@
 |
 */
 	/*----------------------  Menus  ----------------------------------*/
-Route::group(array('prefix' => 'backend', 'before' => 'auth'), function() 
+Route::group(array('prefix' => 'backend', 'before' => ['auth', 'admin']), function() 
 {
 	Route::get('/', function(){
 		return Redirect::to('backend/menus');

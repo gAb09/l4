@@ -1,17 +1,14 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Dashboard / Prefix "dashboard"
 |--------------------------------------------------------------------------*/
 
-Route::group(array('prefix' => 'dashboard', 'before' => 'auth'), function() 
+Route::group(array('prefix' => 'dashboard', 'before' => ['auth', 'user']), function() 
 {
 	Route::get('/', function(){
 		return Redirect::to('dashboard/moncompte');
 	});
-
-	Route::get('deconnexion', array('as' => 'deconnexion', 'uses' => 'DashboardController@deconnexion'));
 
 	Route::get('moncompte', function()
 	{
