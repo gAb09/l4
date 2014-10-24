@@ -5,6 +5,5 @@
 
 {{Form::button('Déconnexion', array('class' => 'btn btn-danger btn-mini iconesmall delete', 'style' => '', 
 'OnClick' => 'document.location.href="/deconnexion";' ))}}
-{{Auth::user()->role}}
 @endif
 
