@@ -70,7 +70,7 @@ Choix d'une période (en construction)
 	</tbody>
 
 </table>
-
+<br />
 @stop
 
 

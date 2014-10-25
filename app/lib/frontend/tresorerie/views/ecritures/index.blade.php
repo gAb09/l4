@@ -27,7 +27,6 @@
 <?php
 $head = array(
 	'ids' => 'Id',
-	'date_emission' => 'Date émission',
 	'date_valeur' => 'Date valeur',
 	'type_id' => 'Type',
 	'banque_id' => 'Banque',
@@ -71,8 +70,11 @@ $head = array(
 			<tr id ="{{$ecriture->id}}" class="surlignage"
 				ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 				<td>{{ $ecriture->id }}</td>
-				<td>{{ Date::courte($ecriture->date_emission) }}</td>
-				<td>{{ Date::courte($ecriture->date_valeur) }}</td>
+				<td class ="info">{{ Date::courte($ecriture->date_valeur) }}
+					<span>
+						Date d’émission : {{ Date::courte($ecriture->date_emission) }}
+					</span>
+				</td>
 				<td>{{ $ecriture->type->nom}}
 					@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 				</td>
