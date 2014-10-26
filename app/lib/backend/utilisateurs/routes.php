@@ -7,7 +7,7 @@
 |
 |
 */
-Route::group(array('prefix' => 'backend', 'before' => ['auth', 'admin']), function() 
+Route::group(array('prefix' => 'backend', 'before' => array('auth', 'admin')), function() 
 {
 
 	/*----------------------  Utilisateurs  ----------------------------------*/
