@@ -74,6 +74,7 @@ class TypeController extends BaseController {
 		$item = Type::findOrFail($id);
 
 		$item->fill(Input::except('_token', '_method'));
+		$item->req_justif = (Input::get('req_justif')? 1 : 0);
 
 		$validation = $this->validateur->validerUpdate(Input::all(), $id);
 
