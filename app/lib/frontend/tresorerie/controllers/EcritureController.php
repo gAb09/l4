@@ -167,7 +167,7 @@ class EcritureController extends BaseController {
 		$ec1->signe_id = Input::get('signe_id');
 		$ec1->libelle = Input::get('libelle');
 		$ec1->libelle_detail = Input::get('libelle_detail');
-		$ec1->type_id = Input::get('type_id');
+		$ec1->type_id = Input::get('type_id1');
 		$ec1->justificatif = Input::get('justificatif');
 		$ec1->compte_id = Input::get('compte_id');
 		$ec1->is_double = Input::get('is_double');
@@ -195,7 +195,7 @@ class EcritureController extends BaseController {
 		$ec2->signe_id = ($ec1->signe_id == 1)? 2 : 1;
 		$ec2->libelle = Input::get('libelle');
 		$ec2->libelle_detail = Input::get('libelle_detail');
-		$ec2->type_id = Input::get('type2_id');
+		$ec2->type_id = Input::get('type_id2');
 		$ec2->justificatif = Input::get('justif2');
 		$ec2->compte_id = Input::get('compte_id');
 		$ec2->is_double = Input::get('is_double');
@@ -347,7 +347,7 @@ class EcritureController extends BaseController {
 				$ec2->save();
 				$success .= '• L’écriture liée a été sauvegardée<br />';
 			}else{
-				return Redirect::back()->withInput(Input::all())->withErrors($validation2);
+				return Redirect::route('tresorerie.ecritures.edit', [$id])->withInput(Input::except('type_id2'))->withErrors($validation2);
 			}
 
 			/* Synchroniser E1 */
@@ -368,7 +368,7 @@ class EcritureController extends BaseController {
 			$ec1->save();
 			$success = "• L’écriture $this->nommage a été sauvegardée.<br />".$success;
 		}else{
-			return Redirect::back()->withInput(Input::all())->withErrors($validation);
+			return Redirect::route('tresorerie.ecritures.edit', [$id])->withInput(Input::except('type_id1'))->withErrors($validation);
 		}
 
 		/* Rediriger */

@@ -83,19 +83,23 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 <fieldset>
 	<div class="input">
 		<!-- Type -->
-		{{ Form::label('type_id', 'Type', array ('class' => '')) }}
-		{{Form::select('type_id', $list['type'], $ecriture->type_id, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
-		<span>
-			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '/' }}
-		</span>
+		{{ Form::label('type_id1', 'Type', array ('class' => '')) }}
+		{{Form::select('type_id1', $list['type'], $ecriture->type_id, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
-	<div class="input">
+@if($ecriture->type->req_justif)
+		<div id="divjustificatif1" class="input">
+	@else
+		<div id="divjustificatif1" class="input hidden">
+	@endif
 		<!-- Type (justificatif) -->
 		{{ Form::label('justificatif', 'Justificatif', array ('class' => '')) }}
+		<span id="sep1">
+			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '/' }}
+		</span>
 		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
 		<!-- Type (justificatif requis) -->
-		{{ Form::hidden('req_justif', $ecriture->type->req_justif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
+		{{ Form::hidden('req_justif', $ecriture->type->req_justif, array ('class' => 'input-long margright', 'id' => 'req_justif1')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
 
@@ -140,18 +144,24 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	</div>
 	<div class="input">
 		<!-- Type 2 -->
-		{{ Form::label('type2_id', 'Type', array ('class' => '')) }}
+		{{ Form::label('type_id2', 'Type', array ('class' => '')) }}
 
-		{{Form::select('type2_id', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
-		<span>
-			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  '/'}}
-		</span>
+		{{Form::select('type_id2', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
-	<div class="input">
+@if($ecriture->ecriture2->type->req_justif)
+		<div id="divjustificatif2" class="input">
+	@else
+		<div id="divjustificatif2" class="input hidden">
+	@endif
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
+		<span id="sep2">
+			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  '/'}}
+		</span>
 		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'input-long margright')) }} 
+		<!-- Type (justificatif requis) -->
+		{{ Form::hidden('req_justif2', $ecriture->ecriture2->type->req_justif, array ('class' => 'input-long margright', 'id' => 'req_justif2')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
 
@@ -161,11 +171,16 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 </script>
 
 <script type="text/javascript">
-var separateurs = {};
 
 <?php 
-foreach($separateurs as $id => $separateur) {
-	echo "separateurs['$id'] = '$separateur';";
+echo "var seps = {};";
+echo "var req_justif = {};";
+
+foreach($types as $i) {
+	echo "
+	seps['$i->id'] = '$i->sep_justif';
+	req_justif['$i->id'] = '$i->req_justif';
+	";
 }
 ?>
 

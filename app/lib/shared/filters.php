@@ -45,7 +45,7 @@ Route::filter('admin', function()
 	{
 
 	}else{
-		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone admin');
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droits d’accès à l’espace d’administration');
 	}
 });
 
@@ -56,7 +56,7 @@ Route::filter('tresorerie', function()
 	{
 
 	}else{
-		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone treso');
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droits d’accès à la section Trésorerie');
 	}
 });
 
@@ -65,7 +65,7 @@ Route::filter('tresorerie', function()
 Route::filter('user', function()
 {
 	if (!Auth::check() or Auth::user()->role == 'CA') 
-		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la page demandée zone user');
+		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la zone "utilisateur"');
 });
 
 

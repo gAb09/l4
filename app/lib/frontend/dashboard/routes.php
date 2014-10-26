@@ -4,7 +4,7 @@
 | Dashboard / Prefix "dashboard"
 |--------------------------------------------------------------------------*/
 
-Route::group(array('prefix' => 'dashboard', 'before' => ['auth', 'user']), function() 
+Route::group(array('prefix' => 'dashboard', 'before' => array('auth', 'user')), function() 
 {
 	Route::get('/', function(){
 		return Redirect::to('dashboard/moncompte');
