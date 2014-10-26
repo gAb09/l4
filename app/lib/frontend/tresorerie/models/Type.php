@@ -36,6 +36,19 @@ class Type extends Eloquent {
 		$this->attributes['sep_justif'] = $value;
 	}
 
+	/* —————————  SCOPES  —————————————————*/
+
+	public static function scopeByRang()
+	{
+		$items = self::orderBy('rang')->get(array('id', 'nom'));
+
+		foreach($items as $item)
+		{
+			$list[$item->id] = $item->nom;
+		}
+		return $list;
+	}
+
 
 
 	/* —————————  Helpers  —————————————————*/

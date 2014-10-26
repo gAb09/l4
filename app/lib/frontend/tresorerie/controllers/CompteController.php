@@ -7,12 +7,9 @@ class CompteController extends BaseController {
 
 	protected $validateur;
 
-	private $listes = array();
-
 	private function listerParentable()
 	{
-		$this->listes = Compte::listForInputSelect('libelle', 'Parentable');
-		return $this->listes;
+		return Compte::listForInputSelect('libelle', 'Parentable');
 	}
 
 	public function __construct(CompteValidation $validateur)

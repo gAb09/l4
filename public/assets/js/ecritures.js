@@ -65,10 +65,8 @@ function banque() {
 		var par_page = document.getElementById('par_page').value;
 		var sens_tri = document.getElementById('sens_tri').value;
 		var critere = param.id;
-		// if (critere == "ids") {
-		// 	critere = "id";
-		// }
 		var prev_tri_sur = document.getElementById('prev_tri_sur').value;
+
 		if (prev_tri_sur === critere) {
 			if(sens_tri == "asc"){
 				sens = "desc";

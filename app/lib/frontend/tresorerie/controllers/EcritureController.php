@@ -23,12 +23,12 @@ class EcritureController extends BaseController {
 
 	private $listes = array();
 
-	private function lister()
+	private function getListes()
 	{
 		$this->listes['banque'] = Banque::listForInputSelect('nom');
 		$this->listes['compte'] = Compte::listForInputSelect('libelle', 'Actif');
 		$this->listes['compte_activation'] = Compte::listForInputSelect('libelle', 'Activable', false);
-		$this->listes['type'] = Type::listForInputSelect('nom');
+		$this->listes['type'] = Type::listForInputSelect('nom', 'ByRang');
 		return $this->listes;
 	}
 // aFa Séparer la génération des listes ?
@@ -85,7 +85,7 @@ class EcritureController extends BaseController {
 
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
-		->with('list', self::lister())
+		->with('list', self::getListes())
 		->with('titre_page', "Création d’une écriture")
 		;
 	}
@@ -96,7 +96,7 @@ class EcritureController extends BaseController {
 
 		return View::Make('frontend.tresorerie.views.ecritures.create')
 		->with('ecriture', $ecriture)
-		->with('list', self::lister())
+		->with('list', self::getListes())
 		->with('titre_page', "Duplication d’une écriture")
 		;
 	}
@@ -212,7 +212,7 @@ class EcritureController extends BaseController {
 
 		return View::Make('frontend/tresorerie/views/ecritures/edit')
 		->with('ecriture', $ec1)
-		->with('list', self::lister())
+		->with('list', self::getListes())
 		->with('titre_page', "Édition de l’écriture \"$ec1->libelle - $ec1->libelle_detail\" (n°$ec1->id)")
 		;
 	}
