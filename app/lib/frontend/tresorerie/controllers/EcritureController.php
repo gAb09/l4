@@ -31,7 +31,7 @@ class EcritureController extends BaseController {
 		$this->listes['type'] = Type::listForInputSelect('nom', 'ByRang');
 		return $this->listes;
 	}
-// aFa Séparer la génération des listes ?
+// aFa Séparer la génération des listes ? OUI
 
 	public function indexBanque($choix = null)
 	{

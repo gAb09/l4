@@ -58,7 +58,7 @@ Route::group(array('prefix' => 'tresorerie', 'before' => 'auth'), function()
 
 	});
 /*----------------------  Prévisionnel  ----------------------------------*/
-Route::get('previsionnel', 'PrevController@index');
+Route::get('previsionnel/{annee?}', 'PrevController@index');
 
 
 });  // Fin de groupe prefix “tresorerie”
