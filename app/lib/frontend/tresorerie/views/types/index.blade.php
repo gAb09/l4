@@ -20,13 +20,13 @@
 @foreach($types as $type)
 
 <hr />
-<h3>{{ $type->nom }} <small>(id n° {{ $type->id }})</small></h3>
+<h3>{{ $type->nom }} <small>(rang n° {{ $type->rang }})</small></h3>
 
 <p>• Description :<br />{{ $type->description }}</p>
 
 @if($type->req_justif)
-<p>• Ce type nécessitera de préciser un justificatif lors de la saisie d'une écriture.
-<br />Le séparateur est : “{{ $type->sep_justif }}”
+<p>• La référence à un justificatif sera obligatoire lors de la saisie d'une écriture.
+	<br />Le séparateur est : “{{ $type->sep_justif }}”
 </p>
 @endif
 </p>

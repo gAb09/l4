@@ -7,6 +7,10 @@ onLoad="justifToggle();"
 	<!-- Nom -->
 	{{ Form::label('nom', 'Nom', array ('class' => '')) }}
 	{{ Form::text('nom', $type->nom, array ('class' => '')) }}
+
+	<!-- Rang -->
+	{{ Form::label('rang', 'Rang', array ('class' => 'nobr')) }}
+	{{ Form::text('rang', $type->rang, array ('class' => '')) }}
 </div>
 
 <div>

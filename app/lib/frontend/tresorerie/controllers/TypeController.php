@@ -16,7 +16,7 @@ class TypeController extends BaseController {
 
 	public function index()
 	{
-		$types = Type::all();
+		$types = Type::orderBy('rang')->get();
 
 		return View::Make('frontend.tresorerie.views.types.index')
 		->with('types', $types)
@@ -63,7 +63,7 @@ class TypeController extends BaseController {
 
 		return View::Make('frontend/tresorerie/views/types/edit')
 		->with('type', $type)
-		->with('titre_page', 'Édition du type “'.$type->nom.'” <small>(Id '.$type->id.')</small>')
+		->with('titre_page', 'Édition du type “'.$type->nom)
 		;
 	}
 
