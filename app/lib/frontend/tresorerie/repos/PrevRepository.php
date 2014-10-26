@@ -10,8 +10,10 @@ class PrevRepository {
 
 	private $rang = 0;
 
-	public function collectionPrev($banques)
+	public function collectionPrev($banques, $annee)
 	{
+		$annee = (is_null($annee))? date('Y') : $annee;
+
 		$order = 'date_valeur';
 
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'compte', 'ecriture2')
@@ -21,11 +23,15 @@ class PrevRepository {
 			;
 
 		})
-		->whereNull('ecritures.is_double')
-		->orWhere('s.banque_id', '!=', 1)
+		->where('ecritures.date_valeur', 'like', $annee.'%')
+		->where(function($query){
+			$query->whereNull('ecritures.is_double')
+			->orWhere('s.banque_id', '!=', 1);
+		})
 		->orderBy("ecritures.$order")
 		->orderBy("ecritures.banque_id")
-		->get(['ecritures.*', 's.banque_id as banque_soeur_id'])
+		->select(['ecritures.*', 's.banque_id as banque_soeur_id'])
+		->get()
 		// ->toArray()
 		// ->toSql()
 		;

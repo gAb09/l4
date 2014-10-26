@@ -31,7 +31,7 @@ class EcritureController extends BaseController {
 		$this->listes['type'] = Type::listForInputSelect('nom', 'ByRang');
 		return $this->listes;
 	}
-// aFa Séparer la génération des listes ?
+// aFa Séparer la génération des listes ? OUI
 
 	public function indexBanque($choix = null)
 	{
@@ -209,11 +209,12 @@ class EcritureController extends BaseController {
 	public function edit($id)
 	{
 		$ec1 = Ecriture::where('id', $id)->with('ecriture2')->first();
+		$libelleDetail = ($ec1->libelle_detail)? ' - '.$ec1->libelle_detail : "";
 
 		return View::Make('frontend/tresorerie/views/ecritures/edit')
 		->with('ecriture', $ec1)
 		->with('list', self::getListes())
-		->with('titre_page', "Édition de l’écriture \"$ec1->libelle - $ec1->libelle_detail\" (n°$ec1->id)")
+		->with('titre_page', "Édition de l’écriture \"$ec1->libelle$libelleDetail\" (n°$ec1->id)")
 		;
 	}
 

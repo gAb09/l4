@@ -18,7 +18,7 @@ class PrevController extends BaseController {
 		$this->statutRepo = new StatutRepository;
 	}
 
-	public function index()
+	public function index($annee = null)
 	{
 		/* Si l'édition d’une écriture est demandée depuis cette page, 
 		il faut passer (via la session) à EcritureController@update pour la redirection */
@@ -27,7 +27,16 @@ class PrevController extends BaseController {
 		$banques = $this->banqueRepo->isPrevisionnel();
 
 		// Récupérer la collection d'écriture
-		$ecritures = $this->prevRepo->collectionPrev($banques);
+		$ecritures = $this->prevRepo->collectionPrev($banques, $annee);
+
+		/* S'il n'y a pas d'écriture pour la banque demandée : 
+		rediriger sur la page pointage par défaut avec un message d'erreur */
+		if (!$ecritures){
+			$message = 'Il n’y a aucune écriture pour l’année “';
+			$message .= $annee;
+			$message .= '”';
+			return Redirect::back()->withErrors($message);
+		}
 
 		// Assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
