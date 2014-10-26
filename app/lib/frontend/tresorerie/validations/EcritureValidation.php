@@ -11,7 +11,7 @@ class EcritureValidation extends ValidationBase
 		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
 		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',
 		'type_id' => 'not_in:0',
-		'justificatif' => 'not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',
+		'justificatif' => 'required_if:req_justif,1|not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',
 		'compte_id' => 'not_in:0',
 		);
 
@@ -31,6 +31,7 @@ class EcritureValidation extends ValidationBase
 		'libelle_detail.not_in' => 'Si vous ne souhaitez pas préciser le libellé, il faut laisser le champs “Libellé détail” vide.',
 		'type_id.not_in' => 'Vous n’avez pas selectionné de “Type”.',
 		'justificatif.not_in' => 'Si vous ne précisez pas de justificatif, il vaut mieux laisser le champs “Justificatif” vide.',
+		'justificatif.required_if' => 'Ce type d’écriture impose un justificatif.',
 		'compte_id.not_in' => 'Vous n’avez pas selectionné de “Compte”.',
 		);
 }

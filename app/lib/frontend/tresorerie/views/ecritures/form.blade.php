@@ -94,6 +94,8 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<!-- Type (justificatif) -->
 		{{ Form::label('justificatif', 'Justificatif', array ('class' => '')) }}
 		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
+		<!-- Type (justificatif requis) -->
+		{{ Form::hidden('req_justif', $ecriture->type->req_justif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
 
@@ -127,9 +129,9 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 
 <!-- Banque 2 -->
 <fieldset id="ecriture2" >
-	<p class="input">
-		Écriture liée :
-	</p>
+	<legend class="input">
+		Écriture liée
+	</legend>
 	<div class="input">
 		<!-- Banque 2 -->
 		{{ Form::hidden('ecriture2_id', isset($ecriture->ecriture2->id) ? $ecriture->ecriture2->id : '') }}
