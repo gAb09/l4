@@ -38,7 +38,9 @@ function banque() {
 	var select = document.getElementById("double");
 	var label = document.getElementById("label_flag");
 
-	/* Si le "type_id" sélectionné via le formulaire est dans la liste des types qui requièrent une banque liée (c'est le tableau $type_dble_ecriture passé en json depuis ecriture_form.blade.php */
+	/* Si le "type_id" sélectionné via le formulaire 
+	est dans la liste des types qui requièrent une banque liée 
+	(c'est le tableau $type_dble_ecriture passé en json depuis ecriture_form.blade.php */
 		if (select.checked === true)
 		{
 			div.className="input"; /* Si oui on affiche la div banque liée */
@@ -46,7 +48,7 @@ function banque() {
 		}
 		else
 		{
-			div.className="input invisible";
+			div.className="input hidden";
 			label.innerHTML="Écriture simple";
 		}
 	}

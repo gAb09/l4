@@ -5,12 +5,12 @@ function justifToggle() {
 
 	if (check.checked === true)
 	{
-		label.innerHTML = "Champ “Justificatif” requis";
+		label.innerHTML = "requis";
 		div.className="";
 	}
 	else
 	{
-		label.innerHTML = "Champ “Justificatif” non requis";
+		label.innerHTML = "non requis";
 		div.className="invisible";
 	}
 }
