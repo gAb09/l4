@@ -9,8 +9,8 @@
 <h1 class="titrepage">{{ $titre_page }}</h1>
 @stop
 
-@section('topcontent2')
 
+@section('topcontent2')
 <div class="banques">
 	@foreach(Banque::all() as $bank)
 <a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
