@@ -149,7 +149,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{Form::select('type_id2', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
-@if($ecriture->ecriture2->type->req_justif)
+@if(isset($ecriture->ecriture2->type->req_justif))
 		<div id="divjustificatif2" class="input">
 	@else
 		<div id="divjustificatif2" class="input hidden">
@@ -161,10 +161,9 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		</span>
 		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'input-long margright')) }} 
 		<!-- Type (justificatif requis) -->
-		{{ Form::hidden('req_justif2', $ecriture->ecriture2->type->req_justif, array ('class' => 'input-long margright', 'id' => 'req_justif2')) }}   <!-- aPo probleme de selected -->
+		{{ Form::hidden('req_justif2', isset($ecriture->ecriture2->type->req_justif) ? $ecriture->ecriture2->justificatif : '', array ('class' => 'input-long margright', 'id' => 'req_justif2')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
-
 
 @section('script')
 <script src="/assets/js/ecritures.js">
