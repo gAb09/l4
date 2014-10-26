@@ -25,7 +25,7 @@
 <p>• Description :<br />{{ $type->description }}</p>
 
 @if($type->req_justif)
-<p>• La référence à un justificatif sera obligatoire lors de la saisie d'une écriture.
+<p>• La référence à un <strong>justificatif sera obligatoire</strong> lors de la saisie d'une écriture.
 	<br />Le séparateur est : “{{ $type->sep_justif }}”
 </p>
 @endif
