@@ -27,7 +27,7 @@ View::composer('frontend/views/layout', function($view) {
 View::composer('frontend/tresorerie/views/ecritures/form', function($view)
 {
 	/* Lister les séparateurs pour le javascript */
-	$separateurs = Type::lists('sep_justif', 'id');
+	$types = Type::all();
 
 	/* Composer les input radios pour le signe */
 	foreach(Signe::all() as $item)
@@ -40,7 +40,7 @@ View::composer('frontend/tresorerie/views/ecritures/form', function($view)
 		$list_radios[$item->id]['fonction_js'] = $item->etiquette.'();';
 	}
 
-	$view->with(compact('separateurs'))->with(compact('list_radios'));
+	$view->with(compact('types'))->with(compact('list_radios'));
 });
 
 
