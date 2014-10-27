@@ -14,7 +14,7 @@ class Type extends Eloquent {
 		'description' => CREATE_FORM_DEFAUT_TXT_DESCRIPTION,
 		'req_justif' => 0,
 		'sep_justif' => CREATE_FORM_DEFAUT_TXT_SEPARATEUR,
-	);
+		);
 
 	/* —————————  RELATIONS  —————————————————*/
 
@@ -49,21 +49,5 @@ class Type extends Eloquent {
 		return $list;
 	}
 
-
-
-	/* —————————  Helpers  —————————————————*/
-	
-	/* Obtenir (au format json) la liste des "id" des types d'écriture requérant une banque liée */
-	public static function type_dble_ecriture() // aFa passer en requete ajax traitée par controleur ??
-	{
-		$req_banque2 = Type::where('req_banque2', 1)->get(array('id'))->toArray();
-
-		foreach ($req_banque2 as $key => $value) {
-			$array[] = ''.$value['id'].'';
-		}
-
-		return $array;
-		// dd($array); // CTRL
-	}
 
 }
