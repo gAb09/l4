@@ -75,7 +75,7 @@ $head = array(
 						Date d’émission : {{ Date::longue($ecriture->date_emission) }}
 					</span>
 				</td>
-				<td>{{ $ecriture->type->nom}}
+				<td>@if($ecriture->type->id = 10)<span class="depense">{{ $ecriture->type->nom}}</span>@endif
 					@if($ecriture->justificatif)<br />{{$ecriture->type->sep_justif}}{{$ecriture->justificatif}}@endif
 				</td>
 				<td><b>{{ $ecriture->banque->nom }}</b>
