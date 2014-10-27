@@ -12,7 +12,7 @@ class EcritureDoubleValidation extends ValidationBase
 		'banque2_id.not_in' => 'Vous n’avez pas selectionné de banque (écriture liée).',
 		'banque2_id.different' => 'Vous avez sélectionné 2 fois la même banque.',
 		'justif2.not_in' => 'Si vous ne précisez pas de justificatif, il vaut mieux laisser le champs “Justificatif” vide (écriture liée).',
-		'justif2.required_if' => 'Ce type d’écriture impose un justificatif (écriture liée).',
+		'justif2.required_if' => 'Ce type d’écriture impose un justificatif, veuillez refaire la sélection et préciser le justificatif (écriture liée).',
 		'type_id2.not_in' => 'Vous n’avez pas selectionné de “Type” (écriture liée).',
 		);
 }
