@@ -95,7 +95,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<!-- Type (justificatif) -->
 		{{ Form::label('justificatif', 'Justificatif', array ('class' => '')) }}
 		<span id="sep1">
-			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '/' }}
+			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '' }}
 		</span>
 		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
 		<!-- Type (justificatif requis) -->
@@ -149,7 +149,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{Form::select('type_id2', $list['type'], isset($ecriture->ecriture2->type_id) ? $ecriture->ecriture2->type_id : 0, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
-@if(isset($ecriture->ecriture2->type->req_justif))
+@if(isset($ecriture->ecriture2->type->req_justif) and $ecriture->ecriture2->type->req_justif)
 		<div id="divjustificatif2" class="input">
 	@else
 		<div id="divjustificatif2" class="input hidden">
@@ -157,7 +157,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<!-- Type (justificatif) -->
 		{{ Form::label('justif2', 'Justificatif', array ('class' => '')) }}
 		<span id="sep2">
-			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  '/'}}
+			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  ''}}
 		</span>
 		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'input-long margright')) }} 
 		<!-- Type (justificatif requis) -->
