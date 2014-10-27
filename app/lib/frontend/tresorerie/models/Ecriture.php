@@ -5,14 +5,9 @@ class Ecriture extends Eloquent {
 	use ModelTrait;
 
 	protected $guarded = array('id');
-	protected $softDelete = true; // AFA
+	protected $softDelete = true;
 
 
-	public static function mutator() // aFa remove ?
-	
-	{
-		return static::$mutatorCache;
-	}
 
 	protected static $default_values_for_create = array(
 		'banque_id' => 0,
