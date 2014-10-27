@@ -23,8 +23,8 @@
 
 @include('frontend/tresorerie/views/ecritures/form')
 
-<p>Créée le {{ Date::courte($ecriture->created_at) }}<br />
-	Modifiée le {{ Date::courte($ecriture->updated_at) }}</p>
+<p>Créée le {{ Date::longue($ecriture->created_at) }}<br />
+	Modifiée le {{ Date::longue($ecriture->updated_at) }}</p>
 	@stop
 
 
