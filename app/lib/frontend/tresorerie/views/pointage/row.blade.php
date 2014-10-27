@@ -69,7 +69,7 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 
 	<!-- Type -->
 	<td>
-		{{ $ecriture->type->nom }}
+		@if($ecriture->type->id == 10)<span class="depense">{{ $ecriture->type->nom}}</span>@else{{ $ecriture->type->nom}}@endif
 		@if($ecriture->justificatif)
 		{{ $ecriture->type->sep_justif }}
 		@endif

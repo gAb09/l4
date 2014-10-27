@@ -22,7 +22,7 @@ $statuts = Statut::all();
 
 @foreach($statuts as $statut)
 
-<h2 class="item">{{ $statut->id }} - {{ $statut->nom }}</h2>
+<h2 class="item {{ $statut->classe }}">{{ $statut->id }} - {{ $statut->nom }}</h2>
 <p>{{ $statut->description }}</p>
 <hr class="filetfin"/>
 
