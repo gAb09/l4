@@ -7,23 +7,23 @@
 class Date
 {
 	
-	/* Date courte insécable
+	/* Date longue insécable
 	**
 	** return 15 décembre 1960 (espaces insécables)
 	** e B Y 
 	** 2 séparateurs = nbspace 
 	*/
-	public static function courte(Carbon\Carbon $date){
+	public static function longue(Carbon\Carbon $date){
 		return $date->formatlocalized('%e&nbsp%B&nbsp%Y');
 	}
 
-	/* Date courte sécable
+	/* Date longue sécable
 	**
 	** return 15 décembre 1960 (espaces sécables)
 	** e B Y 
 	** 2 séparateurs = space 
 	*/
-	public static function courteSec(Carbon\Carbon $date){
+	public static function longueSec(Carbon\Carbon $date){
 		return $date->formatlocalized('%e %B %Y');
 	}
 
