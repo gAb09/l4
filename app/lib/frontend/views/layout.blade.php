@@ -46,7 +46,6 @@
 
 			<nav class="navbar menus span9">
 				@include('shared/views/menus')
-				<h5 style="text-align: center">• • • Version 1 • • • Environnement : {{App::environment()}} • • •</h5>
 			</nav>
 
 
@@ -96,7 +95,8 @@
 			<div class="zapette_actions">
 				@yield('zapette')
 			</div>
-
+			<h5 style="text-align: center">• • • Version 1 • • • Environnement : {{App::environment()}} • • •</h5>
+			@if(App::environment() != 'lalocale')
 			<p class="zapette_infos">
 				<span>••• Page départ : {{Session::get('page_depart')}}</span>
 				<span>•••</span>
@@ -118,9 +118,10 @@
 				<span>Base de données : {{DB::getDatabaseName()}}</span>
 				<span>•••</span>
 			</p>
-
-
+			@endif
 		</div>
+
+		
 		@section('script')
 
 		@show
