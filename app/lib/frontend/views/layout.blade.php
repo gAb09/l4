@@ -96,7 +96,7 @@
 				@yield('zapette')
 			</div>
 			<h5 style="text-align: center">• • • Version 1 • • • Environnement : {{App::environment()}} • • •</h5>
-			@if(App::environment() != 'lalocale')
+			@if(App::environment() != 'o2switch')
 			<p class="zapette_infos">
 				<span>••• Page départ : {{Session::get('page_depart')}}</span>
 				<span>•••</span>
