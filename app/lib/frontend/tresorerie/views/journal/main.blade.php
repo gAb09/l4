@@ -127,7 +127,6 @@
 echo "var classe_statut_selon_id = ".$classe_statut_selon_id.";";
 echo "var statuts_accessibles = '".$statuts_accessibles."';";
 ?>
-
 </script>
 
 

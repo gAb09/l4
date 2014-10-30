@@ -27,29 +27,12 @@ $app->redirectIfTrailingSlash();
 */
 
 
-$env = $app->detectEnvironment(function()
-{
-	$host = $_SERVER['HTTP_HOST'];
+ $env = $app->detectEnvironment(array(
 
-	if (stripos($host, 'bruno') !== false) {
-		return 'bruno';
-	}
-	if (stripos($host, 'lalocale.gbom') !== false) {
-		return 'lalocale';
-	}
-	if (stripos($host, 'lalocale') !== false) {
-		return 'dev';
-	}
-});
-// $env = $app->detectEnvironment(array(
+ 	'o2switch' => array('uranus.o2switch.net'),
+ 	'alubook' => array('alubook-ii'),
 
-// 	'prod' => array('lalocale.gbom.o2switch.net'),
-// 	'local' => array('http://alubook-ii/~brunogabiot/Bruno'),
-// 	'testlocale' => array('http://alubook-ii/~brunogabiot/Locale'),
-// 	// 'autre' => array('alubook-ii'),
-
-// ));
-
+ ));
 
 /*
 |--------------------------------------------------------------------------
