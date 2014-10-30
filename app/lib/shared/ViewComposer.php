@@ -44,13 +44,4 @@ View::composer('frontend/tresorerie/views/ecritures/form', function($view)
 });
 
 
-
-/* appel des notes (Aide et Développement) en fonction de la page demandée */
-/*View::composer('backend/aide/fenetre_note', function($view) {
-	if ($note = DB::table('notes')->where('path', Notes::cleanPathNotes(Request::path()))->first())
-	{
-		$view->with('note', $note);
-	}
-});*/
-
 ?>

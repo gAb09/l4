@@ -29,7 +29,17 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(function()
 {
-    return $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['HTTP_HOST'];
+
+	if (stripos($host, 'bruno') !== false) {
+		return 'bruno';
+	}
+	if (stripos($host, 'lalocale.gbom') !== false) {
+		return 'lalocale';
+	}
+	if (stripos($host, 'lalocale') !== false) {
+		return 'dev';
+	}
 });
 // $env = $app->detectEnvironment(array(
 
