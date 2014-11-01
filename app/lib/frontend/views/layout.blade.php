@@ -98,8 +98,6 @@
 			<h5 style="text-align: center">Version 1 • • • Environnement : {{App::environment()}}</h5>
 			@if(App::environment() != 'o2switch')
 			<p class="zapette_infos">
-				<span>Ligne courante : {{Session::get('Courant.ligne')}}</span>
-				<br />
 				<span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}</span>
 				<span>•</span>
 				<span>Tri (paramètre) : {{Session::get('Courant.tri')}}</span>

@@ -24,7 +24,7 @@
 
 <body @section('body')>
 	@show
-
+{{ var_dump(Session::get(Courant)) }}
 	<div class="container-fluid">
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
@@ -97,16 +97,7 @@
 			</div>
 			<p class="zapette_infos">
 				• Version 1
-				• Page départ : {{Session::get('page_depart')}}
-				••• En cours d'édition : 
-				• Banque : {{Session::get('Courant.banque')}}
-				• Mois  {{Date::MoisEdit(Session::get('Courant.mois'))}}temporairement : {{ Date::MoisEdit(Session::get('mois')) }}
-				• Ligne : {{Session::get('Courant.ligne')}}
-				••• Nombre par page : {{Session::get('Courant.nbre_par_page')}}
-				• Tri (paramètre) : {{Session::get('Courant.tri')}}
-				• Tri (sens) : {{Session::get('Courant.tri_sens')}}
-				• Classe de compte : {{Session::get('Courant.classe')}}
-				• BDD : {{DB::getDatabaseName()}}</p>
+			</p>
 
 		</div>
 
