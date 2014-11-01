@@ -29,7 +29,7 @@
 
 
 	@section('zapette')
-	{{ link_to(Session::get('page_depart')."#".Session::get('mois'), 'Retour à la liste', array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+	{{ link_to(Session::get('page_depart')."#".Session::get('Courant.mois'), 'Retour à la liste', array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
 
 	{{ Form::submit('Modifier cette écriture', array('class' => 'btn btn-edit btn-zapette')) }}
 	{{ Form::close() }}

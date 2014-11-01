@@ -28,7 +28,7 @@
 @if($ecriture->mois_nouveau)
 
 <table>
-	<caption class="ligne_mois" id="{{$ecriture->date_valeur}}" onclick="javascript:volet(this);">
+	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
 		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
 	</caption>
 

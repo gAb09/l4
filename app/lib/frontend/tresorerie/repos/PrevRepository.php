@@ -12,7 +12,7 @@ class PrevRepository {
 
 	public function collectionPrev($banques, $annee)
 	{
-		$annee = (is_null($annee))? date('Y') : $annee;
+		$annee = (is_null($annee))? Session::get('Courant.annee') : $annee;
 
 		$order = 'date_valeur';
 

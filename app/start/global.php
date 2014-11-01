@@ -55,6 +55,8 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
+
+
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
@@ -140,4 +142,15 @@ define('CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL', 'Compléter éventuellement le li
 
 define('VERROU', 'Changement écriture simple/double');
 
+/*
+|--------------------------------------------------------------------------
+| VARIABLES DE SESSION UTLISATEUR
+|--------------------------------------------------------------------------
+|
+*/
+Session::has('Courant.annee')? : Session::put('Courant.annee', date('Y'));
+Session::has('Courant.mois')? : Session::put('Courant.mois', date('Y.m'));
+// Session::flush();
+
 define('PAR_PAGE', 10);
+

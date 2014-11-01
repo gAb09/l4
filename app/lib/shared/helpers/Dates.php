@@ -77,13 +77,22 @@ class Date
 	** Séparateur = nbspace
 	*/
 	public static function MoisEdit($string){
-		if (substr_count($string, '.') == 1) {
-			$parties = explode('.', $string);
+		if ($string and !is_string($string)) {
+			throw new Exception("Une chaîne est attendue", 1);
+			
+		}
+
+		try {
+			if (substr_count($string, '.') == 1) {
+				$parties = explode('.', $string);
 
 			// dd($date = $parties[0].', '.$parties[1].', 01, 00, 00, 00');
-			$date =  Carbon\Carbon::create($parties[0], $parties[1], 01, 00 ,00, 00);
-			return self::MoisAnneeInsec($date);		}
+				$date =  Carbon\Carbon::create($parties[0], $parties[1], 01, 00 ,00, 00);
+				return self::MoisAnneeInsec($date);
+			}
+		} catch (Exception $e) {
 		}
+	}
 
 // – – – – – – – – – –  Constantes php pour les dates – – – – – – – – – – – – – – 
 	/* d

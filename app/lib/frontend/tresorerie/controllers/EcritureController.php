@@ -154,7 +154,7 @@ class EcritureController extends BaseController {
 			$ec1->save();
 		}
 		$mois = self::setMoisCourant($ec1);
-		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
+		return Redirect::to(Session::get('page_depart')."#".Session::get('Courant.mois'));
 
 	}
 
@@ -375,7 +375,7 @@ class EcritureController extends BaseController {
 		/* Rediriger */
 		Session::flash('success', $success);
 		$mois = self::setMoisCourant($ec1);
-		return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
+		return Redirect::to(Session::get('page_depart')."#".Session::get('Courant.mois'));
 	}
 
 
@@ -399,21 +399,16 @@ class EcritureController extends BaseController {
 
 		Session::flash('success', $success);
 
-		// $mois = self::setMoisCourant($ec1);
-		// return Redirect::to(Session::get('page_depart')."#".Session::get('mois'));
-
 		$mois = self::setMoisCourant($ecriture);
-		return Redirect::to(Session::get('page_depart')."#$mois");
+		return Redirect::to(Session::get('page_depart')."#".Session::get('Courant.mois'));
 
 	}
 
 
-	public static function setMoisCourant($ec1){ // aPo redirection vers le mois
-		if(isset($ec1)){
-			$mois = Date::classAnMois($ec1->date_valeur);
-		}else{
-			$mois = "2014.01";
-		}
+	public static function setMoisCourant($ec){
+
+		$mois = Date::classAnMois($ec->date_valeur);
+
 		Session::put('Courant.mois', $mois);
 		return $mois;
 	}
