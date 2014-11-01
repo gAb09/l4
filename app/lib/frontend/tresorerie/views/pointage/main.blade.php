@@ -13,10 +13,9 @@
 @section('topcontent2')
 <div class="banques">
 	@foreach(Banque::all() as $bank)
-<a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big ">{{ $bank->nom }}</a>
+<a href ="{{ URL::route('pointage', $bank->id) }}" class="badge badge-locale badge-big {{ ($bank->nom == Session::get('Courant.banque')) ? 'badge-success' : ''}}">{{ $bank->nom }}</a>
 	@endforeach
 </div>
-@include('shared/views/Session_current')
 
 @stop
 

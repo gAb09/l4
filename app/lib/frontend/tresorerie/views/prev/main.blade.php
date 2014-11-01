@@ -12,12 +12,12 @@
 
 @section('topcontent2')
 <div class="banques">
-	<a href ="{{ URL::to("tresorerie/previsionnel/2013") }}" class="badge badge-locale badge-big ">2013</a>
-	<a href ="{{ URL::to("tresorerie/previsionnel/2014") }}" class="badge badge-locale badge-big ">2014</a>
-	<a href ="{{ URL::to("tresorerie/previsionnel/2015") }}" class="badge badge-locale badge-big ">2015</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2013") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2013') ? 'badge-success' : ''}} ">2013</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2014") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2014') ? 'badge-success' : ''}} ">2014</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2015") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2015') ? 'badge-success' : ''}} ">2015</a>
 	<br /><br />Choix de la banque principale (en construction)
 </div>
-@include('shared/views/Session_current')
+
 @stop
 
 

@@ -24,7 +24,7 @@
 
 <body @section('body')>
 	@show
-{{var_dump(Session::get('Courant'))}}
+
 	<div class="container-fluid">
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
@@ -95,9 +95,15 @@
 			<div class="zapette_actions">
 				@yield('zapette')
 			</div>
-			<h5 style="text-align: center">Version 1 • • • Environnement : {{App::environment()}}</h5>
+
+			<p class="zapette_infos">
+				 • • • <span>Version 1</span> • • •
+			</p>
+
 			@if(App::environment() != 'o2switch')
 			<p class="zapette_infos">
+				<span>Environnement : {{App::environment()}}</span>
+				<span>•••</span>
 				<span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}</span>
 				<span>•</span>
 				<span>Tri (paramètre) : {{Session::get('Courant.tri')}}</span>
@@ -109,6 +115,7 @@
 				<span>Base de données : {{DB::getDatabaseName()}}</span>
 			</p>
 			@endif
+{{var_dump(Session::get('Courant'))}}
 		</div>
 
 		
