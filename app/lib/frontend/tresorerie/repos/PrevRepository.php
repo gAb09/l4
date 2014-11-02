@@ -1,8 +1,8 @@
 <?php
-use lib\frontend\tresorerie\traits\TraitRepository;
+use lib\frontend\tresorerie\traits\Repositorytrait;
 
 class PrevRepository {
-	use TraitRepository;
+	use Repositorytrait;
 
 	private $skip = array();
 
