@@ -12,9 +12,6 @@ class PrevRepository {
 
 	public function collectionPrev($banques, $annee)
 	{
-		$annee = (is_null($annee))? Session::get('Courant.annee') : $annee;
-		Session::put('Courant.annee', $annee);
-
 		$order = 'date_valeur';
 
 		$ecritures = Ecriture::with('signe', 'type', 'banque', 'statut', 'compte', 'ecriture2')
@@ -45,6 +42,9 @@ class PrevRepository {
 
 			return false;
 		}
+
+
+		/* La collection $ecritures n'est pas vide, on peut lancer le traitement */
 
 		$this->solde = array();
 		foreach ($banques as $bank) {
@@ -143,7 +143,7 @@ class PrevRepository {
 					$i = 1;
 
 					while ($i <= $nbre_banques) {
-					$solde_ = 'solde_'.$i;
+						$solde_ = 'solde_'.$i;
 
 						$ecriture->$solde_ = $this->solde[$i];
 						$i++;
@@ -154,9 +154,9 @@ class PrevRepository {
 					$i = 1;
 
 					while ($i <= $nbre_banques) {
-					$show_ = 'show_'.$i;
-					$prev_solde_ = 'prev_solde_'.$i;
-					
+						$show_ = 'show_'.$i;
+						$prev_solde_ = 'prev_solde_'.$i;
+
 						$ecriture->$show_ = ($this->solde[$i] == $$prev_solde_)? false : true;
 						$i++;
 					}
