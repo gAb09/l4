@@ -12,20 +12,33 @@
 
 @section('topcontent2')
 <div class="span6">
-	<p style="float:left;margin: 5px 10px;">
+	<p style="margin: 0px;">
 		Année courante
 	</p>
-	<a href ="{{ URL::to("tresorerie/previsionnel/2013") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2013') ? 'badge-success' : ''}} ">2013</a>
-	<a href ="{{ URL::to("tresorerie/previsionnel/2014") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2014') ? 'badge-success' : ''}} ">2014</a>
-	<a href ="{{ URL::to("tresorerie/previsionnel/2015") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2015') ? 'badge-success' : ''}} ">2015</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2013") }}" 
+		class="badge badge-locale badge-big 
+		{{ (Session::get('Courant.annee') == '2013') ? 'badge-success' : ''}} " >
+		2013
+	</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2014") }}" 
+		class="badge badge-locale badge-big 
+		{{ (Session::get('Courant.annee') == '2014') ? 'badge-success' : ''}} " >
+		2014
+	</a>
+	<a href ="{{ URL::to("tresorerie/previsionnel/2015") }}" 
+		class="badge badge-locale badge-big 
+		{{ (Session::get('Courant.annee') == '2015') ? 'badge-success' : ''}} " >
+		2015
+	</a>
 </div>
 
 <div class="span6">
-	<p style="float:left;margin: 2px 10px;">
+	<p style="margin: 0px;">
 		Banque de référence
 	</p>
 	@foreach(Banque::all() as $bank)
-	<p class="label label-locale label-medium {{ ($bank->rang == 1) ? 'btn-success' : ''}}">
+	<p class="label label-locale label-medium {{ ($bank->rang == 1) ? 'btn-success' : ''}}"
+		onClick="javascript:alert('Le changement de banque de référence sera disponible dans la prochaine version');" >
 		{{ $bank->nom }}
 	</p>
 	@endforeach
