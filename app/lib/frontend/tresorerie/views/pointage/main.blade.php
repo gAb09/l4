@@ -4,6 +4,10 @@
 @parent
 @stop
 
+@section('body')
+onLoad="initVolets();"
+@stop
+
 
 @section('topcontent1')
 <h1 class="titrepage">{{ $titre_page }}</h1>
@@ -109,31 +113,19 @@
 
 @section('script')
 
-<!-- Transmettre le tableau de correspondance classe/id pour les statuts -->
-<script type="text/javascript">
-
+<script type="text/javascript">	
 <?php
+
+/* Transmettre au javascript "incrementeStatuts()" 
+le tableau de correspondance classe/id pour les statuts */
 echo "var classe_statut_selon_id = ".$classe_statut_selon_id.";";
 echo "var statuts_accessibles = '".$statuts_accessibles."';";
+
+/* Transmettre au javascript "initVolets()"
+la variable du mois courant */
+echo 'var mois = "'.Session::get('Courant.mois').'";';
+
 ?>
-
-</script>
-
-
-<!-- aFa Rédiger commentaire -->
-<script type="text/javascript">
-
-<?php
-	echo 'var mois = "'.Session::get('Courant.mois').'";';
-?>
-
-if (mois) {
-	var curhead = document.getElementById("tetiere"+mois);
-	var curcorps = document.getElementById("corps"+mois);
-	curhead.className = "";
-	curcorps.className = "";
-}
-
 </script>
 
 <script src="/assets/js/volets.js">

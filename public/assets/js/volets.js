@@ -1,3 +1,16 @@
+function initVolets() {
+	var curhead = document.getElementById("tetiere"+mois);
+	if (curhead) {
+		curhead.className = "";
+	}
+
+	var curcorps = document.getElementById("corps"+mois);
+	if (curhead) {
+		curcorps.className = "";
+	}
+}
+
+
 function volet(capt) {
 	var tableau = capt.parentNode;
 	var head = tableau.childNodes[3];

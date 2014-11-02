@@ -4,6 +4,10 @@
 @parent
 @stop
 
+@section('body')
+onLoad="initVolets();"
+@stop
+
 
 @section('topcontent1')
 <h1 class="titrepage">{{ $titre_page }}</h1>
@@ -127,19 +131,14 @@
 
 @section('script')
 
-<script type="text/javascript">
-
+<script type="text/javascript">	
 <?php
-	echo 'var mois = "'.Session::get('Courant.mois').'";';
+
+/* Transmettre au javascript "initVolets()"
+la variable du mois courant */
+echo 'var mois = "'.Session::get('Courant.mois').'";';
+
 ?>
-
-if (mois) {
-	var curhead = document.getElementById("corps"+mois);
-	var curcorps = document.getElementById("tetiere"+mois);
-	curhead.className = "";
-	curcorps.className = "";
-}
-
 </script>
 
 <script src="/assets/js/volets.js">
