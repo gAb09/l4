@@ -11,11 +11,24 @@
 
 
 @section('topcontent2')
-<div class="banques">
+<div class="span6">
+	<p style="float:left;margin: 5px 10px;">
+		Année courante
+	</p>
 	<a href ="{{ URL::to("tresorerie/previsionnel/2013") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2013') ? 'badge-success' : ''}} ">2013</a>
 	<a href ="{{ URL::to("tresorerie/previsionnel/2014") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2014') ? 'badge-success' : ''}} ">2014</a>
 	<a href ="{{ URL::to("tresorerie/previsionnel/2015") }}" class="badge badge-locale badge-big {{ (Session::get('Courant.annee') == '2015') ? 'badge-success' : ''}} ">2015</a>
-	<br /><br />Choix de la banque principale (en construction)
+</div>
+
+<div class="span6">
+	<p style="float:left;margin: 2px 10px;">
+		Banque de référence
+	</p>
+	@foreach(Banque::all() as $bank)
+	<p class="label label-locale label-medium {{ ($bank->rang == 1) ? 'btn-success' : ''}}">
+		{{ $bank->nom }}
+	</p>
+	@endforeach
 </div>
 
 @stop
@@ -45,11 +58,11 @@
 		<th>
 			Montant
 		</th>
-@foreach($banques as $banque)		
+		@foreach($banques as $banque)		
 		<th>
 			{{$banque->nom}}
 		</th>
-@endforeach
+		@endforeach
 		<th>
 			Solde global
 		</th>
@@ -92,7 +105,7 @@
 
 @section('zapette')
 
-	{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
+{{link_to_action('EcritureController@create', 'Ajouter une écriture', null, ["class" => "btn btn-success iconemedium add"])}}
 
 @stop
 
@@ -104,15 +117,15 @@
 <script type="text/javascript">
 
 <?php
-	echo 'var mois = "'.Volets::getMoisCourant().'";';
+echo 'var mois = "'.Volets::getMoisCourant().'";';
 ?>
 
-	if (mois) {
-		var curhead = document.getElementById("corps"+mois);
-		var curcorps = document.getElementById("tetiere"+mois);
-		curhead.className = "";
-		curcorps.className = "";
-	}
+if (mois) {
+	var curhead = document.getElementById("corps"+mois);
+	var curcorps = document.getElementById("tetiere"+mois);
+	curhead.className = "";
+	curcorps.className = "";
+}
 
 </script>
 
