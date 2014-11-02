@@ -124,7 +124,7 @@ echo "var statuts_accessibles = '".$statuts_accessibles."';";
 <script type="text/javascript">
 
 <?php
-	echo 'var mois = "'.Volets::getMoisCourant().'";';
+	echo 'var mois = "'.Session::get('Courant.mois').'";';
 ?>
 
 if (mois) {

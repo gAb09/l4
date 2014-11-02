@@ -134,13 +134,16 @@ echo "var statuts_accessibles = '".$statuts_accessibles."';";
 <script type="text/javascript">
 
 <?php
-	echo 'var mois = "'.Volets::getMoisCourant().'";';
+	echo 'var mois = "'.Session::get('Courant.mois').'";';
 ?>
 
-if (mois) {
-	var curhead = document.getElementById("tetiere"+mois);
-	var curcorps = document.getElementById("corps"+mois);
+var curhead = document.getElementById("tetiere"+mois);
+if (curhead) {
 	curhead.className = "";
+}
+
+var curcorps = document.getElementById("corps"+mois);
+if (curhead) {
 	curcorps.className = "";
 }
 
