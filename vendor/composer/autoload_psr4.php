@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'lib\\shared\\Traits\\' => array($baseDir . '/app/lib/shared/traits'),
+    'lib\\frontend\\tresorerie\\traits\\' => array($baseDir . '/app/lib/frontend/tresorerie/traits'),
 );

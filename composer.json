@@ -22,7 +22,7 @@
 			"app/lib"
 		],
 		"psr-4": {
-			"lib\\shared\\Traits\\": "app/lib/shared/traits"
+			"lib\\frontend\\tresorerie\\traits\\": "app/lib/frontend/tresorerie/traits"
 		}
 	},
 	"scripts": {

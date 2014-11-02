@@ -1,5 +1,5 @@
 <?php
-use lib\shared\Traits\ModelTrait;
+use lib\frontend\tresorerie\traits\ModelTrait;
 
 class Ecriture extends Eloquent {
 	use ModelTrait;

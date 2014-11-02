@@ -1,5 +1,5 @@
 <?php
-use lib\shared\Traits\ModelTrait;
+use lib\frontend\tresorerie\traits\ModelTrait;
 
 class Banque extends Eloquent {
 	/* Accès au listes pour input select */

@@ -1,5 +1,5 @@
 <?php
-use lib\shared\Traits\TraitRepository;
+use lib\frontend\tresorerie\traits\TraitRepository;
 
 class PrevRepository {
 	use TraitRepository;

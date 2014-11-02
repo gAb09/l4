@@ -1,5 +1,5 @@
 <?php
-use lib\shared\Traits\ModelTrait;
+use lib\frontend\tresorerie\traits\ModelTrait;
 
 class Type extends Eloquent {
 	use ModelTrait;

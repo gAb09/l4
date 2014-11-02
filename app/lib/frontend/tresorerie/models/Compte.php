@@ -1,6 +1,6 @@
 <?php
 use Baum\Node;
-use lib\shared\Traits\ModelTrait;
+use lib\frontend\tresorerie\traits\ModelTrait;
 
 class Compte extends Node {
 	/* Accès au listes pour input select */

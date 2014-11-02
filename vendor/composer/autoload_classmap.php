@@ -70,7 +70,6 @@ return array(
     'TypeController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/TypeController.php',
     'Utilisateur' => $baseDir . '/app/lib/backend/utilisateurs/Utilisateur.php',
     'UtilisateurController' => $baseDir . '/app/lib/backend/utilisateurs/UtilisateurController.php',
-    'Volets' => $baseDir . '/app/lib/shared/helpers/Volets.php',
     'Way\\Generators\\Generators\\ControllerGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/ControllerGenerator.php',
     'Way\\Generators\\Generators\\FormDumperGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/FormDumperGenerator.php',
     'Way\\Generators\\Generators\\Generator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/Generator.php',
