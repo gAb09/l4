@@ -1,10 +1,6 @@
 <?php
 
-use lib\shared\Traits\IndexEcritures;
-
 class PrevController extends BaseController {
-
-	use IndexEcritures;
 
 	// Le critère de classement
 	private $order = 'date_valeur';

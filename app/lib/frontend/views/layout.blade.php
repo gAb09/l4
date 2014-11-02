@@ -115,7 +115,7 @@
 				<span>Base de données : {{DB::getDatabaseName()}}</span>
 			</p>
 			@endif
-{{-- var_dump(Session::get('Courant')) --}}
+{{ var_dump(Session::get('Courant')) }}
 		</div>
 
 		
