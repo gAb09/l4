@@ -120,7 +120,12 @@ class UtilisateurController extends \BaseController {
 	 * @return Response
 	 */
 	public function update($id) {
-		return 'enregistrement des modifications du utilisateur n°' . $id;
+		// return 'enregistrement des modifications de l’utilisateur n°' . $id;
+
+		$utilisateur = Utilisateur::find($id);
+		$utilisateur->fill(Input::except('_token', '_method'));
+		$utilisateur->save();
+		return Redirect::back();
 	}
 
 

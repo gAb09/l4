@@ -36,7 +36,7 @@ class IdentificationController extends \BaseController {
 			if (Auth::attempt(array('login' => Input::get('login'), 'password' => Input::get('password')))) {
 				// dd('identification ok !!!');
 				// dd(auth::user()->page);
-				return Redirect::to(auth::user()->page)
+				return Redirect::to(auth::user()->accueil)
 				;
 
 			} else {
