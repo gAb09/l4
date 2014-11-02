@@ -1,8 +1,8 @@
 <?php
-use lib\frontend\tresorerie\traits\Repositorytrait;
+use lib\frontend\tresorerie\traits\RepositoryTrait;
 
 class PrevRepository {
-	use Repositorytrait;
+	use RepositoryTrait;
 
 	private $skip = array();
 
@@ -52,10 +52,11 @@ class PrevRepository {
 		}
 		$this->solde['total'] = 0;
 
+		/* Déterminer le rang de la dernière écriture de la page. */
+		$last = $ecritures->count() -1;
 
 
-
-		$ecritures->each(function($ecriture) use ($ecritures, $order, $banques) {
+		$ecritures->each(function($ecriture) use ($ecritures, $order, $banques, $last) {
 
 			/* Affecter la valeur de la propriété $this-rang initialisée à 0. */
 			$ecriture->rang = $this->rang;
@@ -65,7 +66,7 @@ class PrevRepository {
 
 
 			/* ----  Traitement du regroupement par mois ----- */
-			$this->classementParMois($ecriture, $ecritures, $order, 'mois');
+			$this->classementParMois($ecriture, $ecritures, $order, $last);
 
 		});
 

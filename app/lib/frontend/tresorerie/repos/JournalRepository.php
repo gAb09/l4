@@ -1,8 +1,8 @@
 <?php
-use lib\frontend\tresorerie\traits\Repositorytrait;
+use lib\frontend\tresorerie\traits\RepositoryTrait;
 
 class JournalRepository {
-	use Repositorytrait;
+	use RepositoryTrait;
 
 	private $cumul_dep_mois = 0.0;
 

@@ -100,6 +100,22 @@ onLoad="initVolets();"
 
 		@include('frontend/tresorerie/views/prev/row')
 
+		@if($ecriture->last)
+		<tr class="soldes">
+			<td colspan="4" style="text-align:right">
+				Récapitulatif du mois
+			</td>
+			@foreach($banques as $banque)
+			<?php $id = 'solde_'.$banque->id; ?>
+				<td class="{{($ecriture->{$id} >=0) ? 'recette' : 'depense' }}">
+					{{ Nbre::francais_insec($ecriture->{$id}) }}
+				</td>
+			@endforeach
+				<td class="{{($ecriture->solde_total >=0) ? 'recette' : 'depense' }}">
+					{{ Nbre::francais_insec($ecriture->solde_total) }}
+				</td>
+		</tr>
+		@endif
 		@endforeach
 
 	</tbody>
