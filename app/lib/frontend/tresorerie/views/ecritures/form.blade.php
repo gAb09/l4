@@ -87,7 +87,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		{{Form::select('type_id1', $list['type'], $ecriture->type_id, array ('class' => 'input-long', 'onChange' => 'javascript:separateur(this);') ) }}
 	</div>
 
-@if($ecriture->type->req_justif)
+@if(isset($ecriture->type->req_justif) and $ecriture->type->req_justif)
 		<div id="divjustificatif1" class="input">
 	@else
 		<div id="divjustificatif1" class="input hidden">
@@ -97,11 +97,15 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<span id="sep1">
 			{{ isset($ecriture->type->sep_justif) ? $ecriture->type->sep_justif : '' }}
 		</span>
-		{{ Form::text('justificatif', $ecriture->justificatif, array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
+		{{ Form::text('justificatif', isset($ecriture->justificatif) ? $ecriture->justificatif : '',  array ('class' => 'input-long margright')) }}   <!-- aPo probleme de selected -->
 		<!-- Type (justificatif requis) -->
-		{{ Form::hidden('req_justif', $ecriture->type->req_justif, array ('class' => 'input-long margright', 'id' => 'req_justif1')) }}   <!-- aPo probleme de selected -->
+		{{ Form::hidden('req_justif',  isset($ecriture->type->req_justif) ? $ecriture->justificatif : '', array ('class' => 'input-long margright', 'id' => 'req_justif1')) }}   <!-- aPo probleme de selected -->
 	</div>
 </fieldset>
+
+
+
+
 
 
 <!-- Compte -->
@@ -159,7 +163,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 		<span id="sep2">
 			{{isset($ecriture->ecriture2->type->sep_justif) ? $ecriture->ecriture2->type->sep_justif :  ''}}
 		</span>
-		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : CREATE_FORM_DEFAUT_TXT_JUSTIF, array ('class' => 'input-long margright')) }} 
+		{{ Form::text('justif2', isset($ecriture->ecriture2->justificatif) ? $ecriture->ecriture2->justificatif : '', array ('class' => 'input-long margright')) }} 
 		<!-- Type (justificatif requis) -->
 		{{ Form::hidden('req_justif2', isset($ecriture->ecriture2->type->req_justif) ? $ecriture->ecriture2->justificatif : '', array ('class' => 'input-long margright', 'id' => 'req_justif2')) }}   <!-- aPo probleme de selected -->
 	</div>
