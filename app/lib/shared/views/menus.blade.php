@@ -1,10 +1,11 @@
 <p class="logo">{{ Session::get('site') }}</p>
 
 <ul class="nav">
+@if(Auth::user()->role_id != 3)
 
 	@foreach ($menus as $menu)
 
-	@if ($menu->publication == 1)
+	@if ($menu->publication == 1 and $menu->role_id >= Auth::user()->role_id)
 
 		@if ($menu->nom_sys == Request::segment(2))
 		<li class ="dropdown active">
@@ -30,4 +31,5 @@
 		</li>
 	@endif
 	@endforeach
+	@endif
 </ul>

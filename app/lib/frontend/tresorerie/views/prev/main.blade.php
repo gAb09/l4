@@ -59,7 +59,7 @@ onLoad="initVolets();"
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
-		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_valeur)) }}
+		{{ Date::MoisAnneeInsec($ecriture->date_valeur) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}">
@@ -103,7 +103,7 @@ onLoad="initVolets();"
 		@if($ecriture->last)
 		<tr class="soldes">
 			<td colspan="4" style="text-align:right">
-				Récapitulatif du mois
+				Situation à fin {{strtolower(Date::MoisAnneeInsec($ecriture->date_valeur))}}
 			</td>
 			@foreach($banques as $banque)
 			<?php $id = 'solde_'.$banque->id; ?>

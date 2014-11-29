@@ -14,6 +14,17 @@ class Utilisateur extends Eloquent implements UserInterface, RemindableInterface
 	 */
 	protected $table = 'utilisateurs';
 
+
+	/**
+	 * The role's relation.
+	 *
+	 * @var array
+	 */
+  public function role()
+  {
+    return $this->belongsTo('Role');
+  }
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *

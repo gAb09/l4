@@ -10,7 +10,9 @@ class MenuController extends \BaseController {
 	public function __construct(MenuValidation $validateur)
 	{
 		$this->validateur = $validateur;
+		$this->menuRepo = new MenuRepository;
 	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -18,7 +20,7 @@ class MenuController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$menus = Menu::orderBy('parent_id')->orderBy('rang')->get();
+		$menus = Menu::with('role')->orderBy('parent_id')->orderBy('rang')->get();
 
 		return View::make('backend.menus.index')
 		->with(compact('menus'))
@@ -35,6 +37,7 @@ class MenuController extends \BaseController {
 		return View::make('backend.menus.create')
 		->with(compact('menu'))
 		->with('titre_page', "Création d’un menu ou d’un item")
+		->with('list_roles', $this->menuRepo->listRolesForSelect())
 		;
 	}
 
@@ -51,6 +54,7 @@ class MenuController extends \BaseController {
 			'publication' => $publication,
 			'rang' => Input::get('rang'),
 			'route' => Input::get('route'),
+			'role_id' => Input::get('role_id'),
 			'description' => Input::get('description') ? Input::get('description') : 'Sans description',
 			));
 
@@ -74,6 +78,7 @@ class MenuController extends \BaseController {
 		return View::make('backend/menus/edit')
 		->with(compact('menu'))
 		->with('titre_page', "Modification de l’item ou du menu")
+		->with('list_roles', $this->menuRepo->listRolesForSelect())
 		;
 	}
 
@@ -92,6 +97,7 @@ class MenuController extends \BaseController {
 		$menu->rang = Input::get('rang');
 		$menu->route = Input::get('route');
 		$menu->description = Input::get('description');
+		$menu->role_id = Input::get('role_id');
 
 		$parent_id = (Input::get('parent_id'));
 
@@ -120,7 +126,7 @@ class MenuController extends \BaseController {
 			return Redirect::to('backend/menus')->withErrors('L’item “'.$menu->etiquette.'” possède des descendants, 
 				veuillez d‘abord les déplacer ou les supprimer.');
 		} else {
-		$menu->delete();
+			$menu->delete();
 			Session::flash('success', 'L’item "'.$menu->etiquette.'" a bien été supprimé');
 			return Redirect::to('backend/menus');
 		}

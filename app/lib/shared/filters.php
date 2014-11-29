@@ -41,7 +41,7 @@ Route::filter('auth', function()
 
 Route::filter('admin', function()
 {
-	if (Auth::user()->role == 'admin')
+	if (Auth::user()->role_id == 1)
 	{
 
 	}else{
@@ -52,7 +52,7 @@ Route::filter('admin', function()
 
 Route::filter('tresorerie', function()
 {
-	if (Auth::user()->role == 'secretariat' or Auth::user()->role == 'admin')
+	if (Auth::user()->role_id == 2 or Auth::user()->role_id == 1)
 	{
 
 	}else{
@@ -64,7 +64,7 @@ Route::filter('tresorerie', function()
 
 Route::filter('user', function()
 {
-	if (!Auth::check() or Auth::user()->role == 'CA') 
+	if (!Auth::check() or Auth::user()->role_id == 3) 
 		return Redirect::back()->with('erreur', 'Vous n’avez pas les droites d’accès à la zone "utilisateur"');
 });
 

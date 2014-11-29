@@ -28,10 +28,10 @@
 	@else
 	<h2 class ="item">• {{ $menu->etiquette }} </h2>
 		@endif
-
 		<p class="badge badge-locale iconesmall edit"><a href="{{ URL::to('backend/menus/'.$menu->id.'/edit') }}">Modifier ce menu</a></p>
 		<p><strong>Rang = </strong>{{ $menu->rang }}</p>
 		<p><strong>Description : </strong>{{ $menu->description }}</p>
+		<p><strong>Rôle : </strong>{{($menu->role_id)?$menu->role->etiquette: 'Utilisateur connecté'}}</p>
 
 		<!-- Formulaire gestion des rangs par menu-->
 		{{ Form::open(array('url' => 'gestion/menu_items/rangs/'.$menu->id, 'method' => 'get')) }}
@@ -45,6 +45,7 @@
 				<th>Description</th>
 				<th>ID</th>
 				<th>Nom système</th>
+				<th>Role</th>
 				<th>Modifier</th>
 			</thead>
 
@@ -77,6 +78,9 @@
 				</td>
 				<td>
 					{{ $item->nom_sys }}
+				</td>
+				<td>
+					{{ ($item->role_id)?$item->role->etiquette: 'Utilisateur connecté'}}
 				</td>
 				<td>
 					<a  class="iconemedium edit" href="{{ URL::to('backend/menus/'.$item->id.'/edit') }}">
@@ -115,6 +119,9 @@
 				</td>
 				<td>
 					{{ $desc->nom_sys }}
+				</td>
+				<td>
+					{{ ($desc->role_id)?$desc->role->etiquette: 'Utilisateur connecté'}}
 				</td>
 				<td>
 					<a  class="iconemedium edit" href="{{ URL::to('backend/menus/'.$desc->id.'/edit') }}">

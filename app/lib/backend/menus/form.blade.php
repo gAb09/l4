@@ -44,7 +44,13 @@ onLoad="toggle_publication();"
 	</div>
 </fieldset>
 
+	<!-- Role -->
+<fieldset>
+{{ Form::label('role_id', 'Role associé', array ('class' => '')) }}
+{{ Form::select('role_id', $list_roles, array ('class' => '')) }}
+</fieldset>
 
+	<!-- Description -->
 <fieldset>
 {{ Form::label('description', 'Description (facultative)', array ('class' => '')) }}
 {{ Form::textarea('description', null, array ('class' => '')) }}

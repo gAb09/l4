@@ -1,10 +1,13 @@
 <?php
 use Baum\Node;
+use lib\frontend\tresorerie\traits\ModelTrait;
+
 
 /**
 * Menu
 */
 class Menu extends Node {
+  use ModelTrait;
 
   /**
    * Table name.
@@ -14,6 +17,14 @@ class Menu extends Node {
   protected $table = 'menus';
 
   protected $unguard = true;
+
+
+  /* —————————  RELATIONS  —————————————————*/
+
+  public function role()
+  {
+    return $this->belongsTo('Role');
+  }
 
 
   /**
