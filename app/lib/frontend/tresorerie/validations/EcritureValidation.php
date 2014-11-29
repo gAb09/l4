@@ -11,7 +11,7 @@ class EcritureValidation extends ValidationBase
 		'libelle' => 'required|not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE',
 		'libelle_detail' => 'not_in:CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL',
 		'type_id1' => 'not_in:0',
-		'justificatif' => 'required_if:req_justif,1|not_in:CREATE_FORM_DEFAUT_TXT_JUSTIF',
+		'justificatif' => 'required_if:req_justif,1',
 		'compte_id' => 'not_in:0',
 		);
 

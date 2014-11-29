@@ -17,7 +17,6 @@ class Ecriture extends Eloquent {
 		'type_id' => 0,
 		'libelle' => CREATE_FORM_DEFAUT_TXT_LIBELLE,
 		'libelle_detail' => CREATE_FORM_DEFAUT_TXT_LIBELLE_COMPL,
-		'justificatif' => CREATE_FORM_DEFAUT_TXT_JUSTIF,
 		'compte_id' => 0,
 		'is_double' => false,
 		);
