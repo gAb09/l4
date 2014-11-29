@@ -104,6 +104,10 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 </fieldset>
 
 
+
+
+
+
 <!-- Compte -->
 <fieldset>
 	<div class="input">
