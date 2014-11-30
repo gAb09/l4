@@ -3,8 +3,10 @@ Désolés ! Vous n’avez les droits d'accès qu'au prévisionnel !
 @else
 <div class="nav-collapse collapse">
 	<ul class="nav">
+
 		@foreach($sections as $section)
 		@if($section->role_id >= Auth::user()->role_id or $section->role_id == 0)
+
 		@if ($section->nom_sys == Request::segment(1))
 		<li class ="active">
 			@else

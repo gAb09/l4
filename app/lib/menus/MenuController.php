@@ -22,7 +22,7 @@ class MenuController extends \BaseController {
 	public function index() {
 		$menus = Menu::with('role')->orderBy('parent_id')->orderBy('rang')->get();
 
-		return View::make('backend.menus.index')
+		return View::make('menus.views.index')
 		->with(compact('menus'))
 		->with('titre_page', "Gestion des menus")
 		;
@@ -34,7 +34,7 @@ class MenuController extends \BaseController {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('backend.menus.create')
+		return View::make('admin.menus.create')
 		->with(compact('menu'))
 		->with('titre_page', "Création d’un menu ou d’un item")
 		->with('list_roles', $this->menuRepo->listRolesForSelect())
@@ -64,7 +64,7 @@ class MenuController extends \BaseController {
 			$menu->makeChildOf(Menu::findOrFail($parent_id));
 		}
 
-		return Redirect::to('backend/menus');
+		return Redirect::to('menus');
 	}
 
 
@@ -75,7 +75,7 @@ class MenuController extends \BaseController {
 		$menu = Menu::findOrFail($id);
 		// var_dump($menu); // CTRL
 
-		return View::make('backend/menus/edit')
+		return View::make('menus.edit')
 		->with(compact('menu'))
 		->with('titre_page', "Modification de l’item ou du menu")
 		->with('list_roles', $this->menuRepo->listRolesForSelect())
@@ -110,7 +110,7 @@ class MenuController extends \BaseController {
 		$menu->save();
 
 		// return var_dump($menu); //CTRL
-		return Redirect::to('backend/menus');
+		return Redirect::to('menus');
 	}
 
 
@@ -123,12 +123,12 @@ class MenuController extends \BaseController {
 		$desc = $menu->getDescendants();
 
 		if ($desc->count()) {
-			return Redirect::to('backend/menus')->withErrors('L’item “'.$menu->etiquette.'” possède des descendants, 
+			return Redirect::to('menus')->withErrors('L’item “'.$menu->etiquette.'” possède des descendants, 
 				veuillez d‘abord les déplacer ou les supprimer.');
 		} else {
 			$menu->delete();
 			Session::flash('success', 'L’item "'.$menu->etiquette.'" a bien été supprimé');
-			return Redirect::to('backend/menus');
+			return Redirect::to('menus');
 		}
 
 	}

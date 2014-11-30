@@ -1,4 +1,4 @@
-@extends('frontend/views/layout')
+@extends('utilisateurs/views/layout')
 @section('contenu')
 
 {{ Form::open(['method' => 'post', 'action' => 'UtilisateurController@store']) }}

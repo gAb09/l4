@@ -1,4 +1,7 @@
-<?php namespace Lib\Validations;
+<?php 
+namespace lib\dashboard;
+
+use Lib\Validations\ValidationBase;
 
 class ValidationDashboard extends ValidationBase
 {

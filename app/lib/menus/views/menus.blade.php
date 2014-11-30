@@ -5,7 +5,7 @@
 
 	@foreach ($menus as $menu)
 
-	@if ($menu->publication == 1 and $menu->role_id >= Auth::user()->role_id)
+	@if ($menu->publication == 1)
 
 		@if ($menu->nom_sys == Request::segment(2))
 		<li class ="dropdown active">

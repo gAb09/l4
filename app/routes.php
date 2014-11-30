@@ -27,6 +27,12 @@ Route::get('/', function()
 	return Redirect::to('tresorerie/journal');
 });
 
+Route::get('admin', function()
+{
+	return Redirect::to('admin/menus');
+});
+
+
 
 
 
@@ -36,15 +42,13 @@ Route::get('/', function()
 
 require_once("lib/tresorerie/routes.php");
 
-require_once("lib/frontend/dashboard/routes.php");
+require_once("lib/dashboard/routes.php");
 
-require_once("lib/frontend/grille/routes.php");
+require_once("lib/grille/routes.php");
 
-require_once("lib/identification/routes.php");
+require_once("lib/menus/routes.php");
 
-require_once("lib/backend/menus/routes.php");
-
-require_once("lib/backend/utilisateurs/routes.php");
+require_once("lib/utilisateurs/routes.php");
 
 require_once("lib/identification/routes.php");
 

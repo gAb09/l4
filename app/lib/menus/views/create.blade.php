@@ -1,4 +1,4 @@
-@extends('frontend/views/layout')
+@extends('menus/views/layout')
 
 @section('titre')
 @parent
@@ -17,9 +17,9 @@
 @section('contenu')
 
 
-	{{ Form::open(array('url' => URL::to('backend/menus'), 'method' => 'post')) }}
+	{{ Form::open(array('url' => URL::to('menus'), 'method' => 'post')) }}
 
-@include('backend/menus/form')
+@include('menus/form')
 
 @stop
 

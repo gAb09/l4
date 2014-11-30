@@ -24,11 +24,11 @@
 
 <body @section('body')>
 	@show
-{{ var_dump(Session::get(Courant)) }}
+
 	<div class="container-fluid">
 
 		<!-- - - - - - - - - - - - - - - - Messages - - - - - - - - - - - - - - -->
-			@include('shared/views/messages')
+		@include('shared/views/messages')
 
 
 
@@ -38,14 +38,14 @@
 			<!-- - - - - - - - - - - - - - - - MENU SECTIONS - - - - - - - - - - - - - - -->
 
 			<nav class="navbar sections span12">
-				@include('shared/views/menuSections')
+				@include('menus/views/menuSections')
 			</nav>
 
 
 			<!-- - - - - - - - - - - - - - SOUS MENU - - - - - - - - - - - - - - -->
 
 			<nav class="navbar menus span9">
-				@include('shared/views/menus')
+				@include('menus/views/menus')
 			</nav>
 
 
@@ -93,18 +93,34 @@
 
 		<div class="zapette">
 			<div class="zapette_actions">
-			@yield('zapette')
+				@yield('zapette')
 			</div>
+
 			<p class="zapette_infos">
-				• Version 1
+				 • • • <span>Version 1 - Layout de menus</span> • • •
 			</p>
+
+			@if(App::environment() != 'o2switch')
+			<p class="zapette_infos">
+				<span>Environnement : {{App::environment()}}</span>
+				<span>•••</span>
+				<span>Nombre par page : {{Session::get('Courant.nbre_par_page')}}</span>
+				<span>•</span>
+				<span>Tri (paramètre) : {{Session::get('Courant.tri')}}</span>
+				<span>•</span>
+				<span>Tri (sens) : {{Session::get('Courant.tri_sens')}}</span>
+				<span>•••</span>
+				<span>Classe de compte : {{Session::get('Courant.classe')}}</span>
+				<span>•••</span>
+				<span>Base de données : {{DB::getDatabaseName()}}</span>
+			</p>
+			@endif
 
 		</div>
 
+		
+		@section('script')
 
-	</div>
-	@section('script')
-
-	@show
-</body>
-</html>
+		@show
+	</body>
+	</html>

@@ -38,14 +38,14 @@
 			<!-- - - - - - - - - - - - - - - - MENU SECTIONS - - - - - - - - - - - - - - -->
 
 			<nav class="navbar sections span12">
-				@include('shared/views/menuSections')
+				@include('menus/views/menuSections')
 			</nav>
 
 
 			<!-- - - - - - - - - - - - - - SOUS MENU - - - - - - - - - - - - - - -->
 
 			<nav class="navbar menus span9">
-				@include('shared/views/menus')
+				@include('menus/views/menus')
 			</nav>
 
 
@@ -97,7 +97,7 @@
 			</div>
 
 			<p class="zapette_infos">
-				 • • • <span>Version 1</span> • • •
+				 • • • <span>Version 1 - layout de dashboard</span> • • •
 			</p>
 
 			@if(App::environment() != 'o2switch')

@@ -1,4 +1,4 @@
-@extends('frontend/views/layout')
+@extends('tresorerie/views/layout')
 
 @section('titre')
 @parent

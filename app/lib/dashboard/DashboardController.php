@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lib\Validations\ValidationDashboard;
+use lib\dashboard\ValidationDashboard;
 
 class DashboardController extends \BaseController {
 

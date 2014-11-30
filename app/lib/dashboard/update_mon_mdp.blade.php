@@ -1,4 +1,4 @@
-@extends('frontend/views/layout')
+@extends('dashboard/views/layout')
 
 @section('contenu')
 <div>

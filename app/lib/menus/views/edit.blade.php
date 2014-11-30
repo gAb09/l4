@@ -1,4 +1,4 @@
-@extends('frontend/views/layout')
+@extends('menus/views/layout')
 
 @section('titre')
 @parent
@@ -16,9 +16,9 @@
 
 @section('contenu')
 
-{{ Form::model($menu, ['method' => 'PUT', 'route' => ['backend.menus.update', $menu->id]]) }}
+{{ Form::model($menu, ['method' => 'PUT', 'route' => ['menus.update', $menu->id]]) }}
 
-@include('backend/menus/form')
+@include('menus/form')
 
 @stop
 
