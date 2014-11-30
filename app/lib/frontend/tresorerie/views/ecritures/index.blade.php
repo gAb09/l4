@@ -93,7 +93,7 @@ $head = array(
 					— {{ $ecriture->libelle_detail }}
 					@endif
 				</td>
-				<td class="{{ $ecriture->signe->nom_sys }}">{{ Nbre::francais_insec($ecriture->montant) }}</td>
+				<td class="{{ $ecriture->signe->nom_sys }}">{{ NombresFr::francais_insec($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
 				<td>{{ DatesFr::longue($ecriture->created_at) }}</td>
 				<td>{{ DatesFr::longue($ecriture->updated_at) }}</td>

@@ -24,7 +24,7 @@ Validator::extend('afteremission', function($field, $value, $params)
 
 Validator::extend('fnumeric', function($field, $value, $params)
 {
-	$value = Nbre::sauv($value);
+	$value = NombresFr::sauv($value);
 	if (!is_numeric($value)) {
 		return false;
 	}else{return true;}
@@ -32,7 +32,7 @@ Validator::extend('fnumeric', function($field, $value, $params)
 
 Validator::extend('positif', function($field, $value, $params)
 {
-	$value = Nbre::sauv($value);
+	$value = NombresFr::sauv($value);
 	if ($value < 0) {
 		return false;
 	}else{return true;}
@@ -41,7 +41,7 @@ Validator::extend('positif', function($field, $value, $params)
 
 Validator::extend('notnull', function($field, $value, $params)
 {
-	$value = Nbre::sauv($value);
+	$value = NombresFr::sauv($value);
 	settype($value, 'float');
 	if ($value == 0) {
 		return false;

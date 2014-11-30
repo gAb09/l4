@@ -76,7 +76,7 @@ class Ecriture extends Eloquent {
 	public function setMontantAttribute($value)
 	{
 
-		$value = Nbre::sauv($value);
+		$value = NombresFr::sauv($value);
 		$this->attributes['montant'] = $value;
 	}
 

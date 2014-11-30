@@ -108,11 +108,11 @@ onLoad="initVolets();"
 			@foreach($banques as $banque)
 			<?php $id = 'solde_'.$banque->id; ?>
 				<td class="{{($ecriture->{$id} >=0) ? 'recette' : 'depense' }}">
-					{{ Nbre::francais_insec($ecriture->{$id}) }}
+					{{ NombresFr::francais_insec($ecriture->{$id}) }}
 				</td>
 			@endforeach
 				<td class="{{($ecriture->solde_total >=0) ? 'recette' : 'depense' }}">
-					{{ Nbre::francais_insec($ecriture->solde_total) }}
+					{{ NombresFr::francais_insec($ecriture->solde_total) }}
 				</td>
 		</tr>
 		@endif

@@ -25,7 +25,7 @@ class ImportController extends BaseController {
 			$ecriture->libelle = self::transLibelle($import)['libelle'];
 			$ecriture->libelle_detail = self::transLibelle($import)['libelle_detail'];
 			$ecriture->signe_id = self::transSigne($import)['signe'];
-			$ecriture->montant = Nbre::sauv(self::transSigne($import)['montant']);
+			$ecriture->montant = NombresFr::sauv(self::transSigne($import)['montant']);
 			$ecriture->banque_id = 1;
 			$ecriture->compte_id = 5;
 			$ecriture->is_double = null;

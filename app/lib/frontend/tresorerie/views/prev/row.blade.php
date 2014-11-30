@@ -25,7 +25,7 @@
 			</td>
 
 			<td class="{{$ecriture->signe->nom_sys}}">
-				{{ Nbre::francais_insec($ecriture->montant) }}
+				{{ NombresFr::francais_insec($ecriture->montant) }}
 			</td>
 
 			@foreach($banques as $banque)
@@ -34,14 +34,14 @@
 
 				<td class="{{($ecriture->{$id} >=0) ? 'recette' : 'depense' }}">
 					@if($ecriture->{$show})
-					{{ Nbre::francais_insec($ecriture->{$id}) }}
+					{{ NombresFr::francais_insec($ecriture->{$id}) }}
 					@endif
 				</td>
 
 			@endforeach
 
 			<td class="{{($ecriture->solde_total >=0) ? 'recette' : 'depense' }}">
-				{{Nbre::francais_insec($ecriture->solde_total)}}
+				{{NombresFr::francais_insec($ecriture->solde_total)}}
 			</td>
 
 			<td class="icone">

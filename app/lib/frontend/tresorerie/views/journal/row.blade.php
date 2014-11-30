@@ -46,12 +46,12 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 <!-- Montant -->
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 1)
-		{{ Nbre::francais_insec($ecriture->montant) }}
+		{{ NombresFr::francais_insec($ecriture->montant) }}
 		@endif
 	</td>
 	<td class="{{$ecriture->signe->nom_sys}}">
 		@if($ecriture->signe_id == 2)
-		{{ Nbre::francais_insec($ecriture->montant) }}
+		{{ NombresFr::francais_insec($ecriture->montant) }}
 		@endif
 	</td>
 

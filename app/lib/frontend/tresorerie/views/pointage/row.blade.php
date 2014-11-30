@@ -46,14 +46,14 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	<td class="{{$ecriture->signe->nom_sys}}">
 
 		@if($ecriture->signe_id == 1)
-		{{ Nbre::francais_insec($ecriture->montant) }}
+		{{ NombresFr::francais_insec($ecriture->montant) }}
 		@endif
 	</td>
 
 	<td class="{{$ecriture->signe->nom_sys}}">
 
 		@if($ecriture->signe_id == 2)
-		{{ Nbre::francais_insec($ecriture->montant) }}
+		{{ NombresFr::francais_insec($ecriture->montant) }}
 		@endif
 	</td>
 
@@ -61,9 +61,9 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 	<!-- Solde -->
 	<td class="cumul_absolu">
 		@if($ecriture->cumul_absolu < 0)
-		<span class="depense">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
+		<span class="depense">{{NombresFr::francais_insec($ecriture->cumul_absolu)}}</span>
 		@else
-		<span class="recette">{{Nbre::francais_insec($ecriture->cumul_absolu)}}</span>
+		<span class="recette">{{NombresFr::francais_insec($ecriture->cumul_absolu)}}</span>
 		@endif
 	</td>
 

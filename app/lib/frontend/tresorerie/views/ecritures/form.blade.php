@@ -53,7 +53,7 @@ $class_verrou = (Session::get('class_verrou')) ? Session::get('class_verrou') : 
 	<div class="input">
 		<!-- Montant -->
 		{{ Form::label('montant', 'Montant', array ('class' => '')) }}
-		{{ Form::text('montant', Nbre::francais($ecriture->montant), array ('class' => '')) }}
+		{{ Form::text('montant', NombresFr::francais($ecriture->montant), array ('class' => '')) }}
 
 		<!-- Signe -->
 		@foreach($list_radios as $signes => $signe)
