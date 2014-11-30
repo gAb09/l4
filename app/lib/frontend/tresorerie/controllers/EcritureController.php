@@ -161,8 +161,8 @@ class EcritureController extends BaseController {
 	private static function hydrateSimple(Ecriture $ec1)
 	{		
 		$ec1->banque_id = Input::get('banque_id');
-		$ec1->date_emission = Date::Sauv(Input::get('date_emission'));
-		$ec1->date_valeur = Date::Sauv(Input::get('date_valeur'));
+		$ec1->date_emission = DatesFr::Sauv(Input::get('date_emission'));
+		$ec1->date_valeur = DatesFr::Sauv(Input::get('date_valeur'));
 		$ec1->montant = Input::get('montant');
 		$ec1->signe_id = Input::get('signe_id');
 		$ec1->libelle = Input::get('libelle');
@@ -189,8 +189,8 @@ class EcritureController extends BaseController {
 
 		/* Hydrater écriture 2 */
 		$ec2->banque_id = Input::get('banque2_id');
-		$ec2->date_emission = Date::Sauv(Input::get('date_emission'));
-		$ec2->date_valeur = Date::Sauv(Input::get('date_valeur'));
+		$ec2->date_emission = DatesFr::Sauv(Input::get('date_emission'));
+		$ec2->date_valeur = DatesFr::Sauv(Input::get('date_valeur'));
 		$ec2->montant = Input::get('montant');
 		$ec2->signe_id = ($ec1->signe_id == 1)? 2 : 1;
 		$ec2->libelle = Input::get('libelle');
@@ -407,7 +407,7 @@ class EcritureController extends BaseController {
 
 	public static function setMoisCourant($ec){
 
-		$mois = Date::classAnMois($ec->date_valeur);
+		$mois = DatesFr::classAnMois($ec->date_valeur);
 
 		Session::put('Courant.mois', $mois);
 		return $mois;

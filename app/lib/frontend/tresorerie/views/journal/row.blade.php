@@ -24,12 +24,13 @@ ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [
 
 <!-- Dates -->
 	<td id="valeur{{ $ecriture->id }}" class="info">
-		{{ Date::longue($ecriture->date_emission) }}
+		{{ DatesFr::longue($ecriture->date_emission) }}
 		<span>
-			Date de valeur : {{ Date::longue($ecriture->date_valeur) }}
+			Date de valeur : {{ DatesFr::longue($ecriture->date_valeur) }}
 		</span>
 
 	</td>
+
 
 
 <!-- Libellé -->

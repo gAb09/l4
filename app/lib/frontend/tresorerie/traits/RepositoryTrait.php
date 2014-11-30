@@ -24,7 +24,7 @@ trait RepositoryTrait {
 
 
 			/* Extraire le mois et l’année du critère de classement */
-			$ligne->mois_classement = \Date::classAnMois($ligne->{$order});
+			$ligne->mois_classement = \DatesFr::classAnMois($ligne->{$order});
 
 			/* Il s'agit du premier mois de la page ?
 			Assigner $mois_nouveau de cette ligne à "premier"*/

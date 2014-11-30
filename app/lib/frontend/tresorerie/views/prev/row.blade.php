@@ -3,9 +3,9 @@
 
 			<!-- Dates -->
 			<td id="valeur{{ $ecriture->id }}" class="info">
-				{{ Date::longue($ecriture->date_valeur) }}
+				{{ DatesFr::longue($ecriture->date_valeur) }}
 				<span>
-					Date d’émission : {{ Date::longue($ecriture->date_emission) }}
+					Date d’émission : {{ DatesFr::longue($ecriture->date_emission) }}
 				</span>
 			</td>
 

@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'lib\\frontend\\tresorerie\\traits\\' => array($baseDir . '/app/lib/frontend/tresorerie/traits'),
+    'Gab\\DatesFr\\' => array($vendorDir . '/gab/dates-fr/src/Gab/DatesFr'),
 );

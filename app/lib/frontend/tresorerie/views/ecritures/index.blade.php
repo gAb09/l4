@@ -70,9 +70,9 @@ $head = array(
 			<tr id ="{{$ecriture->id}}" class="surlignage"
 				ondblclick = document.location.href="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}">
 				<td>{{ $ecriture->id }}</td>
-				<td class ="info">{{ Date::longue($ecriture->date_valeur) }}
+				<td class ="info">{{ DatesFr::longue($ecriture->date_valeur) }}
 					<span>
-						Date d’émission : {{ Date::longue($ecriture->date_emission) }}
+						Date d’émission : {{ DatesFr::longue($ecriture->date_emission) }}
 					</span>
 				</td>
 				<td>@if($ecriture->type->id == 10)<span class="depense">{{ $ecriture->type->nom}}</span>@else{{ $ecriture->type->nom}}@endif
@@ -95,8 +95,8 @@ $head = array(
 				</td>
 				<td class="{{ $ecriture->signe->nom_sys }}">{{ Nbre::francais_insec($ecriture->montant) }}</td>
 				<td>{{ $ecriture->compte->numero }}<br />({{ $ecriture->compte->libelle }})</td>
-				<td>{{ Date::longue($ecriture->created_at) }}</td>
-				<td>{{ Date::longue($ecriture->updated_at) }}</td>
+				<td>{{ DatesFr::longue($ecriture->created_at) }}</td>
+				<td>{{ DatesFr::longue($ecriture->updated_at) }}</td>
 				<td>
 					<a class="iconemedium edit" href ="{{ URL::action('EcritureController@edit', [$ecriture->id]) }}"></a>
 				</td>

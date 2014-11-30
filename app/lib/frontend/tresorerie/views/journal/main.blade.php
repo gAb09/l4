@@ -32,7 +32,7 @@ onLoad="initVolets();"
 
 <table>
 	<caption class="ligne_mois" id="{{$ecriture->mois_classement}}" onclick="javascript:volet(this);">
-		{{ ucfirst(Date::MoisAnneeInsec($ecriture->date_emission)) }}
+		{{ ucfirst(DatesFr::MoisAnneeInsec($ecriture->date_emission)) }}
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}" >
