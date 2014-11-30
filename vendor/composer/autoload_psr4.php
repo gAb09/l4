@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'lib\\frontend\\tresorerie\\traits\\' => array($baseDir . '/app/lib/frontend/tresorerie/traits'),
+    'lib\\tresorerie\\traits\\' => array($baseDir . '/app/lib/tresorerie/traits'),
     'Gab\\NombresFr\\' => array($vendorDir . '/gab/nombres-fr/src/Gab/NombresFr'),
     'Gab\\DatesFr\\' => array($vendorDir . '/gab/dates-fr/src/Gab/DatesFr'),
 );

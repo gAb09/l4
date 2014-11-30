@@ -1,6 +1,6 @@
 <?php
 use Baum\Node;
-use lib\frontend\tresorerie\traits\ModelTrait;
+use lib\tresorerie\traits\ModelTrait;
 
 
 /**

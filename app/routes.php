@@ -34,7 +34,7 @@ Route::get('/', function()
 
 
 
-require_once("lib/frontend/tresorerie/routes.php");
+require_once("lib/tresorerie/routes.php");
 
 require_once("lib/frontend/dashboard/routes.php");
 
