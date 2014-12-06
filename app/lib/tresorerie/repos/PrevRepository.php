@@ -167,6 +167,22 @@ class PrevRepository {
 				}
 			}
 		});
+
+	/* modifier les classe CSS pour passer de 4 à 2 variantes */
+	$ecritures->each(function($ecriture){
+
+		/* "Pointées www", "pointée relevé" et "émise" prennent la même valeur "pointée relevé" */
+		if ($ecriture->statut->classe == 'st_www' or $ecriture->statut->classe == 'st_emise') {
+			$ecriture->statut->classe = 'st_releve';
+		}
+
+		/* "Pointées www", "pointée relevé" et "émise" prennent la même valeur "pointée relevé" */
+		if ($ecriture->statut->classe == 'st_prev') {
+			$ecriture->statut->classe = 'st_prev2';
+		}
+
+	});
+
 return $ecritures;
 
 }

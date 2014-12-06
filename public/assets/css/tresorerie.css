@@ -511,7 +511,7 @@ div.classeRacine {
 }
 
 
-/* Etats des écritures */
+/* Statuts des écritures */
 
 .st_prev{
     background-color: #d8b9a2;
@@ -524,9 +524,11 @@ div.classeRacine {
     color:#8d6e57;
 }
 
-.st_www{
+.st_prev2{
+    background-color: #dfc09b;
     color:#8d6e57;
 }
+
 
 .editable{
     background-color:#C9A945;
