@@ -44,13 +44,13 @@ class PrevController extends BaseController {
 
 
 		// On peut assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
-		$classe_statut_selon_id = $this->statutRepo->classeStatutSelonId();
+		$classe_statut = $this->statutRepo->setClasseStatut();
 
 		/* On peut afficher la vue "prévisionnel" */ 
 		return View::make('tresorerie.views.prev.main')
 		->with(compact('banques'))
 		->with(compact('ecritures'))
-		->with(compact('classe_statut_selon_id'))
+		->with(compact('classe_statut'))
 		->with(array('statuts_accessibles' => $this->statuts_accessibles)) 
 		->with(array('titre_page' => "Prévisionnel"))
 		;

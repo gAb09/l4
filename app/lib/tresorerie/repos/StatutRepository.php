@@ -2,12 +2,12 @@
 
 class StatutRepository {
 	
-	public function classeStatutSelonId(){
-		$results = Statut::all(['id', 'classe']);
-		foreach ($results as $result) {
-			$classe_statut_selon_id[$result->id] = $result->classe;
+	public function setClasseStatut(){
+		$statuts = Statut::all(['id', 'classe']);
+		foreach ($statuts as $statut) {
+			$classe_statut[$statut->id] = $statut->classe;
 		}
-		return json_encode($classe_statut_selon_id);
+		return json_encode($classe_statut);
 	}
 
 

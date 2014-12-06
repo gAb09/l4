@@ -129,7 +129,7 @@ onLoad="initVolets();"
 
 /* Transmettre au javascript "incrementeStatuts()" 
 le tableau de correspondance classe/id pour les statuts */
-echo "var classe_statut_selon_id = ".$classe_statut_selon_id.";";
+echo "var classe_statut = ".$classe_statut.";";
 echo "var statuts_accessibles = '".$statuts_accessibles."';";
 
 /* Transmettre au javascript "initVolets()"
