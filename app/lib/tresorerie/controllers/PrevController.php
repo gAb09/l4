@@ -46,6 +46,9 @@ class PrevController extends BaseController {
 		// On peut assigner le tableau de correspondance pour gestion js de l'affichage de l'incrémentation des statuts. 
 		$classe_statut = $this->statutRepo->setClasseStatut();
 
+		/* On calcule les reports de l'année précédente */
+
+		
 		/* On peut afficher la vue "prévisionnel" */ 
 		return View::make('tresorerie.views.prev.main')
 		->with(compact('banques'))

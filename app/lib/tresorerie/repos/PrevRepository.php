@@ -46,15 +46,18 @@ class PrevRepository {
 
 		/* La collection $ecritures n'est pas vide, on peut lancer le traitement */
 
+		/* Initialiser les soldes (faire le report de l'année précédente) */
+
 		$this->solde = array();
-		foreach ($banques as $bank) {
-			$this->solde[$bank->id] = 0;
-		}
 		$this->solde['total'] = 0;
+
+		foreach ($banques as $bank) {
+			$this->solde[$bank->id] = $this->CalculReport($annee, $bank->id);
+			$this->solde['total'] += $this->solde[$bank->id];
+		}
 
 		/* Déterminer le rang de la dernière écriture de la page. */
 		$last = $ecritures->count() -1;
-
 
 		$ecritures->each(function($ecriture) use ($ecritures, $order, $banques, $last) {
 
@@ -74,7 +77,7 @@ class PrevRepository {
 		$ecritures->each(function($ecriture) use ($ecritures, $order, $banques) {
 
 			/* On intègre signe et montant, et réassigne $ecriture->montant */
-			$ecriture->montant = $ecriture->montant * $ecriture->signe->signe;
+			$ecriture->montant = $ecriture->montant * $ecriture->signe->signe; // aFa factoriser dans helper
 
 			foreach ($banques as $bank) {
 
@@ -168,23 +171,41 @@ class PrevRepository {
 			}
 		});
 
-	/* modifier les classe CSS pour passer de 4 à 2 variantes */
-	$ecritures->each(function($ecriture){
+		/* modifier les classe CSS pour passer de 4 styles d’affichage à 2 pour + de lisibilité */
+		$ecritures->each(function($ecriture){
 
-		/* "Pointées www", "pointée relevé" et "émise" prennent la même valeur "pointée relevé" */
-		if ($ecriture->statut->classe == 'st_www' or $ecriture->statut->classe == 'st_emise') {
-			$ecriture->statut->classe = 'st_releve';
+			/* "Pointées www", "pointée relevé" et "émise" prennent la même valeur "pointée relevé" */
+			if ($ecriture->statut->classe == 'st_www' or $ecriture->statut->classe == 'st_emise') {
+				$ecriture->statut->classe = 'st_releve';
+			}
+
+			/* Le style "previsionnel" est modifié (en fait on utilise un 2e style) */
+			if ($ecriture->statut->classe == 'st_prev') {
+				$ecriture->statut->classe = 'st_prev2';
+			}
+
+		});
+
+	return $ecritures;
+
+	}
+
+	private function CalculReport($annee, $bank){
+		$annee = $annee -1;
+		$solde = 0;
+
+		$results = Ecriture::with('signe')
+		->where('banque_id', '=', $bank)
+		->where('date_valeur', 'like', $annee.'%')
+		->orderBy("date_valeur")
+		->get(['montant', 'signe_id'])
+		;
+
+		foreach ($results as $result) {
+			$solde += $result->montant * $result->signe->signe; // aFa factoriser dans helper
 		}
 
-		/* "Pointées www", "pointée relevé" et "émise" prennent la même valeur "pointée relevé" */
-		if ($ecriture->statut->classe == 'st_prev') {
-			$ecriture->statut->classe = 'st_prev2';
-		}
-
-	});
-
-return $ecritures;
-
-}
+		return $solde;
+	}
 
 }
