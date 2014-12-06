@@ -27,7 +27,6 @@ return array(
     'ComptesOld' => $baseDir . '/app/lib/divers/ComptesOld.php',
     'DashboardController' => $baseDir . '/app/lib/frontend/dashboard/DashboardController.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
-    'Date' => $baseDir . '/app/lib/shared/helpers/Dates.php',
     'Ecriture' => $baseDir . '/app/lib/frontend/tresorerie/models/Ecriture.php',
     'EcritureController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/EcritureController.php',
     'EcritureRepository' => $baseDir . '/app/lib/frontend/tresorerie/repos/EcritureRepository.php',
@@ -56,7 +55,6 @@ return array(
     'MigrationCartalystSentryInstallThrottle' => $vendorDir . '/cartalyst/sentry/src/migrations/2012_12_06_225988_migration_cartalyst_sentry_install_throttle.php',
     'MigrationCartalystSentryInstallUsers' => $vendorDir . '/cartalyst/sentry/src/migrations/2012_12_06_225921_migration_cartalyst_sentry_install_users.php',
     'MigrationCartalystSentryInstallUsersGroupsPivot' => $vendorDir . '/cartalyst/sentry/src/migrations/2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot.php',
-    'Nbre' => $baseDir . '/app/lib/shared/helpers/Nbre.php',
     'PointageController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/PointageController.php',
     'PointageRepository' => $baseDir . '/app/lib/frontend/tresorerie/repos/PointageRepository.php',
     'PrevController' => $baseDir . '/app/lib/frontend/tresorerie/controllers/PrevController.php',
@@ -83,4 +81,6 @@ return array(
     'Way\\Generators\\Generators\\SeedGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/SeedGenerator.php',
     'Way\\Generators\\Generators\\TestGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/TestGenerator.php',
     'Way\\Generators\\Generators\\ViewGenerator' => $vendorDir . '/way/generators/src/Way/Generators/Generators/ViewGenerator.php',
+    'lib\\frontend\\tresorerie\\traits\\ModelTrait' => $baseDir . '/app/lib/frontend/tresorerie/traits/ModelTrait.php',
+    'lib\\frontend\\tresorerie\\traits\\RepositoryTrait' => $baseDir . '/app/lib/frontend/tresorerie/traits/RepositoryTrait.php',
 );
