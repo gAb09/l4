@@ -2,7 +2,7 @@
 // aFa  décomposer en plusieurs viewcomposer ?
 
 /* Composition du menu principal */
-View::composer('frontend/views/layout', function($view) {
+View::composer(array('menus/views/menuSections'), function($view) {
 	
 	$sections = Menu::where('publication', 1)->whereNull('parent_id')->orderBy('rang')->get();
 
@@ -11,7 +11,7 @@ View::composer('frontend/views/layout', function($view) {
 
 
 /* Composition du sous-menu */
-View::composer('frontend/views/layout', function($view) {
+View::composer(array('menus/views/menus'), function($view) {
 
 
 	$section = Menu::where('nom_sys', Request::segment(1))->get();
@@ -24,7 +24,7 @@ View::composer('frontend/views/layout', function($view) {
 
 
 
-View::composer('frontend/tresorerie/views/ecritures/form', function($view)
+View::composer('tresorerie/views/ecritures/form', function($view)
 {
 	/* Lister les séparateurs pour le javascript */
 	$types = Type::all();

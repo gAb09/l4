@@ -1,7 +1,8 @@
 @extends('dashboard/views/layout')
 
 @section('contenu')
-<div>
+
+<div class="" id="show">
 	<h5 style="display:inline">Login :</h5>
 	{{ Auth::user()->login }}
 	<br />

@@ -24,7 +24,8 @@
 			"app/lib"
 		],
 		"psr-4": {
-			"lib\\frontend\\tresorerie\\traits\\": "app/lib/frontend/tresorerie/traits",
+			"lib\\dashboard\\": "app/lib/dashboard",
+			"lib\\tresorerie\\traits\\": "app/lib/tresorerie/traits",
 			"Gab\\DatesFr\\": "vendor/gab/dates-fr/src/Gab/DatesFr",
 			"Gab\\NombresFr\\": "vendor/gab/nombres-fr/src/Gab/NombresFr"
 		}

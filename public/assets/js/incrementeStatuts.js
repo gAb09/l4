@@ -29,7 +29,7 @@ function bascule_statut(xxx) {// aFa automatiser l'attribution du nom de la clas
 	}
 
 	// Changer la classe
-	row.className = classe_statut_selon_id[new_statut];
+	row.className = classe_statut[new_statut];
 
 	// Actualiser le statut dans input 
 	input.value = new_statut;
