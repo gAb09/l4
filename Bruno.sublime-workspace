@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"sta",
+				"statut"
+			],
+			[
 				"strp",
 				"strpos"
 			],
@@ -34,10 +42,6 @@
 			[
 				"pa",
 				"padding"
-			],
-			[
-				"for",
-				"for	for …"
 			],
 			[
 				"imp",
@@ -138,10 +142,6 @@
 			[
 				"re",
 				"results"
-			],
-			[
-				"sta",
-				"static"
 			],
 			[
 				"ch",
@@ -632,6 +632,27 @@
 	},
 	"file_history":
 	[
+		"/Users/brunogabiot/Sites/Bruno/public/test.php",
+		"/Users/brunogabiot/Sites/Lalocale/app/lib/tresorerie/.gitignore",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/BanqueController.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/PrevController.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/prev/main.blade.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/repos/PrevRepository.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/prev/row.blade.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/banques/index.blade.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/comptes/index.blade.php",
+		"/Users/brunogabiot/Sites/Lalocale/app/lib/tresorerie/readme.md",
+		"/Users/brunogabiot/Sites/Bruno/.gitignore",
+		"/Users/brunogabiot/Sites/Bruno/vendor/autoload.php",
+		"/Users/brunogabiot/Sites/Bruno/vendor/composer/autoload_classmap.php",
+		"/Users/brunogabiot/Sites/Bruno/vendor/composer/autoload_real.php",
+		"/Users/brunogabiot/Sites/Bruno/public/assets/css/tresorerie.css",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/repos/StatutRepository.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/PointageController.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/JournalController.php",
+		"/Users/brunogabiot/Sites/Bruno/public/assets/js/incrementeStatuts.js",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/pointage/main.blade.php",
+		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/journal/main.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/routes.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/routes.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/models/Compte.php",
@@ -639,7 +660,6 @@
 		"/Users/brunogabiot/Sites/Bruno/public/.htaccess",
 		"/Users/brunogabiot/Sites/Bruno/vendor/gab/dates-fr/src/Gab/DatesFr/DatesFrServiceProvider.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/traits/RepositoryTrait.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/repos/PrevRepository.php",
 		"/Users/brunogabiot/Sites/lar_NetP/index.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/menus/views/menus.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/menus/views/menuSections.blade.php",
@@ -673,9 +693,7 @@
 		"/Users/brunogabiot/Sites/Bruno/app/lib/dashboard/DashboardController.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/dashboard/ValidationDashboard.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/grille/routes.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/JournalController.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/backend/menus/create.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/journal/main.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/shared/filters.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/grille/layout.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/types/index.blade.php",
@@ -684,18 +702,13 @@
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/statuts/visu.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/statuts/index.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/statuts/create.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/prev/main.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/pointage/main.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/ecritures/index.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/ecritures/edit.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/ecritures/create.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/comptes/index.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/comptes/edit.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/comptes/create.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/banques/index.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/banques/edit.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/views/banques/create.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/vendor/composer/autoload_classmap.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/shared/views/user_widget.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/identification/routes.php",
 		"/Users/brunogabiot/Sites/Bruno/vendor/composer/autoload_psr4.php",
@@ -709,11 +722,8 @@
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/models/Ecriture.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/models/Banque.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/TypeController.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/PrevController.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/PointageController.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/EcritureController.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/CompteController.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/tresorerie/controllers/BanqueController.php",
 		"/Users/brunogabiot/Sites/Bruno/app/config/view.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/frontend/grille/layout.blade.php",
 		"/Users/brunogabiot/Sites/Bruno/app/lib/backend/roles/role.php",
@@ -749,17 +759,7 @@
 		"/Users/brunogabiot/Sites/Bruno/vendor/composer/autoload_namespaces.php",
 		"/Users/brunogabiot/Sites/Bruno/vendor/way/generators/src/Way/Generators/GeneratorsServiceProvider.php",
 		"/Users/brunogabiot/Sites/Bruno/vendor/composer/installed.json",
-		"/Users/brunogabiot/Sites/Bruno/vendor/gab/dates-fr/vendor/composer/autoload_classmap.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/frontend/tresorerie/controllers/BanqueController.php",
-		"/Users/brunogabiot/Sites/Bruno/vendor/laravel/framework/src/Illuminate/Auth/Reminders/ReminderServiceProvider.php",
-		"/Users/brunogabiot/Sites/Bruno/workbench/gab/dates-fr/src/Gab/DatesFr/DatesFrServiceProvider.php",
-		"/Users/brunogabiot/Sites/Bruno/workbench/gab/dates-fr/src/Gab/DatesFr/DatesFr.php",
-		"/Users/brunogabiot/Sites/Bruno/workbench/gab/dates-fr/vendor/composer/autoload_classmap.php",
-		"/Users/brunogabiot/Sites/Bruno/bootstrap/paths.php",
-		"/Users/brunogabiot/Sites/Bruno/workbench/gab/dates-fr/src/Gab/DatesFr/DatesFrFacade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/frontend/tresorerie/views/ecritures/edit.blade.php",
-		"/Users/brunogabiot/Sites/Bruno/app/lib/frontend/tresorerie/traits/RepositoryTrait.php",
-		"/Users/brunogabiot/Sites/Bruno/app/config/workbench.php"
+		"/Users/brunogabiot/Sites/Bruno/vendor/gab/dates-fr/vendor/composer/autoload_classmap.php"
 	],
 	"find":
 	{
@@ -790,6 +790,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"signe",
+			"solde['total']",
+			"iterate",
+			"iter",
+			"st_www",
+			"classeStatutSelonId",
+			"classe_statut_selon_id",
+			"result",
+			"classe_statut_selon_id",
 			"\\Dates",
 			"resolveFacadeInstance",
 			"swap",
@@ -908,16 +917,7 @@
 			"app/model",
 			"solde_absolu",
 			"mois",
-			"perio",
-			"cumul",
-			"cumul_rec",
-			"cumul_dep",
-			"cumul_rec",
-			"cumul_dep",
-			"solde",
-			"solde_rec",
-			"solde_dep",
-			"solde_absolu"
+			"perio"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -925,6 +925,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"setClasseStatut",
+			"classe_statut",
 			"tresorerie/views",
 			"tresorerie",
 			"NombresFr::",
@@ -1050,9 +1052,7 @@
 			"ttt",
 			"admin",
 			"statut",
-			"Statut",
-			"statut",
-			"listForInputSelect"
+			"Statut"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1204,7 +1204,7 @@
 		],
 		"width": 380.0
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
