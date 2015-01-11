@@ -307,7 +307,9 @@ td, th {
 
 /* Infobulles pour les dates */
 td.info:hover,td.info:focus
-{box-shadow:0 1px 0 rgba(255,255,255,.4); }
+{
+    box-shadow:0 1px 0 rgba(255,255,255,.4);
+}
 
 td.info span{
     position:absolute;
@@ -512,31 +514,28 @@ div.classeRacine {
 
 
 /* Statuts des écritures */
-
-.st_prev{
-    /*background-color: #d8b9a2;*/
-    background-color: #EEE;
-    color:#8d6e57;
+/* lignes */
+tr.st_prev{
+    background-color: rgba(255, 255, 255, 0.2);
+    color:#AA5555;
 }
 
-.st_emise{
+
+tr.st_emise, tr.st_www{
+    color:#7a5b44;
+}
+
+
+/* Cellule 'statut' */
+td.st_prev{
+    background-color: #E2C5C5;
+}
+
+
+td.st_emise{
     background-color: #DDE5C5;
-    color:#8d6e57;
 }
 
-.st_prev2{
-    background-color: #dfc09b;
-    color:#8d6e57;
-}
-
-
-.editable{
-    background-color:#C9A945;
-}
-
-.st_www{
-    color:#8d6e57;
-}
 
 
 
