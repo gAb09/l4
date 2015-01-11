@@ -514,9 +514,9 @@ div.classeRacine {
 /* Statuts des écritures */
 
 .st_prev{
-    background-color: #d8b9a2;
+    /*background-color: #d8b9a2;*/
+    background-color: #EEE;
     color:#8d6e57;
-    /*color:#eee;*/
 }
 
 .st_emise{
@@ -534,9 +534,10 @@ div.classeRacine {
     background-color:#C9A945;
 }
 
-/*.st_releve{
+.st_www{
+    color:#8d6e57;
 }
-*/
+
 
 
 /* Formulaires en erreur */

@@ -59,6 +59,7 @@ return array(
     'PrevController' => $baseDir . '/app/lib/tresorerie/controllers/PrevController.php',
     'PrevRepository' => $baseDir . '/app/lib/tresorerie/repos/PrevRepository.php',
     'Role' => $baseDir . '/app/lib/roles/role.php',
+    'RoleRepository' => $baseDir . '/app/lib/roles/RoleRepository.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Signe' => $baseDir . '/app/lib/tresorerie/models/Signe.php',
     'Statut' => $baseDir . '/app/lib/tresorerie/models/Statut.php',

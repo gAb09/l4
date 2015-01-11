@@ -16,6 +16,7 @@ class IdentificationController extends \BaseController {
 
 
 	public function identification() {
+
 		$validation = $this->validateur->valider(Input::all());
 
 		if($validation !== true) {

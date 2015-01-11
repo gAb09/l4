@@ -28,7 +28,7 @@ onLoad="toggle_publication();"
 	<!-- Parent -->
 	<div class="input">
 {{ Form::label('parent_id', 'Menu parent', array ('class' => '')) }}
-{{ Form::select('parent_id', Menu::listForInputSelect()) }}
+{{ Form::select('parent_id', $list_menus, $menu->parent_id) }}
 	</div>
 
 	<!-- Rang -->
@@ -47,7 +47,7 @@ onLoad="toggle_publication();"
 	<!-- Role -->
 <fieldset>
 {{ Form::label('role_id', 'Role associé', array ('class' => '')) }}
-{{ Form::select('role_id', $list_roles, array ('class' => '')) }}
+{{ Form::select('role_id', $list_roles, $menu->role_id, array ('class' => '')) }}
 </fieldset>
 
 	<!-- Description -->

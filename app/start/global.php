@@ -80,7 +80,7 @@ App::missing(function($exception)
 
 Event::listen('ecriture.*', function()
 {
-  dd(Event::firing());
+  dd('EventFiring : '.Event::firing());
 });
 
 Event::listen('404', function()

@@ -11,6 +11,7 @@ class MenuController extends \BaseController {
 	{
 		$this->validateur = $validateur;
 		$this->menuRepo = new MenuRepository;
+		$this->roleRepo = new RoleRepository;
 	}
 
 
@@ -34,10 +35,11 @@ class MenuController extends \BaseController {
 		// return 'create menu';
 		$menu = Menu::fillFormForCreate();
 
-		return View::make('admin.menus.create')
+		return View::make('menus.views.create')
 		->with(compact('menu'))
 		->with('titre_page', "Création d’un menu ou d’un item")
-		->with('list_roles', $this->menuRepo->listRolesForSelect())
+		->with('list_roles', $this->roleRepo->listRolesForSelect())
+		->with('list_menus', $this->menuRepo->listRolesForSelect())
 		;
 	}
 
@@ -64,21 +66,22 @@ class MenuController extends \BaseController {
 			$menu->makeChildOf(Menu::findOrFail($parent_id));
 		}
 
-		return Redirect::to('menus');
+		return Redirect::action('MenuController@index');
 	}
 
 
 
 	public function edit($id) {
-//		return 'Edition du Menu n°'.$id;
+		// return 'Edition du Menu n°'.$id;
 
-		$menu = Menu::findOrFail($id);
+		$menu = Menu::with('role')->first()->findOrFail($id);
 		// var_dump($menu); // CTRL
 
-		return View::make('menus.edit')
+		return View::make('menus.views.edit')
 		->with(compact('menu'))
 		->with('titre_page', "Modification de l’item ou du menu")
-		->with('list_roles', $this->menuRepo->listRolesForSelect())
+		->with('list_roles', $this->roleRepo->listRolesForSelect())
+		->with('list_menus', $this->menuRepo->listRolesForSelect())
 		;
 	}
 
@@ -104,13 +107,15 @@ class MenuController extends \BaseController {
 		if ($parent_id != 0) {
 			$menu->makeChildOf(Menu::findOrFail($parent_id));
 		}else{
+			if ($menu->parent_id !== null) {
 			$menu->makeRoot();
+			}
 		}
 
 		$menu->save();
 
 		// return var_dump($menu); //CTRL
-		return Redirect::to('menus');
+		return Redirect::action('MenuController@index');
 	}
 
 

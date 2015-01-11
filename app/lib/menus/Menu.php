@@ -35,11 +35,11 @@ class Menu extends Node {
   public static function listForInputSelect() {
     $menus = Menu::roots()->orderBy('id')->get();
 
-    $menuslist[0] = 'Créer une nouvelle racine';
+    $menuslist[0] = 'Faire de cet item une racine';
 
     foreach ($menus as $menu)
     {
-      $menuslist[$menu->etiquette][$menu->id] = 'Placer au premier niveau de “'.$menu->etiquette.'”';
+      $menuslist[$menu->etiquette][$menu->id] = 'Placer juste sous “'.$menu->etiquette.'”';
       foreach($menu->getImmediateDescendants() as $item)
       {
         $menuslist[$menu->etiquette][$item->id] = '• Enfant de '.$item->etiquette;

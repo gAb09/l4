@@ -16,9 +16,9 @@
 
 @section('contenu')
 
-{{ Form::model($menu, ['method' => 'PUT', 'route' => ['menus.update', $menu->id]]) }}
+{{ Form::model($menu, ['method' => 'PUT', 'route' => ['admin.menus.update', $menu->id]]) }}
 
-@include('menus/form')
+@include('menus/views/form')
 
 @stop
 

@@ -4,7 +4,7 @@ class MenuRepository {
 
 	public function listRolesForSelect()
 	{
-		return Role::listForInputSelect('etiquette');
+		return Menu::listForInputSelect('etiquette');
 	}
 
 }

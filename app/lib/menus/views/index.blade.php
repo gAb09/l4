@@ -28,7 +28,9 @@
 	@else
 	<h2 class ="item">• {{ $menu->etiquette }} </h2>
 		@endif
-		<p class="badge badge-locale iconesmall edit"><a href="{{ URL::to('menus/'.$menu->id.'/edit') }}">Modifier ce menu</a></p>
+		<p class="badge badge-locale iconesmall edit">
+			<a href="{{ URL::action('MenuController@edit', $menu->id) }}">Modifier ce menu</a>
+		</p>
 		<p><strong>Rang = </strong>{{ $menu->rang }}</p>
 		<p><strong>Description : </strong>{{ $menu->description }}</p>
 		<p><strong>Rôle : </strong>{{($menu->role_id)?$menu->role->etiquette: 'Utilisateur connecté'}}</p>
@@ -83,7 +85,7 @@
 					{{ ($item->role_id)?$item->role->etiquette: 'Utilisateur connecté'}}
 				</td>
 				<td>
-					<a  class="iconemedium edit" href="{{ URL::to('menus/'.$item->id.'/edit') }}">
+					<a  class="iconemedium edit" href="{{ URL::action('MenuController@edit', $item->id) }}">
 					</a>
 				</td>
 			</tr>
@@ -124,7 +126,7 @@
 					{{ ($desc->role_id)?$desc->role->etiquette: 'Utilisateur connecté'}}
 				</td>
 				<td>
-					<a  class="iconemedium edit" href="{{ URL::to('menus/'.$desc->id.'/edit') }}">
+					<a  class="iconemedium edit" href="{{ URL::action('MenuController@edit', $desc->id) }}">
 					</a>
 				</td>
 			</tr>
@@ -149,7 +151,7 @@
 		@endforeach <!-- Fin foreach $menu -->
 
 	@section('zapette')
-		<a href ="{{ URL::route('admin.menus.create') }}" class="badge badge-locale iconemedium add"
+		<a href ="{{ URL::action('MenuController@create') }}" class="badge badge-locale iconemedium add"
 		style="font-size:1.1em">Créer un menu ou un item de menu</a>
 	@stop
 

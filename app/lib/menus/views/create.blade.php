@@ -16,10 +16,10 @@
 
 @section('contenu')
 
+	{{ Form::open(array('url' => URL::action('MenuController@store'), 'method' => 'post')) }}
 
-	{{ Form::open(array('url' => URL::to('menus'), 'method' => 'post')) }}
+@include('menus/views/form')
 
-@include('menus/form')
 
 @stop
 
