@@ -516,25 +516,36 @@ div.classeRacine {
 /* Statuts des écritures */
 /* lignes */
 tr.st_prev{
-    background-color: rgba(255, 255, 255, 0.2);
-    color:#AA5555;
+    background-color: rgba(255, 255, 255, 0.1);
+    color:#998f8f;
 }
 
 
-tr.st_emise, tr.st_www{
+tr.st_emise{
     color:#7a5b44;
 }
 
 
 /* Cellule 'statut' */
 td.st_prev{
-    background-color: #E2C5C5;
+    background-color: #EB0000;
+}
+td.st_prev button{
+    color: #FFF;
 }
 
 
 td.st_emise{
-    background-color: #DDE5C5;
+    background-color: #EAAA45;
 }
+td.st_emise button{
+    color: #FFF;
+}
+
+td.st_www{
+    background-color: #F2D19F;
+}
+
 
 
 
