@@ -63,6 +63,9 @@ onLoad="initVolets();"
 	</caption>
 
 	<thead class="replie" id="tetiere{{$ecriture->mois_classement}}">
+		<th style="width:10px">
+			Statut
+		</th>
 		<th>
 			Date de valeur
 		</th>
@@ -157,10 +160,10 @@ echo 'var mois = "'.Session::get('Courant.mois').'";';
 ?>
 </script>
 
-<script src="/assets/js/volets.js">
+<script src="/assets/js/tresorerie/volets.js">
 </script>
 
-<script src="/assets/js/incrementeStatuts.js">
+<script src="/assets/js/tresorerie/incrementeStatuts.js">
 </script>
 
 @stop

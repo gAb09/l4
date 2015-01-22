@@ -9,7 +9,10 @@ function bascule_statut(xxx) {// aFa automatiser l'attribution du nom de la clas
 	// Assigner la variable row (ligne qui changera de classe)
 	var row = document.getElementById('row_' + id_ecriture);
 
-	// Assigner la variable input (ligne qui changera de classe)
+	// Assigner la variable statut_td (cellule du statut, qui changera de classe)
+	var statut_td = document.getElementById('statut_td_' + id_ecriture);
+
+	// Assigner la variable input (mémoriser le statut)
 	var input = document.getElementById('input_' + id_ecriture);
 
 
@@ -28,8 +31,9 @@ function bascule_statut(xxx) {// aFa automatiser l'attribution du nom de la clas
 		new_statut = statuts_accessibles[0];
 	}
 
-	// Changer la classe
+	// Changer les classes
 	row.className = classe_statut[new_statut];
+	statut_td.className = classe_statut[new_statut];
 
 	// Actualiser le statut dans input 
 	input.value = new_statut;
