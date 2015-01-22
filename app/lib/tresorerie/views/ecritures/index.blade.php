@@ -138,6 +138,6 @@ $head = array(
 	@stop
 
 	@section('script')
-	<script src="/assets/js/ecritures.js">
+	<script src="/assets/js/tresorerie/ecritures.js">
 	</script>
 	@stop
