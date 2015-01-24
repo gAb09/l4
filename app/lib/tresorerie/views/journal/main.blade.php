@@ -139,10 +139,10 @@ echo 'var mois = "'.Session::get('Courant.mois').'";';
 ?>
 </script>
 
-<script src="/assets/js/tresorerie/volets.js">
+<script src="/assets/tresorerie/js/volets.js">
 </script>
 
-<script src="/assets/js/tresorerie/incrementeStatuts.js">
+<script src="/assets/tresorerie/js/incrementeStatuts.js">
 </script>
 
 @stop

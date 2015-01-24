@@ -37,6 +37,6 @@ onLoad="justifToggle();"
 </div>
 
 @section('script')
-<script src="/assets/js/tresorerie/types.js">
+<script src="/assets/tresorerie/js/types.js">
 </script>
 @stop
