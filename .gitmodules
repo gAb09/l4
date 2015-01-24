@@ -1,0 +1,3 @@
+[submodule "app/modules/tresorerie"]
+	path = app/modules/tresorerie
+	url = https://github.com/gAb09/tresorerie
