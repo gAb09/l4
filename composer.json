@@ -7,8 +7,9 @@
 		"laravel/framework": "4.0.*",
 		"way/generators": "dev-master",
 		"baum/baum": "~1.0",
-		"gab/dates-fr": "~1.0",
 		"gab/nombres-fr": "~1.0",
+		"gab/dates-fr": "~1.0",
+		"gab/domaines": "~1.0",
 		"barryvdh/laravel-debugbar": "1.*",
 		"cartalyst/sentry": "2.0.*",
 		"illuminate/database": "4.0.*",
@@ -21,11 +22,13 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php",
+			"app/modules",
 			"app/lib"
 		],
 		"psr-4": {
 			"lib\\dashboard\\": "app/lib/dashboard",
-			"lib\\tresorerie\\traits\\": "app/lib/tresorerie/traits",
+			"Tresorerie\\Domaines\\": "app/modules/tresorerie/domaines",
+			"Gab\\Domaines\\": "vendor/gab/domaines/src/Gab/Domaines",
 			"Gab\\DatesFr\\": "vendor/gab/dates-fr/src/Gab/DatesFr",
 			"Gab\\NombresFr\\": "vendor/gab/nombres-fr/src/Gab/NombresFr"
 		}

@@ -25,6 +25,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/models',
 	app_path().'/database/seeds',
 	app_path().'/lib',
+	app_path().'/modules',
 	));
 
 /*
@@ -120,8 +121,8 @@ App::down(function()
 // require app_path().'/lib/shared/routes.php';
 require app_path().'/lib/shared/filters.php';
 require app_path().'/lib/shared/ViewComposer.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'//lib/tresorerie/validations/EcrituresCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
-require app_path().'//lib/tresorerie/validations/ComptesCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'/modules/tresorerie/validations/EcrituresCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
+require app_path().'/modules/tresorerie/validations/ComptesCustomRules.php'; // aPo  Est-ce bien là la bonne façon d'autoloader le viewcomposer ??
 
 /*
 |--------------------------------------------------------------------------

@@ -357,6 +357,7 @@ class Carbon extends DateTime
       }
 
       $errors = static::getLastErrors();
+      $errors['errors'][] = $time;
       throw new InvalidArgumentException(implode(PHP_EOL, $errors['errors']));
    }
 

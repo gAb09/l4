@@ -40,7 +40,7 @@ Route::get('admin', function()
 
 
 
-require_once("lib/tresorerie/routes.php");
+require_once("modules/tresorerie/routes.php");
 
 require_once("lib/dashboard/routes.php");
 

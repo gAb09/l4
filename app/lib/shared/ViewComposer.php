@@ -10,6 +10,27 @@ View::composer(array('menus/views/menuSections'), function($view) {
 });
 
 
+/* Composition du sous-menu modes*/
+View::composer(array('tresorerie/views/modes'), function($view) {
+
+
+	$mode = Menu::where('nom_sys', 'tresorerie_modes')->get();
+	$modes = Menu::where('parent_id', $mode[0]->id)->get();
+
+	$view->with(compact('modes'));
+});
+
+
+/* Composition du sous-menu configuration*/
+View::composer(array('tresorerie/views/configuration'), function($view) {
+
+
+	$config = Menu::where('nom_sys', 'tresorerie_configuration')->get();
+	$configs = Menu::where('parent_id', $config[0]->id)->get();
+
+	$view->with(compact('configs'));
+});
+
 /* Composition du sous-menu */
 View::composer(array('menus/views/menus'), function($view) {
 

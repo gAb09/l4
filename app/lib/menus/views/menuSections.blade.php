@@ -7,12 +7,12 @@ Désolés ! Vous n’avez les droits d'accès qu'au prévisionnel !
 		@foreach($sections as $section)
 		@if($section->role_id >= Auth::user()->role_id or $section->role_id == 0)
 
-		@if ($section->nom_sys == Request::segment(1))
+		@if ($section->route == Request::path())
 		<li class ="active">
 			@else
 			<li>
 				@endif
-				<a href="{{ URL::to($section->nom_sys) }}"> {{ $section->etiquette }}</a>
+				<a href="{{ URL::to($section->route) }}"> {{ $section->etiquette }}</a>
 			</li>
 			@endif
 			@endforeach

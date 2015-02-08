@@ -10,8 +10,8 @@ class MenuController extends \BaseController {
 	public function __construct(MenuValidation $validateur)
 	{
 		$this->validateur = $validateur;
-		$this->menuRepo = new MenuRepository;
-		$this->roleRepo = new RoleRepository;
+		$this->menuDom = new MenuDomaine;
+		$this->roleDom = new RoleDomaine;
 	}
 
 
@@ -33,13 +33,13 @@ class MenuController extends \BaseController {
 
 	public function create() {
 		// return 'create menu';
-		$menu = Menu::fillFormForCreate();
+		$menu = $this->menuDom->create();
 
 		return View::make('menus.views.create')
 		->with(compact('menu'))
 		->with('titre_page', "Création d’un menu ou d’un item")
-		->with('list_roles', $this->roleRepo->listRolesForSelect())
-		->with('list_menus', $this->menuRepo->listRolesForSelect())
+		->with('list_roles', $this->roleDom->listRolesForSelect())
+		->with('list_menus', $this->menuDom->listRolesForSelect())
 		;
 	}
 
@@ -80,8 +80,8 @@ class MenuController extends \BaseController {
 		return View::make('menus.views.edit')
 		->with(compact('menu'))
 		->with('titre_page', "Modification de l’item ou du menu")
-		->with('list_roles', $this->roleRepo->listRolesForSelect())
-		->with('list_menus', $this->menuRepo->listRolesForSelect())
+		->with('list_roles', $this->roleDom->listRolesForSelect())
+		->with('list_menus', $this->menuDom->listRolesForSelect())
 		;
 	}
 

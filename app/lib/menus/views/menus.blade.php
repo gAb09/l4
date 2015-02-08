@@ -7,7 +7,7 @@
 
 	@if ($menu->publication == 1)
 
-		@if ($menu->nom_sys == Request::segment(2))
+		@if ($menu->route == Request::path())
 		<li class ="dropdown active">
 		@else
 		<li class="dropdown">
