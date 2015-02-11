@@ -13,7 +13,7 @@
 		<li class="dropdown">
 		@endif
 
-			<a href={{ URL::to($menu->route) }} > {{ $menu->etiquette }} </a>
+			<a href="{{ URL::to($menu->route) }}" > {{ $menu->etiquette }} </a>
 
 			@if(!$menu->children->isEmpty())
 			<ul class="dropdown-menu">

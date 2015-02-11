@@ -23,8 +23,8 @@
 
 @stop
 
-@section('zapette')
-{{ link_to_action('MenuController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-zapette iconesmall list')); }}
+@section('actions')
+{{ link_to_action('MenuController@index', 'Retour à la liste', null, array('class' => 'btn btn-info btn-actions iconesmall list')); }}
 
 {{ Form::submit('Créer ce menu', array('class' => 'btn btn-success')) }}
 {{ Form::close() }}

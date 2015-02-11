@@ -89,11 +89,11 @@
 			@show
 		</footer>
 
-		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES (Zapette) - - - - - - - - - - - - - - -->
+		<!-- - - - - - - - - - - - - - - - BARRE COMMANDES (Actions) - - - - - - - - - - - - - - -->
 
 		<div class="zapette">
 			<div class="zapette_actions">
-				@yield('zapette')
+				@yield('actions')
 			</div>
 
 			<p class="zapette_infos">
