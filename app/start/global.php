@@ -153,5 +153,5 @@ Session::has('Courant.annee')? : Session::put('Courant.annee', date('Y'));
 Session::has('Courant.mois')? : Session::put('Courant.mois', date('Y.m'));
 // Session::flush();
 
-define('PAR_PAGE', 10);
+define('NBRE_PAR_PAGE', 10);
 
